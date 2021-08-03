@@ -1,4 +1,6 @@
+import 'package:fake_news/languages/LocalizationService.dart';
 import 'package:fake_news/resources/utils/dimension.dart';
+import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -15,6 +17,8 @@ class _WidgetResourceState extends State<WidgetResource> {
   Widget build(BuildContext context) {
     Dimension.height = MediaQuery.of(context).size.height;
     Dimension.width = MediaQuery.of(context).size.width;
+    SizeText.queryData = MediaQuery.of(context).textScaleFactor;
+
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -22,12 +26,50 @@ class _WidgetResourceState extends State<WidgetResource> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomButton(
-              width: Dimension.getWidth(0.5),
-              height: 37,
-              buttonText: "Login",
-              buttonColor: const Color(0xff082647),
+              width: Dimension.getWidth(0.4),
+              buttonText: 'translate',
+              buttonColor: MyColors.green,
               buttonRadius: 18.5,
-              textColor: Colors.white,
+              textStyle: StylesText.content14BoldWhite,
+              onPressed: () {
+                setState(() {
+                  LocalizationService.changeLocale('vi');
+                });
+              },
+            ),
+            CustomButton(
+              width: Dimension.getWidth(0.5),
+              buttonText: 'login',
+              buttonColor: MyColors.blueDart,
+              buttonRadius: 18.5,
+              textStyle: StylesText.content14BoldWhite,
+              onPressed: () {},
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomButton(
+                  width: Dimension.getWidth(0.3),
+                  height: 12.0,
+                  buttonText: "f",
+                  buttonColor: MyColors.blue,
+                  buttonRadius: 18.5,
+                  textStyle: StylesText.content18BoldWhite,
+                  onPressed: () {},
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                CustomButton(
+                  width: Dimension.getWidth(0.3),
+                  height: 12.0,
+                  buttonText: "G",
+                  buttonColor: MyColors.red,
+                  buttonRadius: 18.5,
+                  textStyle: StylesText.content18BoldWhite,
+                  onPressed: () {},
+                ),
+              ],
             )
           ],
         ),
