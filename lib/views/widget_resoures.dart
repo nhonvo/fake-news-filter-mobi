@@ -2,6 +2,7 @@ import 'package:fake_news/languages/LocalizationService.dart';
 import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/resources/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -15,12 +16,7 @@ class WidgetResource extends StatefulWidget {
 class _WidgetResourceState extends State<WidgetResource> {
   @override
   Widget build(BuildContext context) {
-    Dimension.height = MediaQuery.of(context).size.height;
-    Dimension.width = MediaQuery.of(context).size.width;
-    SizeText.queryData = MediaQuery.of(context).textScaleFactor;
-
     return Scaffold(
-      appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +49,7 @@ class _WidgetResourceState extends State<WidgetResource> {
                   height: 12.0,
                   buttonText: "f",
                   buttonColor: MyColors.blue,
-                  buttonRadius: 18.5,
+                  buttonRadius: 14,
                   textStyle: StylesText.content18BoldWhite,
                   onPressed: () {},
                 ),
@@ -65,12 +61,21 @@ class _WidgetResourceState extends State<WidgetResource> {
                   height: 12.0,
                   buttonText: "G",
                   buttonColor: MyColors.red,
-                  buttonRadius: 18.5,
+                  buttonRadius: 14,
                   textStyle: StylesText.content18BoldWhite,
                   onPressed: () {},
                 ),
               ],
-            )
+            ),
+            CustomButton(
+              width: Dimension.getWidth(0.4),
+              buttonText: 'started',
+              buttonColor: MyColors.green,
+              buttonRadius: 18.5,
+              textStyle: StylesText.content14BoldWhite,
+              onPressed: () {},
+            ),
+            CustomTextField()
           ],
         ),
       ),
