@@ -75,7 +75,6 @@ class _WidgetResourceState extends State<WidgetResource> {
               textStyle: StylesText.content14BoldWhite,
               onPressed: () {},
             ),
-            CustomTextField()
           ],
         ),
       ),
