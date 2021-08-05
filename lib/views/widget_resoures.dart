@@ -2,6 +2,7 @@ import 'package:fake_news/languages/LocalizationService.dart';
 import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/resources/widgets/card.dart';
 import 'package:fake_news/resources/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -75,6 +76,10 @@ class _WidgetResourceState extends State<WidgetResource> {
               textStyle: StylesText.content14BoldWhite,
               onPressed: () {},
             ),
+            SizedBox(
+              height: 10,
+            ),
+            CustomCard(),
           ],
         ),
       ),

@@ -39,6 +39,20 @@ class RouteScreen extends StatelessWidget {
                 Get.toNamed('/login');
               },
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomButton(
+              width: Dimension.getWidth(0.5),
+              height: 20.0,
+              buttonText: "2. GET STARTED",
+              buttonColor: MyColors.red,
+              buttonRadius: 14,
+              textStyle: StylesText.content18BoldWhite,
+              onPressed: () {
+                Get.toNamed('/getstarted');
+              },
+            )
           ],
         ),
       ),

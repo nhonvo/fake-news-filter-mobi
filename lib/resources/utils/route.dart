@@ -1,3 +1,4 @@
+import 'package:fake_news/views/get_started/get_started.dart';
 import 'package:fake_news/views/login/login_screen.dart';
 import 'package:fake_news/views/route_screen.dart';
 import 'package:fake_news/views/widget_resoures.dart';
@@ -10,4 +11,5 @@ List<GetPage> pageroute = [
       transition: Transition.fadeIn),
   GetPage(name: '/widgets', page: () => const WidgetResource()),
   GetPage(name: '/login', page: () => const LoginScreen()),
+  GetPage(name: '/getstarted', page: () => const GetStartedScreen()),
 ];

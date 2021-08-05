@@ -16,6 +16,9 @@ class MyColors {
   static const Color orange = Color.fromRGBO(255, 149, 104, 1.0);
   static const Color transbackground = Color.fromARGB(10, 0, 0, 0);
   static const Color trans = Color.fromARGB(90, 0, 0, 0);
+
+  static const Color card1 = Color.fromRGBO(0, 178, 184, 1.0);
+  static const Color card1t = Color.fromRGBO(157, 230, 232, 1.0);
 }
 
 class SizeText {
@@ -49,6 +52,11 @@ class StylesText {
     color: Colors.white,
     fontFamily: 'SF-UI-MEDIUM',
     fontSize: SizeText.size14,
+  );
+  static TextStyle content12MediumWhite = TextStyle(
+    color: Colors.white,
+    fontFamily: 'SF-UI-MEDIUM',
+    fontSize: SizeText.size12,
   );
   static TextStyle content14BoldWhite = TextStyle(
     color: Colors.white,
