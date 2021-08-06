@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -53,22 +55,22 @@ class _CustomButtonState extends State<CustomButton> {
 class CustomIconButton extends StatefulWidget {
   final String? buttonText;
   final Widget icon;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final Color buttonColor;
   final VoidCallback? onPressed;
   final double buttonRadius;
-  final double width, height;
+  final double? width, height;
 
   const CustomIconButton(
       {Key? key,
       this.buttonText,
       required this.icon,
-      required this.textStyle,
+      this.textStyle,
       required this.buttonColor,
       required this.onPressed,
       required this.buttonRadius,
-      this.width = 10.0,
-      this.height = 10.0})
+      this.width,
+      this.height = 0.0})
       : super(key: key);
 
   @override
@@ -80,17 +82,16 @@ class _CustomIconButtonState extends State<CustomIconButton> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
-      child: ElevatedButton.icon(
+      child: TextButton.icon(
           icon: widget.icon,
           label: Text(
-            (widget.buttonText!).tr,
+            (widget.buttonText)!.tr,
             style: widget.textStyle,
             textAlign: TextAlign.center,
           ),
           onPressed: widget.onPressed,
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-                EdgeInsets.only(top: widget.height, bottom: widget.height)),
+            padding: MaterialStateProperty.all(EdgeInsets.all(5)),
             backgroundColor: MaterialStateProperty.all(widget.buttonColor),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
               borderRadius:

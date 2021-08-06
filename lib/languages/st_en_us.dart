@@ -10,7 +10,11 @@ const Map<String, String> en = {
   'agree': 'I agree to ',
   'terms': 'The terms and Conditions ',
   'about': 'of Fake News Filter',
-  'content_started': 'Follow feeds to track new updates and get notifications. We will let you know when we create new ones.',
+  'introduction':
+      'Follow top stories and get key update in one place, posted live. Without clickbait or junk.',
+  'covering': 'What we are covering',
+  'content_started':
+      'Follow feeds to track new updates and get notifications. We will let you know when we create new ones.',
   'tap': 'Tap to choose at least 4',
   'multipleLanguage': 'Multiple language'
 };

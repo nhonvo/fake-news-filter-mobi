@@ -1,8 +1,10 @@
 import 'package:fake_news/languages/LocalizationService.dart';
 import 'package:fake_news/resources/utils/dimension.dart';
+import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card.dart';
+import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/resources/widgets/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -80,6 +82,19 @@ class _WidgetResourceState extends State<WidgetResource> {
               height: 10,
             ),
             CustomCard(),
+            SizedBox(
+              height: 10,
+            ),
+            CardNews(
+                factCheck: Images.icprotect,
+                offical: '50%',
+                user: '56%',
+                times: '7 hours',
+                image: Images.chart,
+                title:
+                    '57,083 cases and 751 deaths were reported in the U.S yesterday, bringing the total to 29.5 milion cases and 536,433 deaths.',
+                article: 'CNN News',
+                onpress: () {})
           ],
         ),
       ),

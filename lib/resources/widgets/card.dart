@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
+import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatefulWidget {
@@ -48,18 +49,10 @@ class _CustomCardState extends State<CustomCard> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                  width: 70,
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                      color: MyColors.card1t,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0))),
-                                  child: Center(
-                                      child: Text(
-                                    '#covid19',
-                                    style: StylesText.content12BoldWhite,
-                                  ))),
+                              TagTopic(
+                                tagName: '#covid19',
+                                buttonColor: MyColors.red.withOpacity(0.1),
+                              ),
                               Text(
                                 'Outbreak of respiratory virus that has killed over 1 milion and infected 100 virus',
                                 style: StylesText.content12MediumWhite,

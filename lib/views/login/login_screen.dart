@@ -146,8 +146,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomIconButton(
                       width: Dimension.getWidth(0.35),
                       buttonText: '',
-                      icon: const Icon(FontAwesomeIcons.facebookF),
-                      buttonColor: MyColors.blue,
+                      icon: const Icon(FontAwesomeIcons.facebookF,
+                          color: Colors.white),
+                      buttonColor: Colors.blue,
                       buttonRadius: 14,
                       textStyle: StylesText.content18BoldWhite,
                       onPressed: () {},
@@ -158,8 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomIconButton(
                       width: Dimension.getWidth(0.35),
                       buttonText: '',
-                      icon: const Icon(FontAwesomeIcons.google),
-                      buttonColor: MyColors.red,
+                      icon: const Icon(FontAwesomeIcons.google,
+                          color: Colors.white),
+                      buttonColor: Colors.red,
                       buttonRadius: 14,
                       textStyle: StylesText.content18BoldWhite,
                       onPressed: () {},

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:collection';
 import 'package:fake_news/languages/st_en_us.dart';
 import 'package:fake_news/languages/st_vi_vn.dart';
