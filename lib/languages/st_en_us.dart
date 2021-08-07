@@ -16,5 +16,9 @@ const Map<String, String> en = {
   'content_started':
       'Follow feeds to track new updates and get notifications. We will let you know when we create new ones.',
   'tap': 'Tap to choose at least 4',
-  'multipleLanguage': 'Multiple language'
+  'multipleLanguage': 'Multiple language',
+  'breaking': 'Breaking',
+  'fake': 'Fake news',
+  'real': 'Real news',
+  'setting': 'Setting'
 };

@@ -15,5 +15,9 @@ const Map<String, String> vi = {
   'content_started':
       'Theo dõi các chủ đề để thông báo. Ứng dụng sẽ cho bạn biết khi hệ thống có những cập nhật mới',
   'tap': 'Chọn ít nhất 4 chủ đề',
-  'multipleLanguage': 'Đa ngôn ngữ'
+  'multipleLanguage': 'Đa ngôn ngữ',
+  'breaking': 'Xu hướng',
+  'fake': 'Tin giả',
+  'real': 'Tin thật',
+  'setting': 'Cài đặt'
 };

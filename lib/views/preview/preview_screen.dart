@@ -81,45 +81,51 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     ],
                   ),
                 ),
-                CardNews(
-                    factCheck: Images.icnone,
-                    offical: '18%',
-                    user: '25%',
-                    times: '5 hours',
-                    title:
-                        '110.7 milion vaccine does have now been administered in the U.S., up from 109.1 milion on Monday, according to CDC data.',
-                    article: 'Reuters U.S. News',
-                    onpress: () {}),
-                CardNews(
-                    factCheck: Images.icprotect,
-                    offical: '50%',
-                    user: '56%',
-                    times: '7 hours',
-                    image: Images.chart,
-                    title:
-                        '57,083 cases and 751 deaths were reported in the U.S yesterday, bringing the total to 29.5 milion cases and 536,433 deaths.',
-                    article: 'CNN News',
-                    onpress: () {}),
-                CardNews(
-                    factCheck: Images.icprotect,
-                    offical: '52%',
-                    user: '60%',
-                    times: '9 hours',
-                    title:
-                        '"I would, I would recommend [the vaccine]. And I would recommend it to a lot of people that dont want to get it and a lot of those people voted for me, frankly." ',
-                    article: 'CNN News',
-                    avatar: Images.trump,
-                    name: 'Former President Trump',
-                    onpress: () {}),
-                CardNews(
-                    factCheck: Images.icnone,
-                    offical: '18%',
-                    user: '25%',
-                    times: '10 hours',
-                    title:
-                        '110.7 milion vaccine does have now been administered in the U.S., up from 109.1 milion on Monday, according to CDC data.',
-                    article: 'Reuters U.S. News',
-                    onpress: () {}),
+                Wrap(
+                  spacing: 10, 
+                  runSpacing: 10,
+                  children: [
+                    CardNews(
+                        factCheck: Images.icnone,
+                        offical: '18%',
+                        user: '25%',
+                        times: '5 hours',
+                        title:
+                            '110.7 milion vaccine does have now been administered in the U.S., up from 109.1 milion on Monday, according to CDC data.',
+                        article: 'Reuters U.S. News',
+                        onpress: () {}),
+                    CardNews(
+                        factCheck: Images.icprotect,
+                        offical: '50%',
+                        user: '56%',
+                        times: '7 hours',
+                        image: Images.chart,
+                        title:
+                            '57,083 cases and 751 deaths were reported in the U.S yesterday, bringing the total to 29.5 milion cases and 536,433 deaths.',
+                        article: 'CNN News',
+                        onpress: () {}),
+                    CardNews(
+                        factCheck: Images.icprotect,
+                        offical: '52%',
+                        user: '60%',
+                        times: '9 hours',
+                        title:
+                            '"I would, I would recommend [the vaccine]. And I would recommend it to a lot of people that dont want to get it and a lot of those people voted for me, frankly." ',
+                        article: 'CNN News',
+                        avatar: Images.trump,
+                        name: 'Former President Trump',
+                        onpress: () {}),
+                    CardNews(
+                        factCheck: Images.icnone,
+                        offical: '18%',
+                        user: '25%',
+                        times: '10 hours',
+                        title:
+                            '110.7 milion vaccine does have now been administered in the U.S., up from 109.1 milion on Monday, according to CDC data.',
+                        article: 'Reuters U.S. News',
+                        onpress: () {}),
+                  ],
+                ),
               ],
             ),
           ),

@@ -83,6 +83,20 @@ class RouteScreen extends StatelessWidget {
                   Get.toNamed('/preview');
                 },
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomButton(
+                width: Dimension.getWidth(0.5),
+                height: 20.0,
+                buttonText: "6. HOME",
+                buttonColor: MyColors.red,
+                buttonRadius: 14,
+                textStyle: StylesText.content18BoldWhite,
+                onPressed: () {
+                  Get.toNamed('/home');
+                },
+              ),
             ],
           ),
         ),
