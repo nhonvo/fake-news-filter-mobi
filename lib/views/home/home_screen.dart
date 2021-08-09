@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
 import 'package:bottom_animation/bottom_animation.dart';
 import 'package:bottom_animation/source/bottomnav_item.dart';
 import 'package:fake_news/resources/utils/dimension.dart';

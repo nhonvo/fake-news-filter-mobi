@@ -1,5 +1,3 @@
-import 'package:fake_news/models/news_model.dart';
-
 enum MediaType {
   image,
   video,

@@ -1,7 +1,5 @@
 import 'package:fake_news/data/story_data.dart';
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
-import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/resources/widgets/story_button.dart';
 import 'package:flutter/material.dart';

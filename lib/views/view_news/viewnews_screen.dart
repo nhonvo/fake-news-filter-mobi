@@ -1,14 +1,16 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers
 
 import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
-import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewNewsScreen extends StatefulWidget {
   final String url_news;
@@ -20,6 +22,8 @@ class ViewNewsScreen extends StatefulWidget {
 }
 
 class _ViewNewsScreenState extends State<ViewNewsScreen> {
+  int _stackToView = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,24 +41,81 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
           ],
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {},
-          )
+          PopupMenuButton(
+              offset: Offset(0, 50),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              itemBuilder: (context) => [
+                    PopupMenuItem(
+                      onTap: () {
+                        Clipboard.setData(ClipboardData(text: widget.url_news))
+                            .then((_) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('clipboard'.tr),
+                              backgroundColor: Colors.green));
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.link,
+                              color: Colors.black, size: 17),
+                          SizedBox(width: 10),
+                          Text(
+                            'copy'.tr,
+                            style: StylesText.content14MediumBlack,
+                          )
+                        ],
+                      ),
+                      value: 1,
+                    ),
+                    PopupMenuItem(
+                      onTap: () async {
+                        await canLaunch(widget.url_news)
+                            ? await launch(widget.url_news)
+                            : ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('error_browser'.tr)));
+                      },
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.globeAsia,
+                              color: Colors.black, size: 17),
+                          SizedBox(width: 10),
+                          Text(
+                            'browser'.tr,
+                            style: StylesText.content14MediumBlack,
+                          )
+                        ],
+                      ),
+                      value: 2,
+                    )
+                  ])
         ],
       ),
       body: Stack(
         alignment: Alignment.center,
         children: [
-          WebView(
-            initialUrl: widget.url_news,
+          IndexedStack(
+            index: _stackToView,
+            children: [
+              WebView(
+                initialUrl: widget.url_news,
+                onPageFinished: (String url) {
+                  setState(() {
+                    _stackToView = 0;
+                  });
+                },
+              ),
+              Container(
+                child: Center(child: CupertinoActivityIndicator()),
+              ),
+            ],
           ),
           Positioned(
             bottom: 15,
             child: Container(
                 padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                 width: Dimension.getWidth(0.97),
-                height: Dimension.getHeight(0.12),
+                height: 90,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,

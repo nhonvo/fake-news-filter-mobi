@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/models/news_model.dart';
 import 'package:fake_news/models/story_model.dart';

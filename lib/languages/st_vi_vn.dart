@@ -28,4 +28,8 @@ const Map<String, String> vi = {
   'reliable': 'Tin tức đáng tin cậy?',
   'fa': 'Có',
   're': 'Không',
+  'copy': 'Sao chép đường dẫn',
+  'browser': 'Mở bằng trình duyệt',
+  'error_browser': 'Không thể mở bằng trình duyệt',
+  'clipboard': 'Đã sao chép đường dẫn bài báo!',
 };

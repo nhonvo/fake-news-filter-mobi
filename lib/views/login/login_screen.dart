@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:fake_news/languages/LocalizationService.dart';
 import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
@@ -192,6 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13),
           color: Colors.white,
+          // ignore: prefer_const_literals_to_create_immutables
           boxShadow: [
             BoxShadow(
               color: Color.fromRGBO(123, 174, 255, 0.5),

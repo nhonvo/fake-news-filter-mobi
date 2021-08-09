@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class _RatingButtonState extends State<RatingButton> {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        child: Column(children: [
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
             'reliable'.tr,
             style: StylesText.content12BoldBlack,

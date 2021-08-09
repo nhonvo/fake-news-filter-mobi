@@ -2,7 +2,6 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/models/news_model.dart';
-import 'package:fake_news/models/story_model.dart';
 import 'package:fake_news/views/story/story_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

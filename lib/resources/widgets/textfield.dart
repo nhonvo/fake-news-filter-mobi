@@ -1,6 +1,5 @@
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomTextField extends StatefulWidget {
   final double width;

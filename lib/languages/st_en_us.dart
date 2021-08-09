@@ -29,4 +29,8 @@ const Map<String, String> en = {
   'hours': 'hours',
   'fa': 'Fake',
   're': 'Real',
+  'copy': 'Copy link',
+  'browser': 'Open in browser',
+  'error_browser': 'Error when opening in browser',
+  'clipboard': 'Copied link to your clipboard!',
 };
