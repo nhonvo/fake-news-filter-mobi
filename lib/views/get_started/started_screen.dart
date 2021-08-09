@@ -38,7 +38,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                       Images.logo,
                       width: Dimension.getWidth(0.20),
                     ),
-                    Text("Fake News Filter",
+                    Text('appname'.tr,
                         style: StylesText.content18BoldWhite)
                   ],
                 ),

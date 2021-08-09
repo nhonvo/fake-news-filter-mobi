@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Images.logo,
                         width: Dimension.getWidth(0.25),
                       ),
-                      Text("Fake News Filter",
+                      Text('appname'.tr,
                           style: StylesText.content18BoldWhite)
                     ],
                   ),

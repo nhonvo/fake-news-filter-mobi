@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     Images.logo,
                     width: Dimension.getWidth(0.3),
                   ),
-                  Text("Fake News Filter", style: StylesText.content18BoldWhite)
+                  Text('appname'.tr, style: StylesText.content18BoldWhite)
                 ],
               ),
             ),

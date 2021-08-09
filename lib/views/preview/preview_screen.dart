@@ -82,7 +82,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   ),
                 ),
                 Wrap(
-                  spacing: 10, 
+                  spacing: 10,
                   runSpacing: 10,
                   children: [
                     CardNews(

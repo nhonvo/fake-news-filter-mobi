@@ -37,7 +37,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       Images.logo,
                       width: Dimension.getWidth(0.20),
                     ),
-                    Text("Fake News Filter",
+                    Text('appname'.tr,
                         style: StylesText.content18BoldWhite)
                   ],
                 ),

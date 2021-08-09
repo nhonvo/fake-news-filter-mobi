@@ -1,4 +1,5 @@
 const Map<String, String> en = {
+  'appname': 'Fake News Filter',
   'language': 'English',
   'login': 'Login',
   'translate': 'Translate',
@@ -20,5 +21,12 @@ const Map<String, String> en = {
   'breaking': 'Breaking',
   'fake': 'Fake news',
   'real': 'Real news',
-  'setting': 'Setting'
+  'home': 'Home',
+  'news': 'News',
+  'search': 'Search',
+  'profile': 'Profile',
+  'reliable': 'Is the reliable news?',
+  'hours': 'hours',
+  'fa': 'Fake',
+  're': 'Real',
 };

@@ -22,7 +22,8 @@ class _BreakingScreenState extends State<BreakingScreen> {
           Container(
             color: Colors.white,
             width: double.infinity,
-            height: Dimension.getHeight(0.12),
+            height: 100,
+            alignment: Alignment.center,
             child: ListView.builder(
                 itemCount: news.length,
                 scrollDirection: Axis.horizontal,

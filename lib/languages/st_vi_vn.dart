@@ -1,4 +1,5 @@
 const Map<String, String> vi = {
+  'appname': 'Fake News Filter',
   'language': 'Tiếng Việt',
   'login': 'Đăng nhập',
   'translate': 'Chuyển đổi ngôn ngữ',
@@ -19,5 +20,12 @@ const Map<String, String> vi = {
   'breaking': 'Xu hướng',
   'fake': 'Tin giả',
   'real': 'Tin thật',
-  'setting': 'Cài đặt'
+  'home': 'Trang chủ',
+  'news': 'Tin tức',
+  'search': 'Tìm kiếm',
+  'profile': 'Tài khoản',
+  'hours': 'giờ',
+  'reliable': 'Tin tức đáng tin cậy?',
+  'fa': 'Có',
+  're': 'Không',
 };
