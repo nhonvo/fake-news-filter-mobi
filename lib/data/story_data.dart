@@ -32,19 +32,20 @@ final List<NewsModel> news = [
 final List<StoryModel> stories = [
   StoryModel(
     url:
-        'https://images.unsplash.com/photo-1534103362078-d07e750bd0c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
+        'https://static01.nyt.com/images/2021/08/09/multimedia/09virus-briefing-military-01/09virus-briefing-military-01-superJumbo-v2.jpg?quality=90&auto=webp',
     media: MediaType.image,
     duration: const Duration(seconds: 10),
   ),
   StoryModel(
-    url: 'https://media.giphy.com/media/moyzrwjUIkdNe/giphy.gif',
-    media: MediaType.image,
-    duration: const Duration(seconds: 7),
+    url:
+        'https://link.theplatform.com/s/rksNhC/SWLJ1OlJC6cG?mbr=true&format=redirect&manifest=m3u&format=redirect&Tracking=true&Embedded=true&formats=MPEG4',
+    media: MediaType.video,
+    duration: const Duration(seconds: 10),
   ),
   StoryModel(
     url:
-        'https://static.videezy.com/system/resources/previews/000/007/536/original/rockybeach.mp4',
+        'https://link.theplatform.com/s/rksNhC/TBkhZbtGojSD?mbr=true&format=redirect&manifest=m3u&format=redirect&Tracking=true&Embedded=true&formats=MPEG4',
     media: MediaType.video,
-    duration: const Duration(seconds: 0),
+    duration: const Duration(seconds: 10),
   )
 ];

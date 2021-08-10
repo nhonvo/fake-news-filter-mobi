@@ -6,6 +6,7 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card_topic.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class IntroductionScreen extends StatefulWidget {
@@ -38,8 +39,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       Images.logo,
                       width: Dimension.getWidth(0.20),
                     ),
-                    Text('appname'.tr,
-                        style: StylesText.content18BoldWhite)
+                    Text('appname'.tr, style: StylesText.content18BoldWhite)
                   ],
                 ),
                 Padding(
@@ -56,7 +56,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   buttonColor: MyColors.green,
                   buttonRadius: 18.5,
                   textStyle: StylesText.content14BoldWhite,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed('/login');
+                  },
                 ),
                 const SizedBox(
                   height: 20,
@@ -72,7 +74,11 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     children: List.generate(10, (index) {
                       return Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: CardTopic(),
+                        child: CardTopic(
+                          ontap: () {
+                            Get.toNamed('/preview');
+                          },
+                        ),
                       );
                     }),
                   ),

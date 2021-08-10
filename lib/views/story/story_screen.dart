@@ -52,8 +52,8 @@ class _StoryScreenState extends State<StoryScreen>
 
   @override
   void dispose() {
-    _pageController!.dispose();
-    _animController!.dispose();
+    _pageController?.dispose();
+    _animController?.dispose();
     _videoController?.dispose();
     super.dispose();
   }

@@ -9,6 +9,7 @@ import 'package:fake_news/resources/widgets/textfield.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -87,8 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Images.logo,
                         width: Dimension.getWidth(0.25),
                       ),
-                      Text('appname'.tr,
-                          style: StylesText.content18BoldWhite)
+                      Text('appname'.tr, style: StylesText.content18BoldWhite)
                     ],
                   ),
                 ),
@@ -136,7 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   buttonColor: MyColors.blueDart,
                   buttonRadius: 20,
                   textStyle: StylesText.content16BoldWhite,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offAllNamed('/home');
+                  },
                 ),
                 Text(
                   'or'.tr,
@@ -265,7 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: <Widget>[
           InkWell(
             onTap: () {
-              Navigator.pop(context);
+              Get.back();
             },
             child: const Icon(
               Icons.cancel,

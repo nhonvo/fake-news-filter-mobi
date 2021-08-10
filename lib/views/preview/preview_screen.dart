@@ -7,6 +7,7 @@ import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 class PreviewScreen extends StatefulWidget {
   const PreviewScreen({Key? key}) : super(key: key);
@@ -87,7 +88,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   children: [
                     CardNews(
                         factCheck: Images.icnone,
-                        offical: '18%',
+                        rate: true,
+                        tag: '#covid',
                         user: '25%',
                         times: '5 hours',
                         title:
@@ -95,9 +97,11 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         article: 'Reuters U.S. News',
                         onpress: () {}),
                     CardNews(
-                        factCheck: Images.icprotect,
-                        offical: '50%',
-                        user: '56%',
+                        factCheck: Images.icnone,
+                        rate: true,
+                        tag: '#covid',
+                        offical: 'Misleading',
+                        user: '46%',
                         times: '7 hours',
                         image: Images.chart,
                         title:
@@ -106,7 +110,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         onpress: () {}),
                     CardNews(
                         factCheck: Images.icprotect,
-                        offical: '52%',
+                        rate: true,
+                        tag: '#covid',
+                        offical: 'True',
                         user: '60%',
                         times: '9 hours',
                         title:
@@ -117,7 +123,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         onpress: () {}),
                     CardNews(
                         factCheck: Images.icnone,
-                        offical: '18%',
+                        rate: true,
+                        tag: '#covid',
                         user: '25%',
                         times: '10 hours',
                         title:
@@ -136,7 +143,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     tooltip: 'Close',
                     icon: Icon(Icons.close),
                     color: Colors.white,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                    },
                   ),
                   radius: 30,
                   backgroundColor: MyColors.blue.withOpacity(0.8))),

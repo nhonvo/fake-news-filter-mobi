@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
-import 'package:bottom_animation/bottom_animation.dart';
-import 'package:bottom_animation/source/bottomnav_item.dart';
 import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
+import 'package:fake_news/resources/widgets/bottomnav_item.dart';
+import 'package:fake_news/resources/widgets/navigation_bar.dart';
 import 'package:fake_news/views/breaking/breaking_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var items = <BottomNavItem>[
-    BottomNavItem(title: 'home'.tr, iconData: CupertinoIcons.home),
+    BottomNavItem(title: 'breaking'.tr, iconData: Icons.rss_feed_rounded),
     BottomNavItem(title: 'news'.tr, iconData: CupertinoIcons.news),
     BottomNavItem(title: 'search'.tr, iconData: CupertinoIcons.search),
     BottomNavItem(title: 'profile'.tr, iconData: CupertinoIcons.person),

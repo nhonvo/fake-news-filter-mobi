@@ -39,7 +39,6 @@ class _BreakingScreenState extends State<BreakingScreen> {
                       factCheck: Images.icnone,
                       rate: true,
                       tag: '#covid',
-                      offical: '18%',
                       user: '25%',
                       times: '5 hours',
                       title:
@@ -47,11 +46,11 @@ class _BreakingScreenState extends State<BreakingScreen> {
                       article: 'Reuters U.S. News',
                       onpress: () {}),
                   CardNews(
-                      factCheck: Images.icprotect,
+                      factCheck: Images.icnone,
                       rate: true,
                       tag: '#covid',
-                      offical: '50%',
-                      user: '56%',
+                      offical: 'Misleading',
+                      user: '46%',
                       times: '7 hours',
                       image: Images.chart,
                       title:
@@ -62,7 +61,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                       factCheck: Images.icprotect,
                       rate: true,
                       tag: '#covid',
-                      offical: '52%',
+                      offical: 'True',
                       user: '60%',
                       times: '9 hours',
                       title:
@@ -75,7 +74,6 @@ class _BreakingScreenState extends State<BreakingScreen> {
                       factCheck: Images.icnone,
                       rate: true,
                       tag: '#covid',
-                      offical: '18%',
                       user: '25%',
                       times: '10 hours',
                       title:

@@ -6,13 +6,14 @@ import 'package:fake_news/resources/widgets/rating.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:fake_news/views/view_news/viewnews_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
   final String factCheck;
-  final String offical, user;
+  final String? offical, user;
   final String times;
   final String? image, video;
   final String title, article;
@@ -24,8 +25,8 @@ class CardNews extends StatefulWidget {
   const CardNews(
       {Key? key,
       required this.factCheck,
-      required this.offical,
-      required this.user,
+      this.offical,
+      this.user,
       required this.times,
       this.image,
       this.video,
@@ -71,34 +72,48 @@ class _CardNewsState extends State<CardNews> {
                   children: [
                     Row(
                       children: [
-                        Image.asset(
-                          widget.factCheck,
-                          width: 30,
-                        ),
+                        widget.offical != null && widget.user != null
+                            ? Image.asset(
+                                widget.factCheck,
+                                width: 30,
+                              )
+                            : SizedBox(),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Text('Official Rating: ',
-                                    style: StylesText.content12MediumBlack),
-                                Text(
-                                  widget.offical,
-                                  style: StylesText.content12BoldBlack,
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Social Beliefs: ',
-                                  style: StylesText.content12MediumBlack,
-                                ),
-                                Text(
-                                  widget.user,
-                                  style: StylesText.content12BoldBlack,
-                                )
-                              ],
-                            )
+                            widget.offical != null
+                                ? Row(children: [
+                                    Text('Official Rating: ',
+                                        style: StylesText.content12MediumBlack),
+                                    Text(
+                                      widget.offical!,
+                                      style: StylesText.content12BoldBlack,
+                                    )
+                                  ])
+                                : SizedBox(),
+                            widget.user != null
+                                ? Row(children: [
+                                    widget.offical == null
+                                        ? Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 4.0),
+                                            child: Icon(
+                                              FontAwesomeIcons.staylinked,
+                                              size: 24,
+                                              color: Colors.yellow[700],
+                                            ),
+                                          )
+                                        : SizedBox(),
+                                    Text(
+                                      'Social Beliefs: ',
+                                      style: StylesText.content12MediumBlack,
+                                    ),
+                                    Text(
+                                      widget.user!,
+                                      style: StylesText.content12BoldBlack,
+                                    )
+                                  ])
+                                : SizedBox(),
                           ],
                         ),
                       ],

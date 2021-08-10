@@ -16,7 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () => Get.offNamed('/test'));
+    Future.delayed(
+        const Duration(seconds: 2), () => Get.offNamed('/introduction'));
   }
 
   @override
@@ -49,11 +50,11 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Column(
               children: <Widget>[
-                Text("Xin chào", style: StylesText.content16BoldBlack),
+                Text("Xin chào", style: StylesText.content14BoldBlack),
                 const SizedBox(
                   height: 10,
                 ),
-                Text("Bùi Phú Khuyên", style: StylesText.content16BoldBlack)
+                Text("Bùi Phú Khuyên", style: StylesText.content14BoldBlack)
               ],
             ),
             Image.asset(Images.banner),

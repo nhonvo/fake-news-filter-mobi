@@ -6,7 +6,9 @@ import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:flutter/material.dart';
 
 class CardTopic extends StatefulWidget {
-  const CardTopic({Key? key}) : super(key: key);
+  final VoidCallback ontap;
+
+  const CardTopic({Key? key, required this.ontap}) : super(key: key);
 
   @override
   _CardTopicState createState() => _CardTopicState();
@@ -16,7 +18,7 @@ class _CardTopicState extends State<CardTopic> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: widget.ontap,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
