@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   buttonRadius: 20,
                   textStyle: StylesText.content16BoldWhite,
                   onPressed: () {
-                    Get.offAllNamed('/home');
+                    Get.toNamed('/getstarted');
                   },
                 ),
                 Text(

@@ -88,7 +88,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   children: [
                     CardNews(
                         factCheck: Images.icnone,
-                        rate: true,
                         tag: '#covid',
                         user: '25%',
                         times: '5 hours',
@@ -98,7 +97,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         onpress: () {}),
                     CardNews(
                         factCheck: Images.icnone,
-                        rate: true,
                         tag: '#covid',
                         offical: 'Misleading',
                         user: '46%',
@@ -110,7 +108,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         onpress: () {}),
                     CardNews(
                         factCheck: Images.icprotect,
-                        rate: true,
                         tag: '#covid',
                         offical: 'True',
                         user: '60%',

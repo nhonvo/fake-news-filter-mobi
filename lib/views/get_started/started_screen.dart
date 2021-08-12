@@ -6,6 +6,7 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class GetStartedScreen extends StatefulWidget {
@@ -38,8 +39,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                       Images.logo,
                       width: Dimension.getWidth(0.20),
                     ),
-                    Text('appname'.tr,
-                        style: StylesText.content18BoldWhite)
+                    Text('appname'.tr, style: StylesText.content18BoldWhite)
                   ],
                 ),
                 Padding(
@@ -74,11 +74,13 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 alignment: Alignment.bottomCenter,
                 child: CustomButton(
                   width: Dimension.getWidth(0.3),
-                  buttonText: 'Follow 4 more',
+                  buttonText: 'OK',
                   textStyle: StylesText.content14BoldBlue,
                   buttonColor: Colors.white,
                   buttonRadius: 20,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offAllNamed('/home');
+                  },
                 ),
               ),
             ),
