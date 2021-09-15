@@ -44,3 +44,14 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+ios/build/Pods.build/Release-iphonesimulator/connectivity.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/Flutter.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/FMDB.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/path_provider.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/Pods-Runner.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/Reachability.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/shared_preferences.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/sqflite.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/url_launcher.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/video_player.build/dgph
+ios/build/Pods.build/Release-iphonesimulator/webview_flutter.build/dgph

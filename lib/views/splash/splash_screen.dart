@@ -1,3 +1,4 @@
+import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(
-        const Duration(seconds: 2), () => Get.offNamed('/introduction'));
+        const Duration(seconds: 2), () => Get.offNamed(Routes.LOGIN));
   }
 
   @override

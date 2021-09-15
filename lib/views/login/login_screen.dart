@@ -6,6 +6,7 @@ import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/textfield.dart';
+import 'package:fake_news/views/login/login_viewmodel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,16 +21,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _textcontroller = TextEditingController();
+  LoginViewModel get viewmodel => Get.find<LoginViewModel>();
 
   bool _obscureText = true;
   bool checkbox = false;
 
-  final TextEditingController _passwordcontroller = TextEditingController();
-
-  void clearText() {
-    _textcontroller.clear();
-  }
+  String language = LocalizationService.locale!.languageCode;
 
   void toggle() {
     setState(() {
@@ -37,13 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  String language = LocalizationService.locale!.languageCode;
-
   @override
   Widget build(BuildContext context) {
-    _textcontroller.addListener(() {
-      setState(() {});
-    });
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -100,12 +92,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     //Account Text Field
                     CustomTextField(
-                      controller: _textcontroller,
+                      controller: viewmodel.usernameController,
                       // ignore: null_check_always_fails
                       hintText: 'inputuser'.tr,
-                      suffixIcon: _textcontroller.text.isNotEmpty
+                      suffixIcon: viewmodel.usernameController.text.isNotEmpty
                           ? IconButton(
-                              onPressed: clearText,
+                              onPressed: viewmodel.clearText,
                               icon: const Icon(Icons.clear))
                           : null,
                       width: Dimension.getWidth(0.7),
@@ -116,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: Dimension.getHeight(0.02),
                     ), //Password Text Field
                     CustomTextField(
-                      controller: _passwordcontroller,
+                      controller: viewmodel.passwordController,
                       width: Dimension.getWidth(0.7),
                       prefixIcon: const Icon(Icons.security_outlined),
                       obscureText: _obscureText,
@@ -137,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   buttonRadius: 20,
                   textStyle: StylesText.content16BoldWhite,
                   onPressed: () {
-                    Get.toNamed('/getstarted');
+                    viewmodel.handlelogin();
                   },
                 ),
                 Text(
