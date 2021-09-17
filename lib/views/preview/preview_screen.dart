@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
@@ -29,7 +28,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
             child: Column(
               children: [
                 Container(
-                  height: Dimension.getHeight(0.29),
+                  height: Get.size.height * 0.29,
                   decoration: BoxDecoration(color: MyColors.card1),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,6 +87,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   children: [
                     CardNews(
                         factCheck: Images.icnone,
+                        rate: true,
                         tag: '#covid',
                         user: '25%',
                         times: '5 hours',
@@ -97,6 +97,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         onpress: () {}),
                     CardNews(
                         factCheck: Images.icnone,
+                        rate: true,
                         tag: '#covid',
                         offical: 'Misleading',
                         user: '46%',

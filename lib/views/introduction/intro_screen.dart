@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:fake_news/resources/utils/dimension.dart';
+import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
@@ -37,7 +37,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   children: [
                     Image.asset(
                       Images.logo,
-                      width: Dimension.getWidth(0.20),
+                      width: Get.size.width * 0.2,
                     ),
                     Text('appname'.tr, style: StylesText.content18BoldWhite)
                   ],
@@ -51,13 +51,13 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   ),
                 ),
                 CustomButton(
-                  width: Dimension.getWidth(0.4),
+                  width: Get.size.width * 0.4,
                   buttonText: 'started',
                   buttonColor: MyColors.green,
                   buttonRadius: 18.5,
                   textStyle: StylesText.content14BoldWhite,
                   onPressed: () {
-                    Get.toNamed('/login');
+                    Get.toNamed(Routes.LOGIN);
                   },
                 ),
                 const SizedBox(
@@ -76,7 +76,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                         padding: const EdgeInsets.all(15.0),
                         child: CardTopic(
                           ontap: () {
-                            Get.toNamed('/preview');
+                            Get.toNamed(Routes.PREVIEW);
                           },
                         ),
                       );

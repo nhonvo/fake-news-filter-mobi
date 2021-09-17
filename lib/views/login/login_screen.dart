@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:fake_news/languages/LocalizationService.dart';
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
@@ -48,10 +47,10 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Stack(
           children: [
             Positioned(
-              top: Dimension.getHeight(0.04),
-              left: Dimension.getWidth(0.75),
+              top: Get.size.height * 0.04,
+              left: Get.size.width * 0.75,
               child: CustomButton(
-                width: Dimension.getWidth(0.20),
+                width: Get.size.width * 0.2,
                 buttonText: 'language'.tr,
                 buttonColor: MyColors.blueLight,
                 buttonRadius: 10,
@@ -78,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
                       Image.asset(
                         Images.logo,
-                        width: Dimension.getWidth(0.25),
+                        width: Get.size.width * 0.25,
                       ),
                       Text('appname'.tr, style: StylesText.content18BoldWhite)
                     ],
@@ -88,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     Text('login'.tr, style: StylesText.content18BoldWhite),
                     SizedBox(
-                      height: Dimension.getHeight(0.03),
+                      height: Get.size.height * 0.03,
                     ),
                     //Account Text Field
                     CustomTextField(
@@ -100,16 +99,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               onPressed: viewmodel.clearText,
                               icon: const Icon(Icons.clear))
                           : null,
-                      width: Dimension.getWidth(0.7),
+                      width: Get.size.width * 0.7,
                       prefixIcon: const Icon(Icons.supervised_user_circle),
                       obscureText: false,
                     ),
                     SizedBox(
-                      height: Dimension.getHeight(0.02),
+                      height: Get.size.height * 0.02,
                     ), //Password Text Field
                     CustomTextField(
                       controller: viewmodel.passwordController,
-                      width: Dimension.getWidth(0.7),
+                      width: Get.size.width * 0.7,
                       prefixIcon: const Icon(Icons.security_outlined),
                       obscureText: _obscureText,
                       suffixIcon: InkWell(
@@ -122,8 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 CustomButton(
-                  width: Dimension.getWidth(0.5),
-                  height: Dimension.getHeight(0.015),
+                  width: Get.size.width * 0.5,
+                  height: Get.size.height * 0.015,
                   buttonText: 'login',
                   buttonColor: MyColors.blueDart,
                   buttonRadius: 20,
@@ -140,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomIconButton(
-                      width: Dimension.getWidth(0.35),
+                      width: Get.size.width * 0.35,
                       buttonText: '',
                       icon: const Icon(FontAwesomeIcons.facebookF,
                           color: Colors.white),
@@ -150,10 +149,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {},
                     ),
                     SizedBox(
-                      width: Dimension.getWidth(0.1),
+                      width: 10,
                     ),
                     CustomIconButton(
-                      width: Dimension.getWidth(0.35),
+                      width: Get.size.width * 0.35,
                       buttonText: '',
                       icon: const Icon(FontAwesomeIcons.google,
                           color: Colors.white),
@@ -184,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
         alignment: Alignment.center,
         margin: EdgeInsets.only(top: 50, bottom: 20),
         height: 60,
-        width: Dimension.getWidth(0.87),
+        width: Get.size.width * 0.87,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13),
           color: Colors.white,
@@ -205,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Container(
-              width: Dimension.getWidth(0.65),
+              width: Get.size.width * 0.65,
               alignment: Alignment.center,
               child: RichText(
                 textAlign: TextAlign.center,
@@ -317,7 +316,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: CustomButton(
                 buttonText: 'Đồng ý',
-                width: Dimension.getWidth(0.8),
+                width: Get.size.width * 0.8,
                 onPressed: () {
                   setState(() {
                     checkbox = true;

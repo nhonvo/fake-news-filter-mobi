@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
@@ -59,7 +58,7 @@ class _CardNewsState extends State<CardNews> {
           child: Container(
             padding: EdgeInsets.all(5),
             margin: EdgeInsets.only(top: widget.tag == null ? 10 : 25),
-            width: Dimension.getWidth(0.9),
+            width: Get.size.width * 0.9,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),

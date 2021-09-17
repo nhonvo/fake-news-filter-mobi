@@ -1,5 +1,4 @@
 import 'package:fake_news/resources/utils/app_routes.dart';
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:flutter/material.dart';
@@ -17,15 +16,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(
-        const Duration(seconds: 2), () => Get.offNamed(Routes.LOGIN));
+    Future.delayed(const Duration(seconds: 2), () => Get.offNamed(Routes.HOME));
   }
 
   @override
   Widget build(BuildContext context) {
-    Dimension.height = MediaQuery.of(context).size.height;
-    Dimension.width = MediaQuery.of(context).size.width;
-    SizeText.queryData = MediaQuery.of(context).textScaleFactor;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -43,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 children: <Widget>[
                   Image.asset(
                     Images.logo,
-                    width: Dimension.getWidth(0.3),
+                    width: Get.size.width * 0.2,
                   ),
                   Text('appname'.tr, style: StylesText.content18BoldWhite)
                 ],

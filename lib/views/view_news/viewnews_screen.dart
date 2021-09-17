@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers
 
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -23,7 +23,6 @@ class ViewNewsScreen extends StatefulWidget {
 
 class _ViewNewsScreenState extends State<ViewNewsScreen> {
   int _stackToView = 1;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +113,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
             bottom: 15,
             child: Container(
                 padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                width: Dimension.getWidth(0.97),
+                width: Get.size.width * 0.97,
                 height: 90,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),

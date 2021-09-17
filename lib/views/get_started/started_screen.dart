@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
@@ -37,7 +36,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   children: [
                     Image.asset(
                       Images.logo,
-                      width: Dimension.getWidth(0.20),
+                      width: Get.size.width * 0.2,
                     ),
                     Text('appname'.tr, style: StylesText.content18BoldWhite)
                   ],
@@ -73,7 +72,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: CustomButton(
-                  width: Dimension.getWidth(0.3),
+                  width: Get.size.width * 0.3,
                   buttonText: 'OK',
                   textStyle: StylesText.content14BoldBlue,
                   buttonColor: Colors.white,

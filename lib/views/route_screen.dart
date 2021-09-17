@@ -1,4 +1,3 @@
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ class RouteScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomButton(
-                width: Dimension.getWidth(0.5),
+                width: Get.size.width * 0.5,
                 height: 20.0,
                 buttonText: "1. WIDGET TEST",
                 buttonColor: MyColors.red,
@@ -31,7 +30,7 @@ class RouteScreen extends StatelessWidget {
                 height: 20,
               ),
               CustomButton(
-                width: Dimension.getWidth(0.5),
+                width: Get.size.width * 0.5,
                 height: 20.0,
                 buttonText: "2. LOGIN",
                 buttonColor: MyColors.red,
@@ -45,7 +44,7 @@ class RouteScreen extends StatelessWidget {
                 height: 20,
               ),
               CustomButton(
-                width: Dimension.getWidth(0.5),
+                width: Get.size.width * 0.5,
                 height: 20.0,
                 buttonText: "3. INTRODUCTION",
                 buttonColor: MyColors.red,
@@ -59,7 +58,7 @@ class RouteScreen extends StatelessWidget {
                 height: 20,
               ),
               CustomButton(
-                width: Dimension.getWidth(0.5),
+                width: Get.size.width * 0.5,
                 height: 20.0,
                 buttonText: "4. GET STARTED",
                 buttonColor: MyColors.red,
@@ -73,7 +72,7 @@ class RouteScreen extends StatelessWidget {
                 height: 20,
               ),
               CustomButton(
-                width: Dimension.getWidth(0.5),
+                width: Get.size.width * 0.5,
                 height: 20.0,
                 buttonText: "5. PREVIEW",
                 buttonColor: MyColors.red,
@@ -87,7 +86,7 @@ class RouteScreen extends StatelessWidget {
                 height: 20,
               ),
               CustomButton(
-                width: Dimension.getWidth(0.5),
+                width: Get.size.width * 0.5,
                 height: 20.0,
                 buttonText: "6. HOME",
                 buttonColor: MyColors.red,

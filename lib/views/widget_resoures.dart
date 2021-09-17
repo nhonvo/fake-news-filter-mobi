@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:fake_news/languages/LocalizationService.dart';
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
@@ -9,6 +8,7 @@ import 'package:fake_news/resources/widgets/card.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class WidgetResource extends StatefulWidget {
   const WidgetResource({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _WidgetResourceState extends State<WidgetResource> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomButton(
-              width: Dimension.getWidth(0.4),
+              width: Get.size.width * 0.4,
               buttonText: 'translate',
               buttonColor: MyColors.green,
               buttonRadius: 18.5,
@@ -38,7 +38,7 @@ class _WidgetResourceState extends State<WidgetResource> {
               },
             ),
             CustomButton(
-              width: Dimension.getWidth(0.5),
+              width: Get.size.width * 0.5,
               buttonText: 'login',
               buttonColor: MyColors.blueDart,
               buttonRadius: 18.5,
@@ -49,7 +49,7 @@ class _WidgetResourceState extends State<WidgetResource> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
-                  width: Dimension.getWidth(0.3),
+                  width: Get.size.width * 0.3,
                   height: 12.0,
                   buttonText: "f",
                   buttonColor: MyColors.blue,
@@ -61,7 +61,7 @@ class _WidgetResourceState extends State<WidgetResource> {
                   width: 10,
                 ),
                 CustomButton(
-                  width: Dimension.getWidth(0.3),
+                  width: Get.size.width * 0.3,
                   height: 12.0,
                   buttonText: "G",
                   buttonColor: MyColors.red,
@@ -72,7 +72,7 @@ class _WidgetResourceState extends State<WidgetResource> {
               ],
             ),
             CustomButton(
-              width: Dimension.getWidth(0.4),
+              width: Get.size.width * 0.4,
               buttonText: 'started',
               buttonColor: MyColors.green,
               buttonRadius: 18.5,

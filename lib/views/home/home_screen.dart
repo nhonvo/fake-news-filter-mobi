@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
-import 'package:fake_news/resources/utils/dimension.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/bottomnav_item.dart';
@@ -7,6 +6,7 @@ import 'package:fake_news/resources/widgets/navigation_bar.dart';
 import 'package:fake_news/views/breaking/breaking_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
           fontWeight: FontWeight.bold,
         ),
         itemHoverHeight: 45,
-        itemHoverWidth: Dimension.getWidth(0.3),
+        itemHoverWidth: Get.size.width * 0.3,
         itemHoverBorderRadius: 20,
       ),
       body: Center(
