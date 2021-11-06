@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
@@ -187,9 +189,7 @@ class DioApi extends Api {
         }
         var error = dioError.response!.data['message'].toString();
         var errorCode;
-        if (error != null) {
-          errorCode = dioError.response?.statusCode ?? -9999;
-        }
+        errorCode = dioError.response?.statusCode ?? -9999;
 
         var errorMessage = error != null
             ? error

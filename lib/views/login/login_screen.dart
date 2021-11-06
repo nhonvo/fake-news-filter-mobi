@@ -128,7 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   buttonRadius: 20,
                   textStyle: StylesText.content16BoldWhite,
                   onPressed: () {
-                    viewmodel.handlelogin();
+                    //viewmodel.handlelogin();
+                    Get.offAllNamed('/home');
                   },
                 ),
                 Text(

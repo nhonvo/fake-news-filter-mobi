@@ -24,7 +24,7 @@ class MyColors {
 }
 
 class SizeText {
-  static double queryData = 0.0;
+  static double queryData = 1.0;
   static double size10 = 10.0 / queryData;
   static double size12 = 12.0 / queryData;
   static double size14 = 14.0 / queryData;

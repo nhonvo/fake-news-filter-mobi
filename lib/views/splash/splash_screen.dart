@@ -16,11 +16,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () => Get.offNamed(Routes.HOME));
+    Future.delayed(
+        const Duration(seconds: 2), () => Get.offNamed(Routes.INTRO));
   }
 
   @override
   Widget build(BuildContext context) {
+    SizeText.queryData = MediaQuery.of(context).textScaleFactor;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

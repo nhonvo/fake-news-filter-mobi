@@ -19,7 +19,8 @@ class AuthApiIpml implements AuthApi {
   DioApi dioApi;
   AuthApiIpml({required this.dioApi});
 
-  Future<BaseResponse<UserModel>> login(String username, String password) async {
+  Future<BaseResponse<UserModel>> login(
+      String username, String password) async {
     return await dioApi.doPost<UserModel>(
       "/api/Users/Authenticate",
       {'username': username, 'password': password},
@@ -67,14 +68,12 @@ class AuthApiIpml implements AuthApi {
 
   @override
   Future<BaseResponse<UserModel>> changeProfile(UserModel model) {
-    // TODO: implement changeProfile
     throw UnimplementedError();
   }
 
   @override
   Future<BaseResponse<String>> resetPassword(
       String code, String newPass, String cfNewPass) {
-    // TODO: implement resetPassword
     throw UnimplementedError();
   }
 }

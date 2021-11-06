@@ -52,7 +52,7 @@ class _CardNewsState extends State<CardNews> {
           onTap: () {
             Get.to(() => ViewNewsScreen(
                   url_news:
-                      'https://e.vnexpress.net/news/news/hcmc-nearly-out-of-allocated-covid-19-vaccine-doses-4337584.html',
+                      'https://www.factcheck.org/2021/11/scicheck-desantis-comments-social-media-posts-mislead-on-covid-19s-toll-in-florida/',
                 ));
           },
           child: Container(
