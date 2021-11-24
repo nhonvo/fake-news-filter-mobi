@@ -1,21 +1,18 @@
 import 'dart:core';
 
-import 'base_api_error_model.dart';
-
 class BaseResponse<T> {
   bool? isSuccessed;
   T? resultObj;
-  List<BaseApiError>? error;
+  String? messages;
 
-  BaseResponse.fromJson(Map<String, dynamic> json,
-      {T Function(dynamic json)? parseJson}) {
+  BaseResponse.fromJson(Map<String, dynamic> json, {T Function(dynamic json)? parseJson}) {
     isSuccessed = json["isSuccessed"] ?? false;
-    resultObj =
-        json['resultObj'] != null ? parseJson?.call(json['resultObj']) : null;
-    error = json['massage'];
+    resultObj = json['resultObj'] != null ? parseJson?.call(json['resultObj']) : null;
+    messages = json['message'];
   }
 
   BaseResponse.initError(int code, String message) {
-    error = [BaseApiError(message: message)];
+    messages = message;
+    this.isSuccessed = false;
   }
 }

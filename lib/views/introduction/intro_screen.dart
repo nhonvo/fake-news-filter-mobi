@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card_topic.dart';
+import 'package:fake_news/views/introduction/intro_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -17,6 +17,14 @@ class IntroductionScreen extends StatefulWidget {
 }
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
+  IntroViewModel get viewmodel => Get.find<IntroViewModel>();
+
+  @override
+  void initState() {
+    super.initState();
+    viewmodel.handleGetTopic();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,26 +76,50 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   style: StylesText.content14BoldWhite,
                 ),
                 Expanded(
-                  child: GridView.count(
-                    //shrinkWrap: true,
-                    crossAxisCount: 2,
-                    children: List.generate(10, (index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: CardTopic(
-                          ontap: () {
-                            Get.toNamed(Routes.PREVIEW);
-                          },
-                        ),
-                      );
-                    }),
-                  ),
-                ),
+                  child: Obx(() {
+                    return GridView.count(
+                        //shrinkWrap: true,
+                        crossAxisCount: 2,
+                        children: viewmodel.topics
+                            .map((topic) => Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: CardTopic(
+                                  noNews: topic.noNews.toString(),
+                                  label: topic.label.toString(),
+                                  tag: topic.tag.toString(),
+                                  description: topic.description.toString(),
+                                  time: convertToAgo(DateTime.tryParse(topic.realTime.toString()) ?? DateTime.now()),
+                                  ontap: () {
+                                    // Get.toNamed(Routes.TOPIC, arguments: topic);
+                                  },
+                                )))
+                            .toList());
+                  }),
+                )
               ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  String convertToAgo(DateTime input) {
+    Duration diff = DateTime.now().difference(input);
+    if (diff.inDays >= 1) {
+      if (diff.inDays >= 31) {
+        return '${diff.inDays ~/ 31} months ago';
+      } else {
+        return '${diff.inDays} days ago';
+      }
+    } else if (diff.inHours >= 1) {
+      return '${diff.inHours} hour(s)';
+    } else if (diff.inMinutes >= 1) {
+      return '${diff.inMinutes} minute(s)';
+    } else if (diff.inSeconds >= 1) {
+      return '${diff.inSeconds} second(s)';
+    } else {
+      return 'just now';
+    }
   }
 }

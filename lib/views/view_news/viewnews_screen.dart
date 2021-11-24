@@ -42,22 +42,18 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
         actions: [
           PopupMenuButton(
               offset: Offset(0, 50),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
               itemBuilder: (context) => [
                     PopupMenuItem(
                       onTap: () {
-                        Clipboard.setData(ClipboardData(text: widget.url_news))
-                            .then((_) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('clipboard'.tr),
-                              backgroundColor: Colors.green));
+                        Clipboard.setData(ClipboardData(text: widget.url_news)).then((_) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text('clipboard'.tr), backgroundColor: Colors.green));
                         });
                       },
                       child: Row(
                         children: [
-                          Icon(FontAwesomeIcons.link,
-                              color: Colors.black, size: 17),
+                          Icon(FontAwesomeIcons.link, color: Colors.black, size: 17),
                           SizedBox(width: 10),
                           Text(
                             'copy'.tr,
@@ -71,13 +67,11 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                       onTap: () async {
                         await canLaunch(widget.url_news)
                             ? await launch(widget.url_news)
-                            : ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('error_browser'.tr)));
+                            : ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('error_browser'.tr)));
                       },
                       child: Row(
                         children: [
-                          Icon(FontAwesomeIcons.globeAsia,
-                              color: Colors.black, size: 17),
+                          Icon(FontAwesomeIcons.globeAsia, color: Colors.black, size: 17),
                           SizedBox(width: 10),
                           Text(
                             'browser'.tr,

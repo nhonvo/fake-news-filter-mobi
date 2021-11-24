@@ -50,9 +50,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 });
                               },
                               child: TagTopic(
-                                tagName: follow
-                                    ? '  + FOLLOWING   '
-                                    : '  + FOLLOW   ',
+                                tagName: follow ? '  + FOLLOWING   ' : '  + FOLLOW   ',
                                 buttonColor: MyColors.red.withOpacity(0.1),
                               ),
                             ),
@@ -70,11 +68,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         padding: const EdgeInsets.only(left: 15),
                         child: Row(
                           children: [
-                            Icon(FontAwesomeIcons.syncAlt,
-                                size: 15, color: Colors.white),
+                            Icon(FontAwesomeIcons.syncAlt, size: 15, color: Colors.white),
                             SizedBox(width: 10),
-                            Text('UPDATING LIVE',
-                                style: StylesText.content14BoldWhite)
+                            Text('UPDATING LIVE', style: StylesText.content14BoldWhite)
                           ],
                         ),
                       )

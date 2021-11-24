@@ -17,8 +17,7 @@ class ErrorMessage {
   final String anErrorOccured = 'An error occured';
   final String invalidAccess = 'Your access is invalid';
   final String expiredAccess = 'Your access is expired, please login again';
-  String badInternetConnection =
-      'The internet connection appears to be offline, please try again';
+  String badInternetConnection = 'The internet connection appears to be offline, please try again';
 }
 
 class AppKey {
@@ -36,6 +35,7 @@ class SharePrefKeys {
   final String apiKey = 'apiKey';
   final String deviceToken = 'deviceToken';
   final String authToken = 'authToken';
+  final String userId = 'userId';
   final String firstName = 'firstName';
   final String lastName = 'lastName';
   final String email = 'email';

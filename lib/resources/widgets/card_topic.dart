@@ -6,9 +6,18 @@ import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:flutter/material.dart';
 
 class CardTopic extends StatefulWidget {
-  final VoidCallback ontap;
+  const CardTopic(
+      {Key? key,
+      required this.ontap,
+      required this.tag,
+      required this.description,
+      required this.label,
+      required this.noNews,
+      required this.time})
+      : super(key: key);
 
-  const CardTopic({Key? key, required this.ontap}) : super(key: key);
+  final VoidCallback ontap;
+  final String tag, description, label, noNews, time;
 
   @override
   _CardTopicState createState() => _CardTopicState();
@@ -25,15 +34,11 @@ class _CardTopicState extends State<CardTopic> {
           Container(
               width: 250,
               height: 210,
-              decoration: BoxDecoration(
-                  color: MyColors.card1,
-                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              decoration: BoxDecoration(color: MyColors.card1, borderRadius: BorderRadius.all(Radius.circular(15.0))),
               child: Column(
                 children: [
                   ClipRRect(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15.0),
-                          topRight: Radius.circular(15.0)),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
                       child: Image.asset(Images.covid)),
                   Expanded(
                     child: Padding(
@@ -43,12 +48,12 @@ class _CardTopicState extends State<CardTopic> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TagTopic(
-                            tagName: '#covid19',
+                            tagName: '#${widget.tag}',
                             buttonColor: MyColors.red.withOpacity(0.1),
                           ),
                           Text(
-                            'Outbreak of respiratory virus that has killed over 1 milion and infected 100 virus',
-                            style: StylesText.content12MediumWhite,
+                            widget.description,
+                            style: StylesText.content10MediumWhite,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
                           ),
@@ -60,8 +65,7 @@ class _CardTopicState extends State<CardTopic> {
                                     Icons.menu,
                                     color: Colors.white,
                                   ),
-                                  Text('3,4k',
-                                      style: StylesText.content12MediumWhite)
+                                  Text(widget.noNews, style: StylesText.content12MediumWhite)
                                 ],
                               ),
                               SizedBox(
@@ -73,8 +77,7 @@ class _CardTopicState extends State<CardTopic> {
                                     Icons.sync_rounded,
                                     color: Colors.white,
                                   ),
-                                  Text('9 hrs',
-                                      style: StylesText.content12MediumWhite)
+                                  Text(widget.time, style: StylesText.content12MediumWhite)
                                 ],
                               ),
                             ],
@@ -90,10 +93,8 @@ class _CardTopicState extends State<CardTopic> {
             left: -10,
             child: Container(
               width: 80,
-              height: 25,
-              decoration: BoxDecoration(
-                  color: MyColors.orange,
-                  borderRadius: BorderRadius.all(Radius.circular(13.0))),
+              height: 30,
+              decoration: BoxDecoration(color: MyColors.orange, borderRadius: BorderRadius.all(Radius.circular(13.0))),
               child: Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -101,7 +102,7 @@ class _CardTopicState extends State<CardTopic> {
                     Icons.star_rounded,
                     color: Colors.white,
                   ),
-                  Text('featured', style: StylesText.content12BoldWhite)
+                  Text(widget.label, style: StylesText.content12BoldWhite)
                 ],
               ),
             ),

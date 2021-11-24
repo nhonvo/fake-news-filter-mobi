@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),
       getPages: AppRoutes.appRoutes,
-      initialRoute: Routes.INIT,
+      initialRoute: Routes.INTRO,
     );
   }
 }

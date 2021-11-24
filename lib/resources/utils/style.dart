@@ -27,6 +27,7 @@ class SizeText {
   static double queryData = 1.0;
   static double size10 = 10.0 / queryData;
   static double size12 = 12.0 / queryData;
+  static double size13 = 13.0 / queryData;
   static double size14 = 14.0 / queryData;
   static double size15 = 15.0 / queryData;
   static double size16 = 16.0 / queryData;
@@ -40,45 +41,6 @@ class SizeText {
 }
 
 class StylesText {
-  static TextStyle content12BoldWhite = TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontSize: SizeText.size12,
-  );
-
-  static TextStyle content12BlackWhite = TextStyle(
-    color: Colors.white,
-    fontSize: SizeText.size12,
-  );
-  static TextStyle content14MediumWhite = TextStyle(
-    color: Colors.white,
-    fontSize: SizeText.size14,
-  );
-  static TextStyle content12MediumWhite = TextStyle(
-    color: Colors.white,
-    fontSize: SizeText.size12,
-  );
-  static TextStyle content14BoldWhite = TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontSize: SizeText.size14,
-  );
-  static TextStyle content16BoldWhite = TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontSize: SizeText.size16,
-  );
-  static TextStyle content17BoldWhite = TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontSize: SizeText.size17,
-  );
-  static TextStyle content18BoldWhite = TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontSize: SizeText.size18,
-  );
-
   static TextStyle content10BoldRed = TextStyle(
     color: MyColors.red,
     fontWeight: FontWeight.bold,
@@ -89,9 +51,13 @@ class StylesText {
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size10,
   );
-
   static TextStyle content10MediumBlack = TextStyle(
     color: Colors.black,
+    fontWeight: FontWeight.w400,
+    fontSize: SizeText.size10,
+  );
+  static TextStyle content10MediumWhite = TextStyle(
+    color: Colors.white,
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size10,
   );
@@ -100,13 +66,24 @@ class StylesText {
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size10,
   );
-
+  static TextStyle content12BoldWhite = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size12,
+  );
+  static TextStyle content12BlackWhite = TextStyle(
+    color: Colors.white,
+    fontSize: SizeText.size12,
+  );
+  static TextStyle content12MediumWhite = TextStyle(
+    color: Colors.white,
+    fontSize: SizeText.size12,
+  );
   static TextStyle content12BoldBlue = TextStyle(
     color: Colors.blue,
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size12,
   );
-
   static TextStyle content12MediumBlack = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.w400,
@@ -122,11 +99,40 @@ class StylesText {
     fontFamily: 'SF-UI-LIGHT',
     fontSize: SizeText.size12,
   );
-
   static TextStyle content12BoldOrange = TextStyle(
     color: const Color.fromRGBO(255, 140, 0, 1),
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size12,
+  );
+  static TextStyle content12BoldGrey = TextStyle(
+    color: MyColors.greyDark,
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size12,
+  );
+  static TextStyle content12BoldBlack = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size12,
+  );
+  static TextStyle content13SemiBlack = TextStyle(
+    color: Colors.black,
+    fontFamily: 'SF-UI-SEMIBOLD',
+    fontSize: SizeText.size13,
+  );
+  static TextStyle content13HeavyBlack = TextStyle(
+    color: Colors.black,
+    fontFamily: 'SF-UI-HEAVY',
+    fontSize: SizeText.size13,
+  );
+  static TextStyle content14MediumWhite = TextStyle(
+    color: Colors.white,
+    fontSize: SizeText.size14,
+  );
+
+  static TextStyle content14BoldWhite = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size14,
   );
   static TextStyle content14LightBlack = TextStyle(
     color: Colors.black,
@@ -138,44 +144,20 @@ class StylesText {
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size14,
   );
-
   static TextStyle content14MediumGrey = TextStyle(
     color: const Color.fromRGBO(216, 216, 216, 1.0),
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size14,
   );
-
-  static TextStyle content12BoldGrey = TextStyle(
-    color: MyColors.greyDark,
-    fontWeight: FontWeight.bold,
-    fontSize: SizeText.size12,
-  );
-
   static TextStyle content14BoldGrey = TextStyle(
     color: MyColors.greyDark,
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size14,
   );
-
   static TextStyle content14MediumBlue = TextStyle(
     color: MyColors.blue,
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size14,
-  );
-  static TextStyle content13SemiBlack = TextStyle(
-    color: Colors.black,
-    fontFamily: 'SF-UI-SEMIBOLD',
-    fontSize: SizeText.size14,
-  );
-  static TextStyle content13HeavyBlack = TextStyle(
-    color: Colors.black,
-    fontFamily: 'SF-UI-HEAVY',
-    fontSize: SizeText.size14,
-  );
-  static TextStyle content12BoldBlack = TextStyle(
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
-    fontSize: SizeText.size12,
   );
   static TextStyle content14BoldBlack = TextStyle(
     color: Colors.black,
@@ -187,27 +169,31 @@ class StylesText {
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size14,
   );
-  static TextStyle content16BoldOrange = TextStyle(
-    color: MyColors.orange,
-    fontWeight: FontWeight.bold,
-    fontSize: SizeText.size16,
-  );
   static TextStyle content14BoldBlue = TextStyle(
     color: MyColors.blue,
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size14,
   );
-
+  static TextStyle content14BoldItalicBlack = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic,
+    fontSize: SizeText.size14,
+  );
+  static TextStyle content16BoldWhite = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size16,
+  );
+  static TextStyle content16BoldOrange = TextStyle(
+    color: MyColors.orange,
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size16,
+  );
   static TextStyle content16BoldBlue = TextStyle(
     color: Colors.blue,
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size16,
-  );
-
-  static TextStyle content17BoldBlue = TextStyle(
-    color: Colors.blue,
-    fontWeight: FontWeight.bold,
-    fontSize: SizeText.size17,
   );
   static TextStyle content16LightBlack = TextStyle(
     color: Colors.black,
@@ -229,7 +215,6 @@ class StylesText {
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size16,
   );
-
   static TextStyle content16BoldBlueLight = TextStyle(
     color: const Color.fromRGBO(29, 219, 209, 1.0),
     fontWeight: FontWeight.bold,
@@ -240,13 +225,6 @@ class StylesText {
     fontFamily: 'SF-UI-REGULAR',
     fontSize: SizeText.size16,
   );
-  static TextStyle content14BoldItalicBlack = TextStyle(
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
-    fontStyle: FontStyle.italic,
-    fontSize: SizeText.size14,
-  );
-
   static TextStyle content16MediumBlack = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.w400,
@@ -257,7 +235,21 @@ class StylesText {
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size16,
   );
-
+  static TextStyle content17BoldWhite = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size17,
+  );
+  static TextStyle content17BoldBlue = TextStyle(
+    color: Colors.blue,
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size17,
+  );
+  static TextStyle content18BoldWhite = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size18,
+  );
   static TextStyle content18HeavyBlack = TextStyle(
     color: Colors.black,
     fontFamily: 'SF-UI-HEAVY',
