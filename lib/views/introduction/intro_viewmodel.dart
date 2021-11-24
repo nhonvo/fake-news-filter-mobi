@@ -1,30 +1,27 @@
-import 'package:fake_news/core/api/auth_api.dart';
+import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
-import 'package:fake_news/models/users/login_model.dart';
+import 'package:fake_news/models/topics/topic_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginViewModel extends BaseViewModel {
-  LoginViewModel({required this.authApi, required this.authRepo, required this.pref});
-  AuthApi authApi;
-  AuthRepo authRepo;
-  SharedPreferences pref;
+class IntroViewModel extends BaseViewModel {
+  IntroViewModel({required this.topicApi});
 
-  var usernameController = TextEditingController();
-  var passwordController = TextEditingController();
+  // IntroViewModel({required this.topicApi, required this.authRepo, required this.pref});
+  TopicApi topicApi;
+  final topics = <TopicModel>[].obs;
+  // AuthRepo authRepo;
+  // SharedPreferences pref;
 
-  void clearText() {
-    usernameController.clear();
-  }
-
-  handlelogin() async {
+  handleGetTopic() async {
     // ProgressHud.showLoading();
 
-    var response = await authApi.login(usernameController.text, passwordController.text);
+    var response = await topicApi.getTopic('en');
 
     if (response.isSuccessed == false) {
       // ProgressHud.hideLoading();
@@ -41,9 +38,11 @@ class LoginViewModel extends BaseViewModel {
         SnackPosition.BOTTOM,
       );
     } else {
-      LoginModel user = response.resultObj!;
-      await authRepo.saveAuthToken(user.token ?? '');
-      Get.toNamed(Routes.HOME);
+      List<TopicModel> topicList = response.resultObj!.obs;
+      topicList.forEach((topic) {
+        topics.add(topic);
+      });
+      // Get.toNamed(Routes.HOME);
     }
 
     @override

@@ -1,5 +1,6 @@
 import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/dio_api.dart';
+import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/services/language_service.dart';
 import 'package:fake_news/core/services/local_storage/auth_local_storage.dart';
 import 'package:fake_news/providers/auth_repo.dart';
@@ -22,6 +23,7 @@ class AppServices {
     Get.put<AuthRepo>(AuthRepoImpl(authLocalStorage: Get.find()));
     Get.put<DioApi>(DioApi(authRepo: Get.find()));
     Get.put<AuthApi>(AuthApiIpml(dioApi: Get.find()));
+    Get.put<TopicApi>(TopicApiIpml(dioApi: Get.find()));
     // Get.put<AppointmentApi>(AppointmentApiIpml(dioApi: Get.find()));
     // Get.put<ServicePackageApi>(ServicePackageApiImpl(dioApi: Get.find()));
     // Get.put<FirebaseMessagingWrapper>(
@@ -41,7 +43,6 @@ class AppServices {
     await Get.putAsync<LanguageService>(() async {
       return await LanguageService(sharedPreferences: Get.find()).init();
     });
-
     // Get.put<AuthLocalStorage>(AuthLocalStorageIpml(sharedPref: Get.find()));
     // Get.put<AuthRepo>(AuthRepoImpl(authLocalStorage: Get.find()));
     // Get.put<DioApi>(DioApi(authRepo: Get.find()));
