@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-
-import 'package:fake_news/languages/LocalizationService.dart';
+import 'package:fake_news/languages/language_service.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
@@ -18,6 +17,8 @@ class WidgetResource extends StatefulWidget {
 }
 
 class _WidgetResourceState extends State<WidgetResource> {
+  final language = Get.find<LanguageService>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,7 @@ class _WidgetResourceState extends State<WidgetResource> {
               textStyle: StylesText.content14BoldWhite,
               onPressed: () {
                 setState(() {
-                  LocalizationService.changeLocale('vi');
+                  language.updateLanguage('vi');
                 });
               },
             ),

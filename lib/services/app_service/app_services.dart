@@ -1,7 +1,7 @@
 import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/dio_api.dart';
 import 'package:fake_news/core/api/topic_api.dart';
-import 'package:fake_news/core/services/language_service.dart';
+import 'package:fake_news/languages/language_service.dart';
 import 'package:fake_news/core/services/local_storage/auth_local_storage.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:get/get.dart';

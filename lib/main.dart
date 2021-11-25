@@ -3,8 +3,8 @@ import 'package:fake_news/services/app_service/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-
-import 'languages/LocalizationService.dart';
+import 'languages/language_service.dart';
+import 'languages/localization.dart';
 import 'resources/utils/app_routes.dart';
 
 void main() async {
@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final language = Get.find<LanguageService>();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: LocalizationService.locale,
-      fallbackLocale: LocalizationService.fallbackLocale,
-      translations: LocalizationService(),
+      locale: Locale(language.currentLanguage),
+      translations: Localization(),
       getPages: AppRoutes.appRoutes,
       initialRoute: Routes.INTRO,
     );

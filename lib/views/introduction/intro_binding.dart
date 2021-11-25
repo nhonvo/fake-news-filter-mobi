@@ -1,8 +1,6 @@
 import 'package:fake_news/core/api/topic_api.dart';
-import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/views/introduction/intro_viewmodel.dart';
 import 'package:get/instance_manager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroBinding extends Bindings {
   TopicApi topicApi = Get.find();
