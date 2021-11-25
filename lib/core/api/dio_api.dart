@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:fake_news/core/models/api/base_response_api_model.dart';
+import 'package:fake_news/languages/language_service.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
@@ -24,6 +25,11 @@ abstract class Api {
     var apikey = await authRepo.getApiKey();
     if (apikey != null) {
       header.addAll({"X-APP-ID": apikey});
+    }
+
+    var curLanguage = getX.Get.find<LanguageService>().currentLanguage;
+    if (curLanguage != null) {
+      header.addAll({"Accept-Language": curLanguage});
     }
 
     var token = await authRepo.getAuthToken();

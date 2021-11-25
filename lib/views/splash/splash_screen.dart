@@ -1,3 +1,4 @@
+import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
@@ -7,16 +8,25 @@ import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
-
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  AuthRepo authRepo = Get.find();
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () => Get.offNamed(Routes.INTRO));
+    Future.delayed(const Duration(seconds: 2), () {
+      authRepo.getAuthToken().then((token) {
+        if (token != null) {
+          Get.offAllNamed(Routes.HOME);
+        } else {
+          Get.offAllNamed(Routes.INTRO);
+        }
+        ;
+      });
+    });
   }
 
   @override
