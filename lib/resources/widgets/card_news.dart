@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
+import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
@@ -44,6 +45,22 @@ class CardNews extends StatefulWidget {
 }
 
 class _CardNewsState extends State<CardNews> {
+  AuthRepo authRepo = Get.find();
+  late bool isLoggined = false;
+
+  @override
+  void initState() {
+    super.initState();
+    authRepo.getAuthToken().then((token) {
+      if (token != null) {
+        setState(() {
+          isLoggined = true;
+        });
+      }
+      ;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -170,7 +187,7 @@ class _CardNewsState extends State<CardNews> {
                       widget.article,
                       style: StylesText.content12BoldGrey,
                     ),
-                    widget.rate!
+                    isLoggined
                         ? RatingButton()
                         : InkWell(
                             onTap: () {},
@@ -194,9 +211,9 @@ class _CardNewsState extends State<CardNews> {
             ),
           ),
         ),
-        widget.tag == null
-            ? SizedBox()
-            : Positioned(top: 7, right: 0, child: TagTopic(tagName: "#covid", buttonColor: Colors.blue))
+        // widget.tag == null
+        //     ? SizedBox()
+        //     : Positioned(top: 7, right: 0, child: TagTopic(tagName: widget.tag, buttonColor: Colors.blue))
       ],
     );
   }

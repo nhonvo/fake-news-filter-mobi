@@ -1,9 +1,9 @@
 import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/topics/topic_model.dart';
-import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -26,12 +26,12 @@ class IntroViewModel extends BaseViewModel {
   }
 
   handleGetTopic() async {
-    // ProgressHud.showLoading();
+    EasyLoading.show(status: 'Loading...');
 
     var response = await topicApi.getTopic('en');
 
     if (response.isSuccessed == false) {
-      // ProgressHud.hideLoading();
+      EasyLoading.dismiss();
       snackBar(
         'Error',
         response.messages!,
@@ -49,8 +49,11 @@ class IntroViewModel extends BaseViewModel {
       //clear all topics before get data from API to avoid duplication
       topics.clear();
       topicList.forEach((topic) {
-        topics.add(topic);
+        if (topic.noNews != 0) {
+          topics.add(topic);
+        }
       });
+      EasyLoading.dismiss();
     }
   }
 }

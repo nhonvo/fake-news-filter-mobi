@@ -5,6 +5,7 @@ import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,12 +23,12 @@ class LoginViewModel extends BaseViewModel {
   }
 
   handlelogin() async {
-    // ProgressHud.showLoading();
+    EasyLoading.show(status: 'Logging in...');
 
     var response = await authApi.login(usernameController.text, passwordController.text);
 
     if (response.isSuccessed == false) {
-      // ProgressHud.hideLoading();
+      EasyLoading.dismiss();
       snackBar(
         'Error',
         response.messages!,
@@ -44,6 +45,7 @@ class LoginViewModel extends BaseViewModel {
       LoginModel user = response.resultObj!;
       await authRepo.saveAuthToken(user.token ?? '');
       Get.offAllNamed(Routes.HOME);
+      EasyLoading.dismiss();
     }
   }
 }

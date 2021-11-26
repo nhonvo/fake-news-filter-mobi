@@ -3,6 +3,7 @@ import 'package:fake_news/views/introduction/intro_binding.dart';
 import 'package:fake_news/views/introduction/intro_screen.dart';
 import 'package:fake_news/views/login/login_binding.dart';
 import 'package:fake_news/views/login/login_screen.dart';
+import 'package:fake_news/views/preview/preview_binding.dart';
 import 'package:fake_news/views/preview/preview_screen.dart';
 import 'package:fake_news/views/splash/splash_screen.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ class AppRoutes {
   static final appRoutes = [
     GetPage(name: Routes.INIT, page: () => SplashScreen()),
     GetPage(name: Routes.INTRO, page: () => IntroductionScreen(), binding: IntroBinding()),
-    GetPage(name: Routes.PREVIEW, page: () => PreviewScreen()),
+    GetPage(name: Routes.PREVIEW, page: () => PreviewScreen(), binding: PreviewBinding()),
     GetPage(
       name: Routes.LOGIN,
       page: () => LoginScreen(),

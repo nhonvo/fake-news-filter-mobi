@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
@@ -94,9 +95,10 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                                     label: topic.label.toString(),
                                     tag: topic.tag.toString(),
                                     description: topic.description.toString(),
-                                    time: convertToAgo(DateTime.tryParse(topic.realTime.toString()) ?? DateTime.now()),
+                                    time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
                                     ontap: () {
-                                      // Get.toNamed(Routes.TOPIC, arguments: topic);
+                                      print(topic.topicId);
+                                      Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
                                     },
                                   )))
                               .toList());
@@ -109,24 +111,5 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
         ),
       ),
     );
-  }
-
-  String convertToAgo(DateTime input) {
-    Duration diff = DateTime.now().difference(input);
-    if (diff.inDays >= 1) {
-      if (diff.inDays >= 31) {
-        return '${diff.inDays ~/ 31} months ago';
-      } else {
-        return '${diff.inDays} days ago';
-      }
-    } else if (diff.inHours >= 1) {
-      return '${diff.inHours} hour(s)';
-    } else if (diff.inMinutes >= 1) {
-      return '${diff.inMinutes} minute(s)';
-    } else if (diff.inSeconds >= 1) {
-      return '${diff.inSeconds} second(s)';
-    } else {
-      return 'just now';
-    }
   }
 }

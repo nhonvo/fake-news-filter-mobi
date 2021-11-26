@@ -1,5 +1,6 @@
 import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/dio_api.dart';
+import 'package:fake_news/core/api/news_api.dart';
 import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/languages/language_service.dart';
 import 'package:fake_news/core/services/local_storage/auth_local_storage.dart';
@@ -24,6 +25,7 @@ class AppServices {
     Get.put<DioApi>(DioApi(authRepo: Get.find()));
     Get.put<AuthApi>(AuthApiIpml(dioApi: Get.find()));
     Get.put<TopicApi>(TopicApiIpml(dioApi: Get.find()));
+    Get.put<NewsApi>(NewsApiIpml(dioApi: Get.find()));
     // Get.put<AppointmentApi>(AppointmentApiIpml(dioApi: Get.find()));
     // Get.put<ServicePackageApi>(ServicePackageApiImpl(dioApi: Get.find()));
     // Get.put<FirebaseMessagingWrapper>(

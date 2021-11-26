@@ -94,15 +94,32 @@ class _CardTopicState extends State<CardTopic> {
             child: Container(
               width: 80,
               height: 30,
-              decoration: BoxDecoration(color: MyColors.orange, borderRadius: BorderRadius.all(Radius.circular(13.0))),
+              decoration: BoxDecoration(
+                  color: widget.label == "featured"
+                      ? MyColors.orange
+                      : widget.label == "breaking"
+                          ? MyColors.red
+                          : Colors.transparent,
+                  borderRadius: BorderRadius.all(Radius.circular(13.0))),
               child: Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.star_rounded,
-                    color: Colors.white,
-                  ),
-                  Text(widget.label, style: StylesText.content12BoldWhite)
+                  widget.label == "featured"
+                      ? Icon(
+                          Icons.star_rounded,
+                          color: Colors.white,
+                        )
+                      : widget.label == "breaking"
+                          ? Icon(
+                              Icons.psychology_sharp,
+                              color: Colors.white,
+                            )
+                          : Container(),
+                  widget.label == "featured"
+                      ? Text(widget.label, style: StylesText.content12BoldWhite)
+                      : widget.label == "breaking"
+                          ? Text(widget.label, style: StylesText.content12BoldWhite)
+                          : Container(),
                 ],
               ),
             ),

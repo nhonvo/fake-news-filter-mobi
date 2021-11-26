@@ -1,13 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fake_news/models/news_model.dart';
+import 'package:fake_news/models/news1_model.dart';
 import 'package:fake_news/models/story_model.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class StoryScreen extends StatefulWidget {
-  final NewsModel news;
+  final NewsModel1 news;
 
   const StoryScreen({Key? key, required this.news}) : super(key: key);
 
@@ -15,8 +15,7 @@ class StoryScreen extends StatefulWidget {
   _StoryScreenState createState() => _StoryScreenState();
 }
 
-class _StoryScreenState extends State<StoryScreen>
-    with SingleTickerProviderStateMixin {
+class _StoryScreenState extends State<StoryScreen> with SingleTickerProviderStateMixin {
   PageController? _pageController;
   AnimationController? _animController;
   VideoPlayerController? _videoController;
@@ -222,9 +221,7 @@ class AnimatedBar extends StatelessWidget {
               children: <Widget>[
                 _buildContainer(
                   double.infinity,
-                  position < currentIndex
-                      ? Colors.white
-                      : Colors.white.withOpacity(0.5),
+                  position < currentIndex ? Colors.white : Colors.white.withOpacity(0.5),
                 ),
                 position == currentIndex
                     ? AnimatedBuilder(
@@ -262,7 +259,7 @@ class AnimatedBar extends StatelessWidget {
 }
 
 class NewsInfo extends StatelessWidget {
-  final NewsModel news;
+  final NewsModel1 news;
 
   const NewsInfo({
     Key? key,
