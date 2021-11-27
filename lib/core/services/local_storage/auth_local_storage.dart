@@ -43,6 +43,7 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
   Future<bool> handleUnAuthorized() async {
     await sharedPref.remove(AppConstant.sharePrefKeys.authToken);
     await sharedPref.remove(AppConstant.sharePrefKeys.apiKey);
+    await sharedPref.remove(AppConstant.sharePrefKeys.userId);
     return true;
   }
 }

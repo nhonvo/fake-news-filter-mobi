@@ -2,7 +2,7 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:flutter/material.dart';
 
 class TagTopic extends StatefulWidget {
-  final String tagName;
+  final String? tagName;
   final Color buttonColor;
   final VoidCallback? onPressed;
 
@@ -22,11 +22,9 @@ class _TagTopicState extends State<TagTopic> {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-        decoration: BoxDecoration(
-            color: widget.buttonColor,
-            borderRadius: const BorderRadius.all(Radius.circular(15))),
+        decoration: BoxDecoration(color: widget.buttonColor, borderRadius: const BorderRadius.all(Radius.circular(15))),
         child: Text(
-          widget.tagName,
+          widget.tagName.toString(),
           style: StylesText.content14BoldWhite,
         ));
   }

@@ -34,12 +34,10 @@ class _CustomButtonState extends State<CustomButton> {
       width: widget.width,
       child: ElevatedButton(
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-                EdgeInsets.only(top: widget.height, bottom: widget.height)),
+            padding: MaterialStateProperty.all(EdgeInsets.only(top: widget.height, bottom: widget.height)),
             backgroundColor: MaterialStateProperty.all(widget.buttonColor),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(widget.buttonRadius), // <-- Radius
+              borderRadius: BorderRadius.circular(widget.buttonRadius), // <-- Radius
             )),
           ),
           onPressed: widget.onPressed,
@@ -94,8 +92,7 @@ class _CustomIconButtonState extends State<CustomIconButton> {
             padding: MaterialStateProperty.all(EdgeInsets.all(5)),
             backgroundColor: MaterialStateProperty.all(widget.buttonColor),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(widget.buttonRadius), // <-- Radius
+              borderRadius: BorderRadius.circular(widget.buttonRadius), // <-- Radius
             )),
           )),
     );

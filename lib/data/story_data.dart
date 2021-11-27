@@ -1,31 +1,27 @@
-import 'package:fake_news/models/news_model.dart';
+import 'package:fake_news/models/news1_model.dart';
 import 'package:fake_news/models/story_model.dart';
 
-final List<NewsModel> news = [
-  NewsModel(
+final List<NewsModel1> news = [
+  NewsModel1(
       name: 'CNN',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/CNN_International_logo.svg/1200px-CNN_International_logo.svg.png',
       stories: stories),
-  NewsModel(
+  NewsModel1(
       name: 'New York Times',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/40/New_York_Times_logo_variation.jpg',
       stories: stories),
-  NewsModel(
+  NewsModel1(
       name: 'BBC News',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/f/ff/BBC_News.svg/1200px-BBC_News.svg.png',
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/ff/BBC_News.svg/1200px-BBC_News.svg.png',
       stories: stories),
-  NewsModel(
+  NewsModel1(
       name: 'abc News',
-      imageUrl:
-          'https://s.abcnews.com/assets/beta/assets/abcn_images/abcnews_pearl_stacked.png',
+      imageUrl: 'https://s.abcnews.com/assets/beta/assets/abcn_images/abcnews_pearl_stacked.png',
       stories: stories),
-  NewsModel(
+  NewsModel1(
       name: 'Fox News',
-      imageUrl:
-          'https://www.bark.us/blog/wp-content/uploads/2019/04/Fox-news-logo.png',
+      imageUrl: 'https://www.bark.us/blog/wp-content/uploads/2019/04/Fox-news-logo.png',
       stories: stories),
 ];
 
