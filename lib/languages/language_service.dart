@@ -20,8 +20,7 @@ class LanguageService extends GetxService {
 
   /// save locale if don't have
   Future<void> initLocalLanguage() async {
-    String? currentLanguageStore =
-        sharedPreferences.getString(AppConstant.sharePrefKeys.language);
+    String? currentLanguageStore = sharedPreferences.getString(AppConstant.sharePrefKeys.language);
 
     if ((currentLanguageStore == '') || (currentLanguageStore == null)) {
       await setDefaultLocale(LocaleKey.EN);
@@ -31,14 +30,12 @@ class LanguageService extends GetxService {
   }
 
   setDefaultLocale(String value) async {
-    await sharedPreferences.setString(
-        AppConstant.sharePrefKeys.language, value);
+    await sharedPreferences.setString(AppConstant.sharePrefKeys.language, value);
     language.value = value;
   }
 
   Future<void> updateLanguage(String value) async {
-    Stream.fromFuture(sharedPreferences.setString(
-            AppConstant.sharePrefKeys.language, value))
+    Stream.fromFuture(sharedPreferences.setString(AppConstant.sharePrefKeys.language, value))
         .debounceTime(Duration(seconds: 2));
     language.value = value;
     Get.updateLocale(Locale(value));
