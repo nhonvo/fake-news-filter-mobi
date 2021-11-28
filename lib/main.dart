@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/services/app_service/app_services.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,16 @@ import 'languages/language_service.dart';
 import 'languages/localization.dart';
 import 'resources/utils/app_routes.dart';
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 void main() async {
+  HttpOverrides.global = new MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
 
   Get.put<AppEnvironment>(AppEnvironment.dev());
