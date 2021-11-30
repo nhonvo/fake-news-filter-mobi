@@ -5,7 +5,6 @@ import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
-import 'package:fake_news/views/introduction/intro_screen.dart';
 import 'package:fake_news/views/preview/preview_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -101,6 +100,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
                             title: item.description.toString().substring(
                                 0, item.description.toString().length > 50 ? 50 : item.description.toString().length),
+                            content: item.content.toString(),
                             article: item.publisher ?? '',
                             onpress: () {}),
                     ],

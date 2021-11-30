@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginViewModel get viewmodel => Get.find<LoginViewModel>();
 
   bool _obscureText = true;
-  bool checkbox = false;
+  bool checkbox = true;
 
   final language = Get.find<LanguageService>();
 

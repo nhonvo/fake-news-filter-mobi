@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fake_news/resources/utils/app_config.dart';
+import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/services/app_service/app_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -27,6 +28,7 @@ void main() async {
   await AppServices.initServices();
 
   runApp(const MyApp());
+  configLoading();
 }
 
 class MyApp extends StatelessWidget {
@@ -41,7 +43,22 @@ class MyApp extends StatelessWidget {
       locale: Locale(language.currentLanguage),
       translations: Localization(),
       getPages: AppRoutes.appRoutes,
-      initialRoute: Routes.INTRO,
+      initialRoute: Routes.INIT,
     );
   }
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = MyColors.blue
+    ..backgroundColor = MyColors.blueEgg
+    ..indicatorColor = MyColors.blue
+    ..textColor = MyColors.blue
+    ..userInteractions = true
+    ..dismissOnTap = false;
 }

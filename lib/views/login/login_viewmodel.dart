@@ -25,24 +25,13 @@ class LoginViewModel extends BaseViewModel {
   }
 
   handlelogin() async {
-    EasyLoading.show(status: 'Logging in...');
+    EasyLoading.show(status: 'loadingLogin'.tr);
 
     var response = await authApi.login(usernameController.text, passwordController.text);
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
-      snackBar(
-        'Error',
-        response.messages!,
-        'Something went wrong',
-        Icon(
-          Icons.error,
-          color: Colors.white,
-        ),
-        Colors.red,
-        Colors.white,
-        SnackPosition.BOTTOM,
-      );
+      showSnackbar(response.messages!);
     } else {
       LoginModel user = response.resultObj!;
       await authRepo.saveAuthToken(user.token ?? '');
@@ -52,6 +41,8 @@ class LoginViewModel extends BaseViewModel {
   }
 
   handleLoginFacebook() async {
+    EasyLoading.show(status: 'loadingLogin'.tr);
+
     final LoginResult result = await FacebookAuth.instance
         .login(permissions: ['public_profile', 'email']); // by default we request the email and the public profile
 
@@ -61,27 +52,17 @@ class LoginViewModel extends BaseViewModel {
       var response = await authApi.loginFacebook(accessToken.token);
       if (response.isSuccessed == false) {
         EasyLoading.dismiss();
-        snackBar(
-          'Error',
-          response.messages!,
-          'Something went wrong',
-          Icon(
-            Icons.error,
-            color: Colors.white,
-          ),
-          Colors.red,
-          Colors.white,
-          SnackPosition.BOTTOM,
-        );
+        showSnackbar(response.messages!);
       } else {
         LoginModel user = response.resultObj!;
         await authRepo.saveAuthToken(user.token ?? '');
+        await authRepo.saveEmail(user.email ?? '');
         Get.offAllNamed(Routes.HOME);
         EasyLoading.dismiss();
       }
     } else {
-      print(result.status);
-      print(result.message);
+      showSnackbar(result.message!);
+      EasyLoading.dismiss();
     }
   }
 
@@ -94,6 +75,8 @@ class LoginViewModel extends BaseViewModel {
   );
 
   Future<void> handleLoginGoogle() async {
+    EasyLoading.show(status: 'loadingLogin'.tr);
+
     try {
       var result = await _googleSignIn.signIn();
       GoogleSignInAuthentication googleSignInAuthentication = await result!.authentication;
@@ -101,26 +84,32 @@ class LoginViewModel extends BaseViewModel {
       var response = await authApi.loginGoogle(googleSignInAuthentication.idToken.toString());
       if (response.isSuccessed == false) {
         EasyLoading.dismiss();
-        snackBar(
-          'Error',
-          response.messages!,
-          'Something went wrong',
-          Icon(
-            Icons.error,
-            color: Colors.white,
-          ),
-          Colors.red,
-          Colors.white,
-          SnackPosition.BOTTOM,
-        );
+        showSnackbar(response.messages!);
       } else {
         LoginModel user = response.resultObj!;
         await authRepo.saveAuthToken(user.token ?? '');
+        await authRepo.saveEmail(user.email ?? '');
         Get.offAllNamed(Routes.HOME);
         EasyLoading.dismiss();
       }
     } catch (error) {
-      print(error);
+      EasyLoading.dismiss();
+      showSnackbar(error.toString());
     }
+  }
+
+  void showSnackbar(String message) {
+    snackBar(
+      'error'.tr,
+      message,
+      'Something went wrong',
+      Icon(
+        Icons.error,
+        color: Colors.white,
+      ),
+      Colors.red,
+      Colors.white,
+      SnackPosition.BOTTOM,
+    );
   }
 }
