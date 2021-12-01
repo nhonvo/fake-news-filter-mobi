@@ -93,6 +93,7 @@ class _WidgetResourceState extends State<WidgetResource> {
                 user: '56%',
                 times: '7 hours',
                 image: Images.chart,
+                content: "",
                 title:
                     '57,083 cases and 751 deaths were reported in the U.S yesterday, bringing the total to 29.5 milion cases and 536,433 deaths.',
                 article: 'CNN News',
