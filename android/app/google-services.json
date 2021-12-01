@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "801182969519",
+    "project_id": "fake-news-filter",
+    "storage_bucket": "fake-news-filter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801182969519:android:e7cc466d8425f1a757ae5a",
+        "android_client_info": {
+          "package_name": "com.example.fake_news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801182969519-0l8hskdqu11malnqdvtp3663h8ro6os7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB26a9P4t2E8CvZze7ga-lQqq6gL05WGyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801182969519-0l8hskdqu11malnqdvtp3663h8ro6os7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "801182969519-hpdvcifae1co4kuu6h7i2kp7nohbs6sr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fakenewsfilter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -26,14 +26,14 @@ class IntroViewModel extends BaseViewModel {
   }
 
   handleGetTopic() async {
-    EasyLoading.show(status: 'Loading...');
+    EasyLoading.show(status: 'fetchingData'.tr);
 
     var response = await topicApi.getTopic('en');
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
       snackBar(
-        'Error',
+        'error'.tr,
         response.messages!,
         'Something went wrong',
         Icon(
