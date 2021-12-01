@@ -3,13 +3,11 @@ import 'package:fake_news/resources/utils/app_constant.dart';
 
 abstract class AuthLocalStorage {
   Future<String?> getApiKey();
-
   Future<String?> getAuthToken();
-
+  Future<String?> getEmail();
   Future<bool> saveApiKey(String apiKey);
-
   Future<bool> saveAuthToken(String authToken);
-
+  Future<bool> saveEmail(String email);
   Future<bool> handleUnAuthorized();
 }
 
@@ -30,13 +28,23 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
   }
 
   @override
+  Future<String?> getEmail() async {
+    return sharedPref.getString(AppConstant.sharePrefKeys.email);
+  }
+
+  @override
   Future<bool> saveApiKey(String apiKey) async {
-    return sharedPref.setString(AppConstant.sharePrefKeys.apiKey, apiKey);
+    return await sharedPref.setString(AppConstant.sharePrefKeys.apiKey, apiKey);
   }
 
   @override
   Future<bool> saveAuthToken(String authToken) async {
-    return sharedPref.setString(AppConstant.sharePrefKeys.authToken, authToken);
+    return await sharedPref.setString(AppConstant.sharePrefKeys.authToken, authToken);
+  }
+
+  @override
+  Future<bool> saveEmail(String email) async {
+    return await sharedPref.setString(AppConstant.sharePrefKeys.email, email);
   }
 
   @override
@@ -44,6 +52,7 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
     await sharedPref.remove(AppConstant.sharePrefKeys.authToken);
     await sharedPref.remove(AppConstant.sharePrefKeys.apiKey);
     await sharedPref.remove(AppConstant.sharePrefKeys.userId);
+    await sharedPref.remove(AppConstant.sharePrefKeys.email);
     return true;
   }
 }

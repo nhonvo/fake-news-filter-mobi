@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:fake_news/models/language.dart';
 import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
@@ -24,6 +25,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   @override
   void initState() {
     super.initState();
+    var kakakaka = Get.find<List<LanguageModel>?>();
     viewmodel.handleGetTopic();
   }
 
@@ -45,6 +47,26 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           ),
           child: Stack(
             children: [
+              Positioned(
+                top: Get.size.height * 0.04,
+                left: Get.size.width * 0.75,
+                child: CustomButton(
+                  width: Get.size.width * 0.2,
+                  buttonText: 'language'.tr,
+                  buttonColor: MyColors.blueLight,
+                  buttonRadius: 10,
+                  textStyle: StylesText.content12MediumBlue,
+                  onPressed: () {
+                    // setState(() {
+                    //   if (language.currentLanguage == "en") {
+                    //     language.updateLanguage("vi");
+                    //   } else {
+                    //     language.updateLanguage("en");
+                    //   }
+                    // });
+                  },
+                ),
+              ),
               Column(
                 children: [
                   Row(

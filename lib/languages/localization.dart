@@ -41,6 +41,9 @@ class Localization extends Translations {
           LanguageKey.browser: 'Open in browser',
           LanguageKey.error_browser: 'Error when opening in browser',
           LanguageKey.clipboard: 'Copied link to your clipboard!',
+          LanguageKey.error: 'Error',
+          LanguageKey.loadingLogin: "Logging in...",
+          LanguageKey.fetchingData: "Fetching data...",
         },
         LocaleKey.VI: {
           LanguageKey.appname: 'Fake News Filter',
@@ -55,8 +58,7 @@ class Localization extends Translations {
           LanguageKey.agree: 'Tôi đồng ý với ',
           LanguageKey.terms: 'Điều khoản sử dụng ',
           LanguageKey.about: 'của Fake News Filter',
-          LanguageKey.introduction:
-              'Theo dõi những tin tức nằm ở những chủ đề khác nhau.',
+          LanguageKey.introduction: 'Theo dõi những tin tức nằm ở những chủ đề khác nhau.',
           LanguageKey.covering: 'Tổng hợp chủ đề được quan tâm',
           LanguageKey.content_started:
               'Theo dõi các chủ đề để thông báo. Ứng dụng sẽ cho bạn biết khi hệ thống có những cập nhật mới',
@@ -77,6 +79,9 @@ class Localization extends Translations {
           LanguageKey.browser: 'Mở bằng trình duyệt',
           LanguageKey.error_browser: 'Không thể mở bằng trình duyệt',
           LanguageKey.clipboard: 'Đã sao chép đường dẫn bài báo!',
+          LanguageKey.error: 'Lỗi',
+          LanguageKey.loadingLogin: "Đang đăng nhập...",
+          LanguageKey.fetchingData: "Đang tải dữ liệu...",
         },
       };
 }

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:math';
+
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
@@ -23,6 +25,8 @@ class CardTopic extends StatefulWidget {
   _CardTopicState createState() => _CardTopicState();
 }
 
+var colorsArr = [Colors.amber[500], Colors.pink[200], Colors.blue[400], Colors.green[400]];
+
 class _CardTopicState extends State<CardTopic> {
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,9 @@ class _CardTopicState extends State<CardTopic> {
           Container(
               width: 250,
               height: 210,
-              decoration: BoxDecoration(color: MyColors.card1, borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              decoration: BoxDecoration(
+                  color: colorsArr.elementAt(new Random().nextInt(colorsArr.length)),
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
               child: Column(
                 children: [
                   ClipRRect(
@@ -49,7 +55,7 @@ class _CardTopicState extends State<CardTopic> {
                         children: [
                           TagTopic(
                             tagName: '#${widget.tag}',
-                            buttonColor: MyColors.red.withOpacity(0.1),
+                            buttonColor: MyColors.red.withOpacity(0.2),
                           ),
                           Text(
                             widget.description,

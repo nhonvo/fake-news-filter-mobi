@@ -31,5 +31,8 @@ class LanguageKey {
   static const copy = "copy";
   static const browser = "browser";
   static const error_browser = "error_browser";
-  static const clipboard = "Copied link to your clipboard!";
+  static const clipboard = "clipboard";
+  static const error = "error";
+  static const loadingLogin = "loadingLogin";
+  static const fetchingData = "fetchingData";
 }

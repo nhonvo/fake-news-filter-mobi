@@ -6,6 +6,8 @@ abstract class AuthRepo {
   Future<String?> getAuthToken();
   Future<bool> saveApiKey(String apiKey);
   Future<bool> saveAuthToken(String authToken);
+  Future<bool> saveEmail(String email);
+  Future<String?>? getEmail();
   Future<bool> handleUnAuthorized();
 }
 
@@ -34,14 +36,21 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
+  Future<String?>? getEmail() {
+    return authLocalStorage.getEmail();
+  }
+
+  @override
   Future<bool> saveApiKey(String apiKey) async {
     _apiKey = apiKey;
     return authLocalStorage.saveApiKey(apiKey);
   }
 
   @override
-  Future<bool> saveAuthToken(String authToken) async =>
-      authLocalStorage.saveAuthToken(authToken);
+  Future<bool> saveAuthToken(String authToken) async => authLocalStorage.saveAuthToken(authToken);
+
+  @override
+  Future<bool> saveEmail(String email) async => authLocalStorage.saveEmail(email);
 
   @override
   Future<bool> handleUnAuthorized() {

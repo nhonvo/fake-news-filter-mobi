@@ -14,7 +14,7 @@ class NewsApiIpml implements NewsApi {
   Future<BaseResponse<List<NewsModel>>> getNewsById(int? topicId) async {
     return await dioApi.doGet<List<NewsModel>>(
       //FIXME: change to real url
-      "/api/News/Topic?TopicId=${topicId}",
+      "/api/News/Topic?TopicId=$topicId",
       parseJson: (json) => List<NewsModel>.from(json.map((x) => NewsModel.fromJson(x))),
     );
   }

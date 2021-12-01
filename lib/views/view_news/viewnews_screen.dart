@@ -6,16 +6,17 @@ import 'package:fake_news/resources/widgets/rating.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:html/dom.dart' as dom;
 import 'package:url_launcher/url_launcher.dart';
 
 class ViewNewsScreen extends StatefulWidget {
-  final String url_news;
+  final String content;
 
-  const ViewNewsScreen({Key? key, required this.url_news}) : super(key: key);
+  const ViewNewsScreen({Key? key, required this.content}) : super(key: key);
 
   @override
   _ViewNewsScreenState createState() => _ViewNewsScreenState();
@@ -46,7 +47,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
               itemBuilder: (context) => [
                     PopupMenuItem(
                       onTap: () {
-                        Clipboard.setData(ClipboardData(text: widget.url_news)).then((_) {
+                        Clipboard.setData(ClipboardData(text: widget.content)).then((_) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(SnackBar(content: Text('clipboard'.tr), backgroundColor: Colors.green));
                         });
@@ -65,9 +66,9 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                     ),
                     PopupMenuItem(
                       onTap: () async {
-                        await canLaunch(widget.url_news)
-                            ? await launch(widget.url_news)
-                            : ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('error_browser'.tr)));
+                        // await canLaunch(widget.content)
+                        //     ? await launch(widget.content)
+                        //     : ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('error_browser'.tr)));
                       },
                       child: Row(
                         children: [
@@ -87,22 +88,54 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          IndexedStack(
-            index: _stackToView,
-            children: [
-              WebView(
-                initialUrl: widget.url_news,
-                onPageFinished: (String url) {
-                  setState(() {
-                    _stackToView = 0;
-                  });
+          SingleChildScrollView(
+            child: Html(
+                data: widget.content,
+                style: {
+                  "table": Style(
+                    backgroundColor: Color.fromARGB(0x50, 0xee, 0xee, 0xee),
+                  ),
+                  // some other granular customizations are also possible
+                  "tr": Style(
+                    border: Border(bottom: BorderSide(color: Colors.grey)),
+                  ),
+                  "th": Style(
+                    padding: EdgeInsets.all(6),
+                    backgroundColor: Colors.grey,
+                  ),
+                  "blockquote": Style(
+                    backgroundColor: Colors.grey[200],
+                    fontSize: FontSize(SizeText.size13),
+                    color: Colors.grey[800],
+                  ),
+                  "p": Style(
+                    padding: EdgeInsets.only(right: 10, left: 10),
+                    fontSize: FontSize(SizeText.size20),
+                  ),
+                  // text that renders h1 elements will be red
+                  "h1": Style(color: Colors.red),
                 },
-              ),
-              Container(
-                child: Center(child: CupertinoActivityIndicator()),
-              ),
-            ],
+                onLinkTap:
+                    (String? url, RenderContext context, Map<String, String> attributes, dom.Element? element) async {
+                  if (await canLaunch(url.toString())) {
+                    await launch(url.toString());
+                  }
+                  //  else {
+                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('error_browser'.tr)));
+                  // }
+                }),
           ),
+          //     IndexedStack(
+          //       index: _stackToView,
+          //       children: [
+          //         Html(
+          //           data: """
+          //         ),
+          Container(
+              // child: Center(child: CupertinoActivityIndicator()),
+              ),
+          //       ],
+          //     ),
           Positioned(
             bottom: 15,
             child: Container(

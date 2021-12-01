@@ -3,7 +3,6 @@
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
-import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:fake_news/views/view_news/viewnews_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,15 +11,11 @@ import 'package:get/get.dart';
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
-  final String factCheck;
-  final String? offical, user;
-  final String times;
-  final String? image, video;
-  final String title, article;
-  final String? avatar, name;
+  final String? offical, user, avatar, name, link, tag, image, video;
+  final String times, title, article, content, factCheck;
+
   final VoidCallback onpress;
-  final String? link;
-  final String? tag;
+
   final bool? rate;
   const CardNews(
       {Key? key,
@@ -37,6 +32,7 @@ class CardNews extends StatefulWidget {
       required this.onpress,
       this.link,
       this.tag,
+      required this.content,
       this.rate = false})
       : super(key: key);
 
@@ -57,7 +53,6 @@ class _CardNewsState extends State<CardNews> {
           isLoggined = true;
         });
       }
-      ;
     });
   }
 
@@ -68,8 +63,7 @@ class _CardNewsState extends State<CardNews> {
         GestureDetector(
           onTap: () {
             Get.to(() => ViewNewsScreen(
-                  url_news:
-                      'https://www.factcheck.org/2021/11/scicheck-desantis-comments-social-media-posts-mislead-on-covid-19s-toll-in-florida/',
+                  content: widget.content,
                 ));
           },
           child: Container(
