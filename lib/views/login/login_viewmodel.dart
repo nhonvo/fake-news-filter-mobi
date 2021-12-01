@@ -24,7 +24,27 @@ class LoginViewModel extends BaseViewModel {
     usernameController.clear();
   }
 
+  bool validateTextField() {
+    if (usernameController.text.isEmpty) {
+      showSnackbar("Please fill username field");
+      return false;
+    }
+    if (passwordController.text.isEmpty) {
+      showSnackbar("Please fill password field");
+      return false;
+    }
+    if (passwordController.text.length < 6) {
+      showSnackbar("Password at lease 6 characters");
+      return false;
+    }
+    return true;
+  }
+
   handlelogin() async {
+    if (!validateTextField()) {
+      return;
+    }
+
     EasyLoading.show(status: 'loadingLogin'.tr);
 
     var response = await authApi.login(usernameController.text, passwordController.text);
