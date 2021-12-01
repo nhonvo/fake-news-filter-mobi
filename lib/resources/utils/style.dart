@@ -96,7 +96,7 @@ class StylesText {
   );
   static TextStyle content12LightBlack = TextStyle(
     color: Colors.black,
-    fontFamily: 'SF-UI-LIGHT',
+    fontFamily: 'NUNITO-LIGHT',
     fontSize: SizeText.size12,
   );
   static TextStyle content12BoldOrange = TextStyle(
@@ -116,12 +116,12 @@ class StylesText {
   );
   static TextStyle content13SemiBlack = TextStyle(
     color: Colors.black,
-    fontFamily: 'SF-UI-SEMIBOLD',
+    fontFamily: 'NUNITO-SEMIBOLD',
     fontSize: SizeText.size13,
   );
   static TextStyle content13HeavyBlack = TextStyle(
     color: Colors.black,
-    fontFamily: 'SF-UI-HEAVY',
+    fontFamily: 'NUNITO-BOLD',
     fontSize: SizeText.size13,
   );
   static TextStyle content14MediumWhite = TextStyle(
@@ -136,7 +136,7 @@ class StylesText {
   );
   static TextStyle content14LightBlack = TextStyle(
     color: Colors.black,
-    fontFamily: 'SF-UI-LIGHT',
+    fontFamily: 'NUNITO-LIGHT',
     fontSize: SizeText.size14,
   );
   static TextStyle content14MediumBlack = TextStyle(
@@ -197,7 +197,7 @@ class StylesText {
   );
   static TextStyle content16LightBlack = TextStyle(
     color: Colors.black,
-    fontFamily: 'SF-UI-LIGHT',
+    fontFamily: 'NUNITO-LIGHT',
     fontSize: SizeText.size16,
   );
   static TextStyle content16BoldBlack = TextStyle(
@@ -207,7 +207,7 @@ class StylesText {
   );
   static TextStyle content16HeavyYellow = TextStyle(
     color: MyColors.yellow,
-    fontFamily: 'SF-UI-HEAVY',
+    fontFamily: 'NUNITO-BOLD',
     fontSize: SizeText.size16,
   );
   static TextStyle content16BoldRed = TextStyle(
@@ -222,7 +222,7 @@ class StylesText {
   );
   static TextStyle content16RegularBlack = TextStyle(
     color: Colors.black,
-    fontFamily: 'SF-UI-REGULAR',
+    fontFamily: 'NUNITO-REGULAR',
     fontSize: SizeText.size16,
   );
   static TextStyle content16MediumBlack = TextStyle(
@@ -252,7 +252,7 @@ class StylesText {
   );
   static TextStyle content18HeavyBlack = TextStyle(
     color: Colors.black,
-    fontFamily: 'SF-UI-HEAVY',
+    fontFamily: 'NUNITO-BOLD',
     fontSize: SizeText.size18,
   );
   static TextStyle content18BoldBlack = TextStyle(
@@ -272,7 +272,7 @@ class StylesText {
   );
   static TextStyle title24HeavyBlack = TextStyle(
     color: Colors.black,
-    fontFamily: 'SF-UI-HEAVY',
+    fontFamily: 'NUNITO-BOLD',
     fontSize: SizeText.size24,
   );
   static TextStyle content24BoldOrange = TextStyle(
