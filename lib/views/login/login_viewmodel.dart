@@ -14,7 +14,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends BaseViewModel {
-  LoginViewModel({required this.authApi, required this.authRepo, required this.pref});
+  LoginViewModel(
+      {required this.authApi, required this.authRepo, required this.pref});
   AuthApi authApi;
   AuthRepo authRepo;
   SharedPreferences pref;
@@ -50,7 +51,8 @@ class LoginViewModel extends BaseViewModel {
 
     EasyLoading.show(status: 'loadingLogin'.tr);
 
-    var response = await authApi.login(usernameController.text, passwordController.text);
+    var response =
+        await authApi.login(usernameController.text, passwordController.text);
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
@@ -77,8 +79,10 @@ class LoginViewModel extends BaseViewModel {
   handleLoginFacebook() async {
     EasyLoading.show(status: 'loadingLogin'.tr);
 
-    final LoginResult result = await FacebookAuth.instance
-        .login(permissions: ['public_profile', 'email']); // by default we request the email and the public profile
+    final LoginResult result = await FacebookAuth.instance.login(permissions: [
+      'public_profile',
+      'email'
+    ]); // by default we request the email and the public profile
 
     if (result.status == LoginStatus.success) {
       final AccessToken accessToken = result.accessToken!;
@@ -113,9 +117,11 @@ class LoginViewModel extends BaseViewModel {
 
     try {
       var result = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleSignInAuthentication = await result!.authentication;
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await result!.authentication;
 
-      var response = await authApi.loginGoogle(googleSignInAuthentication.idToken.toString());
+      var response = await authApi
+          .loginGoogle(googleSignInAuthentication.idToken.toString());
       if (response.isSuccessed == false) {
         EasyLoading.dismiss();
         showSnackbar(response.messages!);
