@@ -63,8 +63,7 @@ class LoginViewModel extends BaseViewModel {
       await authRepo.saveAuthToken(user.token ?? '');
       await authRepo.saveUserId(user.userId!);
 
-      var topicIdList =
-          await followingApi.getFollowedTopic(user.userId.toString());
+      var topicIdList = await followingApi.getFollowedTopic(user.userId.toString());
 
       //check if user has followed any topic
       if (topicIdList.resultObj == null || topicIdList.resultObj?.length == 0) {

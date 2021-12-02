@@ -58,10 +58,19 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                Text(
-                  'tap'.tr,
-                  style: StylesText.content16BoldRed,
-                ),
+                Obx(() {
+                  if (viewmodel.topicIds.length < 4) {
+                    return Text(
+                      'tap'.tr,
+                      style: StylesText.content16BoldRed,
+                    );
+                  } else {
+                    return Text(
+                      'started'.tr,
+                      style: StylesText.content16BoldWhite,
+                    );
+                  }
+                }),
                 Expanded(
                   child: Obx(() {
                     return GridView.count(
@@ -87,16 +96,22 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               bottom: 15,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: CustomButton(
-                  width: Get.size.width * 0.3,
-                  buttonText: 'OK',
-                  textStyle: StylesText.content14BoldBlue,
-                  buttonColor: Colors.white,
-                  buttonRadius: 20,
-                  onPressed: () {
-                    // Get.offAllNamed('/home');
-                  },
-                ),
+                child: Obx(() {
+                  if (viewmodel.topicIds.length < 4) {
+                    return Container();
+                  } else {
+                    return CustomButton(
+                      width: Get.size.width * 0.3,
+                      buttonText: 'OK',
+                      textStyle: StylesText.content14BoldBlue,
+                      buttonColor: Colors.white,
+                      buttonRadius: 20,
+                      onPressed: () {
+                        viewmodel.handleCreateFollow();
+                      },
+                    );
+                  }
+                }),
               ),
             ),
           ],

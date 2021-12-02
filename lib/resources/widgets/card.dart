@@ -4,7 +4,9 @@ import 'dart:math';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
+import 'package:fake_news/views/introduction/intro_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomCard extends StatefulWidget {
   CustomCard(
@@ -28,6 +30,8 @@ var colorsArr = [Colors.amber[500], Colors.pink[200], Colors.blue[400], Colors.g
 class _CustomCardState extends State<CustomCard> {
   bool check = false;
 
+  IntroViewModel get viewmodel => Get.find<IntroViewModel>();
+
   List<int> selectedTopicList = [];
 
   @override
@@ -37,17 +41,8 @@ class _CustomCardState extends State<CustomCard> {
         setState(() {
           check = !check;
         });
-        if (check) {
-          setState(() {
-            selectedTopicList.add(int.parse(widget.id));
-          });
-          print(selectedTopicList);
-        } else {
-          setState(() {
-            selectedTopicList.remove(int.parse(widget.id));
-          });
-          print(selectedTopicList);
-        }
+        //add to selected topic list in intro viewmodel
+        viewmodel.handlerGetListIdTopic(int.parse(widget.id));
       },
       child: Transform.scale(
         scale: check ? 0.95 : 1.0,
