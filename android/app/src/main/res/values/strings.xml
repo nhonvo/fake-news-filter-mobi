@@ -1,3 +1,7 @@
-  <string name="facebook_app_id">263493625606585</string>
-  <string name="fb_login_protocol_scheme">fb263493625606585</string>
-  <string name="app_name">Fake News Filter</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fake News Filter</string>
+    <string name="facebook_app_id">263493625606585</string>
+    <string name="fb_login_protocol_scheme">fb263493625606585</string>
+    <string name="facebook_client_token">3a516a44c4a8715809bd0a358d91e922</string>
+</resources>
