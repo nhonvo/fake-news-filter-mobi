@@ -75,7 +75,7 @@ class _CardTopicState extends State<CardTopic> {
                                 ],
                               ),
                               SizedBox(
-                                width: 20,
+                                width: 15,
                               ),
                               Row(
                                 children: [

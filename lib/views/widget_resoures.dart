@@ -83,7 +83,8 @@ class _WidgetResourceState extends State<WidgetResource> {
             SizedBox(
               height: 10,
             ),
-            CustomCard(),
+            //FIXME: ????????????????????????
+            // CustomCard(),
             SizedBox(
               height: 10,
             ),

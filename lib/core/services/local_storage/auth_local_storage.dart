@@ -3,9 +3,11 @@ import 'package:fake_news/resources/utils/app_constant.dart';
 
 abstract class AuthLocalStorage {
   Future<String?> getApiKey();
+  Future<String?> getUserId();
   Future<String?> getAuthToken();
   Future<String?> getEmail();
   Future<bool> saveApiKey(String apiKey);
+  Future<bool> saveUserId(String userId);
   Future<bool> saveAuthToken(String authToken);
   Future<bool> saveEmail(String email);
   Future<bool> handleUnAuthorized();
@@ -23,6 +25,11 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
   }
 
   @override
+  Future<String?> getUserId() async {
+    return sharedPref.getString(AppConstant.sharePrefKeys.userId)!;
+  }
+
+  @override
   Future<String?> getAuthToken() async {
     return sharedPref.getString(AppConstant.sharePrefKeys.authToken);
   }
@@ -35,6 +42,11 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
   @override
   Future<bool> saveApiKey(String apiKey) async {
     return await sharedPref.setString(AppConstant.sharePrefKeys.apiKey, apiKey);
+  }
+
+  @override
+  Future<bool> saveUserId(String userId) async {
+    return await sharedPref.setString(AppConstant.sharePrefKeys.userId, userId);
   }
 
   @override
