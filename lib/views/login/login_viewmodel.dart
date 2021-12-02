@@ -63,9 +63,10 @@ class LoginViewModel extends BaseViewModel {
 
       var topicIdList = await followingApi.getFollowedTopic(user.userId.toString());
 
+      //check if user has followed any topic
       if (topicIdList.resultObj == null || topicIdList.resultObj?.length == 0) {
         EasyLoading.dismiss();
-        Get.to(GetStartedScreen());
+        Get.offAllNamed(Routes.LAUNCH);
       } else {
         EasyLoading.dismiss();
         Get.offAllNamed(Routes.HOME);

@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card.dart';
+import 'package:fake_news/views/introduction/intro_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -16,6 +18,13 @@ class GetStartedScreen extends StatefulWidget {
 }
 
 class _GetStartedScreenState extends State<GetStartedScreen> {
+  IntroViewModel get viewmodel => Get.find<IntroViewModel>();
+
+  void initState() {
+    super.initState();
+    viewmodel.handleGetTopic();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,16 +63,23 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   style: StylesText.content16BoldRed,
                 ),
                 Expanded(
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    children: List.generate(10, (index) {
-                      return Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: CustomCard(),
-                      );
-                    }),
-                  ),
+                  child: Obx(() {
+                    return GridView.count(
+                        //shrinkWrap: true,
+                        crossAxisCount: 2,
+                        children: viewmodel.topics
+                            .map((topic) => Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: CustomCard(
+                                  id: topic.topicId.toString(),
+                                  noNews: topic.noNews.toString(),
+                                  label: topic.label.toString(),
+                                  tag: topic.tag.toString(),
+                                  description: topic.description.toString(),
+                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
+                                )))
+                            .toList());
+                  }),
                 ),
               ],
             ),
@@ -78,7 +94,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   buttonColor: Colors.white,
                   buttonRadius: 20,
                   onPressed: () {
-                    Get.offAllNamed('/home');
+                    // Get.offAllNamed('/home');
                   },
                 ),
               ),

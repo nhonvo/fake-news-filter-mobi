@@ -15,7 +15,7 @@ class AppRoutes {
 
   static final appRoutes = [
     GetPage(name: Routes.INIT, page: () => SplashScreen()),
-    // GetPage(name: Routes.INIT, page: () => GetStartedScreen()),
+    GetPage(name: Routes.LAUNCH, page: () => GetStartedScreen(), binding: IntroBinding()),
     GetPage(name: Routes.INTRO, page: () => IntroductionScreen(), binding: IntroBinding()),
     GetPage(name: Routes.PREVIEW, page: () => PreviewScreen(), binding: PreviewBinding()),
     GetPage(
@@ -30,6 +30,7 @@ class AppRoutes {
 class Routes {
   static const String INIT = "/splash";
   static const String INTRO = "/intro";
+  static const String LAUNCH = "/LAUNCH";
   static const String HOME = "/home";
   static const String LOGIN = "/login";
   static const String PREVIEW = "/preview";
