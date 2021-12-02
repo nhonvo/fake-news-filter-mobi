@@ -32,15 +32,13 @@ class _CustomCardState extends State<CustomCard> {
               Container(
                   width: 250,
                   height: 210,
-                  decoration: BoxDecoration(
-                      color: MyColors.card1,
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  decoration:
+                      BoxDecoration(color: MyColors.card1, borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   child: Column(
                     children: [
                       ClipRRect(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15.0),
-                              topRight: Radius.circular(15.0)),
+                          borderRadius:
+                              BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
                           child: Image.asset(Images.covid)),
                       Expanded(
                         child: Padding(
@@ -55,7 +53,7 @@ class _CustomCardState extends State<CustomCard> {
                               ),
                               Text(
                                 'Outbreak of respiratory virus that has killed over 1 milion and infected 100 virus',
-                                style: StylesText.content12MediumWhite,
+                                style: StylesText.content10MediumWhite,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,
                               ),
@@ -67,9 +65,7 @@ class _CustomCardState extends State<CustomCard> {
                                         Icons.menu,
                                         color: Colors.white,
                                       ),
-                                      Text('3,4k',
-                                          style:
-                                              StylesText.content12MediumWhite)
+                                      Text('3,4k', style: StylesText.content12MediumWhite)
                                     ],
                                   ),
                                   SizedBox(
@@ -81,9 +77,7 @@ class _CustomCardState extends State<CustomCard> {
                                         Icons.sync_rounded,
                                         color: Colors.white,
                                       ),
-                                      Text('9 hrs',
-                                          style:
-                                              StylesText.content12MediumWhite)
+                                      Text('9 hrs', style: StylesText.content12MediumWhite)
                                     ],
                                   ),
                                 ],
@@ -100,9 +94,8 @@ class _CustomCardState extends State<CustomCard> {
                 child: Container(
                   width: 80,
                   height: 25,
-                  decoration: BoxDecoration(
-                      color: MyColors.orange,
-                      borderRadius: BorderRadius.all(Radius.circular(13.0))),
+                  decoration:
+                      BoxDecoration(color: MyColors.orange, borderRadius: BorderRadius.all(Radius.circular(13.0))),
                   child: Row(
                     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

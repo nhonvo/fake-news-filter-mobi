@@ -21,6 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    // GetStartedScreen()
     languageApi.getLanguages().then((value) {
       Get.put<List<LanguageModel>?>(value.resultObj);
       Future.delayed(const Duration(seconds: 2), () {
