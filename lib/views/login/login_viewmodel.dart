@@ -100,32 +100,6 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
-  handleLoginFacebook() async {
-    EasyLoading.show(status: 'loadingLogin'.tr);
-
-    final LoginResult result = await FacebookAuth.instance
-        .login(permissions: ['public_profile', 'email']); // by default we request the email and the public profile
-
-    if (result.status == LoginStatus.success) {
-      final AccessToken accessToken = result.accessToken!;
-
-      var response = await authApi.loginFacebook(accessToken.token);
-      if (response.isSuccessed == false) {
-        EasyLoading.dismiss();
-        showSnackbar(response.messages!);
-      } else {
-        LoginModel user = response.resultObj!;
-        await authRepo.saveAuthToken(user.token ?? '');
-        await authRepo.saveEmail(user.email ?? '');
-        Get.offAllNamed(Routes.HOME);
-        EasyLoading.dismiss();
-      }
-    } else {
-      showSnackbar(result.message!);
-      EasyLoading.dismiss();
-    }
-  }
-
   GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
