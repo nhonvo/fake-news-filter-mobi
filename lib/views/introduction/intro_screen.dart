@@ -25,6 +25,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   @override
   void initState() {
     super.initState();
+    //FIXME: Load languages from API to get topic
     var kakakaka = Get.find<List<LanguageModel>?>();
     viewmodel.handleGetTopic();
   }
@@ -109,21 +110,21 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       return GridView.count(
                           //shrinkWrap: true,
                           crossAxisCount: 2,
-                          children: viewmodel.topics
-                              .map((topic) => Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: CardTopic(
-                                    noNews: topic.noNews.toString(),
-                                    label: topic.label.toString(),
-                                    tag: topic.tag.toString(),
-                                    description: topic.description.toString(),
-                                    time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
-                                    ontap: () {
-                                      print(topic.topicId);
-                                      Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
-                                    },
-                                  )))
-                              .toList());
+                          children: viewmodel.topics.map((topic) {
+                            return Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: CardTopic(
+                                  noNews: topic.noNews.toString(),
+                                  label: topic.label.toString(),
+                                  tag: topic.tag.toString(),
+                                  description: topic.description.toString(),
+                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
+                                  ontap: () {
+                                    print(topic.topicId);
+                                    Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
+                                  },
+                                ));
+                          }).toList());
                     }),
                   )
                 ],
