@@ -3,6 +3,7 @@ import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/news/news_model.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -27,11 +28,12 @@ class PreviewViewModel extends BaseViewModel {
   }
 
   handleGetNewsByTopic() async {
-    // ProgressHud.showLoading();
+    EasyLoading.show(status: 'fetchingData'.tr);
+
     var response = await newsApi.getNewsById(topicModel.value.topicId);
 
     if (response.isSuccessed == false) {
-      // ProgressHud.hideLoading();
+      EasyLoading.dismiss();
       snackBar(
         'Error',
         response.messages!,
@@ -51,6 +53,7 @@ class PreviewViewModel extends BaseViewModel {
       newsList.forEach((topic) {
         news.add(topic);
       });
+      EasyLoading.dismiss();
     }
   }
 }
