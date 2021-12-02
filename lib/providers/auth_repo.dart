@@ -3,8 +3,10 @@ import 'package:fake_news/core/services/local_storage/auth_local_storage.dart';
 
 abstract class AuthRepo {
   Future<String?>? getApiKey();
+  Future<String?> getUserId();
   Future<String?> getAuthToken();
   Future<bool> saveApiKey(String apiKey);
+  Future<bool> saveUserId(String userId);
   Future<bool> saveAuthToken(String authToken);
   Future<bool> saveEmail(String email);
   Future<String?>? getEmail();
@@ -31,6 +33,11 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
+  Future<String?> getUserId() {
+    return authLocalStorage.getUserId();
+  }
+
+  @override
   Future<String?> getAuthToken() async {
     return authLocalStorage.getAuthToken();
   }
@@ -44,6 +51,11 @@ class AuthRepoImpl implements AuthRepo {
   Future<bool> saveApiKey(String apiKey) async {
     _apiKey = apiKey;
     return authLocalStorage.saveApiKey(apiKey);
+  }
+
+  @override
+  Future<bool> saveUserId(String userId) {
+    return authLocalStorage.saveUserId(userId);
   }
 
   @override

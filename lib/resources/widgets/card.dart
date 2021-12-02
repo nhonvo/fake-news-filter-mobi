@@ -1,18 +1,34 @@
 // ignore_for_file: prefer_const_constructors
+import 'dart:math';
+
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatefulWidget {
-  const CustomCard({Key? key}) : super(key: key);
+  CustomCard(
+      {Key? key,
+      required this.id,
+      required this.tag,
+      required this.description,
+      required this.label,
+      required this.noNews,
+      required this.time})
+      : super(key: key);
+
+  final String id, tag, description, label, noNews, time;
 
   @override
   _CustomCardState createState() => _CustomCardState();
 }
 
+var colorsArr = [Colors.amber[500], Colors.pink[200], Colors.blue[400], Colors.green[400]];
+
 class _CustomCardState extends State<CustomCard> {
   bool check = false;
+
+  List<int> selectedTopicList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +37,17 @@ class _CustomCardState extends State<CustomCard> {
         setState(() {
           check = !check;
         });
+        if (check) {
+          setState(() {
+            selectedTopicList.add(int.parse(widget.id));
+          });
+          print(selectedTopicList);
+        } else {
+          setState(() {
+            selectedTopicList.remove(int.parse(widget.id));
+          });
+          print(selectedTopicList);
+        }
       },
       child: Transform.scale(
         scale: check ? 0.95 : 1.0,
@@ -33,14 +60,13 @@ class _CustomCardState extends State<CustomCard> {
                   width: 250,
                   height: 210,
                   decoration: BoxDecoration(
-                      color: MyColors.card1,
+                      color: colorsArr.elementAt(new Random().nextInt(colorsArr.length)),
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   child: Column(
                     children: [
                       ClipRRect(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15.0),
-                              topRight: Radius.circular(15.0)),
+                          borderRadius:
+                              BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
                           child: Image.asset(Images.covid)),
                       Expanded(
                         child: Padding(
@@ -50,12 +76,12 @@ class _CustomCardState extends State<CustomCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TagTopic(
-                                tagName: '#covid19',
+                                tagName: '#${widget.tag}',
                                 buttonColor: MyColors.red.withOpacity(0.1),
                               ),
                               Text(
-                                'Outbreak of respiratory virus that has killed over 1 milion and infected 100 virus',
-                                style: StylesText.content12MediumWhite,
+                                widget.description,
+                                style: StylesText.content10MediumWhite,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,
                               ),
@@ -67,13 +93,11 @@ class _CustomCardState extends State<CustomCard> {
                                         Icons.menu,
                                         color: Colors.white,
                                       ),
-                                      Text('3,4k',
-                                          style:
-                                              StylesText.content12MediumWhite)
+                                      Text(widget.noNews, style: StylesText.content12MediumWhite)
                                     ],
                                   ),
                                   SizedBox(
-                                    width: 20,
+                                    width: 15,
                                   ),
                                   Row(
                                     children: [
@@ -81,9 +105,7 @@ class _CustomCardState extends State<CustomCard> {
                                         Icons.sync_rounded,
                                         color: Colors.white,
                                       ),
-                                      Text('9 hrs',
-                                          style:
-                                              StylesText.content12MediumWhite)
+                                      Text(widget.time, style: StylesText.content12MediumWhite)
                                     ],
                                   ),
                                 ],
@@ -101,16 +123,31 @@ class _CustomCardState extends State<CustomCard> {
                   width: 80,
                   height: 25,
                   decoration: BoxDecoration(
-                      color: MyColors.orange,
+                      color: widget.label == "featured"
+                          ? MyColors.orange
+                          : widget.label == "breaking"
+                              ? MyColors.red
+                              : Colors.transparent,
                       borderRadius: BorderRadius.all(Radius.circular(13.0))),
                   child: Row(
                     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        Icons.star_rounded,
-                        color: Colors.white,
-                      ),
-                      Text('featured', style: StylesText.content12BoldWhite)
+                      widget.label == "featured"
+                          ? Icon(
+                              Icons.star_rounded,
+                              color: Colors.white,
+                            )
+                          : widget.label == "breaking"
+                              ? Icon(
+                                  Icons.psychology_sharp,
+                                  color: Colors.white,
+                                )
+                              : Container(),
+                      widget.label == "featured"
+                          ? Text(widget.label, style: StylesText.content12BoldWhite)
+                          : widget.label == "breaking"
+                              ? Text(widget.label, style: StylesText.content12BoldWhite)
+                              : Container(),
                     ],
                   ),
                 ),

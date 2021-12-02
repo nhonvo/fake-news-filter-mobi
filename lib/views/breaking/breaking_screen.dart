@@ -1,8 +1,12 @@
 import 'package:fake_news/data/story_data.dart';
+import 'package:fake_news/models/news/news_model.dart';
+import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/resources/widgets/story_button.dart';
+import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BreakingScreen extends StatefulWidget {
   const BreakingScreen({Key? key}) : super(key: key);
@@ -12,6 +16,21 @@ class BreakingScreen extends StatefulWidget {
 }
 
 class _BreakingScreenState extends State<BreakingScreen> {
+  BreakingViewModel get viewmodel => Get.find<BreakingViewModel>();
+  List<NewsModel> newsList = <NewsModel>[];
+  bool isLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    viewmodel.handleGetNewsByFollowedTopic().then((value) {
+      setState(() {
+        newsList = viewmodel.news;
+        isLoaded = true;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,52 +54,19 @@ class _BreakingScreenState extends State<BreakingScreen> {
                 spacing: 10,
                 runSpacing: 10,
                 children: [
-                  CardNews(
-                      factCheck: Images.icnone,
-                      rate: true,
-                      tag: '#covid',
-                      user: '25%',
-                      times: '5 hours',
-                      title:
-                          '110.7 milion vaccine does have now been administered in the U.S., up from 109.1 milion on Monday, according to CDC data.',
-                      content: "",
-                      article: 'Reuters U.S. News',
-                      onpress: () {}),
-                  // CardNews(
-                  //     factCheck: Images.icnone,
-                  //     rate: true,
-                  //     tag: '#covid',
-                  //     offical: 'Misleading',
-                  //     user: '46%',
-                  //     times: '7 hours',
-                  //     image: Images.chart,
-                  //     title:
-                  //         '57,083 cases and 751 deaths were reported in the U.S yesterday, bringing the total to 29.5 milion cases and 536,433 deaths.',
-                  //     article: 'CNN News',
-                  //     onpress: () {}),
-                  // CardNews(
-                  //     factCheck: Images.icprotect,
-                  //     rate: true,
-                  //     tag: '#covid',
-                  //     offical: 'True',
-                  //     user: '60%',
-                  //     times: '9 hours',
-                  //     title:
-                  //         '"I would, I would recommend [the vaccine]. And I would recommend it to a lot of people that dont want to get it and a lot of those people voted for me, frankly." ',
-                  //     article: 'CNN News',
-                  //     avatar: Images.trump,
-                  //     name: 'Former President Trump',
-                  //     onpress: () {}),
-                  // CardNews(
-                  //     factCheck: Images.icnone,
-                  //     rate: true,
-                  //     tag: '#covid',
-                  //     user: '25%',
-                  //     times: '10 hours',
-                  //     title:
-                  //         '110.7 milion vaccine does have now been administered in the U.S., up from 109.1 milion on Monday, according to CDC data.',
-                  //     article: 'Reuters U.S. News',
-                  //     onpress: () {}),
+                  if (isLoaded)
+                    for (var item in newsList)
+                      CardNews(
+                          factCheck: Images.icnone,
+                          rate: true,
+                          // tag: viewmodel.topicModel.value.tag.toString(),
+                          user: '25%',
+                          times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                          title: item.description.toString().substring(
+                              0, item.description.toString().length > 50 ? 50 : item.description.toString().length),
+                          content: item.content.toString(),
+                          article: item.publisher ?? '',
+                          onpress: () {}),
                 ],
               ),
             ),
@@ -90,3 +76,17 @@ class _BreakingScreenState extends State<BreakingScreen> {
     );
   }
 }
+
+
+
+// CardNews(
+//                         factCheck: Images.icnone,
+//                         rate: true,
+//                         // tag: viewmodel.topicModel.value.tag.toString(),
+//                         user: '25%',
+//                         times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+//                         title: item.description.toString().substring(
+//                             0, item.description.toString().length > 50 ? 50 : item.description.toString().length),
+//                         content: item.content.toString(),
+//                         article: item.publisher ?? '',
+//                         onpress: () {}),

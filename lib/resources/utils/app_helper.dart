@@ -5,7 +5,7 @@ class AppHelper {
       if (diff.inDays >= 31) {
         return '${diff.inDays ~/ 31} months ago';
       } else {
-        return '${diff.inDays} days ago';
+        return '${diff.inDays} day(s) ago';
       }
     } else if (diff.inHours >= 1) {
       return '${diff.inHours} hour(s)';
