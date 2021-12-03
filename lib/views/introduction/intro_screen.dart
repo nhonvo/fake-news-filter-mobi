@@ -5,6 +5,7 @@ import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/resources/widgets/card.dart';
 import 'package:fake_news/resources/widgets/card_topic.dart';
 import 'package:fake_news/views/introduction/intro_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -107,13 +108,16 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   ),
                   Expanded(
                     child: Obx(() {
+                      int index = 0;
                       return GridView.count(
                           //shrinkWrap: true,
                           crossAxisCount: 2,
                           children: viewmodel.topics.map((topic) {
+                            index++;
                             return Padding(
-                                padding: const EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: CardTopic(
+                                  index: index.toString(),
                                   noNews: topic.noNews.toString(),
                                   label: topic.label.toString(),
                                   tag: topic.tag.toString(),

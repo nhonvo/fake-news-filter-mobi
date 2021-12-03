@@ -2,6 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class MyColors {
+  static var colorsArr = [
+    Colors.amber[600],
+    Colors.pink[600],
+    Colors.blue[400],
+    Colors.green[400],
+    Colors.purple[400],
+    Colors.cyan[800],
+    Colors.blueGrey[600],
+    Colors.teal[400],
+    Colors.indigo[300],
+    Colors.lime[800],
+  ];
+
   static const Color blue = Color.fromRGBO(38, 143, 255, 1.0);
   static const Color red = Color.fromRGBO(244, 30, 30, 1.0);
   static const Color green = Color.fromRGBO(31, 207, 108, 1.0);
@@ -43,54 +56,65 @@ class SizeText {
 class StylesText {
   static TextStyle content10BoldRed = TextStyle(
     color: MyColors.red,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size10,
   );
   static TextStyle content10BoldBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size10,
   );
   static TextStyle content10MediumBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-REGULAR',
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size10,
   );
   static TextStyle content10MediumWhite = TextStyle(
     color: Colors.white,
+    fontFamily: 'NUNITO-REGULAR',
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size10,
   );
   static TextStyle content10BoldBlue = TextStyle(
     color: MyColors.blue,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size10,
   );
   static TextStyle content12BoldWhite = TextStyle(
     color: Colors.white,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size12,
   );
   static TextStyle content12BlackWhite = TextStyle(
     color: Colors.white,
+    fontFamily: 'NUNITO-REGULAR',
     fontSize: SizeText.size12,
   );
   static TextStyle content12MediumWhite = TextStyle(
     color: Colors.white,
+    fontFamily: 'NUNITO-REGULAR',
     fontSize: SizeText.size12,
   );
   static TextStyle content12BoldBlue = TextStyle(
     color: Colors.blue,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size12,
   );
   static TextStyle content12MediumBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-REGULAR',
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size12,
   );
   static TextStyle content12MediumBlue = TextStyle(
     color: MyColors.blue,
+    fontFamily: 'NUNITO-REGULAR',
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size12,
   );
@@ -101,16 +125,19 @@ class StylesText {
   );
   static TextStyle content12BoldOrange = TextStyle(
     color: const Color.fromRGBO(255, 140, 0, 1),
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size12,
   );
   static TextStyle content12BoldGrey = TextStyle(
     color: MyColors.greyDark,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size12,
   );
   static TextStyle content12BoldBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size12,
   );
@@ -126,11 +153,13 @@ class StylesText {
   );
   static TextStyle content14MediumWhite = TextStyle(
     color: Colors.white,
+    fontFamily: 'NUNITO-REGULAR',
     fontSize: SizeText.size14,
   );
 
   static TextStyle content14BoldWhite = TextStyle(
     color: Colors.white,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size14,
   );
@@ -141,57 +170,68 @@ class StylesText {
   );
   static TextStyle content14MediumBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-REGULAR',
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size14,
   );
   static TextStyle content14MediumGrey = TextStyle(
     color: const Color.fromRGBO(216, 216, 216, 1.0),
+    fontFamily: 'NUNITO-REGULAR',
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size14,
   );
   static TextStyle content14BoldGrey = TextStyle(
     color: MyColors.greyDark,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size14,
   );
   static TextStyle content14MediumBlue = TextStyle(
     color: MyColors.blue,
+    fontFamily: 'NUNITO-REGULAR',
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size14,
   );
   static TextStyle content14BoldBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size14,
   );
   static TextStyle content14BoldOrange = TextStyle(
     color: MyColors.orange,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size14,
   );
   static TextStyle content14BoldBlue = TextStyle(
     color: MyColors.blue,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size14,
   );
   static TextStyle content14BoldItalicBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-BOLD-ITALIC',
     fontWeight: FontWeight.bold,
     fontStyle: FontStyle.italic,
     fontSize: SizeText.size14,
   );
   static TextStyle content16BoldWhite = TextStyle(
     color: Colors.white,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size16,
   );
   static TextStyle content16BoldOrange = TextStyle(
     color: MyColors.orange,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size16,
   );
   static TextStyle content16BoldBlue = TextStyle(
     color: Colors.blue,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size16,
   );
@@ -202,6 +242,7 @@ class StylesText {
   );
   static TextStyle content16BoldBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size16,
   );
@@ -212,11 +253,13 @@ class StylesText {
   );
   static TextStyle content16BoldRed = TextStyle(
     color: MyColors.red,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size16,
   );
   static TextStyle content16BoldBlueLight = TextStyle(
     color: const Color.fromRGBO(29, 219, 209, 1.0),
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size16,
   );
@@ -227,26 +270,31 @@ class StylesText {
   );
   static TextStyle content16MediumBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size16,
   );
   static TextStyle content16MediumBlue = TextStyle(
     color: MyColors.blue,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.w400,
     fontSize: SizeText.size16,
   );
   static TextStyle content17BoldWhite = TextStyle(
     color: Colors.white,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size17,
   );
   static TextStyle content17BoldBlue = TextStyle(
     color: Colors.blue,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size17,
   );
   static TextStyle content18BoldWhite = TextStyle(
     color: Colors.white,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size18,
   );
@@ -257,16 +305,19 @@ class StylesText {
   );
   static TextStyle content18BoldBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size18,
   );
   static TextStyle content20BoldBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size20,
   );
   static TextStyle title24BoldBlack = TextStyle(
     color: Colors.black,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size24,
   );
@@ -277,6 +328,7 @@ class StylesText {
   );
   static TextStyle content24BoldOrange = TextStyle(
     color: MyColors.orange,
+    fontFamily: 'NUNITO-BOLD',
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size24,
   );
