@@ -42,7 +42,7 @@ class CardNews extends StatefulWidget {
 
 class _CardNewsState extends State<CardNews> {
   AuthRepo authRepo = Get.find();
-  late bool isLoggined = false;
+  late bool isLoggedIn = false;
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _CardNewsState extends State<CardNews> {
     authRepo.getAuthToken().then((token) {
       if (token != null) {
         setState(() {
-          isLoggined = true;
+          isLoggedIn = true;
         });
       }
     });
@@ -181,7 +181,7 @@ class _CardNewsState extends State<CardNews> {
                       widget.article,
                       style: StylesText.content12BoldGrey,
                     ),
-                    isLoggined
+                    isLoggedIn
                         ? RatingButton()
                         : InkWell(
                             onTap: () {},
