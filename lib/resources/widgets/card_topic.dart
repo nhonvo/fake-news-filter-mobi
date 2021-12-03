@@ -15,17 +15,16 @@ class CardTopic extends StatefulWidget {
       required this.description,
       required this.label,
       required this.noNews,
-      required this.time})
+      required this.time,
+      required this.index})
       : super(key: key);
 
   final VoidCallback ontap;
-  final String tag, description, label, noNews, time;
+  final String index, tag, description, label, noNews, time;
 
   @override
   _CardTopicState createState() => _CardTopicState();
 }
-
-var colorsArr = [Colors.amber[500], Colors.pink[200], Colors.blue[400], Colors.green[400]];
 
 class _CardTopicState extends State<CardTopic> {
   @override
@@ -37,9 +36,9 @@ class _CardTopicState extends State<CardTopic> {
         children: [
           Container(
               width: 250,
-              height: 210,
+              height: 300,
               decoration: BoxDecoration(
-                  color: colorsArr.elementAt(new Random().nextInt(colorsArr.length)),
+                  color: MyColors.colorsArr.elementAt(int.parse(widget.index) % MyColors.colorsArr.length),
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               child: Column(
                 children: [

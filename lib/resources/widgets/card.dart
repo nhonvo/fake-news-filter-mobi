@@ -16,23 +16,20 @@ class CustomCard extends StatefulWidget {
       required this.description,
       required this.label,
       required this.noNews,
+      required this.index,
       required this.time})
       : super(key: key);
 
-  final String id, tag, description, label, noNews, time;
+  final String id, tag, description, label, noNews, time, index;
 
   @override
   _CustomCardState createState() => _CustomCardState();
 }
 
-var colorsArr = [Colors.amber[500], Colors.pink[200], Colors.blue[400], Colors.green[400]];
-
 class _CustomCardState extends State<CustomCard> {
   bool check = false;
 
   IntroViewModel get viewmodel => Get.find<IntroViewModel>();
-
-  List<int> selectedTopicList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +52,7 @@ class _CustomCardState extends State<CustomCard> {
                   width: 250,
                   height: 210,
                   decoration: BoxDecoration(
-                      color: colorsArr.elementAt(new Random().nextInt(colorsArr.length)),
+                      color: MyColors.colorsArr.elementAt(int.parse(widget.index) % MyColors.colorsArr.length),
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   child: Column(
                     children: [

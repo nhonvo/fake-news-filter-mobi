@@ -73,21 +73,24 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                 }),
                 Expanded(
                   child: Obx(() {
+                    int index = 0;
                     return GridView.count(
                         //shrinkWrap: true,
                         crossAxisCount: 2,
-                        children: viewmodel.topics
-                            .map((topic) => Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: CustomCard(
-                                  id: topic.topicId.toString(),
-                                  noNews: topic.noNews.toString(),
-                                  label: topic.label.toString(),
-                                  tag: topic.tag.toString(),
-                                  description: topic.description.toString(),
-                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
-                                )))
-                            .toList());
+                        children: viewmodel.topics.map((topic) {
+                          index++;
+                          return Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: CustomCard(
+                                index: index.toString(),
+                                id: topic.topicId.toString(),
+                                noNews: topic.noNews.toString(),
+                                label: topic.label.toString(),
+                                tag: topic.tag.toString(),
+                                description: topic.description.toString(),
+                                time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
+                              ));
+                        }).toList());
                   }),
                 ),
               ],
