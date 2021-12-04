@@ -5,11 +5,13 @@ abstract class AuthRepo {
   Future<String?>? getApiKey();
   Future<String?> getUserId();
   Future<String?> getAuthToken();
+  Future<String?>? getEmail();
+  Future<String?> getIsNotFollow();
   Future<bool> saveApiKey(String apiKey);
   Future<bool> saveUserId(String userId);
   Future<bool> saveAuthToken(String authToken);
   Future<bool> saveEmail(String email);
-  Future<String?>? getEmail();
+  Future<bool> saveIsNotFollow(bool isNotFollow);
   Future<bool> handleUnAuthorized();
 }
 
@@ -48,6 +50,11 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
+  Future<String?> getIsNotFollow() {
+    return authLocalStorage.getIsNotFollow();
+  }
+
+  @override
   Future<bool> saveApiKey(String apiKey) async {
     _apiKey = apiKey;
     return authLocalStorage.saveApiKey(apiKey);
@@ -63,6 +70,9 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future<bool> saveEmail(String email) async => authLocalStorage.saveEmail(email);
+
+  @override
+  Future<bool> saveIsNotFollow(bool isNotFollow) async => authLocalStorage.saveIsNotFollow(isNotFollow);
 
   @override
   Future<bool> handleUnAuthorized() {

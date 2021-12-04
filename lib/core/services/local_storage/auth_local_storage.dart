@@ -6,10 +6,12 @@ abstract class AuthLocalStorage {
   Future<String?> getUserId();
   Future<String?> getAuthToken();
   Future<String?> getEmail();
+  Future<String?> getIsNotFollow();
   Future<bool> saveApiKey(String apiKey);
   Future<bool> saveUserId(String userId);
   Future<bool> saveAuthToken(String authToken);
   Future<bool> saveEmail(String email);
+  Future<bool> saveIsNotFollow(bool isNotFollow);
   Future<bool> handleUnAuthorized();
 }
 
@@ -26,7 +28,7 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
 
   @override
   Future<String?> getUserId() async {
-    return sharedPref.getString(AppConstant.sharePrefKeys.userId)!;
+    return sharedPref.getString(AppConstant.sharePrefKeys.userId);
   }
 
   @override
@@ -37,6 +39,11 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
   @override
   Future<String?> getEmail() async {
     return sharedPref.getString(AppConstant.sharePrefKeys.email);
+  }
+
+  @override
+  Future<String?> getIsNotFollow() async {
+    return sharedPref.getString(AppConstant.sharePrefKeys.isFollow);
   }
 
   @override
@@ -57,6 +64,11 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
   @override
   Future<bool> saveEmail(String email) async {
     return await sharedPref.setString(AppConstant.sharePrefKeys.email, email);
+  }
+
+  @override
+  Future<bool> saveIsNotFollow(bool isNotFollow) async {
+    return await sharedPref.setString(AppConstant.sharePrefKeys.isFollow, isNotFollow.toString());
   }
 
   @override
