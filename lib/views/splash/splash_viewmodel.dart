@@ -14,7 +14,6 @@ class SplashViewModel extends BaseViewModel {
   FollowingApi followingApi;
 
   handleTransition() async {
-    var userId = await authRepo.getUserId();
     var isNotFollow = await authRepo.getIsNotFollow();
     var token = await authRepo.getAuthToken();
 

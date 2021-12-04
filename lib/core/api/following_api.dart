@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:fake_news/core/models/api/base_response_api_model.dart';
 
 import 'dio_api.dart';

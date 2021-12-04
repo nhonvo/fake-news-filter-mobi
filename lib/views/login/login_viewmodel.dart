@@ -5,7 +5,6 @@ import 'package:fake_news/models/users/login_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
-import 'package:fake_news/views/get_started/started_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';

@@ -1,8 +1,6 @@
 import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/api/language_api.dart';
-import 'package:fake_news/models/language.dart';
 import 'package:fake_news/providers/auth_repo.dart';
-import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/views/splash/splash_viewmodel.dart';
