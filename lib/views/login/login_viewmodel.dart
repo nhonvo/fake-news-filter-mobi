@@ -66,7 +66,7 @@ class LoginViewModel extends BaseViewModel {
 
       if (isNotFollow) {
         EasyLoading.dismiss();
-        Get.offAllNamed(Routes.LAUNCH);
+        Get.offAllNamed(Routes.FOLLOW_TOPIC);
       } else {
         EasyLoading.dismiss();
         //set this user has followed any topics
