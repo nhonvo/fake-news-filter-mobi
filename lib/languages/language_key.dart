@@ -7,6 +7,9 @@ class LanguageKey {
   static const started = "started";
   static const inputuser = "inputuser";
   static const inputpass = "inputpass";
+  static const inputUserEmptyErr = "inputUserEmptyErr";
+  static const inputPassEmptyErr = "inputPassEmptyErr";
+  static const inputPassAtLeast6Err = "inputPassAtLeast6Err";
   static const or = "or";
   static const help = "help";
   static const agree = "agree";
@@ -32,7 +35,16 @@ class LanguageKey {
   static const browser = "browser";
   static const error_browser = "error_browser";
   static const clipboard = "clipboard";
+  static const altMessage = "altMessage";
   static const error = "error";
   static const loadingLogin = "loadingLogin";
   static const fetchingData = "fetchingData";
+  static const fetchingDataErr = "fetchingDataErr";
+  static const dataConvertErr = "dataConvertErr";
+  static const requestTimeOutErr = "requestTimeOutErr";
+  static const noInternetErr = "noInternetErr";
+  static const networkErr = "networkErr";
+  static const serverErr = "serverErr";
+  static const serverDieErr = "serverDieErr";
+  static const interruptErr = "interruptErr";
 }

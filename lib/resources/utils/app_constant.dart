@@ -48,7 +48,7 @@ class SharePrefKeys {
   final String startDayOfWeek = 'startDayOfWeek';
   final String formatTime = 'startDayOfWeek';
   final String taxes = 'taxes';
-  final String isFollow = 'isFollow';
+  final String isNotFollow = 'isNotFollow';
 }
 
 class LocaleKey {
