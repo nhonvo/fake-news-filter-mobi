@@ -27,7 +27,7 @@ class BreakingViewModel extends BaseViewModel {
       snackBar(
         'error'.tr,
         response.messages!,
-        'Something went wrong',
+        'altMessage'.tr,
         Icon(
           Icons.error,
           color: Colors.white,

@@ -131,27 +131,25 @@ class DioApi extends Api {
       return await handleDioError<T>(error);
     }
     if (error is TimeoutException) {
-      return BaseResponse<T>.initError(-9999, 'Your request time out');
+      return BaseResponse<T>.initError(-9999, 'requestTimeOutErr'.tr);
     }
     if (error is SocketException) if (error.osError != null) {
       if (error.osError?.errorCode == 8) {
-        return BaseResponse<T>.initError(
-            error.osError?.errorCode ?? -999, 'The internet connection appears to be offline, please try again');
+        return BaseResponse<T>.initError(error.osError?.errorCode ?? -999, 'noInternetErr'.tr);
       } else {
         return BaseResponse<T>.initError(error.osError?.errorCode ?? -999, error.osError!.message);
       }
     } else {
-      return BaseResponse<T>.initError(
-          error.osError?.errorCode ?? -999, 'The internet connection appears to be offline, please try again');
+      return BaseResponse<T>.initError(error.osError?.errorCode ?? -999, 'noInternetErr'.tr);
     }
     if (error is NoSuchMethodError) {
-      return BaseResponse<T>.initError(-1, 'Error when getting data');
+      return BaseResponse<T>.initError(-1, 'fetchingDataErr'.tr);
     }
     if (error is TypeError) {
-      return BaseResponse<T>.initError(-2, 'Error when converting data');
+      return BaseResponse<T>.initError(-2, 'dataConvertErr'.tr);
     }
 
-    return BaseResponse.initError(-999, error?.message ?? 'An error occured');
+    return BaseResponse.initError(-999, error?.message ?? 'altMessage'.tr);
   }
 
   @override
@@ -166,16 +164,16 @@ class DioApi extends Api {
   Future<BaseResponse<T>> handleDioError<T>(DioError dioError) async {
     switch (dioError.type) {
       case DioErrorType.connectTimeout:
-        return BaseResponse<T>.initError(-9999, 'Your request time out');
+        return BaseResponse<T>.initError(-9999, 'requestTimeOutErr'.tr);
       case DioErrorType.sendTimeout:
-        return BaseResponse<T>.initError(-9999, 'Your request time out');
+        return BaseResponse<T>.initError(-9999, 'requestTimeOutErr'.tr);
 
       case DioErrorType.receiveTimeout:
-        return BaseResponse<T>.initError(-9999, 'Your request time out');
+        return BaseResponse<T>.initError(-9999, 'requestTimeOutErr'.tr);
 
       case DioErrorType.response:
         if (dioError.response?.statusCode == 502) {
-          return BaseResponse<T>.initError(502, 'Server die');
+          return BaseResponse<T>.initError(502, 'serverDieErr'.tr);
         }
         if (dioError.response?.statusCode == 401) {
           await handleUnAuthorized();
@@ -186,12 +184,12 @@ class DioApi extends Api {
         var errorCode;
         errorCode = dioError.response?.statusCode ?? -9999;
 
-        var errorMessage = error != null ? error : 'Server error, please try again, code: $errorCode';
+        var errorMessage = error != null ? error : 'serverErr'.tr + '$errorCode';
         print("ERRRRrrrrrrrrr $error");
         return BaseResponse<T>.initError(errorCode, errorMessage);
 
       case DioErrorType.cancel:
-        return BaseResponse<T>.initError(-9999, 'Cancelled, please try again');
+        return BaseResponse<T>.initError(-9999, 'interruptErr'.tr);
       default:
         return BaseResponse<T>.initError(
           dioError.response?.statusCode ?? -9999,

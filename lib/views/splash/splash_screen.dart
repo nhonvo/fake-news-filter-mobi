@@ -1,6 +1,3 @@
-import 'package:fake_news/core/api/following_api.dart';
-import 'package:fake_news/core/api/language_api.dart';
-import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/views/splash/splash_viewmodel.dart';
@@ -15,10 +12,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  AuthRepo authRepo = Get.find();
-  LanguageApi languageApi = Get.find();
-  FollowingApi followingApi = Get.find();
-
   SplashViewModel get viewmodel => Get.find<SplashViewModel>();
 
   @override
