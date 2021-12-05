@@ -1,9 +1,9 @@
+import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/api/language_api.dart';
-import 'package:fake_news/models/language.dart';
 import 'package:fake_news/providers/auth_repo.dart';
-import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
+import 'package:fake_news/views/splash/splash_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -17,24 +17,15 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   AuthRepo authRepo = Get.find();
   LanguageApi languageApi = Get.find();
+  FollowingApi followingApi = Get.find();
+
+  SplashViewModel get viewmodel => Get.find<SplashViewModel>();
 
   @override
   void initState() {
     super.initState();
     // GetStartedScreen()
-    languageApi.getLanguages().then((value) {
-      Get.put<List<LanguageModel>?>(value.resultObj);
-      Future.delayed(const Duration(seconds: 2), () {
-        authRepo.getAuthToken().then((token) {
-          if (token != null) {
-            // Get.offAllNamed(Routes.HOME);
-            Get.offAllNamed(Routes.INTRO);
-          } else {
-            Get.offAllNamed(Routes.INTRO);
-          }
-        });
-      });
-    });
+    viewmodel.handleTransition();
   }
 
   @override

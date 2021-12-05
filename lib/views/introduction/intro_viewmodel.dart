@@ -93,6 +93,9 @@ class IntroViewModel extends BaseViewModel {
       );
     } else {
       EasyLoading.dismiss();
+
+      //set this user has followed any topics
+      await authRepo.saveIsNotFollow(false);
       Get.offAllNamed(Routes.HOME);
     }
   }

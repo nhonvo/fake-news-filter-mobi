@@ -5,7 +5,6 @@ import 'package:fake_news/models/users/login_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
-import 'package:fake_news/views/get_started/started_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -14,8 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends BaseViewModel {
-  LoginViewModel(
-      {required this.authApi, required this.authRepo, required this.pref});
+  LoginViewModel({required this.authApi, required this.authRepo, required this.pref});
   AuthApi authApi;
   AuthRepo authRepo;
   SharedPreferences pref;
@@ -51,8 +49,7 @@ class LoginViewModel extends BaseViewModel {
 
     EasyLoading.show(status: 'loadingLogin'.tr);
 
-    var response =
-        await authApi.login(usernameController.text, passwordController.text);
+    var response = await authApi.login(usernameController.text, passwordController.text);
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
@@ -63,14 +60,17 @@ class LoginViewModel extends BaseViewModel {
       await authRepo.saveAuthToken(user.token ?? '');
       await authRepo.saveUserId(user.userId!);
 
-      var topicIdList = await followingApi.getFollowedTopic(user.userId.toString());
-
       //check if user has followed any topic
-      if (topicIdList.resultObj == null || topicIdList.resultObj?.length == 0) {
+      var topicIdList = await followingApi.getFollowedTopic(user.userId.toString());
+      bool isNotFollow = topicIdList.resultObj == null || topicIdList.resultObj?.length == 0;
+
+      if (isNotFollow) {
         EasyLoading.dismiss();
         Get.offAllNamed(Routes.LAUNCH);
       } else {
         EasyLoading.dismiss();
+        //set this user has followed any topics
+        await authRepo.saveIsNotFollow(false);
         Get.offAllNamed(Routes.HOME);
       }
     }
@@ -79,10 +79,8 @@ class LoginViewModel extends BaseViewModel {
   handleLoginFacebook() async {
     EasyLoading.show(status: 'loadingLogin'.tr);
 
-    final LoginResult result = await FacebookAuth.instance.login(permissions: [
-      'public_profile',
-      'email'
-    ]); // by default we request the email and the public profile
+    final LoginResult result = await FacebookAuth.instance
+        .login(permissions: ['public_profile', 'email']); // by default we request the email and the public profile
 
     if (result.status == LoginStatus.success) {
       final AccessToken accessToken = result.accessToken!;
@@ -117,11 +115,9 @@ class LoginViewModel extends BaseViewModel {
 
     try {
       var result = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleSignInAuthentication =
-          await result!.authentication;
+      GoogleSignInAuthentication googleSignInAuthentication = await result!.authentication;
 
-      var response = await authApi
-          .loginGoogle(googleSignInAuthentication.idToken.toString());
+      var response = await authApi.loginGoogle(googleSignInAuthentication.idToken.toString());
       if (response.isSuccessed == false) {
         EasyLoading.dismiss();
         showSnackbar(response.messages!);

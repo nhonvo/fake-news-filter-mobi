@@ -97,8 +97,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             rate: true,
                             tag: viewmodel.topicModel.value.tag.toString(),
                             user: '25%',
-                            times: '30 gio',
-                            // AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                            times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
                             title: item.description.toString().substring(
                                 0, item.description.toString().length > 50 ? 50 : item.description.toString().length),
                             content: item.content.toString(),
