@@ -1,24 +1,23 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card.dart';
-import 'package:fake_news/views/introduction/intro_viewmodel.dart';
+import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class GetStartedScreen extends StatefulWidget {
-  const GetStartedScreen({Key? key}) : super(key: key);
+class FollowTopicScreen extends StatefulWidget {
+  const FollowTopicScreen({Key? key}) : super(key: key);
 
   @override
-  _GetStartedScreenState createState() => _GetStartedScreenState();
+  _FollowTopicScreenState createState() => _FollowTopicScreenState();
 }
 
-class _GetStartedScreenState extends State<GetStartedScreen> {
-  IntroViewModel get viewmodel => Get.find<IntroViewModel>();
+class _FollowTopicScreenState extends State<FollowTopicScreen> {
+  DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
 
   void initState() {
     super.initState();

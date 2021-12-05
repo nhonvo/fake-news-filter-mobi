@@ -1,8 +1,8 @@
 import 'package:fake_news/views/breaking/breaking_binding.dart';
-import 'package:fake_news/views/get_started/started_screen.dart';
+import 'package:fake_news/views/follow_topic/follow_topic.dart';
 import 'package:fake_news/views/home/home_screen.dart';
-import 'package:fake_news/views/introduction/intro_binding.dart';
-import 'package:fake_news/views/introduction/intro_screen.dart';
+import 'package:fake_news/views/discovery/discovery_binding.dart';
+import 'package:fake_news/views/discovery/discovery_screen.dart';
 import 'package:fake_news/views/login/login_binding.dart';
 import 'package:fake_news/views/login/login_screen.dart';
 import 'package:fake_news/views/preview/preview_binding.dart';
@@ -16,8 +16,8 @@ class AppRoutes {
 
   static final appRoutes = [
     GetPage(name: Routes.INIT, page: () => SplashScreen(), binding: SplashBinding()),
-    GetPage(name: Routes.LAUNCH, page: () => GetStartedScreen(), binding: IntroBinding()),
-    GetPage(name: Routes.INTRO, page: () => IntroductionScreen(), binding: IntroBinding()),
+    GetPage(name: Routes.FOLLOW_TOPIC, page: () => FollowTopicScreen(), binding: DiscoveryBinding()),
+    GetPage(name: Routes.DISCOVERY, page: () => DiscoveryScreen(), binding: DiscoveryBinding()),
     GetPage(name: Routes.PREVIEW, page: () => PreviewScreen(), binding: PreviewBinding()),
     GetPage(
       name: Routes.LOGIN,
@@ -30,8 +30,8 @@ class AppRoutes {
 
 class Routes {
   static const String INIT = "/splash";
-  static const String INTRO = "/intro";
-  static const String LAUNCH = "/LAUNCH";
+  static const String DISCOVERY = "/discovery";
+  static const String FOLLOW_TOPIC = "/followTopic";
   static const String HOME = "/home";
   static const String LOGIN = "/login";
   static const String PREVIEW = "/preview";

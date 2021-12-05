@@ -4,6 +4,7 @@ class LanguageKey {
   static const language = "language";
   static const login = "login";
   static const translate = "translate";
+  static const hello = "hello";
   static const started = "started";
   static const inputuser = "inputuser";
   static const inputpass = "inputpass";

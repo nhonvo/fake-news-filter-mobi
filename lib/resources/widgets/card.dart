@@ -1,9 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
-import 'package:fake_news/views/introduction/intro_viewmodel.dart';
+import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +26,7 @@ class CustomCard extends StatefulWidget {
 class _CustomCardState extends State<CustomCard> {
   bool check = false;
 
-  IntroViewModel get viewmodel => Get.find<IntroViewModel>();
+  DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
 
   @override
   Widget build(BuildContext context) {

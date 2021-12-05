@@ -26,11 +26,11 @@ class SplashViewModel extends BaseViewModel {
         Get.offAllNamed(Routes.HOME);
       } else {
         //if user is not following any topics despite having token
-        Get.offAllNamed(Routes.LAUNCH);
+        Get.offAllNamed(Routes.FOLLOW_TOPIC);
       }
     } else {
       //if user do not have token
-      Get.offAllNamed(Routes.INTRO);
+      Get.offAllNamed(Routes.DISCOVERY);
     }
   }
 }
