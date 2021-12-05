@@ -37,7 +37,7 @@ class PreviewViewModel extends BaseViewModel {
       snackBar(
         'Error',
         response.messages!,
-        'Something went wrong',
+        'altMessage'.tr,
         Icon(
           Icons.error,
           color: Colors.white,

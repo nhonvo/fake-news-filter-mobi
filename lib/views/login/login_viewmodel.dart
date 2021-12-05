@@ -28,15 +28,15 @@ class LoginViewModel extends BaseViewModel {
 
   bool validateTextField() {
     if (usernameController.text.isEmpty) {
-      showSnackbar("Please fill username field");
+      showSnackbar("inputUserEmptyErr".tr);
       return false;
     }
     if (passwordController.text.isEmpty) {
-      showSnackbar("Please fill password field");
+      showSnackbar("inputPassEmptyErr".tr);
       return false;
     }
     if (passwordController.text.length < 6) {
-      showSnackbar("Password at lease 6 characters");
+      showSnackbar("inputPassAtLeast6Err".tr);
       return false;
     }
     return true;
@@ -138,7 +138,7 @@ class LoginViewModel extends BaseViewModel {
     snackBar(
       'error'.tr,
       message,
-      'Something went wrong',
+      'altMessage'.tr,
       Icon(
         Icons.error,
         color: Colors.white,
