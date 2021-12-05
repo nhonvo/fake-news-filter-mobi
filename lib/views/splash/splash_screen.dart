@@ -49,11 +49,10 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Column(
               children: <Widget>[
-                Text("Xin chào", style: StylesText.content14BoldBlack),
+                Text("hello".tr, style: StylesText.content18BoldBlack),
                 const SizedBox(
                   height: 10,
                 ),
-                Text("Bùi Phú Khuyên", style: StylesText.content14BoldBlack)
               ],
             ),
             Image.asset(Images.banner),

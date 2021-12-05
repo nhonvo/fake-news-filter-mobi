@@ -7,21 +7,21 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card.dart';
 import 'package:fake_news/resources/widgets/card_topic.dart';
-import 'package:fake_news/views/introduction/intro_viewmodel.dart';
+import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class IntroductionScreen extends StatefulWidget {
-  const IntroductionScreen({Key? key}) : super(key: key);
+class DiscoveryScreen extends StatefulWidget {
+  const DiscoveryScreen({Key? key}) : super(key: key);
 
   @override
-  _IntroductionScreenState createState() => _IntroductionScreenState();
+  _DiscoveryScreenState createState() => _DiscoveryScreenState();
 }
 
-class _IntroductionScreenState extends State<IntroductionScreen> {
-  IntroViewModel get viewmodel => Get.find<IntroViewModel>();
+class _DiscoveryScreenState extends State<DiscoveryScreen> {
+  DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
 
   @override
   void initState() {

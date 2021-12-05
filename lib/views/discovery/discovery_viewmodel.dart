@@ -10,8 +10,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class IntroViewModel extends BaseViewModel {
-  IntroViewModel({required this.topicApi, required this.followingApi, required this.authRepo});
+class DiscoveryViewModel extends BaseViewModel {
+  DiscoveryViewModel({required this.topicApi, required this.followingApi, required this.authRepo});
 
   // IntroViewModel({required this.topicApi, required this.authRepo, required this.pref});
   TopicApi topicApi;
