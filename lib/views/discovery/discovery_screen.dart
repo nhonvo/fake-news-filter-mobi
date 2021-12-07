@@ -5,6 +5,7 @@ import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/resources/widgets/card.dart';
 import 'package:fake_news/resources/widgets/card_topic.dart';
 import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
 import 'package:flutter/material.dart';
