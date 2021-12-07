@@ -63,7 +63,7 @@ class DiscoveryViewModel extends BaseViewModel {
     }
   }
 
-  //StartedScreen
+  //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥StartedScreen💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
   handlerGetListIdTopic(int id) {
     if (topicIds.contains(id)) {
       topicIds.remove(id);
@@ -98,5 +98,11 @@ class DiscoveryViewModel extends BaseViewModel {
       await authRepo.saveIsNotFollow(false);
       Get.offAllNamed(Routes.HOME);
     }
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    handleGetTopic();
   }
 }

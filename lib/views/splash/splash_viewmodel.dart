@@ -33,4 +33,10 @@ class SplashViewModel extends BaseViewModel {
       Get.offAllNamed(Routes.DISCOVERY);
     }
   }
+
+  @override
+  void onInit() {
+    super.onInit();
+    handleTransition();
+  }
 }

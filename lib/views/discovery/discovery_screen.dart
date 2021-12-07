@@ -22,13 +22,8 @@ class DiscoveryScreen extends StatefulWidget {
 class _DiscoveryScreenState extends State<DiscoveryScreen> {
   DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
 
-  @override
-  void initState() {
-    super.initState();
-    //FIXME: Load languages from API to get topic
-    var kakakaka = Get.find<List<LanguageModel>?>();
-    viewmodel.handleGetTopic();
-  }
+  //FIXME: Load languages from API to get topic
+  // var kakakaka = Get.find<List<LanguageModel>?>();
 
   @override
   Widget build(BuildContext context) {

@@ -6,6 +6,7 @@ import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class BreakingViewModel extends BaseViewModel {
   BreakingViewModel({required this.newsApi, required this.authRepo});
@@ -14,6 +15,16 @@ class BreakingViewModel extends BaseViewModel {
   AuthRepo authRepo;
 
   final news = <NewsModel>[].obs;
+  var isLoaded = false.obs;
+
+  RefreshController refreshController = RefreshController(initialRefresh: false);
+
+  void onRefresh() async {
+    // monitor network fetch
+    await handleGetNewsByFollowedTopic();
+    // if failed,use refreshFailed()
+    refreshController.refreshCompleted();
+  }
 
   handleGetNewsByFollowedTopic() async {
     EasyLoading.show(status: 'fetchingData'.tr);
@@ -45,5 +56,12 @@ class BreakingViewModel extends BaseViewModel {
       });
       EasyLoading.dismiss();
     }
+  }
+
+  @override
+  void onInit() async {
+    super.onInit();
+    await handleGetNewsByFollowedTopic();
+    isLoaded.value = true;
   }
 }

@@ -15,13 +15,6 @@ class _SplashScreenState extends State<SplashScreen> {
   SplashViewModel get viewmodel => Get.find<SplashViewModel>();
 
   @override
-  void initState() {
-    super.initState();
-    // GetStartedScreen()
-    viewmodel.handleTransition();
-  }
-
-  @override
   Widget build(BuildContext context) {
     SizeText.queryData = MediaQuery.of(context).textScaleFactor;
     return Scaffold(
