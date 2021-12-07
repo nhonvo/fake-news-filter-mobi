@@ -19,10 +19,10 @@ class FollowTopicScreen extends StatefulWidget {
 class _FollowTopicScreenState extends State<FollowTopicScreen> {
   DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
 
-  void initState() {
-    super.initState();
-    viewmodel.handleGetTopic();
-  }
+  // void initState() {
+  //   super.initState();
+  //   viewmodel.handleGetTopic();
+  // }
 
   @override
   Widget build(BuildContext context) {

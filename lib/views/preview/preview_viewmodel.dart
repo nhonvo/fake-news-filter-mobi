@@ -56,4 +56,10 @@ class PreviewViewModel extends BaseViewModel {
       EasyLoading.dismiss();
     }
   }
+
+  @override
+  void onInit() {
+    super.onInit();
+    handleGetNewsByTopic();
+  }
 }

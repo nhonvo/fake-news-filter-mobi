@@ -21,11 +21,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
   PreviewViewModel get viewmodel => Get.find<PreviewViewModel>();
 
   bool follow = false;
-  @override
-  void initState() {
-    super.initState();
-    viewmodel.handleGetNewsByTopic();
-  }
 
   @override
   Widget build(BuildContext context) {

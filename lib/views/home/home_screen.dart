@@ -91,8 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
         itemHoverWidth: Get.size.width * 0.3,
         itemHoverBorderRadius: 20,
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(cIndex),
+      body: IndexedStack(
+        index: cIndex,
+        children: _widgetOptions,
       ),
     );
   }
