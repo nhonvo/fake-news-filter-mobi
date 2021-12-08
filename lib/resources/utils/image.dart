@@ -4,6 +4,7 @@ class Images {
   static const String covid = "assets/images/coronavirus.jpg";
   static const String chart = "assets/images/chart.png";
   static const String trump = "assets/images/dtrump.jpg";
+  static const String avatar = "assets/images/avatar.png";
   static const String icprotect = "assets/icons/protect.png";
   static const String icnone = "assets/icons/none.png";
 }
