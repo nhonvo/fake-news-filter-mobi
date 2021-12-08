@@ -133,5 +133,9 @@ flutter:
     - family: NUNITO-SEMIBOLD-ITALIC
       fonts:
         - asset: assets/fonts/Nunito-SemiBoldItalic.ttf
+    - family: ProfileIcons
+      fonts:
+        - asset: assets/fonts/ProfileIcons.ttf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
