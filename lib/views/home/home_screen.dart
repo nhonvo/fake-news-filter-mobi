@@ -4,6 +4,7 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/bottomnav_item.dart';
 import 'package:fake_news/resources/widgets/navigation_bar.dart';
 import 'package:fake_news/views/breaking/breaking_screen.dart';
+import 'package:fake_news/views/profile_setting/profile_setting_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,9 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Text(
       'Index 2: Search',
     ),
-    Text(
-      'Index 3: Settings',
-    ),
+    ProfileScreen(),
   ];
 
   var cIndex;
