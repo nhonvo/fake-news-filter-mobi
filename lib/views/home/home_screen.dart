@@ -4,7 +4,7 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/bottomnav_item.dart';
 import 'package:fake_news/resources/widgets/navigation_bar.dart';
 import 'package:fake_news/views/breaking/breaking_screen.dart';
-import 'package:fake_news/views/profile_setting/profile_setting_screen.dart';
+import 'package:fake_news/views/profile_setting/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

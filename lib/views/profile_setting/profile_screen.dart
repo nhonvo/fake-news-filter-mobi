@@ -3,8 +3,11 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/icon.dart';
+import 'package:fake_news/views/profile_setting/profile_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -14,7 +17,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  @override
+  ProfileViewModel get viewmodel => Get.find<ProfileViewModel>();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -119,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         IconButton(
           icon: Icon(Icons.exit_to_app),
           onPressed: () async {
-            //Logout
+            viewmodel.handlelogout();
           },
         ),
       ],
@@ -157,7 +161,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               BuildItemButon(
                 colorbrg: Colors.red,
                 icon: ProfileIcons.support,
-                content: 'Hỗ trợ',
+                content: 'Liên kết mạng xã hội',
                 screen: '/support',
               ),
             ],
