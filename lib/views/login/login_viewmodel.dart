@@ -55,24 +55,7 @@ class LoginViewModel extends BaseViewModel {
       EasyLoading.dismiss();
       showSnackbar(response.messages!);
     } else {
-      LoginModel user = response.resultObj!;
-
-      await authRepo.saveAuthToken(user.token ?? '');
-      await authRepo.saveUserId(user.userId!);
-
-      //check if user has followed any topic
-      var topicIdList = await followingApi.getFollowedTopic(user.userId.toString());
-      bool isNotFollow = topicIdList.resultObj == null || topicIdList.resultObj?.length == 0;
-
-      if (isNotFollow) {
-        EasyLoading.dismiss();
-        Get.offAllNamed(Routes.FOLLOW_TOPIC);
-      } else {
-        EasyLoading.dismiss();
-        //set this user has followed any topics
-        await authRepo.saveIsNotFollow(false);
-        Get.offAllNamed(Routes.HOME);
-      }
+      checkIsFollowed(response);
     }
   }
 
@@ -90,11 +73,7 @@ class LoginViewModel extends BaseViewModel {
         EasyLoading.dismiss();
         showSnackbar(response.messages!);
       } else {
-        LoginModel user = response.resultObj!;
-        await authRepo.saveAuthToken(user.token ?? '');
-        await authRepo.saveEmail(user.email ?? '');
-        Get.offAllNamed(Routes.HOME);
-        EasyLoading.dismiss();
+        checkIsFollowed(response);
       }
     } else {
       showSnackbar(result.message!);
@@ -110,7 +89,7 @@ class LoginViewModel extends BaseViewModel {
     ],
   );
 
-  Future<void> handleLoginGoogle() async {
+  handleLoginGoogle() async {
     EasyLoading.show(status: 'loadingLogin'.tr);
 
     try {
@@ -122,15 +101,32 @@ class LoginViewModel extends BaseViewModel {
         EasyLoading.dismiss();
         showSnackbar(response.messages!);
       } else {
-        LoginModel user = response.resultObj!;
-        await authRepo.saveAuthToken(user.token ?? '');
-        await authRepo.saveEmail(user.email ?? '');
-        Get.offAllNamed(Routes.HOME);
-        EasyLoading.dismiss();
+        checkIsFollowed(response);
       }
     } catch (error) {
       EasyLoading.dismiss();
       showSnackbar(error.toString());
+    }
+  }
+
+  checkIsFollowed(dynamic response) async {
+    LoginModel user = response.resultObj!;
+
+    await authRepo.saveAuthToken(user.token ?? '');
+    await authRepo.saveUserId(user.userId!);
+
+    //check if user has followed any topic
+    var topicIdList = await followingApi.getFollowedTopic(user.userId.toString());
+    bool isNotFollow = topicIdList.resultObj == null || topicIdList.resultObj?.length == 0;
+
+    if (isNotFollow) {
+      EasyLoading.dismiss();
+      Get.offAllNamed(Routes.FOLLOW_TOPIC);
+    } else {
+      EasyLoading.dismiss();
+      //set this user has followed any topics
+      await authRepo.saveIsNotFollow(false);
+      Get.offAllNamed(Routes.HOME);
     }
   }
 
