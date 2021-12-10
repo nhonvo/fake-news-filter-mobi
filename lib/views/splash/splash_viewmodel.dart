@@ -7,7 +7,10 @@ import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:get/get.dart';
 
 class SplashViewModel extends BaseViewModel {
-  SplashViewModel({required this.authRepo, required this.languageApi, required this.followingApi});
+  SplashViewModel(
+      {required this.authRepo,
+      required this.languageApi,
+      required this.followingApi});
 
   AuthRepo authRepo;
   LanguageApi languageApi;
@@ -18,6 +21,7 @@ class SplashViewModel extends BaseViewModel {
     var token = await authRepo.getAuthToken();
 
     var response = await languageApi.getLanguages();
+
     Get.put<List<LanguageModel>?>(response.resultObj);
 
     if (token != null) {

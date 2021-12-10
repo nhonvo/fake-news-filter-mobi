@@ -1,5 +1,5 @@
-import 'package:fake_news/views/breaking/breaking_binding.dart';
 import 'package:fake_news/views/follow_topic/follow_topic.dart';
+import 'package:fake_news/views/home/home_binding.dart';
 import 'package:fake_news/views/home/home_screen.dart';
 import 'package:fake_news/views/discovery/discovery_binding.dart';
 import 'package:fake_news/views/discovery/discovery_screen.dart';
@@ -15,16 +15,34 @@ class AppRoutes {
   AppRoutes._();
 
   static final appRoutes = [
-    GetPage(name: Routes.INIT, page: () => SplashScreen(), binding: SplashBinding()),
-    GetPage(name: Routes.FOLLOW_TOPIC, page: () => FollowTopicScreen(), binding: DiscoveryBinding()),
-    GetPage(name: Routes.DISCOVERY, page: () => DiscoveryScreen(), binding: DiscoveryBinding()),
-    GetPage(name: Routes.PREVIEW, page: () => PreviewScreen(), binding: PreviewBinding()),
+    GetPage(
+        name: Routes.INIT,
+        page: () => SplashScreen(),
+        transition: Transition.rightToLeftWithFade,
+        binding: SplashBinding()),
+    GetPage(
+        name: Routes.FOLLOW_TOPIC,
+        page: () => FollowTopicScreen(),
+        transition: Transition.rightToLeftWithFade,
+        binding: DiscoveryBinding()),
+    GetPage(
+        name: Routes.DISCOVERY,
+        page: () => DiscoveryScreen(),
+        transition: Transition.rightToLeftWithFade,
+        binding: DiscoveryBinding()),
+    GetPage(
+        name: Routes.PREVIEW,
+        page: () => PreviewScreen(),
+        transition: Transition.rightToLeftWithFade,
+        binding: PreviewBinding()),
     GetPage(
       name: Routes.LOGIN,
       page: () => LoginScreen(),
+      transition: Transition.rightToLeftWithFade,
       binding: LoginBinding(),
     ),
-    GetPage(name: Routes.HOME, page: () => HomeScreen(), binding: BreakingBinding()),
+    GetPage(
+        name: Routes.HOME, page: () => HomeScreen(), binding: HomeBinding()),
   ];
 }
 
