@@ -21,6 +21,8 @@ class LanguageService extends GetxService {
   /// save locale if don't have
   Future<void> initLocalLanguage() async {
     String? currentLanguageStore = sharedPreferences.getString(AppConstant.sharePrefKeys.language);
+    String? currentLanguageContent =
+        sharedPreferences.getString(AppConstant.sharePrefKeys.languageContent).obs.value ?? "en";
 
     if ((currentLanguageStore == '') || (currentLanguageStore == null)) {
       await setDefaultLocale(LocaleKey.EN);

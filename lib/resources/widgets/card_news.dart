@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
 import 'package:fake_news/views/view_news/viewnews_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -43,6 +46,7 @@ class CardNews extends StatefulWidget {
 class _CardNewsState extends State<CardNews> {
   AuthRepo authRepo = Get.find();
   late bool isLoggedIn = false;
+  var appEnvironment = Get.find<AppEnvironment>();
 
   @override
   void initState() {
@@ -145,7 +149,22 @@ class _CardNewsState extends State<CardNews> {
                   ],
                 ),
                 widget.image != null
-                    ? Image.asset(widget.image!, fit: BoxFit.fitWidth)
+                    ? CachedNetworkImage(
+                        width: 100,
+                        height: 50,
+                        imageUrl: "${appEnvironment.apiBaseUrl}/images/news/${widget.image}",
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.fill,
+                                colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                          ),
+                        ),
+                        placeholder: (context, url) => CupertinoActivityIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      )
                     : SizedBox(
                         height: 10,
                       ),

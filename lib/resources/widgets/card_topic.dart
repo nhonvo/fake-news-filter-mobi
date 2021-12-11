@@ -1,12 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CardTopic extends StatefulWidget {
-  const CardTopic(
+  CardTopic(
       {Key? key,
       required this.ontap,
       required this.tag,
@@ -14,17 +18,19 @@ class CardTopic extends StatefulWidget {
       required this.label,
       required this.noNews,
       required this.time,
+      required this.image,
       required this.index})
       : super(key: key);
 
   final VoidCallback ontap;
-  final String index, tag, description, label, noNews, time;
-
+  final String index, tag, description, label, noNews, image, time;
   @override
   _CardTopicState createState() => _CardTopicState();
 }
 
 class _CardTopicState extends State<CardTopic> {
+  var appEnvironment = Get.find<AppEnvironment>();
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -42,7 +48,22 @@ class _CardTopicState extends State<CardTopic> {
                 children: [
                   ClipRRect(
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
-                      child: Image.asset(Images.covid)),
+                      child: CachedNetworkImage(
+                        width: 100,
+                        height: 50,
+                        imageUrl: "${appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.fill,
+                                colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                          ),
+                        ),
+                        placeholder: (context, url) => CupertinoActivityIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      )),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
