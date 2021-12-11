@@ -96,6 +96,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             title: item.description.toString().substring(
                                 0, item.description.toString().length > 50 ? 50 : item.description.toString().length),
                             content: item.content.toString(),
+                            // image: item.thumbNews.toString(),
+                            image: "newsid5.jpg",
                             article: item.publisher ?? '',
                             onpress: () {}),
                     ],

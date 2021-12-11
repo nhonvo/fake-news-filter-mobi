@@ -1,16 +1,13 @@
 import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/api/language_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
-import 'package:fake_news/models/language.dart';
+import 'package:fake_news/models/language_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:get/get.dart';
 
 class SplashViewModel extends BaseViewModel {
-  SplashViewModel(
-      {required this.authRepo,
-      required this.languageApi,
-      required this.followingApi});
+  SplashViewModel({required this.authRepo, required this.languageApi, required this.followingApi});
 
   AuthRepo authRepo;
   LanguageApi languageApi;
@@ -22,7 +19,7 @@ class SplashViewModel extends BaseViewModel {
 
     var response = await languageApi.getLanguages();
 
-    Get.put<List<LanguageModel>?>(response.resultObj);
+    Get.lazyPut<List<LanguageModel>?>(() => response.resultObj);
 
     if (token != null) {
       if (isNotFollow == 'false') {

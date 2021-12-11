@@ -1,5 +1,5 @@
 import 'package:fake_news/core/models/api/base_response_api_model.dart';
-import 'package:fake_news/models/language.dart';
+import 'package:fake_news/models/language_model.dart';
 import 'dio_api.dart';
 
 abstract class LanguageApi {

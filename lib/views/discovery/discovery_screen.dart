@@ -22,9 +22,6 @@ class DiscoveryScreen extends StatefulWidget {
 class _DiscoveryScreenState extends State<DiscoveryScreen> {
   DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
 
-  //FIXME: Load languages from API to get topic
-  // var kakakaka = Get.find<List<LanguageModel>?>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,12 +115,11 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                                   label: topic.label.toString(),
                                   tag: topic.tag.toString(),
                                   description: topic.description.toString(),
-                                  time: AppHelper.convertToAgo(DateTime.parse(
-                                      topic.realTime.toString())),
+                                  image: topic.thumbImage.toString(),
+                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
                                   ontap: () {
                                     print(topic.topicId);
-                                    Get.toNamed(Routes.PREVIEW,
-                                        arguments: topic.obs);
+                                    Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
                                   },
                                 ));
                           }).toList());
