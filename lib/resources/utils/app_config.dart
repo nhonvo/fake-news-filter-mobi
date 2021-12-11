@@ -23,7 +23,7 @@ class AppEnvironment {
 
   factory AppEnvironment.live() {
     return AppEnvironment._(
-      apiBaseUrl: "",
+      apiBaseUrl: "https://fakenewsfilter.tk",
       imageUrl: "",
       defaultBranchApiKey: "",
       oneSignalAppId: "",
