@@ -1,5 +1,4 @@
 import 'package:fake_news/data/story_data.dart';
-import 'package:fake_news/models/news/news_model.dart';
 import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';

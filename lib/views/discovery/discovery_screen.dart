@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:fake_news/models/language.dart';
 import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
-import 'package:fake_news/resources/widgets/card.dart';
 import 'package:fake_news/resources/widgets/card_topic.dart';
+import 'package:fake_news/resources/widgets/language.dart';
 import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,13 +53,15 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                   buttonRadius: 10,
                   textStyle: StylesText.content12MediumBlue,
                   onPressed: () {
-                    // setState(() {
-                    //   if (language.currentLanguage == "en") {
-                    //     language.updateLanguage("vi");
-                    //   } else {
-                    //     language.updateLanguage("en");
-                    //   }
-                    // });
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return ChooseLanguage();
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -117,10 +118,12 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                                   label: topic.label.toString(),
                                   tag: topic.tag.toString(),
                                   description: topic.description.toString(),
-                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
+                                  time: AppHelper.convertToAgo(DateTime.parse(
+                                      topic.realTime.toString())),
                                   ontap: () {
                                     print(topic.topicId);
-                                    Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
+                                    Get.toNamed(Routes.PREVIEW,
+                                        arguments: topic.obs);
                                   },
                                 ));
                           }).toList());

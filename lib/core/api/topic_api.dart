@@ -15,7 +15,8 @@ class TopicApiIpml implements TopicApi {
     return await dioApi.doGet<List<TopicModel>>(
       //FIXME: change to real url
       "/api/Topic/List?languageId=$languageId",
-      parseJson: (json) => List<TopicModel>.from(json.map((x) => TopicModel.fromJson(x))),
+      parseJson: (json) =>
+          List<TopicModel>.from(json.map((x) => TopicModel.fromJson(x))),
     );
   }
 }
