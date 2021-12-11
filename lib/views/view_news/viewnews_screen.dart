@@ -23,7 +23,6 @@ class ViewNewsScreen extends StatefulWidget {
 }
 
 class _ViewNewsScreenState extends State<ViewNewsScreen> {
-  int _stackToView = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

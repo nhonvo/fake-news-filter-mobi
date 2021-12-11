@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
       translations: Localization(),
       getPages: AppRoutes.appRoutes,
       initialRoute: Routes.INIT,
+      defaultTransition: Transition.rightToLeftWithFade,
     );
   }
 }
