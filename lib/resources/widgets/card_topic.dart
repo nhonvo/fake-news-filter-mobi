@@ -2,7 +2,6 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
-import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,26 +41,31 @@ class _CardTopicState extends State<CardTopic> {
               width: 250,
               height: 300,
               decoration: BoxDecoration(
-                  color: MyColors.colorsArr.elementAt(int.parse(widget.index) % MyColors.colorsArr.length),
+                  color: MyColors.colorsArr.elementAt(
+                      int.parse(widget.index) % MyColors.colorsArr.length),
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               child: Column(
                 children: [
                   ClipRRect(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15.0),
+                          topRight: Radius.circular(15.0)),
                       child: CachedNetworkImage(
-                        width: 100,
-                        height: 50,
-                        imageUrl: "${appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
+                        fit: BoxFit.fitWidth,
+                        height: 65,
+                        imageUrl:
+                            "${appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
                             image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.fill,
-                                colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                              image: imageProvider,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
-                        placeholder: (context, url) => CupertinoActivityIndicator(),
+                        placeholder: (context, url) =>
+                            CupertinoActivityIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       )),
                   Expanded(
@@ -77,11 +81,12 @@ class _CardTopicState extends State<CardTopic> {
                           ),
                           Text(
                             widget.description,
-                            style: StylesText.content10MediumWhite,
+                            style: StylesText.content12MediumWhite,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
@@ -89,7 +94,11 @@ class _CardTopicState extends State<CardTopic> {
                                     Icons.menu,
                                     color: Colors.white,
                                   ),
-                                  Text(widget.noNews, style: StylesText.content12MediumWhite)
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  Text(widget.noNews,
+                                      style: StylesText.content12MediumWhite)
                                 ],
                               ),
                               SizedBox(
@@ -101,7 +110,8 @@ class _CardTopicState extends State<CardTopic> {
                                     Icons.sync_rounded,
                                     color: Colors.white,
                                   ),
-                                  Text(widget.time, style: StylesText.content12MediumWhite)
+                                  Text(widget.time,
+                                      style: StylesText.content12MediumWhite)
                                 ],
                               ),
                             ],
@@ -142,7 +152,8 @@ class _CardTopicState extends State<CardTopic> {
                   widget.label == "featured"
                       ? Text(widget.label, style: StylesText.content12BoldWhite)
                       : widget.label == "breaking"
-                          ? Text(widget.label, style: StylesText.content12BoldWhite)
+                          ? Text(widget.label,
+                              style: StylesText.content12BoldWhite)
                           : Container(),
                 ],
               ),

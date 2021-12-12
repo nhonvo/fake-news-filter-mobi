@@ -41,11 +41,11 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
           child: Stack(
             children: [
               Positioned(
-                top: Get.size.height * 0.04,
+                top: Get.size.height * 0.001,
                 left: Get.size.width * 0.75,
                 child: CustomButton(
                   width: Get.size.width * 0.2,
-                  buttonText: 'language'.tr,
+                  buttonText: 'klanguage'.tr,
                   buttonColor: MyColors.blueLight,
                   buttonRadius: 10,
                   textStyle: StylesText.content12MediumBlue,
@@ -108,7 +108,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                           children: viewmodel.topics.map((topic) {
                             index++;
                             return Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(15.0),
                                 child: CardTopic(
                                   index: index.toString(),
                                   noNews: topic.noNews.toString(),
@@ -116,10 +116,12 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                                   tag: topic.tag.toString(),
                                   description: topic.description.toString(),
                                   image: topic.thumbImage.toString(),
-                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
+                                  time: AppHelper.convertToAgo(DateTime.parse(
+                                      topic.realTime.toString())),
                                   ontap: () {
                                     print(topic.topicId);
-                                    Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
+                                    Get.toNamed(Routes.PREVIEW,
+                                        arguments: topic.obs);
                                   },
                                 ));
                           }).toList());

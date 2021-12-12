@@ -2,12 +2,13 @@ import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
-import 'package:fake_news/resources/widgets/icon.dart';
 import 'package:fake_news/views/profile_setting/profile_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -108,24 +109,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Container(
                     child: CustomButton(
-                        buttonText: 'Cập nhật thông tin cá nhân',
+                        buttonText: 'updateProfile'.tr,
                         onPressed: () {},
                         width: 200,
                         buttonRadius: 20,
                         buttonColor: Colors.white,
-                        textStyle: StylesText.content12BoldBlack),
+                        textStyle: StylesText.content12MediumBlack),
                   ),
                 ],
               ),
             ),
           ],
         ),
-        IconButton(
-          icon: Icon(Icons.exit_to_app),
-          onPressed: () async {
+        InkWell(
+          child: SvgPicture.asset(IconsApp.exit, width: 30),
+          onTap: () async {
             viewmodel.handlelogout();
           },
-        ),
+        )
       ],
     );
   }
@@ -137,10 +138,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: EdgeInsets.only(top: 5, bottom: 5),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color: Colors.black38,
+                color: Colors.black26,
                 blurRadius: 1.0,
               ),
             ],
@@ -148,22 +149,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             children: <Widget>[
               BuildItemButon(
-                colorbrg: Colors.blue,
-                icon: ProfileIcons.help,
-                content: 'Ngôn ngữ',
-                screen: '/faq',
-              ),
+                  icon: IconsApp.language,
+                  content: 'klanguage'.tr,
+                  onTap: () {}),
               BuildItemButon(
-                  colorbrg: Colors.orange,
-                  icon: ProfileIcons.info,
-                  content: 'Chủ đề theo dõi tin tức',
-                  screen: '/info'),
+                  icon: IconsApp.follow,
+                  content: 'followTopic'.tr,
+                  onTap: () {}),
               BuildItemButon(
-                colorbrg: Colors.red,
-                icon: ProfileIcons.support,
-                content: 'Liên kết mạng xã hội',
-                screen: '/support',
-              ),
+                  icon: IconsApp.social,
+                  content: 'linkSocial'.tr,
+                  onTap: () {}),
             ],
           ),
         )
@@ -179,56 +175,27 @@ Widget _infoSupport(BuildContext context) {
         padding: EdgeInsets.only(top: 5, bottom: 5),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Colors.black38,
+              color: Colors.black26,
               blurRadius: 1.0,
             ),
           ],
         ),
         child: Column(
           children: <Widget>[
+            BuildItemButon(icon: IconsApp.faq, content: 'FAQ', onTap: () {}),
             BuildItemButon(
-              colorbrg: Colors.blue,
-              icon: ProfileIcons.help,
-              content: 'FAQ',
-              screen: '/faq',
-            ),
-            InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: CustomIcon(
-                            colorbackground: Colors.green,
-                            coloricon: Colors.white,
-                            iconData: ProfileIcons.star),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          'Đánh giá ứng dụng',
-                          style: StylesText.content14BoldBlack,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                icon: IconsApp.rate,
+                content: 'Đánh giá ứng dụng',
                 onTap: () {}),
             BuildItemButon(
-                colorbrg: Colors.orange,
-                icon: ProfileIcons.info,
+                icon: IconsApp.about,
                 content: 'Về Fake News Filter',
-                screen: '/info'),
+                onTap: () {}),
             BuildItemButon(
-              colorbrg: Colors.red,
-              icon: ProfileIcons.support,
-              content: 'Hỗ trợ',
-              screen: '/support',
-            ),
+                icon: IconsApp.support, content: 'Hỗ trợ', onTap: () {}),
           ],
         ),
       )
@@ -237,37 +204,33 @@ Widget _infoSupport(BuildContext context) {
 }
 
 class BuildItemButon extends StatelessWidget {
-  final Color colorbrg;
-  final IconData icon;
+  final String icon;
   final String content;
-  final String screen;
+  final Function onTap;
   BuildItemButon(
-      {required this.icon,
-      required this.colorbrg,
-      required this.content,
-      required this.screen});
+      {required this.icon, required this.content, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        onTap();
+      },
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Row(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: CustomIcon(
-                colorbackground: colorbrg,
-                coloricon: Colors.white,
-                iconData: icon,
-              ),
-            ),
+                padding: const EdgeInsets.only(left: 10.0),
+                child: SvgPicture.asset(
+                  icon,
+                  width: 30,
+                )),
             Padding(
-              padding: const EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 20),
               child: Text(
                 content,
-                style: StylesText.content14BoldBlack,
+                style: StylesText.content14MediumBlack,
               ),
             ),
           ],

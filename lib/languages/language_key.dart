@@ -1,7 +1,11 @@
 class LanguageKey {
   //App
   static const appname = "appname";
+  static const klanguage = "klanguage";
   static const language = "language";
+  static const managelanguage = "managelanguage";
+  static const displaylanguage = "displaylanguage";
+  static const contentlanguage = "contentlanguage";
   static const login = "login";
   static const translate = "translate";
   static const hello = "hello";
@@ -48,4 +52,8 @@ class LanguageKey {
   static const serverErr = "serverErr";
   static const serverDieErr = "serverDieErr";
   static const interruptErr = "interruptErr";
+  static const updateProfile = "updateProfile";
+  static const followTopic = "followTopic";
+  static const linkSocial = "linkSocial";
+  static const rateApp = "rateApp";
 }

@@ -97,7 +97,8 @@ class _CardNewsState extends State<CardNews> {
                           children: [
                             widget.offical != null
                                 ? Row(children: [
-                                    Text('Official Rating: ', style: StylesText.content12MediumBlack),
+                                    Text('Official Rating: ',
+                                        style: StylesText.content12MediumBlack),
                                     Text(
                                       widget.offical!,
                                       style: StylesText.content12BoldBlack,
@@ -108,7 +109,8 @@ class _CardNewsState extends State<CardNews> {
                                 ? Row(children: [
                                     widget.offical == null
                                         ? Padding(
-                                            padding: const EdgeInsets.only(right: 4.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 4.0),
                                             child: Icon(
                                               FontAwesomeIcons.staylinked,
                                               size: 24,
@@ -149,25 +151,36 @@ class _CardNewsState extends State<CardNews> {
                   ],
                 ),
                 widget.image != null
-                    ? CachedNetworkImage(
-                        width: 100,
-                        height: 50,
-                        imageUrl: "${appEnvironment.apiBaseUrl}/images/news/${widget.image}",
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.fill,
-                                colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: CachedNetworkImage(
+                            fit: BoxFit.fitWidth,
+                            height: 180,
+                            imageUrl:
+                                "${appEnvironment.apiBaseUrl}/images/news/${widget.image}",
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                            placeholder: (context, url) =>
+                                CupertinoActivityIndicator(),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                         ),
-                        placeholder: (context, url) => CupertinoActivityIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
                       )
                     : SizedBox(
                         height: 10,
                       ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   widget.title,
                   style: StylesText.content14BoldBlack,

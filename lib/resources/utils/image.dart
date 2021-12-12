@@ -7,6 +7,4 @@ class Images {
   static const String avatar = "assets/images/avatar.png";
   static const String icprotect = "assets/icons/protect.png";
   static const String icnone = "assets/icons/none.png";
-  static const String en = "assets/icons/en.svg";
-  static const String vi = "assets/icons/vi.svg";
 }
