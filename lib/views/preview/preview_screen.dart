@@ -45,7 +45,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TagTopic(
-                                tagName: viewmodel.topicModel.value.tag.toString(),
+                                tagName:
+                                    viewmodel.topicModel.value.tag.toString(),
                                 buttonColor: MyColors.red.withOpacity(0.1),
                               ),
                               InkWell(
@@ -55,7 +56,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                   });
                                 },
                                 child: TagTopic(
-                                  tagName: follow ? '  + FOLLOWING   ' : '  + FOLLOW   ',
+                                  tagName: follow
+                                      ? '  + FOLLOWING   '
+                                      : '  + FOLLOW   ',
                                   buttonColor: MyColors.red.withOpacity(0.1),
                                 ),
                               ),
@@ -69,14 +72,18 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             style: StylesText.content12BlackWhite,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15),
-                          child: Row(
-                            children: [
-                              Icon(FontAwesomeIcons.syncAlt, size: 15, color: Colors.white),
-                              SizedBox(width: 10),
-                              Text('UPDATING LIVE', style: StylesText.content14BoldWhite)
-                            ],
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15),
+                            child: Row(
+                              children: [
+                                Icon(FontAwesomeIcons.syncAlt,
+                                    size: 15, color: Colors.white),
+                                SizedBox(width: 10),
+                                Text('UPDATING LIVE',
+                                    style: StylesText.content14BoldWhite)
+                              ],
+                            ),
                           ),
                         )
                       ],
@@ -92,9 +99,13 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             rate: true,
                             tag: viewmodel.topicModel.value.tag.toString(),
                             user: '25%',
-                            times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                            times: AppHelper.convertToAgo(
+                                DateTime.parse(item.timestamp.toString())),
                             title: item.description.toString().substring(
-                                0, item.description.toString().length > 50 ? 50 : item.description.toString().length),
+                                0,
+                                item.description.toString().length > 50
+                                    ? 50
+                                    : item.description.toString().length),
                             content: item.content.toString(),
                             // image: item.thumbNews.toString(),
                             image: "newsid5.jpg",

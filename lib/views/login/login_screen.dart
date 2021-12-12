@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               left: Get.size.width * 0.75,
               child: CustomButton(
                 width: Get.size.width * 0.2,
-                buttonText: 'language'.tr,
+                buttonText: 'klanguage'.tr,
                 buttonColor: MyColors.blueLight,
                 buttonRadius: 10,
                 textStyle: StylesText.content12MediumBlue,

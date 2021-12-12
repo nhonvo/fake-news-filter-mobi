@@ -1,18 +1,12 @@
-import 'package:flutter/widgets.dart';
-
-class ProfileIcons {
-  static const _kFontFam = 'ProfileIcons';
-
-  static const IconData settings =
-      const IconData(0xe800, fontFamily: _kFontFam);
-  static const IconData help = const IconData(0xe801, fontFamily: _kFontFam);
-  static const IconData support = const IconData(0xe802, fontFamily: _kFontFam);
-  static const IconData star = const IconData(0xe803, fontFamily: _kFontFam);
-  static const IconData info = const IconData(0xe804, fontFamily: _kFontFam);
-  static const IconData major = const IconData(0xe805, fontFamily: _kFontFam);
-  static const IconData ilass = const IconData(0xe806, fontFamily: _kFontFam);
-  static const IconData id_student =
-      const IconData(0xe807, fontFamily: _kFontFam);
-  static const IconData mail = const IconData(0xe808, fontFamily: _kFontFam);
-  static const IconData stats = const IconData(0xe809, fontFamily: _kFontFam);
+class IconsApp {
+  static const String en = "assets/icons/en.svg";
+  static const String vi = "assets/icons/vi.svg";
+  static const String language = "assets/icons/language.svg";
+  static const String support = "assets/icons/support.svg";
+  static const String follow = "assets/icons/follow.svg";
+  static const String faq = "assets/icons/faq.svg";
+  static const String rate = "assets/icons/rate.svg";
+  static const String about = "assets/icons/about.svg";
+  static const String social = "assets/icons/social.svg";
+  static const String exit = "assets/icons/exit.svg";
 }
