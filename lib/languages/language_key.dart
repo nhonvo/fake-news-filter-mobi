@@ -16,6 +16,7 @@ class LanguageKey {
   static const inputPassEmptyErr = "inputPassEmptyErr";
   static const inputPassAtLeast6Err = "inputPassAtLeast6Err";
   static const or = "or";
+  static const okay = "okay";
   static const help = "help";
   static const agree = "agree";
   static const terms = "terms";

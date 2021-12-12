@@ -3,6 +3,7 @@ import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/topics/topic_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
@@ -17,11 +18,12 @@ class DiscoveryViewModel extends BaseViewModel {
 
   TopicApi topicApi;
   FollowingApi followingApi;
+  AuthRepo authRepo;
+  SharedPreferences prefs;
 
   final topics = <TopicModel>[].obs;
   var topicIds = <int>[].obs;
-  AuthRepo authRepo;
-  SharedPreferences prefs;
+  var appEnvironment = Get.find<AppEnvironment>();
 
   RefreshController refreshController = RefreshController(initialRefresh: false);
 
