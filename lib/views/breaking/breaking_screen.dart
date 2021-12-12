@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fake_news/data/story_data.dart';
 import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
@@ -58,23 +60,15 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         factCheck: Images.icnone,
                                         rate: true,
                                         // tag: viewmodel.topicModel.value.tag.toString(),
-                                        user: '25%',
-                                        times: AppHelper.convertToAgo(
-                                            DateTime.parse(
-                                                item.timestamp.toString())),
-                                        title: item.description
-                                            .toString()
-                                            .substring(
-                                                0,
-                                                item.description
-                                                            .toString()
-                                                            .length >
-                                                        50
-                                                    ? 50
-                                                    : item.description
-                                                        .toString()
-                                                        .length),
+                                        user: '${50 + new Random().nextInt(90 - 50)}%',
+                                        times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                                        title: item.description.toString().substring(
+                                            0,
+                                            item.description.toString().length > 50
+                                                ? 50
+                                                : item.description.toString().length),
                                         content: item.content.toString(),
+                                        image: item.thumbNews.toString(),
                                         article: item.publisher ?? '',
                                         onpress: () {}),
                                 ],

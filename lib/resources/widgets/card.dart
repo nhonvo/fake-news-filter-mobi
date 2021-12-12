@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,10 +16,11 @@ class CustomCard extends StatefulWidget {
       required this.label,
       required this.noNews,
       required this.index,
+      required this.image,
       required this.time})
       : super(key: key);
 
-  final String id, tag, description, label, noNews, time, index;
+  final String id, image, tag, description, label, noNews, time, index;
 
   @override
   _CustomCardState createState() => _CustomCardState();
@@ -56,7 +59,24 @@ class _CustomCardState extends State<CustomCard> {
                       ClipRRect(
                           borderRadius:
                               BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
-                          child: Image.asset(Images.covid)),
+                          child: widget.image != "null"
+                              ? CachedNetworkImage(
+                                  fit: BoxFit.fitWidth,
+                                  height: 65,
+                                  imageUrl: "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
+                                  imageBuilder: (context, imageProvider) => Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                  placeholder: (context, url) => CupertinoActivityIndicator(),
+                                  errorWidget: (context, url, error) => Icon(Icons.error),
+                                )
+                              : Container()),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),

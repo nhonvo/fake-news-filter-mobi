@@ -27,18 +27,19 @@ class ChooseLanguage extends StatefulWidget {
 
 class _ChooseLanguageState extends State<ChooseLanguage> {
   int? selectedValue = 0;
-  SharedPreferences _prefs = Get.find<SharedPreferences>();
   String? getLanguageContent, tempLanguage;
+
+  SharedPreferences _prefs = Get.find<SharedPreferences>();
   final language = Get.find<LanguageService>();
   var languagesList = Get.find<List<LanguageModel>?>();
   var appEnvironment = Get.find<AppEnvironment>();
+
   DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
 
   @override
   void initState() {
     super.initState();
-    getLanguageContent =
-        _prefs.getString(AppConstant.sharePrefKeys.languageContent) ?? "";
+    getLanguageContent = _prefs.getString(AppConstant.sharePrefKeys.languageContent) ?? "";
     tempLanguage = getLanguageContent;
   }
 
@@ -57,8 +58,7 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
     int defaultLanguage = language.currentLanguage == "en" ? 1 : 0;
 
     if (getLanguageContent != "") {
-      selectedValue = languagesList
-          ?.indexWhere((element) => element.id == getLanguageContent);
+      selectedValue = languagesList?.indexWhere((element) => element.id == getLanguageContent);
     }
 
     return SingleChildScrollView(
@@ -142,62 +142,44 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                               });
                             },
                             child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               child: Container(
                                 width: 175,
                                 padding: EdgeInsets.all(25),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     CachedNetworkImage(
                                       width: 50,
                                       height: 50,
                                       imageUrl:
                                           "${appEnvironment.apiBaseUrl}/images/languages/${languagesList?[index].flag}",
-                                      imageBuilder: (context, imageProvider) =>
-                                          Container(
+                                      imageBuilder: (context, imageProvider) => Container(
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(6),
                                           image: DecorationImage(
                                               image: imageProvider,
                                               fit: BoxFit.fitWidth,
-                                              colorFilter: ColorFilter.mode(
-                                                  Colors.red,
-                                                  BlendMode.colorBurn)),
+                                              colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
                                         ),
                                       ),
-                                      placeholder: (context, url) =>
-                                          CupertinoActivityIndicator(),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
+                                      placeholder: (context, url) => CupertinoActivityIndicator(),
+                                      errorWidget: (context, url, error) => Icon(Icons.error),
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                            languagesList![index]
-                                                .name
-                                                .toString(),
+                                        Text(languagesList![index].name.toString(),
                                             style: selectedValue == index
                                                 ? StylesText.content14BoldBlue
-                                                : StylesText
-                                                    .content14MediumBlack),
+                                                : StylesText.content14MediumBlack),
                                         Container(
                                           decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              border: Border.all(
-                                                  color: Colors.black12)),
+                                              borderRadius: BorderRadius.circular(100),
+                                              border: Border.all(color: Colors.black12)),
                                           child: Icon(Icons.check,
-                                              size: 18,
-                                              color: selectedValue == index
-                                                  ? MyColors.blue
-                                                  : Colors.black12),
+                                              size: 18, color: selectedValue == index ? MyColors.blue : Colors.black12),
                                         )
                                       ],
                                     )
@@ -219,12 +201,11 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                 Navigator.pop(context);
               },
               child: CustomButton(
-                buttonText: 'Đồng ý',
+                buttonText: 'okay'.tr,
                 width: Get.size.width * 0.8,
                 onPressed: () {
                   //save language content to shared pref
-                  _prefs.setString(AppConstant.sharePrefKeys.languageContent,
-                      getLanguageContent.toString());
+                  _prefs.setString(AppConstant.sharePrefKeys.languageContent, getLanguageContent.toString());
 
                   if (getLanguageContent != tempLanguage) {
                     viewmodel.handleGetTopic();

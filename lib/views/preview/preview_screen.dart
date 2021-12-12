@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:math';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:fake_news/views/preview/preview_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -38,15 +42,30 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.asset(Images.covid),
+                        CachedNetworkImage(
+                          fit: BoxFit.fitWidth,
+                          height: 120,
+                          imageUrl:
+                              "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${viewmodel.topicModel.value.thumbImage}",
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          placeholder: (context, url) => CupertinoActivityIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TagTopic(
-                                tagName:
-                                    viewmodel.topicModel.value.tag.toString(),
+                                tagName: viewmodel.topicModel.value.tag.toString(),
                                 buttonColor: MyColors.red.withOpacity(0.1),
                               ),
                               InkWell(
@@ -56,9 +75,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                   });
                                 },
                                 child: TagTopic(
-                                  tagName: follow
-                                      ? '  + FOLLOWING   '
-                                      : '  + FOLLOW   ',
+                                  tagName: follow ? '  + FOLLOWING   ' : '  + FOLLOW   ',
                                   buttonColor: MyColors.red.withOpacity(0.1),
                                 ),
                               ),
@@ -77,11 +94,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             padding: const EdgeInsets.only(left: 15),
                             child: Row(
                               children: [
-                                Icon(FontAwesomeIcons.syncAlt,
-                                    size: 15, color: Colors.white),
+                                Icon(FontAwesomeIcons.syncAlt, size: 15, color: Colors.white),
                                 SizedBox(width: 10),
-                                Text('UPDATING LIVE',
-                                    style: StylesText.content14BoldWhite)
+                                Text('UPDATING LIVE', style: StylesText.content14BoldWhite)
                               ],
                             ),
                           ),
@@ -97,18 +112,12 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         CardNews(
                             factCheck: Images.icnone,
                             rate: true,
-                            tag: viewmodel.topicModel.value.tag.toString(),
-                            user: '25%',
-                            times: AppHelper.convertToAgo(
-                                DateTime.parse(item.timestamp.toString())),
+                            user: '${50 + new Random().nextInt(90 - 50)}%',
+                            times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
                             title: item.description.toString().substring(
-                                0,
-                                item.description.toString().length > 50
-                                    ? 50
-                                    : item.description.toString().length),
+                                0, item.description.toString().length > 50 ? 50 : item.description.toString().length),
                             content: item.content.toString(),
-                            // image: item.thumbNews.toString(),
-                            image: "newsid5.jpg",
+                            image: item.thumbNews.toString(),
                             article: item.publisher ?? '',
                             onpress: () {}),
                     ],

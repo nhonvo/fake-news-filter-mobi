@@ -5,6 +5,7 @@ import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
+import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:fake_news/views/view_news/viewnews_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -97,8 +98,7 @@ class _CardNewsState extends State<CardNews> {
                           children: [
                             widget.offical != null
                                 ? Row(children: [
-                                    Text('Official Rating: ',
-                                        style: StylesText.content12MediumBlack),
+                                    Text('Official Rating: ', style: StylesText.content12MediumBlack),
                                     Text(
                                       widget.offical!,
                                       style: StylesText.content12BoldBlack,
@@ -109,8 +109,7 @@ class _CardNewsState extends State<CardNews> {
                                 ? Row(children: [
                                     widget.offical == null
                                         ? Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 4.0),
+                                            padding: const EdgeInsets.only(right: 4.0),
                                             child: Icon(
                                               FontAwesomeIcons.staylinked,
                                               size: 24,
@@ -150,15 +149,14 @@ class _CardNewsState extends State<CardNews> {
                     )
                   ],
                 ),
-                widget.image != null
+                widget.image != "null"
                     ? Center(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10.0),
                           child: CachedNetworkImage(
                             fit: BoxFit.fitWidth,
                             height: 180,
-                            imageUrl:
-                                "${appEnvironment.apiBaseUrl}/images/news/${widget.image}",
+                            imageUrl: "${appEnvironment.apiBaseUrl}/images/news/${widget.image}",
                             imageBuilder: (context, imageProvider) => Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
@@ -168,10 +166,8 @@ class _CardNewsState extends State<CardNews> {
                                 ),
                               ),
                             ),
-                            placeholder: (context, url) =>
-                                CupertinoActivityIndicator(),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                            placeholder: (context, url) => CupertinoActivityIndicator(),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
                           ),
                         ),
                       )
@@ -237,9 +233,9 @@ class _CardNewsState extends State<CardNews> {
             ),
           ),
         ),
-        // widget.tag == null
-        //     ? SizedBox()
-        //     : Positioned(top: 7, right: 0, child: TagTopic(tagName: widget.tag, buttonColor: Colors.blue))
+        widget.tag == null
+            ? SizedBox()
+            : Positioned(top: 7, right: 0, child: TagTopic(tagName: widget.tag, buttonColor: Colors.blue))
       ],
     );
   }

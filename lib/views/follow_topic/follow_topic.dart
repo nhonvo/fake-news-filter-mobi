@@ -19,11 +19,6 @@ class FollowTopicScreen extends StatefulWidget {
 class _FollowTopicScreenState extends State<FollowTopicScreen> {
   DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
 
-  // void initState() {
-  //   super.initState();
-  //   viewmodel.handleGetTopic();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,6 +82,7 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
                                 label: topic.label.toString(),
                                 tag: topic.tag.toString(),
                                 description: topic.description.toString(),
+                                image: topic.thumbImage.toString(),
                                 time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
                               ));
                         }).toList());
