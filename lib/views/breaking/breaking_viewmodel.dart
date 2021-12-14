@@ -62,7 +62,6 @@ class BreakingViewModel extends BaseViewModel {
 
   //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥Rating button💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
   Future<void> vote(bool isReal, String newsId) async {
-    EasyLoading.show(status: 'voting'.tr);
     var userId = await authRepo.getUserId();
     var response = await voteApi.createVote(userId.toString(), newsId, isReal);
 
@@ -80,8 +79,6 @@ class BreakingViewModel extends BaseViewModel {
         Colors.white,
         SnackPosition.BOTTOM,
       );
-    } else {
-      EasyLoading.dismiss();
     }
   }
 
