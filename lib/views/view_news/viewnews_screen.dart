@@ -160,7 +160,9 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    RatingButton(),
+                    RatingButton(
+                      newsId: "",
+                    ),
                     VerticalDivider(),
                     Icon(FontAwesomeIcons.comments),
                     VerticalDivider(),

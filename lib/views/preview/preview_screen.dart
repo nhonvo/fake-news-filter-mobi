@@ -110,6 +110,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     children: [
                       for (var item in viewmodel.news)
                         CardNews(
+                            newsId: item.newsId.toString(),
                             factCheck: Images.icnone,
                             rate: true,
                             user: '${50 + new Random().nextInt(90 - 50)}%',

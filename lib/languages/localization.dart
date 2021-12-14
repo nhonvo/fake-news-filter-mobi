@@ -65,6 +65,7 @@ class Localization extends Translations {
           LanguageKey.followTopic: "Change follow topic",
           LanguageKey.linkSocial: "Link social network",
           LanguageKey.rateApp: "Rate application",
+          LanguageKey.voting: "Voting...",
         },
         LocaleKey.VI: {
           LanguageKey.appname: 'Fake News Filter',
@@ -124,6 +125,7 @@ class Localization extends Translations {
           LanguageKey.followTopic: "Thay đổi Chủ đề tin tức",
           LanguageKey.linkSocial: "Liên kết mạng xã hội",
           LanguageKey.rateApp: "Đã hủy, vui lòng thử lại",
+          LanguageKey.voting: "Đang bình chọn...",
         },
       };
 }
