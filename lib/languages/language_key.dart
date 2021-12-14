@@ -57,4 +57,5 @@ class LanguageKey {
   static const followTopic = "followTopic";
   static const linkSocial = "linkSocial";
   static const rateApp = "rateApp";
+  static const voting = "voting";
 }

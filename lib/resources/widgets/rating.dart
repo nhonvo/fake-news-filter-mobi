@@ -1,20 +1,26 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:fake_news/resources/utils/style.dart';
+import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 import 'button.dart';
 
 class RatingButton extends StatefulWidget {
-  const RatingButton({Key? key}) : super(key: key);
+  RatingButton({Key? key, required this.newsId}) : super(key: key);
+  String newsId;
 
   @override
   _RatingButtonState createState() => _RatingButtonState();
 }
 
 class _RatingButtonState extends State<RatingButton> {
+  BreakingViewModel get viewmodel => Get.find<BreakingViewModel>();
+  int isVoted = -1;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,20 +44,26 @@ class _RatingButtonState extends State<RatingButton> {
                 CustomIconButton(
                   buttonText: 're'.tr,
                   textStyle: StylesText.content12LightBlack,
-                  onPressed: () {
-                    print("Real");
+                  onPressed: () async {
+                    await viewmodel.vote(true, widget.newsId);
+                    setState(() {
+                      isVoted = 1;
+                    });
                   },
-                  icon: Icon(FontAwesomeIcons.thumbsUp, color: Colors.black),
+                  icon: Icon(FontAwesomeIcons.thumbsUp, color: isVoted == 1 ? Colors.green : Colors.black),
                   buttonColor: Colors.white,
                   buttonRadius: 10,
                 ),
                 CustomIconButton(
                   buttonText: 'fa'.tr,
                   textStyle: StylesText.content12LightBlack,
-                  onPressed: () {
-                    print("Fake");
+                  onPressed: () async {
+                    await viewmodel.vote(false, widget.newsId);
+                    setState(() {
+                      isVoted = 0;
+                    });
                   },
-                  icon: Icon(FontAwesomeIcons.thumbsDown, color: Colors.black),
+                  icon: Icon(FontAwesomeIcons.thumbsDown, color: isVoted == 0 ? Colors.red : Colors.black),
                   buttonColor: Colors.white,
                   buttonRadius: 10,
                 ),

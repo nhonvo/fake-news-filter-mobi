@@ -1,4 +1,5 @@
 import 'package:fake_news/core/api/news_api.dart';
+import 'package:fake_news/core/api/vote_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/news/news_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
@@ -9,9 +10,10 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class BreakingViewModel extends BaseViewModel {
-  BreakingViewModel({required this.newsApi, required this.authRepo});
+  BreakingViewModel({required this.newsApi, required this.voteApi, required this.authRepo});
 
   NewsApi newsApi;
+  VoteApi voteApi;
   AuthRepo authRepo;
 
   final news = <NewsModel>[].obs;
@@ -54,6 +56,31 @@ class BreakingViewModel extends BaseViewModel {
       newsList.forEach((news) {
         this.news.add(news);
       });
+      EasyLoading.dismiss();
+    }
+  }
+
+  //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥Rating button💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
+  Future<void> vote(bool isReal, String newsId) async {
+    EasyLoading.show(status: 'voting'.tr);
+    var userId = await authRepo.getUserId();
+    var response = await voteApi.createVote(userId.toString(), newsId, isReal);
+
+    if (response.isSuccessed == false) {
+      EasyLoading.dismiss();
+      snackBar(
+        'error'.tr,
+        response.messages!,
+        'altMessage'.tr,
+        Icon(
+          Icons.error,
+          color: Colors.white,
+        ),
+        Colors.red,
+        Colors.white,
+        SnackPosition.BOTTOM,
+      );
+    } else {
       EasyLoading.dismiss();
     }
   }
