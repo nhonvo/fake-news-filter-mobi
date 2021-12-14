@@ -16,13 +16,14 @@ import 'button.dart';
 
 class CardNews extends StatefulWidget {
   final String? offical, user, avatar, name, link, tag, image, video;
-  final String times, title, article, content, factCheck;
+  final String newsId, times, title, article, content, factCheck;
 
   final VoidCallback onpress;
 
   final bool? rate;
   const CardNews(
       {Key? key,
+      required this.newsId,
       required this.factCheck,
       this.offical,
       this.user,
@@ -210,7 +211,7 @@ class _CardNewsState extends State<CardNews> {
                       style: StylesText.content12BoldGrey,
                     ),
                     isLoggedIn
-                        ? RatingButton()
+                        ? RatingButton(newsId: widget.newsId.toString())
                         : InkWell(
                             onTap: () {},
                             child: Row(

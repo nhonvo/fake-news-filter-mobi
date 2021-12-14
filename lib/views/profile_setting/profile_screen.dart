@@ -66,8 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            margin:
-                EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+            margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
             child: Text(
               'Phiên bản 0.0.1',
               style: StylesText.content12LightBlack,
@@ -101,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Bui Phu Khuyen',
+                    'Huynh Huu Khanh',
                     style: StylesText.content18BoldBlack,
                   ),
                   SizedBox(
@@ -148,18 +147,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           child: Column(
             children: <Widget>[
-              BuildItemButon(
-                  icon: IconsApp.language,
-                  content: 'klanguage'.tr,
-                  onTap: () {}),
-              BuildItemButon(
-                  icon: IconsApp.follow,
-                  content: 'followTopic'.tr,
-                  onTap: () {}),
-              BuildItemButon(
-                  icon: IconsApp.social,
-                  content: 'linkSocial'.tr,
-                  onTap: () {}),
+              BuildItemButon(icon: IconsApp.language, content: 'klanguage'.tr, onTap: () {}),
+              BuildItemButon(icon: IconsApp.follow, content: 'followTopic'.tr, onTap: () {}),
+              BuildItemButon(icon: IconsApp.social, content: 'linkSocial'.tr, onTap: () {}),
             ],
           ),
         )
@@ -186,16 +176,9 @@ Widget _infoSupport(BuildContext context) {
         child: Column(
           children: <Widget>[
             BuildItemButon(icon: IconsApp.faq, content: 'FAQ', onTap: () {}),
-            BuildItemButon(
-                icon: IconsApp.rate,
-                content: 'Đánh giá ứng dụng',
-                onTap: () {}),
-            BuildItemButon(
-                icon: IconsApp.about,
-                content: 'Về Fake News Filter',
-                onTap: () {}),
-            BuildItemButon(
-                icon: IconsApp.support, content: 'Hỗ trợ', onTap: () {}),
+            BuildItemButon(icon: IconsApp.rate, content: 'Đánh giá ứng dụng', onTap: () {}),
+            BuildItemButon(icon: IconsApp.about, content: 'Về Fake News Filter', onTap: () {}),
+            BuildItemButon(icon: IconsApp.support, content: 'Hỗ trợ', onTap: () {}),
           ],
         ),
       )
@@ -207,8 +190,7 @@ class BuildItemButon extends StatelessWidget {
   final String icon;
   final String content;
   final Function onTap;
-  BuildItemButon(
-      {required this.icon, required this.content, required this.onTap});
+  BuildItemButon({required this.icon, required this.content, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

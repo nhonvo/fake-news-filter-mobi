@@ -15,8 +15,7 @@ class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -24,7 +23,7 @@ void main() async {
   HttpOverrides.global = new MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
 
-  Get.put<AppEnvironment>(AppEnvironment.live());
+  Get.put<AppEnvironment>(AppEnvironment.dev());
 
   await AppServices.initServices();
 

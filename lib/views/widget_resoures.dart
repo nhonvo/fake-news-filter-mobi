@@ -88,6 +88,7 @@ class _WidgetResourceState extends State<WidgetResource> {
               height: 10,
             ),
             CardNews(
+                newsId: "",
                 factCheck: Images.icprotect,
                 offical: '50%',
                 user: '56%',
