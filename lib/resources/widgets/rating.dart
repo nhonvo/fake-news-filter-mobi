@@ -12,6 +12,7 @@ import 'button.dart';
 class RatingButton extends StatefulWidget {
   RatingButton({Key? key, required this.newsId}) : super(key: key);
   String newsId;
+  int isVoted = -1;
 
   @override
   _RatingButtonState createState() => _RatingButtonState();
@@ -19,7 +20,6 @@ class RatingButton extends StatefulWidget {
 
 class _RatingButtonState extends State<RatingButton> {
   BreakingViewModel get viewmodel => Get.find<BreakingViewModel>();
-  int isVoted = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +47,10 @@ class _RatingButtonState extends State<RatingButton> {
                   onPressed: () async {
                     await viewmodel.vote(true, widget.newsId);
                     setState(() {
-                      isVoted = 1;
+                      widget.isVoted = 1;
                     });
                   },
-                  icon: Icon(FontAwesomeIcons.thumbsUp, color: isVoted == 1 ? Colors.green : Colors.black),
+                  icon: Icon(FontAwesomeIcons.thumbsUp, color: widget.isVoted == 1 ? Colors.green : Colors.black),
                   buttonColor: Colors.white,
                   buttonRadius: 10,
                 ),
@@ -60,10 +60,10 @@ class _RatingButtonState extends State<RatingButton> {
                   onPressed: () async {
                     await viewmodel.vote(false, widget.newsId);
                     setState(() {
-                      isVoted = 0;
+                      widget.isVoted = 0;
                     });
                   },
-                  icon: Icon(FontAwesomeIcons.thumbsDown, color: isVoted == 0 ? Colors.red : Colors.black),
+                  icon: Icon(FontAwesomeIcons.thumbsDown, color: widget.isVoted == 0 ? Colors.red : Colors.black),
                   buttonColor: Colors.white,
                   buttonRadius: 10,
                 ),
