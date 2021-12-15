@@ -57,7 +57,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                 children: [
                                   for (var item in viewmodel.news)
                                     CardNews(
-                                        newsId: item.newsId.toString(),
+                                        newsId: item!.newsId.toString(),
                                         factCheck: Images.icnone,
                                         rate: true,
                                         // tag: viewmodel.topicModel.value.tag.toString(),
