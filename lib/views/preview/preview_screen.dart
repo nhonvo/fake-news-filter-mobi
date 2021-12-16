@@ -42,23 +42,25 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CachedNetworkImage(
-                          fit: BoxFit.fitWidth,
-                          height: 120,
-                          imageUrl:
-                              "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${viewmodel.topicModel.value.thumbImage}",
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                          placeholder: (context, url) => CupertinoActivityIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
-                        ),
+                        viewmodel.topicModel.value.thumbImage != null
+                            ? CachedNetworkImage(
+                                fit: BoxFit.fitWidth,
+                                height: 120,
+                                imageUrl:
+                                    "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${viewmodel.topicModel.value.thumbImage}",
+                                imageBuilder: (context, imageProvider) => Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                                placeholder: (context, url) => CupertinoActivityIndicator(),
+                                errorWidget: (context, url, error) => Icon(Icons.error),
+                              )
+                            : Container(),
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Row(

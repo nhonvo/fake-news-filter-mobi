@@ -1,4 +1,5 @@
 import 'package:fake_news/core/api/auth_api.dart';
+import 'package:fake_news/core/api/extra_api.dart';
 import 'package:fake_news/core/api/news_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
 import 'package:fake_news/providers/auth_repo.dart';
@@ -14,11 +15,13 @@ class HomeBinding extends Bindings {
   AuthRepo authRepo = Get.find();
   NewsApi newsApi = Get.find();
   VoteApi voteApi = Get.find();
+  ExtraApi extraApi = Get.find();
   SharedPreferences pref = Get.find();
 
   @override
   void dependencies() {
-    Get.put<BreakingViewModel>(BreakingViewModel(newsApi: newsApi, voteApi: voteApi, authRepo: authRepo));
+    Get.put<BreakingViewModel>(
+        BreakingViewModel(newsApi: newsApi, voteApi: voteApi, extraApi: extraApi, pref: pref, authRepo: authRepo));
 
     Get.put<ProfileViewModel>(ProfileViewModel(authApi: authApi, authRepo: authRepo, pref: pref));
   }

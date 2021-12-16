@@ -150,23 +150,25 @@ class _ChooseLanguageState extends State<ChooseLanguage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    CachedNetworkImage(
-                                      width: 50,
-                                      height: 50,
-                                      imageUrl:
-                                          "${appEnvironment.apiBaseUrl}/images/languages/${languagesList?[index].flag}",
-                                      imageBuilder: (context, imageProvider) => Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(6),
-                                          image: DecorationImage(
-                                              image: imageProvider,
-                                              fit: BoxFit.fitWidth,
-                                              colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
-                                        ),
-                                      ),
-                                      placeholder: (context, url) => CupertinoActivityIndicator(),
-                                      errorWidget: (context, url, error) => Icon(Icons.error),
-                                    ),
+                                    languagesList?[index].flag != null
+                                        ? CachedNetworkImage(
+                                            width: 50,
+                                            height: 50,
+                                            imageUrl:
+                                                "${appEnvironment.apiBaseUrl}/images/languages/${languagesList?[index].flag}",
+                                            imageBuilder: (context, imageProvider) => Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(6),
+                                                image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.fitWidth,
+                                                    colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                                              ),
+                                            ),
+                                            placeholder: (context, url) => CupertinoActivityIndicator(),
+                                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                          )
+                                        : Container(),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [

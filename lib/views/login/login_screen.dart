@@ -3,6 +3,7 @@ import 'package:fake_news/languages/language_service.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/resources/widgets/language.dart';
 import 'package:fake_news/resources/widgets/textfield.dart';
 import 'package:fake_news/views/login/login_viewmodel.dart';
 import 'package:flutter/gestures.dart';
@@ -55,13 +56,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 buttonRadius: 10,
                 textStyle: StylesText.content12MediumBlue,
                 onPressed: () {
-                  setState(() {
-                    if (language.currentLanguage == "en") {
-                      language.updateLanguage("vi");
-                    } else {
-                      language.updateLanguage("en");
-                    }
-                  });
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return ChooseLanguage();
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  );
                 },
               ),
             ),
@@ -92,9 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       // ignore: null_check_always_fails
                       hintText: 'inputuser'.tr,
                       suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(
-                              onPressed: viewmodel.clearText,
-                              icon: const Icon(Icons.clear))
+                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       prefixIcon: const Icon(Icons.supervised_user_circle),
@@ -108,11 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: Get.size.width * 0.7,
                       prefixIcon: const Icon(Icons.security_outlined),
                       obscureText: _obscureText,
-                      suffixIcon: InkWell(
-                          onTap: toggle,
-                          child: Icon(_obscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility)),
+                      suffixIcon:
+                          InkWell(onTap: toggle, child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility)),
                       hintText: 'inputpass'.tr,
                     ),
                   ],
@@ -138,8 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomIconButton(
                       width: Get.size.width * 0.35,
                       buttonText: '',
-                      icon: const Icon(FontAwesomeIcons.facebookF,
-                          color: Colors.white),
+                      icon: const Icon(FontAwesomeIcons.facebookF, color: Colors.white),
                       buttonColor: Colors.blue,
                       buttonRadius: 14,
                       textStyle: StylesText.content18BoldWhite,
@@ -153,8 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomIconButton(
                       width: Get.size.width * 0.35,
                       buttonText: '',
-                      icon: const Icon(FontAwesomeIcons.google,
-                          color: Colors.white),
+                      icon: const Icon(FontAwesomeIcons.google, color: Colors.white),
                       buttonColor: Colors.red,
                       buttonRadius: 14,
                       textStyle: StylesText.content18BoldWhite,
@@ -278,8 +274,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _buildTextBold('Chúng tôi thu thập những thông tin gì?'),
-              _buildTextMedium(
-                  '- Chúng tôi thu thập thông tin từ bạn khi bạn điền vào một biểu mẫu.'),
+              _buildTextMedium('- Chúng tôi thu thập thông tin từ bạn khi bạn điền vào một biểu mẫu.'),
               _buildTextMedium(
                   '- Chúng tôi có thể thu thập các thông tin như tên thiết bị, hệ điều hành, kích cỡ màn hình ngôn ngữ và vị trí.'),
               const SizedBox(
@@ -300,8 +295,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 5,
               ),
               _buildTextBold('Sự đồng ý của bạn'),
-              _buildTextMedium(
-                  'Bằng cách sử dụng ứng dụng, bạn bằng lòng với chính sách riêng tư của chúng tôi.'),
+              _buildTextMedium('Bằng cách sử dụng ứng dụng, bạn bằng lòng với chính sách riêng tư của chúng tôi.'),
               _buildTextBold('Thay đổi chính sách bảo mật của chúng tôi'),
               _buildTextMedium(
                   'Nếu có bất kỳ câu hỏi liên quan đến chính sách bảo mật này, bạn có thể liên hệ với chúng tôi')
@@ -347,8 +341,7 @@ class _LoginScreenState extends State<LoginScreen> {
       padding: const EdgeInsets.only(left: 10),
       child: Text(
         content,
-        style:
-            StylesText.content14MediumBlack.merge(const TextStyle(height: 1.4)),
+        style: StylesText.content14MediumBlack.merge(const TextStyle(height: 1.4)),
       ),
     );
   }
