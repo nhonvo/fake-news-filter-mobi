@@ -58,4 +58,5 @@ class LanguageKey {
   static const linkSocial = "linkSocial";
   static const rateApp = "rateApp";
   static const voting = "voting";
+  static const searchNews = "searchNews";
 }

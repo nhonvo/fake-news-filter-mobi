@@ -74,9 +74,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         onpress: () {}),
                                 ],
                               )
-                            : Center(
-                                child: CircularProgressIndicator(),
-                              );
+                            : Container();
                       }),
                     ),
                   )

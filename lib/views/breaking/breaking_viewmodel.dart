@@ -68,9 +68,7 @@ class BreakingViewModel extends BaseViewModel {
       List<NewsModel> newsList = response.resultObj!.obs;
       //clear all news before get data from API to avoid duplication
       news.clear();
-      newsList.forEach((news) {
-        this.news.add(news);
-      });
+      news.addAll(newsList);
       EasyLoading.dismiss();
     }
   }
@@ -108,9 +106,7 @@ class BreakingViewModel extends BaseViewModel {
       var response = await extraApi.search(keyword, languageContent ?? 'en');
 
       searchingNews.clear();
-      response.resultObj?.news?.forEach((n) {
-        this.searchingNews.add(n);
-      });
+      searchingNews.addAll(response.resultObj?.news?.toList() ?? []);
     }
 
     //hide progress searching
