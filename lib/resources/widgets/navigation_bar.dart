@@ -1,234 +1,180 @@
-// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-import 'bottomnav_item.dart';
-
-/// Bottom Navigation Widget.
-class BottomAnimation extends StatefulWidget {
-  // widget parameters
-  final int selectedIndex;
-  final List<BottomNavItem> items;
-  final Color backgroundColor;
-  final Color activeIconColor;
-  final Color deActiveIconColor;
-  final double iconSize;
-  final TextStyle? textStyle;
-  final ValueChanged<int> onItemSelect;
-  final double barHeight;
-  final double barRadius;
-  final Color itemHoverColor;
-  final double itemHoverColorOpacity;
-  final double itemHoverBorderRadius;
-  final double itemHoverWidth;
-  final double itemHoverHeight;
-  final int hoverAlignmentDuration;
-
-  const BottomAnimation({
+class SalomonBottomBar extends StatelessWidget {
+  /// A bottom bar that faithfully follows the design by Aurélien Salomon
+  ///
+  /// https://dribbble.com/shots/5925052-Google-Bottom-Bar-Navigation-Pattern/
+  SalomonBottomBar({
     Key? key,
-    required this.selectedIndex,
     required this.items,
-    required this.activeIconColor,
-    required this.deActiveIconColor,
-    required this.backgroundColor,
-    required this.onItemSelect,
-    required this.itemHoverColor,
-    this.hoverAlignmentDuration = 700,
-    this.iconSize = 30,
-    this.textStyle,
-    this.barHeight = 80,
-    this.barRadius = 0,
-    this.itemHoverBorderRadius = 15,
-    this.itemHoverColorOpacity = .13,
-    this.itemHoverHeight = 55,
-    this.itemHoverWidth = 150,
+    this.currentIndex = 0,
+    this.onTap,
+    this.selectedItemColor,
+    this.unselectedItemColor,
+    this.selectedColorOpacity,
+    this.itemShape = const StadiumBorder(),
+    this.margin = const EdgeInsets.all(8),
+    this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+    this.duration = const Duration(milliseconds: 500),
+    this.curve = Curves.easeOutQuint,
   }) : super(key: key);
 
-  @override
-  _BottomAnimationState createState() => _BottomAnimationState();
-}
+  /// A list of tabs to display, ie `Home`, `Likes`, etc
+  final List<SalomonBottomBarItem> items;
 
-class _BottomAnimationState extends State<BottomAnimation> {
-  var textStyle;
-  late List<BottomNavItem> listItems;
+  /// The tab to display.
+  final int currentIndex;
 
-  double calculateContainerPosition(int index) {
-    //lerp parameter
-    var isLtr = Directionality.of(context) == TextDirection.ltr;
-    var listSize = widget.items.length;
-    var a = 0.0;
-    var b = 0.0;
-    // set suitable count for calculate lerp
-    if (listSize == 0) {
-      a = 0.0;
-      b = 0.0;
-    } else if (listSize == 2) {
-      a = .6;
-      b = .6;
-    } else if (listSize == 3) {
-      a = .8;
-      b = .8;
-    } else if (listSize == 4) {
-      a = .9;
-      b = .9;
-    } else {
-      a = 1;
-      b = 1;
-    }
-    // return calculated lerp
-    if (isLtr)
-      return lerpDouble(-a, b, index / (listSize - 1))!;
-    else
-      return lerpDouble(b, -a, index / (listSize - 1))!;
-  }
+  /// Returns the index of the tab that was tapped.
+  final Function(int)? onTap;
 
-  @override
-  void initState() {
-    listItems = widget.items;
+  /// The color of the icon and text when the item is selected.
+  final Color? selectedItemColor;
 
-    textStyle = widget.textStyle ??
-        TextStyle(
-          color: Colors.white,
-          fontSize: 18.0,
-          fontWeight: FontWeight.w300,
-        );
-    super.initState();
-  }
+  /// The color of the icon and text when the item is not selected.
+  final Color? unselectedItemColor;
+
+  /// The opacity of color of the touchable background when the item is selected.
+  final double? selectedColorOpacity;
+
+  /// The border shape of each item.
+  final ShapeBorder itemShape;
+
+  /// A convenience field for the margin surrounding the entire widget.
+  final EdgeInsets margin;
+
+  /// The padding of each item.
+  final EdgeInsets itemPadding;
+
+  /// The transition duration
+  final Duration duration;
+
+  /// The transition curve
+  final Curve curve;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: widget.backgroundColor,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(
-            widget.barRadius,
-          ),
-        ),
-      ),
-      width: double.infinity,
-      height: widget.barHeight,
-      child: Stack(
-        children: <Widget>[
-          AnimatedAlign(
-            curve: Curves.ease,
-            duration: Duration(milliseconds: widget.hoverAlignmentDuration),
-            alignment:
-                Alignment(calculateContainerPosition(widget.selectedIndex), 0),
-            child: Container(
-              width: widget.itemHoverWidth,
-              height: widget.itemHoverHeight,
-              decoration: BoxDecoration(
-                color: widget.itemHoverColor
-                    .withOpacity(widget.itemHoverColorOpacity),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(widget.itemHoverBorderRadius),
-                ),
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: margin,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          for (final item in items)
+            TweenAnimationBuilder<double>(
+              tween: Tween(
+                end: items.indexOf(item) == currentIndex ? 1.0 : 0.0,
               ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: listItems.map((item) {
-                var index = listItems.indexOf(item);
-                return GestureDetector(
-                  onTap: () => widget.onItemSelect(index),
-                  child: BarItem(
-                    selected: widget.selectedIndex == index,
-                    activeColor: widget.activeIconColor,
-                    deActiveColor: widget.deActiveIconColor,
-                    widget: item.widget,
-                    iconData: item.iconData,
-                    title: item.title,
-                    iconSize: widget.iconSize,
-                    textStyle: textStyle,
+              curve: curve,
+              duration: duration,
+              builder: (context, t, _) {
+                final _selectedColor = item.selectedColor ??
+                    selectedItemColor ??
+                    theme.primaryColor;
+
+                final _unselectedColor = item.unselectedColor ??
+                    unselectedItemColor ??
+                    theme.iconTheme.color;
+
+                return Material(
+                  color: Color.lerp(
+                      _selectedColor.withOpacity(0.0),
+                      _selectedColor.withOpacity(selectedColorOpacity ?? 0.1),
+                      t),
+                  shape: itemShape,
+                  child: InkWell(
+                    onTap: () => onTap?.call(items.indexOf(item)),
+                    customBorder: itemShape,
+                    focusColor: _selectedColor.withOpacity(0.1),
+                    highlightColor: _selectedColor.withOpacity(0.1),
+                    splashColor: _selectedColor.withOpacity(0.1),
+                    hoverColor: _selectedColor.withOpacity(0.1),
+                    child: Padding(
+                      padding: itemPadding -
+                          (Directionality.of(context) == TextDirection.ltr
+                              ? EdgeInsets.only(right: itemPadding.right * t)
+                              : EdgeInsets.only(left: itemPadding.left * t)),
+                      child: Row(
+                        children: [
+                          IconTheme(
+                            data: IconThemeData(
+                              color: Color.lerp(
+                                  _unselectedColor, _selectedColor, t),
+                              size: 24,
+                            ),
+                            child: items.indexOf(item) == currentIndex
+                                ? item.activeIcon ?? item.icon
+                                : item.icon,
+                          ),
+                          ClipRect(
+                            child: SizedBox(
+                              /// TODO: Constrain item height without a fixed value
+                              ///
+                              /// The Align property appears to make these full height, would be
+                              /// best to find a way to make it respond only to padding.
+                              height: 20,
+                              child: Align(
+                                alignment: Alignment(-0.2, 0.0),
+                                widthFactor: t,
+                                child: Padding(
+                                  padding: Directionality.of(context) ==
+                                          TextDirection.ltr
+                                      ? EdgeInsets.only(
+                                          left: itemPadding.left / 2,
+                                          right: itemPadding.right)
+                                      : EdgeInsets.only(
+                                          left: itemPadding.left,
+                                          right: itemPadding.right / 2),
+                                  child: DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: Color.lerp(
+                                          _selectedColor.withOpacity(0.0),
+                                          _selectedColor,
+                                          t),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    child: item.title,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 );
-              }).toList(),
+              },
             ),
-          ),
         ],
       ),
     );
   }
 }
 
-/// Each item in Bottom Navigation
-class BarItem extends StatefulWidget {
-  final Widget? widget;
-  final IconData? iconData;
-  final String title;
-  final bool selected;
-  final Color activeColor;
-  final Color deActiveColor;
-  final double iconSize;
-  final TextStyle textStyle;
+/// A tab to display in a [SalomonBottomBar]
+class SalomonBottomBarItem {
+  /// An icon to display.
+  final Widget icon;
 
-  const BarItem({
-    Key? key,
-    this.widget,
-    this.iconData,
+  /// An icon to display when this tab bar is active.
+  final Widget? activeIcon;
+
+  /// Text to display, ie `Home`
+  final Widget title;
+
+  /// A primary color to use for this tab.
+  final Color? selectedColor;
+
+  /// The color to display when this tab is not selected.
+  final Color? unselectedColor;
+
+  SalomonBottomBarItem({
+    required this.icon,
     required this.title,
-    required this.selected,
-    required this.activeColor,
-    required this.deActiveColor,
-    required this.iconSize,
-    required this.textStyle,
-  }) : super(key: key);
-
-  @override
-  _BarItemState createState() => _BarItemState();
-}
-
-class _BarItemState extends State<BarItem> with TickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      curve: Curves.ease,
-      width: widget.selected ? 100 : 50,
-      duration: Duration(seconds: 1),
-      child: Center(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              widget.widget ??
-                  Icon(
-                    widget.iconData,
-                    color: widget.selected
-                        ? widget.activeColor
-                        : widget.deActiveColor,
-                    size: widget.iconSize,
-                  ),
-              SizedBox(
-                width: 3,
-              ),
-              widget.selected
-                  ? Text(
-                      widget.title,
-                      style: widget.textStyle,
-                    )
-                  : Container()
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+    this.selectedColor,
+    this.unselectedColor,
+    this.activeIcon,
+  });
 }

@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
+import 'package:bottom_bar/bottom_bar.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
-import 'package:fake_news/resources/widgets/bottomnav_item.dart';
-import 'package:fake_news/resources/widgets/navigation_bar.dart';
 import 'package:fake_news/views/breaking/breaking_screen.dart';
 import 'package:fake_news/views/fact_news/fact_news_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_screen.dart';
@@ -19,15 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var items = <BottomNavItem>[
-    BottomNavItem(title: 'breaking'.tr, iconData: Icons.rss_feed_rounded),
-    BottomNavItem(title: 'news'.tr, iconData: Icons.assignment_outlined),
-    BottomNavItem(
-        title: 'community'.tr, iconData: Icons.admin_panel_settings_outlined),
-    BottomNavItem(
-        title: 'profile'.tr, iconData: Icons.settings_suggest_outlined),
-  ];
-
   static const List<Widget> _widgetOptions = <Widget>[
     BreakingScreen(),
     FactNewsScreen(),
@@ -69,27 +59,41 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       backgroundColor: Colors.white,
-      bottomNavigationBar: BottomAnimation(
-        barHeight: 70,
-        selectedIndex: cIndex,
-        items: items,
+      bottomNavigationBar: BottomBar(
+        textStyle: StylesText.content14BoldWhite,
         backgroundColor: Colors.blue,
-        onItemSelect: (value) {
+        selectedIndex: cIndex,
+        onTap: (value) {
           setState(() {
             cIndex = value;
           });
         },
-        itemHoverColor: Colors.white,
-        itemHoverColorOpacity: .9,
-        activeIconColor: Colors.blue,
-        deActiveIconColor: Colors.white.withOpacity(.9),
-        textStyle: TextStyle(
-          color: Colors.blue,
-          fontWeight: FontWeight.bold,
-        ),
-        itemHoverHeight: 45,
-        itemHoverWidth: Get.size.width * 0.3,
-        itemHoverBorderRadius: 20,
+        items: [
+          BottomBarItem(
+            inactiveColor: Colors.white.withOpacity(.5),
+            icon: Icon(Icons.rss_feed_rounded),
+            title: Text('breaking'.tr),
+            activeColor: Colors.white,
+          ),
+          BottomBarItem(
+            inactiveColor: Colors.white.withOpacity(.5),
+            icon: Icon(Icons.assignment_outlined),
+            title: Text('news'.tr),
+            activeColor: Colors.white,
+          ),
+          BottomBarItem(
+            inactiveColor: Colors.white.withOpacity(.5),
+            icon: Icon(Icons.admin_panel_settings_outlined),
+            title: Text('community'.tr),
+            activeColor: Colors.white,
+          ),
+          BottomBarItem(
+            inactiveColor: Colors.white.withOpacity(.5),
+            icon: Icon(Icons.settings_suggest_outlined),
+            title: Text('profile'.tr),
+            activeColor: Colors.white,
+          ),
+        ],
       ),
       body: IndexedStack(
         index: cIndex,
