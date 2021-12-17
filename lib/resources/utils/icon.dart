@@ -9,4 +9,7 @@ class IconsApp {
   static const String about = "assets/icons/about.svg";
   static const String social = "assets/icons/social.svg";
   static const String exit = "assets/icons/exit.svg";
+  static const String fake = "assets/icons/fake.svg";
+  static const String real = "assets/icons/real.svg";
+  static const String unknow = "assets/icons/unknow.svg";
 }

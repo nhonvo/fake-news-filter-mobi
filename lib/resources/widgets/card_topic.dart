@@ -39,20 +39,22 @@ class _CardTopicState extends State<CardTopic> {
         children: [
           Container(
               width: 250,
-              height: 300,
               decoration: BoxDecoration(
-                  color: MyColors.colorsArr.elementAt(int.parse(widget.index) % MyColors.colorsArr.length),
+                  color: MyColors.colorsArr.elementAt(
+                      int.parse(widget.index) % MyColors.colorsArr.length),
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               child: Column(
                 children: [
                   widget.image != "null"
                       ? ClipRRect(
-                          borderRadius:
-                              BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15.0),
+                              topRight: Radius.circular(15.0)),
                           child: CachedNetworkImage(
                             fit: BoxFit.fitWidth,
-                            height: 65,
-                            imageUrl: "${appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
+                            height: 55,
+                            imageUrl:
+                                "${appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
                             imageBuilder: (context, imageProvider) => Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
@@ -62,13 +64,15 @@ class _CardTopicState extends State<CardTopic> {
                                 ),
                               ),
                             ),
-                            placeholder: (context, url) => CupertinoActivityIndicator(),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            placeholder: (context, url) =>
+                                CupertinoActivityIndicator(),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ))
                       : Container(),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(9.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +83,7 @@ class _CardTopicState extends State<CardTopic> {
                           ),
                           Text(
                             widget.description,
-                            style: StylesText.content12MediumWhite,
+                            style: StylesText.content10MediumWhite,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
                           ),
@@ -95,11 +99,9 @@ class _CardTopicState extends State<CardTopic> {
                                   SizedBox(
                                     width: 3,
                                   ),
-                                  Text(widget.noNews, style: StylesText.content12MediumWhite)
+                                  Text(widget.noNews,
+                                      style: StylesText.content10MediumWhite)
                                 ],
-                              ),
-                              SizedBox(
-                                width: 15,
                               ),
                               Row(
                                 children: [
@@ -107,7 +109,9 @@ class _CardTopicState extends State<CardTopic> {
                                     Icons.sync_rounded,
                                     color: Colors.white,
                                   ),
-                                  Text(widget.time, style: StylesText.content12MediumWhite)
+                                  SizedBox(width: 3),
+                                  Text(widget.time,
+                                      style: StylesText.content10MediumWhite)
                                 ],
                               ),
                             ],
@@ -148,7 +152,8 @@ class _CardTopicState extends State<CardTopic> {
                   widget.label == "featured"
                       ? Text(widget.label, style: StylesText.content12BoldWhite)
                       : widget.label == "breaking"
-                          ? Text(widget.label, style: StylesText.content12BoldWhite)
+                          ? Text(widget.label,
+                              style: StylesText.content12BoldWhite)
                           : Container(),
                 ],
               ),

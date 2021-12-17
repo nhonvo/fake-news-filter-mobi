@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
@@ -50,21 +49,24 @@ class _CustomCardState extends State<CustomCard> {
             children: [
               Container(
                   width: 250,
-                  height: 210,
                   decoration: BoxDecoration(
-                      color: MyColors.colorsArr.elementAt(int.parse(widget.index) % MyColors.colorsArr.length),
+                      color: MyColors.colorsArr.elementAt(
+                          int.parse(widget.index) % MyColors.colorsArr.length),
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   child: Column(
                     children: [
                       ClipRRect(
-                          borderRadius:
-                              BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15.0),
+                              topRight: Radius.circular(15.0)),
                           child: widget.image != "null"
                               ? CachedNetworkImage(
                                   fit: BoxFit.fitWidth,
-                                  height: 65,
-                                  imageUrl: "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
-                                  imageBuilder: (context, imageProvider) => Container(
+                                  height: 55,
+                                  imageUrl:
+                                      "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
+                                  imageBuilder: (context, imageProvider) =>
+                                      Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(6),
                                       image: DecorationImage(
@@ -73,13 +75,15 @@ class _CustomCardState extends State<CustomCard> {
                                       ),
                                     ),
                                   ),
-                                  placeholder: (context, url) => CupertinoActivityIndicator(),
-                                  errorWidget: (context, url, error) => Icon(Icons.error),
+                                  placeholder: (context, url) =>
+                                      CupertinoActivityIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
                                 )
                               : Container()),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,6 +99,8 @@ class _CustomCardState extends State<CustomCard> {
                                 maxLines: 3,
                               ),
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -102,11 +108,11 @@ class _CustomCardState extends State<CustomCard> {
                                         Icons.menu,
                                         color: Colors.white,
                                       ),
-                                      Text(widget.noNews, style: StylesText.content12MediumWhite)
+                                      SizedBox(width: 3),
+                                      Text(widget.noNews,
+                                          style:
+                                              StylesText.content10MediumWhite)
                                     ],
-                                  ),
-                                  SizedBox(
-                                    width: 15,
                                   ),
                                   Row(
                                     children: [
@@ -114,7 +120,10 @@ class _CustomCardState extends State<CustomCard> {
                                         Icons.sync_rounded,
                                         color: Colors.white,
                                       ),
-                                      Text(widget.time, style: StylesText.content12MediumWhite)
+                                      SizedBox(width: 3),
+                                      Text(widget.time,
+                                          style:
+                                              StylesText.content10MediumWhite)
                                     ],
                                   ),
                                 ],
@@ -153,9 +162,11 @@ class _CustomCardState extends State<CustomCard> {
                                 )
                               : Container(),
                       widget.label == "featured"
-                          ? Text(widget.label, style: StylesText.content12BoldWhite)
+                          ? Text(widget.label,
+                              style: StylesText.content12BoldWhite)
                           : widget.label == "breaking"
-                              ? Text(widget.label, style: StylesText.content12BoldWhite)
+                              ? Text(widget.label,
+                                  style: StylesText.content12BoldWhite)
                               : Container(),
                     ],
                   ),

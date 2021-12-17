@@ -31,7 +31,7 @@ class LanguageKey {
   static const real = "real";
   static const home = "home";
   static const news = "news";
-  static const search = "search";
+  static const community = "community";
   static const profile = "profile";
   static const reliable = "reliable";
   static const hours = "hours";

@@ -4,6 +4,7 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/bottomnav_item.dart';
 import 'package:fake_news/resources/widgets/navigation_bar.dart';
 import 'package:fake_news/views/breaking/breaking_screen.dart';
+import 'package:fake_news/views/fact_news/fact_news_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,16 +21,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   var items = <BottomNavItem>[
     BottomNavItem(title: 'breaking'.tr, iconData: Icons.rss_feed_rounded),
-    BottomNavItem(title: 'news'.tr, iconData: CupertinoIcons.news),
-    BottomNavItem(title: 'search'.tr, iconData: CupertinoIcons.search),
-    BottomNavItem(title: 'profile'.tr, iconData: CupertinoIcons.person),
+    BottomNavItem(title: 'news'.tr, iconData: Icons.assignment_outlined),
+    BottomNavItem(
+        title: 'community'.tr, iconData: Icons.admin_panel_settings_outlined),
+    BottomNavItem(
+        title: 'profile'.tr, iconData: Icons.settings_suggest_outlined),
   ];
 
   static const List<Widget> _widgetOptions = <Widget>[
     BreakingScreen(),
-    Text(
-      'Index 1: News',
-    ),
+    FactNewsScreen(),
     Text(
       'Index 2: Search',
     ),
