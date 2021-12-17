@@ -3,6 +3,7 @@ import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card.dart';
+import 'package:fake_news/resources/widgets/language.dart';
 import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
 
 import 'package:flutter/material.dart';
@@ -32,6 +33,28 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
         ),
         child: Stack(
           children: [
+            Positioned(
+              top: Get.size.height * 0.001,
+              left: Get.size.width * 0.75,
+              child: CustomButton(
+                width: Get.size.width * 0.2,
+                buttonText: 'klanguage'.tr,
+                buttonColor: MyColors.blueLight,
+                buttonRadius: 10,
+                textStyle: StylesText.content12MediumBlue,
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return ChooseLanguage();
+                    },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  );
+                },
+              ),
+            ),
             Column(
               children: [
                 Row(
@@ -83,7 +106,8 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
                                 tag: topic.tag.toString(),
                                 description: topic.description.toString(),
                                 image: topic.thumbImage.toString(),
-                                time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
+                                time: AppHelper.convertToAgo(
+                                    DateTime.parse(topic.realTime.toString())),
                               ));
                         }).toList());
                   }),
