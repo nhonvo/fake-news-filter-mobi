@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'languages/language_service.dart';
 import 'languages/localization.dart';
 import 'resources/utils/app_routes.dart';
@@ -27,7 +28,7 @@ void main() async {
   Get.put<AppEnvironment>(AppEnvironment.live());
 
   await AppServices.initServices();
-
+  initOneSignal();
   runApp(const MyApp());
   configLoading();
 }
@@ -63,4 +64,16 @@ void configLoading() {
     ..textColor = MyColors.blue
     ..userInteractions = true
     ..dismissOnTap = false;
+}
+
+void initOneSignal() {
+  //Remove this method to stop OneSignal Debugging
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+
+  OneSignal.shared.setAppId("fabd12c6-0ad1-4e5a-bdad-78fabebae2a7");
+
+// The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
+  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+    print("Accepted permission: $accepted");
+  });
 }

@@ -50,6 +50,8 @@ dependencies:
   animated_toggle_switch: ^0.2.1
   flutter_svg: ^0.22.0
   material_floating_search_bar: ^0.3.6
+  bottom_bar: ^1.2.5
+  onesignal_flutter: ^3.0.0
   
 dev_dependencies:
   flutter_test:
