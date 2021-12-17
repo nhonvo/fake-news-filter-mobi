@@ -32,7 +32,7 @@ class PreviewViewModel extends BaseViewModel {
   handleGetNewsByTopic() async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var response = await newsApi.getNewsById(topicModel.value.topicId);
+    var response = await newsApi.getNewsByTopicId(topicModel.value.topicId);
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();

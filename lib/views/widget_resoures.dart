@@ -91,7 +91,7 @@ class _WidgetResourceState extends State<WidgetResource> {
                 newsId: "",
                 factCheck: Images.icprotect,
                 offical: '50%',
-                user: '56%',
+                socialBeliefs: '56%',
                 times: '7 hours',
                 image: Images.chart,
                 content: "",

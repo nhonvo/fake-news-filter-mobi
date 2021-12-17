@@ -25,8 +25,11 @@ class LanguageKey {
   static const covering = "covering";
   static const content_started = "content_started";
   static const tap = "tap";
+  static const read_more = "read_more";
   static const multipleLanguage = "multipleLanguage";
   static const breaking = "breaking";
+  static const filter_news = "filter_news";
+  static const choose_type_filter = "choose_type_filter";
   static const fake = "fake";
   static const real = "real";
   static const home = "home";
@@ -34,7 +37,12 @@ class LanguageKey {
   static const community = "community";
   static const profile = "profile";
   static const reliable = "reliable";
+  static const days = "days";
   static const hours = "hours";
+  static const minutes = "minutes";
+  static const seconds = "seconds";
+  static const ago = "ago";
+  static const now = "now";
   static const fa = "fa";
   static const re = "re";
   static const copy = "copy";

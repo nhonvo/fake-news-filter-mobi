@@ -115,10 +115,10 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             newsId: item.newsId.toString(),
                             factCheck: Images.icnone,
                             rate: true,
-                            user: '${50 + new Random().nextInt(90 - 50)}%',
+                            socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
                             times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
-                            title: item.description.toString().substring(
-                                0, item.description.toString().length > 50 ? 50 : item.description.toString().length),
+                            title:
+                                '${item.description.toString().substring(0, item.description!.length > 50 ? 50 : item.description.toString().length)}...',
                             content: item.content.toString(),
                             image: item.thumbNews.toString(),
                             article: item.publisher ?? '',

@@ -26,24 +26,24 @@ class LoginViewModel extends BaseViewModel {
     usernameController.clear();
   }
 
-  bool validateTextField() {
+  bool _validateTextField() {
     if (usernameController.text.isEmpty) {
-      showSnackbar("inputUserEmptyErr".tr);
+      _showSnackbar("inputUserEmptyErr".tr);
       return false;
     }
     if (passwordController.text.isEmpty) {
-      showSnackbar("inputPassEmptyErr".tr);
+      _showSnackbar("inputPassEmptyErr".tr);
       return false;
     }
     if (passwordController.text.length < 6) {
-      showSnackbar("inputPassAtLeast6Err".tr);
+      _showSnackbar("inputPassAtLeast6Err".tr);
       return false;
     }
     return true;
   }
 
-  handlelogin() async {
-    if (!validateTextField()) {
+  handleLogin() async {
+    if (!_validateTextField()) {
       return;
     }
 
@@ -53,9 +53,9 @@ class LoginViewModel extends BaseViewModel {
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
-      showSnackbar(response.messages!);
+      _showSnackbar(response.messages!);
     } else {
-      checkIsFollowed(response);
+      _checkIsFollowed(response);
     }
   }
 
@@ -71,12 +71,12 @@ class LoginViewModel extends BaseViewModel {
       var response = await authApi.loginFacebook(accessToken.token);
       if (response.isSuccessed == false) {
         EasyLoading.dismiss();
-        showSnackbar(response.messages!);
+        _showSnackbar(response.messages!);
       } else {
-        checkIsFollowed(response);
+        _checkIsFollowed(response);
       }
     } else {
-      showSnackbar(result.message!);
+      _showSnackbar(result.message!);
       EasyLoading.dismiss();
     }
   }
@@ -99,17 +99,17 @@ class LoginViewModel extends BaseViewModel {
       var response = await authApi.loginGoogle(googleSignInAuthentication.idToken.toString());
       if (response.isSuccessed == false) {
         EasyLoading.dismiss();
-        showSnackbar(response.messages!);
+        _showSnackbar(response.messages!);
       } else {
-        checkIsFollowed(response);
+        _checkIsFollowed(response);
       }
     } catch (error) {
       EasyLoading.dismiss();
-      showSnackbar(error.toString());
+      _showSnackbar(error.toString());
     }
   }
 
-  checkIsFollowed(dynamic response) async {
+  _checkIsFollowed(dynamic response) async {
     LoginModel user = response.resultObj!;
 
     await authRepo.saveAuthToken(user.token ?? '');
@@ -130,7 +130,7 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
-  void showSnackbar(String message) {
+  _showSnackbar(String message) {
     snackBar(
       'error'.tr,
       message,

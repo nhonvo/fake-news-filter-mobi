@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
-  final String? offical, user, avatar, name, link, tag, image, video;
+  final String? offical, socialBeliefs, avatar, name, link, tag, image, video;
   final String newsId, times, title, article, content, factCheck;
 
   final VoidCallback onpress;
@@ -26,7 +26,7 @@ class CardNews extends StatefulWidget {
       required this.newsId,
       required this.factCheck,
       this.offical,
-      this.user,
+      this.socialBeliefs,
       required this.times,
       this.image,
       this.video,
@@ -88,7 +88,7 @@ class _CardNewsState extends State<CardNews> {
                   children: [
                     Row(
                       children: [
-                        widget.offical != null && widget.user != null
+                        widget.offical != null && widget.socialBeliefs != null
                             ? Image.asset(
                                 widget.factCheck,
                                 width: 30,
@@ -106,7 +106,7 @@ class _CardNewsState extends State<CardNews> {
                                     )
                                   ])
                                 : SizedBox(),
-                            widget.user != null
+                            widget.socialBeliefs != null
                                 ? Row(children: [
                                     widget.offical == null
                                         ? Padding(
@@ -123,7 +123,7 @@ class _CardNewsState extends State<CardNews> {
                                       style: StylesText.content12MediumBlack,
                                     ),
                                     Text(
-                                      widget.user!,
+                                      widget.socialBeliefs!,
                                       style: StylesText.content12BoldBlack,
                                     )
                                   ])
@@ -210,14 +210,14 @@ class _CardNewsState extends State<CardNews> {
                       widget.article,
                       style: StylesText.content12BoldGrey,
                     ),
-                    isLoggedIn
+                    isLoggedIn && widget.rate == true
                         ? RatingButton(newsId: widget.newsId.toString())
                         : InkWell(
                             onTap: () {},
                             child: Row(
                               children: [
                                 Text(
-                                  'Read more',
+                                  'read_more'.tr,
                                   style: StylesText.content12BoldGrey,
                                 ),
                                 Icon(

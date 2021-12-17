@@ -4,6 +4,7 @@ import 'package:fake_news/core/api/news_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
+import 'package:fake_news/views/fact_news/fact_news_viewmodel.dart';
 import 'package:fake_news/views/profile_setting/profile_viewmodel.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/bindings_interface.dart';
@@ -22,7 +23,8 @@ class HomeBinding extends Bindings {
   void dependencies() {
     Get.put<BreakingViewModel>(
         BreakingViewModel(newsApi: newsApi, voteApi: voteApi, extraApi: extraApi, pref: pref, authRepo: authRepo));
-
+    Get.put<FactNewsViewModel>(
+        FactNewsViewModel(newsApi: newsApi, voteApi: voteApi, extraApi: extraApi, pref: pref, authRepo: authRepo));
     Get.put<ProfileViewModel>(ProfileViewModel(authApi: authApi, authRepo: authRepo, pref: pref));
   }
 }
