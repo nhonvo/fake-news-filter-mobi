@@ -33,7 +33,8 @@ class BreakingViewModel extends BaseViewModel {
   //hide progress searching
   var isSearching = false.obs;
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -99,7 +100,8 @@ class BreakingViewModel extends BaseViewModel {
     //show progress searching
     isSearching.value = true;
 
-    var languageContent = pref.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent =
+        pref.getString(AppConstant.sharePrefKeys.languageContent);
 
     if (!keyword.trim().isEmpty) {
       var response = await extraApi.search(keyword, languageContent ?? 'en');

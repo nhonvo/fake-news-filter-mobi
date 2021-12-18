@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/services/app_service/app_services.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -23,13 +24,19 @@ class MyHttpOverrides extends HttpOverrides {
 
 void main() async {
   HttpOverrides.global = new MyHttpOverrides();
+
   WidgetsFlutterBinding.ensureInitialized();
+
+  GestureBinding.instance?.resamplingEnabled = true; //Custom Gesture ListView
 
   Get.put<AppEnvironment>(AppEnvironment.live());
 
   await AppServices.initServices();
+
   initOneSignal();
+
   runApp(const MyApp());
+
   configLoading();
 }
 
