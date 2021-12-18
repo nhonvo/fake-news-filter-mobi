@@ -3,6 +3,7 @@ import 'package:bottom_bar/bottom_bar.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/views/breaking/breaking_screen.dart';
+import 'package:fake_news/views/community/community_screen.dart';
 import 'package:fake_news/views/fact_news/fact_news_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,9 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const List<Widget> _widgetOptions = <Widget>[
     BreakingScreen(),
     FactNewsScreen(),
-    Text(
-      'Index 2: Search',
-    ),
+    CommunityScreen(),
     ProfileScreen(),
   ];
 
