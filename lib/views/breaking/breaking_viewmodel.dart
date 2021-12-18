@@ -3,7 +3,6 @@ import 'package:fake_news/core/api/news_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/news/news_model.dart';
-import 'package:fake_news/models/searching_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
@@ -34,7 +33,8 @@ class BreakingViewModel extends BaseViewModel {
   //hide progress searching
   var isSearching = false.obs;
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -100,7 +100,8 @@ class BreakingViewModel extends BaseViewModel {
     //show progress searching
     isSearching.value = true;
 
-    var languageContent = pref.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent =
+        pref.getString(AppConstant.sharePrefKeys.languageContent);
 
     if (!keyword.trim().isEmpty) {
       var response = await extraApi.search(keyword, languageContent ?? 'en');

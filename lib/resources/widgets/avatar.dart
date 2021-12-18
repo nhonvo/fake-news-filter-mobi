@@ -28,7 +28,7 @@ class CircleAvatarCustom extends StatelessWidget {
           Container(
               width: radius * 2,
               height: radius * 2,
-              decoration: (url != "" || url != null)
+              decoration: (url == "" || url == null)
                   ? BoxDecoration(
                       shape: BoxShape.circle,
                       color: backgroundColor ?? Colors.blue[400],
