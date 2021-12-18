@@ -19,7 +19,8 @@ class SplashViewModel extends BaseViewModel {
 
     var response = await languageApi.getLanguages();
 
-    Get.lazyPut<List<LanguageModel>?>(() => response.resultObj);
+    // Get.lazyPut<List<LanguageModel>?>(() => response.resultObj);
+    Get.create<List<LanguageModel>?>(() => response.resultObj);
 
     if (token != null) {
       if (isNotFollow == 'false') {

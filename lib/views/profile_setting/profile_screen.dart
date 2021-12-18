@@ -2,7 +2,7 @@ import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
-import 'package:fake_news/resources/widgets/language.dart';
+import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -155,7 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) {
-                        return ChooseLanguage();
+                        return ChooseLanguageScreen();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),

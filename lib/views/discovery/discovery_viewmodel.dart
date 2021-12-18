@@ -1,6 +1,8 @@
 import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
+import 'package:fake_news/languages/language_service.dart';
+import 'package:fake_news/models/language_model.dart';
 import 'package:fake_news/models/topics/topic_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
@@ -14,16 +16,30 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DiscoveryViewModel extends BaseViewModel {
-  DiscoveryViewModel({required this.topicApi, required this.followingApi, required this.authRepo, required this.prefs});
+  DiscoveryViewModel(
+      {required this.topicApi,
+      required this.followingApi,
+      required this.languageService,
+      required this.authRepo,
+      required this.prefs,
+      required this.appEnvironment});
 
   TopicApi topicApi;
   FollowingApi followingApi;
   AuthRepo authRepo;
   SharedPreferences prefs;
+  AppEnvironment appEnvironment;
 
   final topics = <TopicModel>[].obs;
   var topicIds = <int>[].obs;
-  var appEnvironment = Get.find<AppEnvironment>();
+
+//used to choose the language in choose language screen
+  var languagesList = Get.find<List<LanguageModel>?>();
+  LanguageService languageService;
+
+  var selectedValue = 0.obs;
+  var getLanguageContent = "".obs, tempLanguageContent = "".obs;
+////////////////////////////////////////////////////////////
 
   RefreshController refreshController = RefreshController(initialRefresh: false);
 
@@ -105,9 +121,23 @@ class DiscoveryViewModel extends BaseViewModel {
     }
   }
 
+  //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥ChooseLanguageScreen💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
+  handleChangeLanguage() async {
+    if (languageService.currentLanguage == "en") {
+      languageService.updateLanguage("vi");
+    } else {
+      languageService.updateLanguage("en");
+    }
+  }
+
   @override
   void onInit() {
     super.onInit();
     handleGetTopic();
+
+    //used to choose the language in choose language screen
+    getLanguageContent.value = prefs.getString(AppConstant.sharePrefKeys.languageContent) ?? "";
+    //saving selected language content to temporary variable for compare with new language content
+    tempLanguageContent.value = getLanguageContent.value;
   }
 }

@@ -50,23 +50,19 @@ class _CustomCardState extends State<CustomCard> {
               Container(
                   width: 250,
                   decoration: BoxDecoration(
-                      color: MyColors.colorsArr.elementAt(
-                          int.parse(widget.index) % MyColors.colorsArr.length),
+                      color: MyColors.colorsArr.elementAt(int.parse(widget.index) % MyColors.colorsArr.length),
                       borderRadius: BorderRadius.all(Radius.circular(15.0))),
                   child: Column(
                     children: [
                       ClipRRect(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15.0),
-                              topRight: Radius.circular(15.0)),
+                          borderRadius:
+                              BorderRadius.only(topLeft: Radius.circular(15.0), topRight: Radius.circular(15.0)),
                           child: widget.image != "null"
                               ? CachedNetworkImage(
                                   fit: BoxFit.fitWidth,
                                   height: 55,
-                                  imageUrl:
-                                      "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
+                                  imageUrl: "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
+                                  imageBuilder: (context, imageProvider) => Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(6),
                                       image: DecorationImage(
@@ -75,10 +71,8 @@ class _CustomCardState extends State<CustomCard> {
                                       ),
                                     ),
                                   ),
-                                  placeholder: (context, url) =>
-                                      CupertinoActivityIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
+                                  placeholder: (context, url) => CupertinoActivityIndicator(),
+                                  errorWidget: (context, url, error) => Icon(Icons.error),
                                 )
                               : Container()),
                       Expanded(
@@ -99,8 +93,7 @@ class _CustomCardState extends State<CustomCard> {
                                 maxLines: 3,
                               ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -109,9 +102,7 @@ class _CustomCardState extends State<CustomCard> {
                                         color: Colors.white,
                                       ),
                                       SizedBox(width: 3),
-                                      Text(widget.noNews,
-                                          style:
-                                              StylesText.content10MediumWhite)
+                                      Text(widget.noNews, style: StylesText.content10MediumWhite)
                                     ],
                                   ),
                                   Row(
@@ -121,9 +112,7 @@ class _CustomCardState extends State<CustomCard> {
                                         color: Colors.white,
                                       ),
                                       SizedBox(width: 3),
-                                      Text(widget.time,
-                                          style:
-                                              StylesText.content10MediumWhite)
+                                      Text(widget.time, style: StylesText.content10MediumWhite)
                                     ],
                                   ),
                                 ],
@@ -162,11 +151,9 @@ class _CustomCardState extends State<CustomCard> {
                                 )
                               : Container(),
                       widget.label == "featured"
-                          ? Text(widget.label,
-                              style: StylesText.content12BoldWhite)
+                          ? Text(widget.label, style: StylesText.content12BoldWhite)
                           : widget.label == "breaking"
-                              ? Text(widget.label,
-                                  style: StylesText.content12BoldWhite)
+                              ? Text(widget.label, style: StylesText.content12BoldWhite)
                               : Container(),
                     ],
                   ),

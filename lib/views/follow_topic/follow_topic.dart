@@ -3,7 +3,7 @@ import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card.dart';
-import 'package:fake_news/resources/widgets/language.dart';
+import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
 
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
                   showModalBottomSheet(
                     context: context,
                     builder: (context) {
-                      return ChooseLanguage();
+                      return ChooseLanguageScreen();
                     },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
@@ -106,8 +106,7 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
                                 tag: topic.tag.toString(),
                                 description: topic.description.toString(),
                                 image: topic.thumbImage.toString(),
-                                time: AppHelper.convertToAgo(
-                                    DateTime.parse(topic.realTime.toString())),
+                                time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
                               ));
                         }).toList());
                   }),

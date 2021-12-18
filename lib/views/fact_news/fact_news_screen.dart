@@ -140,7 +140,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                 for (var item in viewmodel.news)
                   CardNews(
                       newsId: item!.newsId.toString(),
-                      factCheck: Images.icprotect,
+                      factCheck: filter == 'real' ? Images.icprotect : Images.icnone,
                       rate: false,
                       offical: "$filter".tr,
                       // tag: viewmodel.topicModel.value.tag.toString(),
