@@ -3,11 +3,11 @@ import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
-import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
+import 'package:fake_news/views/community/community_viewmodel.dart';
 import 'package:get/instance_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DiscoveryBinding extends Bindings {
+class CommunityBinding extends Bindings {
   TopicApi topicApi = Get.find();
   FollowingApi followingApi = Get.find();
   AuthRepo authRepo = Get.find();
@@ -17,7 +17,7 @@ class DiscoveryBinding extends Bindings {
 
   @override
   void dependencies() {
-    Get.put<DiscoveryViewModel>(DiscoveryViewModel(
+    Get.put<CommunityViewModel>(CommunityViewModel(
         topicApi: topicApi,
         followingApi: followingApi,
         languageService: languageService,

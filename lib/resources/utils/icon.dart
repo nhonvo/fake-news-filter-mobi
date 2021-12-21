@@ -11,5 +11,5 @@ class IconsApp {
   static const String exit = "assets/icons/exit.svg";
   static const String fake = "assets/icons/fake.svg";
   static const String real = "assets/icons/real.svg";
-  static const String unknow = "assets/icons/unknow.svg";
+  static const String unknown = "assets/icons/unknown.svg";
 }

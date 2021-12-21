@@ -1,3 +1,4 @@
+import 'package:fake_news/data/community_data.dart';
 import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/card_community.dart';
@@ -117,19 +118,19 @@ class _CommunityScreenState extends State<CommunityScreen> {
                       padding: EdgeInsets.all(10),
                       scrollDirection: Axis.horizontal,
                       physics: BouncingScrollPhysics(),
-                      itemCount: 4,
+                      itemCount: communities.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {},
                           child: CardCommunity(
-                            title:
-                                "Tin: Loan tin giả về việc tiêm Vaccine Trung Quốc, người dân bỏ về hết",
-                            content: '',
-                            crowdId: '',
-                            nameCrowd: "Huynh Huu Khanh",
-                            numberCrowd: 20,
+                            avatar: communities[index].avatar,
+                            title: communities[index].title.toString(),
+                            content: communities[index].content.toString(),
+                            crowdId: communities[index].crowdId.toString(),
+                            nameCrowd: communities[index].nameCrowd.toString(),
+                            numberCrowd: communities[index].numberCrowd ?? 0,
                             onpress: () {},
-                            times: '',
+                            times: "",
                           ),
                         );
                       },
@@ -154,26 +155,18 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   "Tin đóng góp mới nhất",
                   style: StylesText.content16BoldBlack,
                 ),
-                CardCommunity(
-                    title:
-                        "Tin: Loan tin giả về việc tiêm Vaccine Trung Quốc, người dân bỏ về hết",
-                    content: '',
-                    crowdId: '',
-                    nameCrowd: "Huynh Huu Khanh",
-                    numberCrowd: 20,
+                for (var item in communitiesRecent)
+                  CardCommunity(
+                    avatar: item.avatar,
+                    title: item.title.toString(),
+                    content: item.content.toString(),
+                    crowdId: item.crowdId.toString(),
+                    nameCrowd: item.nameCrowd.toString(),
+                    numberCrowd: item.numberCrowd ?? 0,
                     onpress: () {},
-                    times: '1 giờ trước',
-                    width: Get.size.width),
-                CardCommunity(
-                    title:
-                        "Tin: Loan tin giả về việc tiêm Vaccine Trung Quốc, người dân bỏ về hết",
-                    content: '',
-                    crowdId: '',
-                    nameCrowd: "Huynh Huu Khanh",
-                    numberCrowd: 20,
-                    onpress: () {},
-                    times: '1 giờ trước',
-                    width: Get.size.width),
+                    times: item.times.toString(),
+                    width: Get.size.width,
+                  ),
               ],
             ),
           )

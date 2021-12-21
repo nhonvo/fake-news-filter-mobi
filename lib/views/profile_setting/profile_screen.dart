@@ -93,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             _buildCicleAvatar(
-                "https://scontent.fdad3-4.fna.fbcdn.net/v/t1.6435-9/103099051_1406544689546058_2645542971869687953_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=2s9RY20WIvYAX8LubND&_nc_ht=scontent.fdad3-4.fna&oh=1903adfdb80ed6bd55fcf9b5bc962417&oe=61D79C7F"),
+                "https://scontent.fsgn8-1.fna.fbcdn.net/v/t1.6435-9/182394264_2883716055249217_2405969830174331902_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=s25Yo5XumrwAX9T_BHX&_nc_ht=scontent.fsgn8-1.fna&oh=00_AT_aIE7OYqlx7QjRyp9cpgn5-hkQsyKP7MvB_pffvdhpLQ&oe=61E268EF"),
             Container(
               margin: EdgeInsets.only(left: 20),
               child: Column(

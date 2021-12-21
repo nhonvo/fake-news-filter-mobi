@@ -3,12 +3,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
+import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:fake_news/views/view_news/viewnews_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -89,11 +91,12 @@ class _CardNewsState extends State<CardNews> {
                     Row(
                       children: [
                         widget.offical != null && widget.socialBeliefs != null
-                            ? Image.asset(
+                            ? SvgPicture.asset(
                                 widget.factCheck,
                                 width: 30,
                               )
                             : SizedBox(),
+                        SizedBox(width: 5),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -111,12 +114,10 @@ class _CardNewsState extends State<CardNews> {
                                     widget.offical == null
                                         ? Padding(
                                             padding: const EdgeInsets.only(right: 4.0),
-                                            child: Icon(
-                                              FontAwesomeIcons.staylinked,
-                                              size: 24,
-                                              color: Colors.yellow[700],
-                                            ),
-                                          )
+                                            child: SvgPicture.asset(
+                                              IconsApp.unknown,
+                                              width: 24,
+                                            ))
                                         : SizedBox(),
                                     Text(
                                       'Social Beliefs: ',

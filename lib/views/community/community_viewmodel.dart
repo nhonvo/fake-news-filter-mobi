@@ -15,8 +15,8 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DiscoveryViewModel extends BaseViewModel {
-  DiscoveryViewModel(
+class CommunityViewModel extends BaseViewModel {
+  CommunityViewModel(
       {required this.topicApi,
       required this.followingApi,
       required this.languageService,

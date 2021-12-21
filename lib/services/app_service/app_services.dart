@@ -6,7 +6,7 @@ import 'package:fake_news/core/api/language_api.dart';
 import 'package:fake_news/core/api/news_api.dart';
 import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
-import 'package:fake_news/languages/language_service.dart';
+import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:fake_news/core/services/local_storage/auth_local_storage.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:get/get.dart';

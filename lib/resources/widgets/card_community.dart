@@ -67,8 +67,7 @@ class _CardCommunityState extends State<CardCommunity> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CircleAvatarCustom(
-                        url:
-                            'https://scontent.fdad3-4.fna.fbcdn.net/v/t1.6435-9/103099051_1406544689546058_2645542971869687953_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=P-9rMj4otgkAX8r_sC0&_nc_ht=scontent.fdad3-4.fna&oh=00_AT-a-2j3l6iVNg44Xg9TSjNk3zOKUcGHKw-73ZsxrsqGPw&oe=61E379FF',
+                        url: widget.avatar,
                         radius: 17,
                       ),
                       SizedBox(
@@ -92,8 +91,7 @@ class _CardCommunityState extends State<CardCommunity> {
                                 "Số tin đã đóng góp:",
                                 style: StylesText.content10MediumBlack,
                               ),
-                              Text(widget.numberCrowd.toString(),
-                                  style: StylesText.content10BoldBlack)
+                              Text(widget.numberCrowd.toString(), style: StylesText.content10BoldBlack)
                             ],
                           ),
                         ],
