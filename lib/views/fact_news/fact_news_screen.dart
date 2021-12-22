@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:fake_news/resources/utils/app_helper.dart';
-import 'package:fake_news/resources/utils/image.dart';
+import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
@@ -140,7 +140,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                 for (var item in viewmodel.news)
                   CardNews(
                       newsId: item!.newsId.toString(),
-                      factCheck: Images.icprotect,
+                      factCheck: filter == 'real' ? IconsApp.real : IconsApp.fake,
                       rate: false,
                       offical: "$filter".tr,
                       // tag: viewmodel.topicModel.value.tag.toString(),

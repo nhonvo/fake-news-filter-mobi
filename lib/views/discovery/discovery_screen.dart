@@ -5,8 +5,8 @@ import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card_topic.dart';
-import 'package:fake_news/resources/widgets/language.dart';
 import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
+import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -53,7 +53,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) {
-                        return ChooseLanguage();
+                        return ChooseLanguageScreen();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),

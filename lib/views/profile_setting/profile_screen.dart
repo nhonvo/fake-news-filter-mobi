@@ -2,13 +2,15 @@ import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
-import 'package:fake_news/resources/widgets/language.dart';
+import 'package:fake_news/views/follow_topic/follow_topic.dart';
+import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -19,7 +21,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  ProfileViewModel get viewmodel => Get.find<ProfileViewModel>();
+  ProfileViewModel get viewModel => Get.find<ProfileViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             _buildCicleAvatar(
-                "https://scontent.fdad3-4.fna.fbcdn.net/v/t1.6435-9/103099051_1406544689546058_2645542971869687953_n.jpg?_nc_cat=104&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=2s9RY20WIvYAX8LubND&_nc_ht=scontent.fdad3-4.fna&oh=1903adfdb80ed6bd55fcf9b5bc962417&oe=61D79C7F"),
+                "https://scontent.fsgn8-1.fna.fbcdn.net/v/t1.6435-9/182394264_2883716055249217_2405969830174331902_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=s25Yo5XumrwAX9T_BHX&_nc_ht=scontent.fsgn8-1.fna&oh=00_AT_aIE7OYqlx7QjRyp9cpgn5-hkQsyKP7MvB_pffvdhpLQ&oe=61E268EF"),
             Container(
               margin: EdgeInsets.only(left: 20),
               child: Column(
@@ -124,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         InkWell(
           child: SvgPicture.asset(IconsApp.exit, width: 30),
           onTap: () async {
-            viewmodel.handlelogout();
+            viewModel.handlelogout();
           },
         )
       ],
@@ -155,14 +157,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) {
-                        return ChooseLanguage();
+                        return ChooseLanguageScreen();
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                     );
                   }),
-              BuildItemButon(icon: IconsApp.follow, content: 'followTopic'.tr, onTap: () {}),
+              BuildItemButon(icon: IconsApp.follow, content: 'followTopic'.tr, onTap: () {Get.to(FollowTopicScreen());}),
               BuildItemButon(icon: IconsApp.social, content: 'linkSocial'.tr, onTap: () {}),
             ],
           ),
