@@ -2,6 +2,7 @@ import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/views/follow_topic/follow_topic.dart';
 import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -19,7 +21,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  ProfileViewModel get viewmodel => Get.find<ProfileViewModel>();
+  ProfileViewModel get viewModel => Get.find<ProfileViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         InkWell(
           child: SvgPicture.asset(IconsApp.exit, width: 30),
           onTap: () async {
-            viewmodel.handlelogout();
+            viewModel.handlelogout();
           },
         )
       ],
@@ -162,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     );
                   }),
-              BuildItemButon(icon: IconsApp.follow, content: 'followTopic'.tr, onTap: () {}),
+              BuildItemButon(icon: IconsApp.follow, content: 'followTopic'.tr, onTap: () {Get.to(FollowTopicScreen());}),
               BuildItemButon(icon: IconsApp.social, content: 'linkSocial'.tr, onTap: () {}),
             ],
           ),

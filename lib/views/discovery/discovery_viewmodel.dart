@@ -31,8 +31,7 @@ class DiscoveryViewModel extends BaseViewModel {
   AppEnvironment appEnvironment;
 
   final topics = <TopicModel>[].obs;
-  var topicIds = <int>[].obs;
-
+  var topicIdListHasFollowed = <int>[].obs;
 //used to choose the language in choose language screen
   var languagesList = Get.find<List<LanguageModel>?>();
   LanguageService languageService;
@@ -56,6 +55,14 @@ class DiscoveryViewModel extends BaseViewModel {
     var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
 
     var response = await topicApi.getTopic(languageContent ?? 'en');
+
+    var userId = await authRepo.getUserId();
+
+    //get the topic ids of the user has followed topics
+    if (userId?.isNotEmpty ?? false) {
+      var result = await followingApi.getFollowedTopic(userId.toString());
+      topicIdListHasFollowed.addAll(result.resultObj?.map((e) => e) ?? []);
+    }
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
@@ -85,11 +92,11 @@ class DiscoveryViewModel extends BaseViewModel {
   }
 
   //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥StartedScreen💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
-  handlerGetListIdTopic(int id) {
-    if (topicIds.contains(id)) {
-      topicIds.remove(id);
+  handlerGetListIdTopic(int id) async {
+    if (topicIdListHasFollowed.contains(id)) {
+      topicIdListHasFollowed.remove(id);
     } else {
-      topicIds.add(id);
+      topicIdListHasFollowed.add(id);
     }
   }
 
@@ -97,7 +104,7 @@ class DiscoveryViewModel extends BaseViewModel {
     EasyLoading.show(status: 'fetchingData'.tr);
     var userId = await authRepo.getUserId();
 
-    var response = await followingApi.createFollow(topicIds, userId.toString());
+    var response = await followingApi.createFollow(topicIdListHasFollowed, userId.toString());
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
       snackBar(

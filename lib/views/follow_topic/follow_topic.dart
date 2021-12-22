@@ -18,7 +18,7 @@ class FollowTopicScreen extends StatefulWidget {
 }
 
 class _FollowTopicScreenState extends State<FollowTopicScreen> {
-  DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
+  DiscoveryViewModel get viewModel => Get.find<DiscoveryViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
                   ),
                 ),
                 Obx(() {
-                  if (viewmodel.topicIds.length < 4) {
+                  if (viewModel.topicIdListHasFollowed.length < 4) {
                     return Text(
                       'tap'.tr,
                       style: StylesText.content16BoldRed,
@@ -94,13 +94,15 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
                     return GridView.count(
                         //shrinkWrap: true,
                         crossAxisCount: 2,
-                        children: viewmodel.topics.map((topic) {
+                        children: viewModel.topics.map((topic) {
+                          //index used to random color card
                           index++;
                           return Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: CustomCard(
                                 index: index.toString(),
                                 id: topic.topicId.toString(),
+                                isSelected: viewModel.topicIdListHasFollowed.contains(topic.topicId) ? true : false,
                                 noNews: topic.noNews.toString(),
                                 label: topic.label.toString(),
                                 tag: topic.tag.toString(),
@@ -118,7 +120,7 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Obx(() {
-                  if (viewmodel.topicIds.length < 4) {
+                  if (viewModel.topicIdListHasFollowed.length < 4) {
                     return Container();
                   } else {
                     return CustomButton(
@@ -128,7 +130,7 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
                       buttonColor: Colors.white,
                       buttonRadius: 20,
                       onPressed: () {
-                        viewmodel.handleCreateFollow();
+                        viewModel.handleCreateFollow();
                       },
                     );
                   }

@@ -16,34 +16,35 @@ class CustomCard extends StatefulWidget {
       required this.noNews,
       required this.index,
       required this.image,
+      required this.isSelected,
       required this.time})
       : super(key: key);
 
   final String id, image, tag, description, label, noNews, time, index;
-
+  bool isSelected;
   @override
   _CustomCardState createState() => _CustomCardState();
 }
 
 class _CustomCardState extends State<CustomCard> {
-  bool check = false;
+  // bool isSelected = false;
 
-  DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
+  DiscoveryViewModel get viewModel => Get.find<DiscoveryViewModel>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          check = !check;
+          widget.isSelected = !widget.isSelected;
         });
         //add to selected topic list in intro viewmodel
-        viewmodel.handlerGetListIdTopic(int.parse(widget.id));
+        viewModel.handlerGetListIdTopic(int.parse(widget.id));
       },
       child: Transform.scale(
-        scale: check ? 0.95 : 1.0,
+        scale: widget.isSelected ? 0.95 : 1.0,
         child: Opacity(
-          opacity: check ? 0.6 : 1.0,
+          opacity: widget.isSelected ? 0.6 : 1.0,
           child: Stack(
             clipBehavior: Clip.none,
             children: [
@@ -61,7 +62,7 @@ class _CustomCardState extends State<CustomCard> {
                               ? CachedNetworkImage(
                                   fit: BoxFit.fitWidth,
                                   height: 55,
-                                  imageUrl: "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
+                                  imageUrl: "${viewModel.appEnvironment.apiBaseUrl}/images/topics/${widget.image}",
                                   imageBuilder: (context, imageProvider) => Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(6),
@@ -165,7 +166,7 @@ class _CustomCardState extends State<CustomCard> {
                   child: Icon(
                     Icons.check_circle_rounded,
                     color: Colors.green,
-                    size: check ? 35 : 0,
+                    size: widget.isSelected ? 35 : 0,
                   ))
             ],
           ),
