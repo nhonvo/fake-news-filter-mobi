@@ -2,6 +2,7 @@ import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/extra_api.dart';
 import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/api/news_api.dart';
+import 'package:fake_news/core/api/news_community_api.dart';
 import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
 import 'package:fake_news/providers/auth_repo.dart';
@@ -25,6 +26,7 @@ class HomeBinding extends Bindings {
   ExtraApi extraApi = Get.find();
   TopicApi topicApi = Get.find();
   FollowingApi followingApi = Get.find();
+  NewsCommunityApi newsCommunityApi = Get.find();
   LanguageService languageService = Get.find();
   SharedPreferences pref = Get.find();
   AppEnvironment appEnvironment = Get.find();
@@ -47,6 +49,7 @@ class HomeBinding extends Bindings {
     Get.lazyPut<CommunityViewModel>(() => CommunityViewModel(
         topicApi: topicApi,
         followingApi: followingApi,
+        newsCommunityApi: newsCommunityApi,
         languageService: languageService,
         authRepo: authRepo,
         prefs: pref,

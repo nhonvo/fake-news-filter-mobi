@@ -1,6 +1,8 @@
 import 'package:fake_news/core/api/following_api.dart';
+import 'package:fake_news/core/api/news_community_api.dart';
 import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
+import 'package:fake_news/models/news_comnunity_model.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:fake_news/models/language_model.dart';
 import 'package:fake_news/models/topics/topic_model.dart';
@@ -19,6 +21,7 @@ class CommunityViewModel extends BaseViewModel {
   CommunityViewModel(
       {required this.topicApi,
       required this.followingApi,
+      required this.newsCommunityApi,
       required this.languageService,
       required this.authRepo,
       required this.prefs,
@@ -26,11 +29,12 @@ class CommunityViewModel extends BaseViewModel {
 
   TopicApi topicApi;
   FollowingApi followingApi;
+  NewsCommunityApi newsCommunityApi;
   AuthRepo authRepo;
   SharedPreferences prefs;
   AppEnvironment appEnvironment;
 
-  final topics = <TopicModel>[].obs;
+  final newsCommList = <NewsCommunityModel>[].obs;
   var topicIds = <int>[].obs;
 
 //used to choose the language in choose language screen
@@ -45,17 +49,17 @@ class CommunityViewModel extends BaseViewModel {
 
   void onRefresh() async {
     // monitor network fetch
-    await handleGetTopic();
+    await handleGetNews();
     // if failed,use refreshFailed()
     refreshController.refreshCompleted();
   }
 
-  handleGetTopic() async {
+  handleGetNews() async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
     var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
 
-    var response = await topicApi.getTopic(languageContent ?? 'en');
+    var response = await newsCommunityApi.getNewsCommunity(languageContent ?? 'en');
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
@@ -72,72 +76,17 @@ class CommunityViewModel extends BaseViewModel {
         SnackPosition.BOTTOM,
       );
     } else {
-      List<TopicModel> topicList = response.resultObj!.obs;
-      //clear all topics before get data from API to avoid duplication
-      topics.clear();
-      topicList.forEach((topic) {
-        if (topic.noNews != 0) {
-          topics.add(topic);
-        }
-      });
+      List<NewsCommunityModel> newsCommunityList = response.resultObj!.obs;
+      //clear all data before get data from API to avoid duplication
+      newsCommList.clear();
+      newsCommList.addAll(newsCommunityList);
       EasyLoading.dismiss();
-    }
-  }
-
-  //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥StartedScreen💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
-  handlerGetListIdTopic(int id) {
-    if (topicIds.contains(id)) {
-      topicIds.remove(id);
-    } else {
-      topicIds.add(id);
-    }
-  }
-
-  handleCreateFollow() async {
-    EasyLoading.show(status: 'fetchingData'.tr);
-    var userId = await authRepo.getUserId();
-
-    var response = await followingApi.createFollow(topicIds, userId.toString());
-    if (response.isSuccessed == false) {
-      EasyLoading.dismiss();
-      snackBar(
-        'error'.tr,
-        response.messages!,
-        'altMessage'.tr,
-        Icon(
-          Icons.error,
-          color: Colors.white,
-        ),
-        Colors.red,
-        Colors.white,
-        SnackPosition.BOTTOM,
-      );
-    } else {
-      EasyLoading.dismiss();
-
-      //set this user has followed any topics
-      await authRepo.saveIsNotFollow(false);
-      Get.offAllNamed(Routes.HOME);
-    }
-  }
-
-  //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥ChooseLanguageScreen💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
-  handleChangeLanguage() async {
-    if (languageService.currentLanguage == "en") {
-      languageService.updateLanguage("vi");
-    } else {
-      languageService.updateLanguage("en");
     }
   }
 
   @override
   void onInit() {
     super.onInit();
-    handleGetTopic();
-
-    //used to choose the language in choose language screen
-    getLanguageContent.value = prefs.getString(AppConstant.sharePrefKeys.languageContent) ?? "";
-    //saving selected language content to temporary variable for compare with new language content
-    tempLanguageContent.value = getLanguageContent.value;
+    handleGetNews();
   }
 }

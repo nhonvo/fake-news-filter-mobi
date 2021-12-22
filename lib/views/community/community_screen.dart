@@ -1,11 +1,13 @@
-import 'package:fake_news/data/community_data.dart';
+import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/card_community.dart';
+import 'package:fake_news/views/community/community_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({Key? key}) : super(key: key);
@@ -15,163 +17,175 @@ class CommunityScreen extends StatefulWidget {
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
+  CommunityViewModel get viewModel => Get.find<CommunityViewModel>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Kiểm tra tính xác thực",
-                style: StylesText.content18BoldBlack,
-              ),
-              IconButton(onPressed: () {}, icon: Icon(Icons.history))
-            ],
-          ),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey,
-                style: BorderStyle.solid,
-                width: 1.0,
-              ),
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(10.0),
+      body: SmartRefresher(
+        controller: viewModel.refreshController,
+        onRefresh: viewModel.onRefresh,
+        enablePullDown: true,
+        header: MaterialClassicHeader(),
+        child: SingleChildScrollView(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Kiểm tra tính xác thực",
+                  style: StylesText.content18BoldBlack,
+                ),
+                IconButton(onPressed: () {}, icon: Icon(Icons.history))
+              ],
             ),
-            height: 45,
-            width: Get.size.width * 0.9,
-            child: Center(
-                child: Text(
-              "Gửi thông tin chi tiết về tin tức cần xác thực ...",
-              style: StylesText.content12LightBlack,
-            )),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.backup_outlined,
-                    color: Colors.blue,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    "Thêm tệp đính kèm",
-                    style: StylesText.content12MediumBlack,
-                  )
-                ],
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey,
+                  style: BorderStyle.solid,
+                  width: 1.0,
+                ),
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(10.0),
               ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.info,
-                    color: Colors.blue,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    "Xem hướng dẫn",
-                    style: StylesText.content12MediumBlack,
-                  )
-                ],
-              )
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            color: Colors.white,
-            child: Column(
+              height: 45,
+              width: Get.size.width * 0.9,
+              child: Center(
+                  child: Text(
+                "Gửi thông tin chi tiết về tin tức cần xác thực ...",
+                style: StylesText.content12LightBlack,
+              )),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      IconsApp.follow,
-                      width: 25,
+                    Icon(
+                      Icons.backup_outlined,
+                      color: Colors.blue,
                     ),
                     SizedBox(
                       width: 5,
                     ),
                     Text(
-                      "Tin đóng góp nổi bật",
-                      style: StylesText.content16BoldBlack,
-                    ),
+                      "Thêm tệp đính kèm",
+                      style: StylesText.content12MediumBlack,
+                    )
                   ],
                 ),
-                Container(
-                  height: 170,
-                  child: Center(
-                    child: ListView.builder(
-                      padding: EdgeInsets.all(10),
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                      itemCount: communities.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {},
-                          child: CardCommunity(
-                            avatar: communities[index].avatar,
-                            title: communities[index].title.toString(),
-                            content: communities[index].content.toString(),
-                            crowdId: communities[index].crowdId.toString(),
-                            nameCrowd: communities[index].nameCrowd.toString(),
-                            numberCrowd: communities[index].numberCrowd ?? 0,
-                            onpress: () {},
-                            times: "",
-                          ),
-                        );
-                      },
+                Row(
+                  children: [
+                    Icon(
+                      Icons.info,
+                      color: Colors.blue,
                     ),
-                  ),
-                ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "Xem hướng dẫn",
+                      style: StylesText.content12MediumBlack,
+                    )
+                  ],
+                )
               ],
             ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            width: Get.size.width,
-            padding: EdgeInsets.all(10),
-            color: Colors.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Tin đóng góp mới nhất",
-                  style: StylesText.content16BoldBlack,
-                ),
-                for (var item in communitiesRecent)
-                  CardCommunity(
-                    avatar: item.avatar,
-                    title: item.title.toString(),
-                    content: item.content.toString(),
-                    crowdId: item.crowdId.toString(),
-                    nameCrowd: item.nameCrowd.toString(),
-                    numberCrowd: item.numberCrowd ?? 0,
-                    onpress: () {},
-                    times: item.times.toString(),
-                    width: Get.size.width,
-                  ),
-              ],
+            SizedBox(
+              height: 10,
             ),
-          )
-        ]),
-      )),
+            Container(
+              padding: EdgeInsets.all(10),
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        IconsApp.follow,
+                        width: 25,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "Tin đóng góp nổi bật",
+                        style: StylesText.content16BoldBlack,
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 170,
+                    child: Obx(() => Center(
+                          child: ListView.builder(
+                            padding: EdgeInsets.all(10),
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            itemCount: viewModel.newsCommList.length,
+                            itemBuilder: (context, index) {
+                              if (viewModel.newsCommList[index].isPopular == true) {
+                                return GestureDetector(
+                                  onTap: () {},
+                                  child: CardCommunity(
+                                    avatar: viewModel.newsCommList[index].publisher?.avatar,
+                                    title: viewModel.newsCommList[index].title.toString(),
+                                    content: viewModel.newsCommList[index].content.toString(),
+                                    crowdId: viewModel.newsCommList[index].newsCommunityId.toString(),
+                                    nameCrowd: viewModel.newsCommList[index].publisher?.fullName ?? "Anonymous",
+                                    numberCrowd: viewModel.newsCommList[index].publisher?.noNewsContributed ?? 0,
+                                    onpress: () {},
+                                    times: "",
+                                  ),
+                                );
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
+                        )),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Obx(() => Container(
+                  width: Get.size.width,
+                  padding: EdgeInsets.all(10),
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Tin đóng góp mới nhất",
+                        style: StylesText.content16BoldBlack,
+                      ),
+                      for (var item in viewModel.newsCommList)
+                        CardCommunity(
+                          avatar: item.publisher?.avatar,
+                          title: item.title.toString(),
+                          content: item.content.toString(),
+                          crowdId: item.newsCommunityId.toString(),
+                          nameCrowd: item.publisher?.fullName.toString() ?? "Anonymous",
+                          numberCrowd: item.publisher?.noNewsContributed ?? 0,
+                          width: Get.size.width,
+                          times: AppHelper.convertToAgo(DateTime.parse(item.datePublished.toString())),
+                          onpress: () {},
+                        ),
+                    ],
+                  ),
+                ))
+          ]),
+        )),
+      ),
     );
   }
 }
