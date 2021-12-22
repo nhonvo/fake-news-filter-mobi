@@ -41,8 +41,7 @@ class AppRoutes {
       transition: Transition.rightToLeftWithFade,
       binding: LoginBinding(),
     ),
-    GetPage(
-        name: Routes.HOME, page: () => HomeScreen(), binding: HomeBinding()),
+    GetPage(name: Routes.HOME, page: () => HomeScreen(), binding: HomeBinding()),
   ];
 }
 

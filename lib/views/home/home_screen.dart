@@ -26,13 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ProfileScreen(),
   ];
 
-  var cIndex;
-
-  @override
-  void initState() {
-    cIndex = 0;
-    super.initState();
-  }
+  var cIndex = 0;
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,8 @@
 import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
+import 'package:fake_news/services/language_service/language_service.dart';
+import 'package:fake_news/models/language_model.dart';
 import 'package:fake_news/models/topics/topic_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
@@ -14,16 +16,29 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DiscoveryViewModel extends BaseViewModel {
-  DiscoveryViewModel({required this.topicApi, required this.followingApi, required this.authRepo, required this.prefs});
+  DiscoveryViewModel(
+      {required this.topicApi,
+      required this.followingApi,
+      required this.languageService,
+      required this.authRepo,
+      required this.prefs,
+      required this.appEnvironment});
 
   TopicApi topicApi;
   FollowingApi followingApi;
   AuthRepo authRepo;
   SharedPreferences prefs;
+  AppEnvironment appEnvironment;
 
   final topics = <TopicModel>[].obs;
-  var topicIds = <int>[].obs;
-  var appEnvironment = Get.find<AppEnvironment>();
+  var topicIdListHasFollowed = <int>[].obs;
+//used to choose the language in choose language screen
+  var languagesList = Get.find<List<LanguageModel>?>();
+  LanguageService languageService;
+
+  var selectedValue = 0.obs;
+  var getLanguageContent = "".obs, tempLanguageContent = "".obs;
+////////////////////////////////////////////////////////////
 
   RefreshController refreshController = RefreshController(initialRefresh: false);
 
@@ -40,6 +55,14 @@ class DiscoveryViewModel extends BaseViewModel {
     var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
 
     var response = await topicApi.getTopic(languageContent ?? 'en');
+
+    var userId = await authRepo.getUserId();
+
+    //get the topic ids of the user has followed topics
+    if (userId?.isNotEmpty ?? false) {
+      var result = await followingApi.getFollowedTopic(userId.toString());
+      topicIdListHasFollowed.addAll(result.resultObj?.map((e) => e) ?? []);
+    }
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
@@ -69,11 +92,11 @@ class DiscoveryViewModel extends BaseViewModel {
   }
 
   //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥StartedScreen💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
-  handlerGetListIdTopic(int id) {
-    if (topicIds.contains(id)) {
-      topicIds.remove(id);
+  handlerGetListIdTopic(int id) async {
+    if (topicIdListHasFollowed.contains(id)) {
+      topicIdListHasFollowed.remove(id);
     } else {
-      topicIds.add(id);
+      topicIdListHasFollowed.add(id);
     }
   }
 
@@ -81,7 +104,7 @@ class DiscoveryViewModel extends BaseViewModel {
     EasyLoading.show(status: 'fetchingData'.tr);
     var userId = await authRepo.getUserId();
 
-    var response = await followingApi.createFollow(topicIds, userId.toString());
+    var response = await followingApi.createFollow(topicIdListHasFollowed, userId.toString());
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
       snackBar(
@@ -105,9 +128,23 @@ class DiscoveryViewModel extends BaseViewModel {
     }
   }
 
+  //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥ChooseLanguageScreen💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
+  handleChangeLanguage() async {
+    if (languageService.currentLanguage == "en") {
+      languageService.updateLanguage("vi");
+    } else {
+      languageService.updateLanguage("en");
+    }
+  }
+
   @override
   void onInit() {
     super.onInit();
     handleGetTopic();
+
+    //used to choose the language in choose language screen
+    getLanguageContent.value = prefs.getString(AppConstant.sharePrefKeys.languageContent) ?? "";
+    //saving selected language content to temporary variable for compare with new language content
+    tempLanguageContent.value = getLanguageContent.value;
   }
 }

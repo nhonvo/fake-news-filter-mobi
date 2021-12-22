@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:fake_news/core/models/api/base_response_api_model.dart';
-import 'package:fake_news/languages/language_service.dart';
+import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';

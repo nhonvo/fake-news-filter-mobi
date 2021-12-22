@@ -3,7 +3,6 @@ import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:fake_news/views/view_news/viewnews_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_html/style.dart';
 import 'package:get/get.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 

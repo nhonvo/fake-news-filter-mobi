@@ -33,6 +33,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
             child: SmartRefresher(
               controller: viewmodel.refreshController,
               onRefresh: viewmodel.onRefresh,
+              header: MaterialClassicHeader(),
               child: Column(
                 children: [
                   Container(
