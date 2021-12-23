@@ -7,8 +7,10 @@ class LanguageKey {
   static const displaylanguage = "displaylanguage";
   static const contentlanguage = "contentlanguage";
   static const login = "login";
+  static const logout = "logout";
   static const translate = "translate";
   static const hello = "hello";
+  static const confirmLogout = "confirmLogout";
   static const started = "started";
   static const inputuser = "inputuser";
   static const inputpass = "inputpass";
@@ -17,6 +19,7 @@ class LanguageKey {
   static const inputPassAtLeast6Err = "inputPassAtLeast6Err";
   static const or = "or";
   static const okay = "okay";
+  static const cancel = "cancel";
   static const help = "help";
   static const agree = "agree";
   static const terms = "terms";

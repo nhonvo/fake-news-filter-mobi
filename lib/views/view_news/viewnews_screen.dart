@@ -14,9 +14,10 @@ import 'package:html/dom.dart' as dom;
 import 'package:url_launcher/url_launcher.dart';
 
 class ViewNewsScreen extends StatefulWidget {
-  final String content;
+  ViewNewsScreen({Key? key, required this.content, this.isLoggedIn, required this.newsId}) : super(key: key);
 
-  const ViewNewsScreen({Key? key, required this.content}) : super(key: key);
+  final String content, newsId;
+  late bool? isLoggedIn;
 
   @override
   _ViewNewsScreenState createState() => _ViewNewsScreenState();
@@ -159,17 +160,27 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    RatingButton(
-                      newsId: "",
-                    ),
-                    VerticalDivider(),
-                    Icon(FontAwesomeIcons.comments),
-                    VerticalDivider(),
-                    Icon(FontAwesomeIcons.shareAlt),
-                    VerticalDivider(),
-                    Icon(FontAwesomeIcons.bookmark),
-                  ],
+                  children: widget.isLoggedIn == true
+                      ? [
+                          RatingButton(
+                            newsId: widget.newsId,
+                          ),
+                          VerticalDivider(),
+                          Icon(FontAwesomeIcons.comments),
+                          VerticalDivider(),
+                          Icon(FontAwesomeIcons.shareAlt),
+                          VerticalDivider(),
+                          Icon(FontAwesomeIcons.bookmark),
+                        ]
+                      : [
+                          Container(),
+                          Icon(FontAwesomeIcons.comments),
+                          VerticalDivider(),
+                          Icon(FontAwesomeIcons.shareAlt),
+                          VerticalDivider(),
+                          Icon(FontAwesomeIcons.bookmark),
+                          Container(),
+                        ],
                 )),
           )
         ],

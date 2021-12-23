@@ -52,9 +52,7 @@ class PreviewViewModel extends BaseViewModel {
       List<NewsModel> newsList = response.resultObj!.obs;
       //clear all news before get data from API to avoid duplication
       news.clear();
-      newsList.forEach((topic) {
-        news.add(topic);
-      });
+      news.addAll(newsList);
       EasyLoading.dismiss();
     }
   }
