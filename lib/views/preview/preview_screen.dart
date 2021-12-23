@@ -22,7 +22,7 @@ class PreviewScreen extends StatefulWidget {
 }
 
 class _PreviewScreenState extends State<PreviewScreen> {
-  PreviewViewModel get viewmodel => Get.find<PreviewViewModel>();
+  PreviewViewModel get viewModel => Get.find<PreviewViewModel>();
 
   bool follow = false;
 
@@ -42,12 +42,12 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        viewmodel.topicModel.value.thumbImage != null
+                        viewModel.topicModel.value.thumbImage != null
                             ? CachedNetworkImage(
                                 fit: BoxFit.fitWidth,
                                 height: 120,
                                 imageUrl:
-                                    "${viewmodel.appEnvironment.apiBaseUrl}/images/topics/${viewmodel.topicModel.value.thumbImage}",
+                                    "${viewModel.appEnvironment.apiBaseUrl}/images/topics/${viewModel.topicModel.value.thumbImage}",
                                 imageBuilder: (context, imageProvider) => Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(6),
@@ -67,14 +67,15 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TagTopic(
-                                tagName: viewmodel.topicModel.value.tag.toString(),
+                                tagName: viewModel.topicModel.value.tag.toString(),
                                 buttonColor: MyColors.red.withOpacity(0.1),
                               ),
                               InkWell(
                                 onTap: () {
-                                  setState(() {
-                                    follow = !follow;
-                                  });
+                                  viewModel.handleFollowing();
+                                  // setState(() {
+                                  //   follow = !follow;
+                                  // });
                                 },
                                 child: TagTopic(
                                   tagName: follow ? '  + FOLLOWING   ' : '  + FOLLOW   ',
@@ -87,7 +88,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
                           child: Text(
-                            viewmodel.topicModel.value.description.toString(),
+                            viewModel.topicModel.value.description.toString(),
                             style: StylesText.content12BlackWhite,
                           ),
                         ),
@@ -110,7 +111,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     spacing: 10,
                     runSpacing: 10,
                     children: [
-                      for (var item in viewmodel.news)
+                      for (var item in viewModel.news)
                         CardNews(
                             newsId: item.newsId.toString(),
                             factCheck: Images.icnone,
