@@ -11,7 +11,6 @@ import 'package:fake_news/views/view_news/viewnews_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import 'button.dart';
@@ -71,7 +70,9 @@ class _CardNewsState extends State<CardNews> {
         GestureDetector(
           onTap: () {
             Get.to(() => ViewNewsScreen(
+                  newsId: widget.newsId,
                   content: widget.content,
+                  isLoggedIn: isLoggedIn,
                 ));
           },
           child: Container(

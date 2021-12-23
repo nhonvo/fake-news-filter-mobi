@@ -6,20 +6,20 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileViewModel extends BaseViewModel {
-  ProfileViewModel(
-      {required this.authApi, required this.authRepo, required this.pref});
+  ProfileViewModel({required this.authApi, required this.authRepo, required this.pref});
   AuthApi authApi;
   AuthRepo authRepo;
   SharedPreferences pref;
 
   handlelogout() async {
     Get.defaultDialog(
-      title: "Logout",
+      title: "logout".tr,
       titleStyle: StylesText.content14BoldBlack,
-      middleText: "You content goes here...",
+      middleText: "confirmLogout".tr,
       middleTextStyle: StylesText.content12BoldBlack,
       barrierDismissible: false,
       radius: 15.0,
@@ -40,7 +40,7 @@ class ProfileViewModel extends BaseViewModel {
           authRepo.handleUnAuthorized();
           Get.offAllNamed(Routes.DISCOVERY);
         },
-        child: Text("Confirm"));
+        child: Text("okay".tr));
   }
 
   Widget cancelBtn() {
@@ -48,6 +48,6 @@ class ProfileViewModel extends BaseViewModel {
         onPressed: () {
           Get.back();
         },
-        child: Text("Cancel"));
+        child: Text("cancel".tr));
   }
 }

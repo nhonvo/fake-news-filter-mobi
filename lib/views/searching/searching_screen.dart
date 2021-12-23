@@ -14,7 +14,7 @@ class Searching extends StatefulWidget {
 }
 
 class _SearchingState extends State<Searching> {
-  BreakingViewModel get viewmodel => Get.find<BreakingViewModel>();
+  BreakingViewModel get viewModel => Get.find<BreakingViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +35,9 @@ class _SearchingState extends State<Searching> {
         openAxisAlignment: 0.0,
         width: isPortrait ? 600 : 500,
         debounceDelay: const Duration(milliseconds: 500),
-        progress: viewmodel.isSearching.value,
+        progress: viewModel.isSearching.value,
         onQueryChanged: (query) {
-          viewmodel.search(query);
+          viewModel.search(query);
         },
         transition: CircularFloatingSearchBarTransition(),
         actions: [
@@ -62,16 +62,17 @@ class _SearchingState extends State<Searching> {
               elevation: 4.0,
               child: Obx(() {
                 return Column(mainAxisSize: MainAxisSize.min, children: [
-                  for (var item in viewmodel.searchingNews)
+                  for (var item in viewModel.searchingNews)
                     InkWell(
                       onTap: () {
                         // FloatingSearchBar.of(context)!.close();
                         Get.to(() => ViewNewsScreen(
-                              content: item?.content.toString() ?? "",
+                              newsId: item!.newsId.toString(),
+                              content: item.content.toString(),
                             ));
                       },
                       child: Container(
-                        decoration: item != viewmodel.searchingNews.last
+                        decoration: item != viewModel.searchingNews.last
                             ? BoxDecoration(border: Border(bottom: BorderSide(color: MyColors.greyLight)))
                             : null,
                         child: Padding(
