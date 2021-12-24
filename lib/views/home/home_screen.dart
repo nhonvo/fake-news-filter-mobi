@@ -6,7 +6,6 @@ import 'package:fake_news/views/breaking/breaking_screen.dart';
 import 'package:fake_news/views/community/community_screen.dart';
 import 'package:fake_news/views/fact_news/fact_news_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';

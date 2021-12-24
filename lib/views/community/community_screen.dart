@@ -1,10 +1,10 @@
 import 'package:fake_news/resources/utils/app_helper.dart';
+import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/card_community.dart';
 import 'package:fake_news/views/community/community_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -41,23 +41,26 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 IconButton(onPressed: () {}, icon: Icon(Icons.history))
               ],
             ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
-                  style: BorderStyle.solid,
-                  width: 1.0,
+            InkWell(
+              onTap: () => Get.toNamed(Routes.CONTRIBUTE),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
+                    style: BorderStyle.solid,
+                    width: 1.0,
+                  ),
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(10.0),
+                height: 45,
+                width: Get.size.width * 0.9,
+                child: Center(
+                    child: Text(
+                  "Gửi thông tin chi tiết về tin tức cần xác thực ...",
+                  style: StylesText.content12LightBlack,
+                )),
               ),
-              height: 45,
-              width: Get.size.width * 0.9,
-              child: Center(
-                  child: Text(
-                "Gửi thông tin chi tiết về tin tức cần xác thực ...",
-                style: StylesText.content12LightBlack,
-              )),
             ),
             SizedBox(
               height: 5,
@@ -129,16 +132,27 @@ class _CommunityScreenState extends State<CommunityScreen> {
                             physics: BouncingScrollPhysics(),
                             itemCount: viewModel.newsCommList.length,
                             itemBuilder: (context, index) {
-                              if (viewModel.newsCommList[index].isPopular == true) {
+                              if (viewModel.newsCommList[index].isPopular ==
+                                  true) {
                                 return GestureDetector(
                                   onTap: () {},
                                   child: CardCommunity(
-                                    avatar: viewModel.newsCommList[index].publisher?.avatar,
-                                    title: viewModel.newsCommList[index].title.toString(),
-                                    content: viewModel.newsCommList[index].content.toString(),
-                                    crowdId: viewModel.newsCommList[index].newsCommunityId.toString(),
-                                    nameCrowd: viewModel.newsCommList[index].publisher?.fullName ?? "Anonymous",
-                                    numberCrowd: viewModel.newsCommList[index].publisher?.noNewsContributed ?? 0,
+                                    avatar: viewModel
+                                        .newsCommList[index].publisher?.avatar,
+                                    title: viewModel.newsCommList[index].title
+                                        .toString(),
+                                    content: viewModel
+                                        .newsCommList[index].content
+                                        .toString(),
+                                    crowdId: viewModel
+                                        .newsCommList[index].newsCommunityId
+                                        .toString(),
+                                    nameCrowd: viewModel.newsCommList[index]
+                                            .publisher?.fullName ??
+                                        "Anonymous",
+                                    numberCrowd: viewModel.newsCommList[index]
+                                            .publisher?.noNewsContributed ??
+                                        0,
                                     onpress: () {},
                                     times: "",
                                   ),
@@ -174,10 +188,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           title: item.title.toString(),
                           content: item.content.toString(),
                           crowdId: item.newsCommunityId.toString(),
-                          nameCrowd: item.publisher?.fullName.toString() ?? "Anonymous",
+                          nameCrowd: item.publisher?.fullName.toString() ??
+                              "Anonymous",
                           numberCrowd: item.publisher?.noNewsContributed ?? 0,
                           width: Get.size.width,
-                          times: AppHelper.convertToAgo(DateTime.parse(item.datePublished.toString())),
+                          times: AppHelper.convertToAgo(
+                              DateTime.parse(item.datePublished.toString())),
                           onpress: () {},
                         ),
                     ],

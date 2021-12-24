@@ -3,18 +3,18 @@
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:url_launcher/url_launcher.dart';
 
 class ViewNewsScreen extends StatefulWidget {
-  ViewNewsScreen({Key? key, required this.content, this.isLoggedIn, required this.newsId}) : super(key: key);
+  ViewNewsScreen(
+      {Key? key, required this.content, this.isLoggedIn, required this.newsId})
+      : super(key: key);
 
   final String content, newsId;
   late bool? isLoggedIn;
@@ -43,18 +43,22 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
         actions: [
           PopupMenuButton(
               offset: Offset(0, 50),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
               itemBuilder: (context) => [
                     PopupMenuItem(
                       onTap: () {
-                        Clipboard.setData(ClipboardData(text: widget.content)).then((_) {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text('clipboard'.tr), backgroundColor: Colors.green));
+                        Clipboard.setData(ClipboardData(text: widget.content))
+                            .then((_) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('clipboard'.tr),
+                              backgroundColor: Colors.green));
                         });
                       },
                       child: Row(
                         children: [
-                          Icon(FontAwesomeIcons.link, color: Colors.black, size: 17),
+                          Icon(FontAwesomeIcons.link,
+                              color: Colors.black, size: 17),
                           SizedBox(width: 10),
                           Text(
                             'copy'.tr,
@@ -72,7 +76,8 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                       },
                       child: Row(
                         children: [
-                          Icon(FontAwesomeIcons.globeAsia, color: Colors.black, size: 17),
+                          Icon(FontAwesomeIcons.globeAsia,
+                              color: Colors.black, size: 17),
                           SizedBox(width: 10),
                           Text(
                             'browser'.tr,
@@ -115,8 +120,10 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                   // text that renders h1 elements will be red
                   "h1": Style(color: Colors.red),
                 },
-                onLinkTap:
-                    (String? url, RenderContext context, Map<String, String> attributes, dom.Element? element) async {
+                onLinkTap: (String? url,
+                    RenderContext context,
+                    Map<String, String> attributes,
+                    dom.Element? element) async {
                   if (await canLaunch(url.toString())) {
                     await launch(url.toString());
                   }

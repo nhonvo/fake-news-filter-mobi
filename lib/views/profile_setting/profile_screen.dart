@@ -6,7 +6,6 @@ import 'package:fake_news/views/follow_topic/follow_topic.dart';
 import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
@@ -69,7 +68,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+            margin:
+                EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
             child: Text(
               'Phiên bản 0.0.1',
               style: StylesText.content12LightBlack,
@@ -164,8 +164,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     );
                   }),
-              BuildItemButon(icon: IconsApp.follow, content: 'followTopic'.tr, onTap: () {Get.to(FollowTopicScreen());}),
-              BuildItemButon(icon: IconsApp.social, content: 'linkSocial'.tr, onTap: () {}),
+              BuildItemButon(
+                  icon: IconsApp.follow,
+                  content: 'followTopic'.tr,
+                  onTap: () {
+                    Get.to(FollowTopicScreen());
+                  }),
+              BuildItemButon(
+                  icon: IconsApp.social,
+                  content: 'linkSocial'.tr,
+                  onTap: () {}),
             ],
           ),
         )
@@ -192,9 +200,16 @@ Widget _infoSupport(BuildContext context) {
         child: Column(
           children: <Widget>[
             BuildItemButon(icon: IconsApp.faq, content: 'FAQ', onTap: () {}),
-            BuildItemButon(icon: IconsApp.rate, content: 'Đánh giá ứng dụng', onTap: () {}),
-            BuildItemButon(icon: IconsApp.about, content: 'Về Fake News Filter', onTap: () {}),
-            BuildItemButon(icon: IconsApp.support, content: 'Hỗ trợ', onTap: () {}),
+            BuildItemButon(
+                icon: IconsApp.rate,
+                content: 'Đánh giá ứng dụng',
+                onTap: () {}),
+            BuildItemButon(
+                icon: IconsApp.about,
+                content: 'Về Fake News Filter',
+                onTap: () {}),
+            BuildItemButon(
+                icon: IconsApp.support, content: 'Hỗ trợ', onTap: () {}),
           ],
         ),
       )
@@ -206,7 +221,8 @@ class BuildItemButon extends StatelessWidget {
   final String icon;
   final String content;
   final Function onTap;
-  BuildItemButon({required this.icon, required this.content, required this.onTap});
+  BuildItemButon(
+      {required this.icon, required this.content, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

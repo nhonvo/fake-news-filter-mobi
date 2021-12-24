@@ -1,3 +1,4 @@
+import 'package:fake_news/views/community/contribute/contribute_screen.dart';
 import 'package:fake_news/views/follow_topic/follow_topic.dart';
 import 'package:fake_news/views/home/home_binding.dart';
 import 'package:fake_news/views/home/home_screen.dart';
@@ -41,7 +42,17 @@ class AppRoutes {
       transition: Transition.rightToLeftWithFade,
       binding: LoginBinding(),
     ),
-    GetPage(name: Routes.HOME, page: () => HomeScreen(), binding: HomeBinding()),
+    GetPage(
+      name: Routes.HOME,
+      page: () => HomeScreen(),
+      binding: HomeBinding(),
+      transition: Transition.rightToLeftWithFade,
+    ),
+    GetPage(
+      name: Routes.CONTRIBUTE,
+      page: () => ContributeScreen(),
+      transition: Transition.rightToLeftWithFade,
+    ),
   ];
 }
 
@@ -52,4 +63,5 @@ class Routes {
   static const String HOME = "/home";
   static const String LOGIN = "/login";
   static const String PREVIEW = "/preview";
+  static const String CONTRIBUTE = "/contribute";
 }
