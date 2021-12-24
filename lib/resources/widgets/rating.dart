@@ -5,7 +5,6 @@ import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 import 'button.dart';
 
@@ -50,7 +49,8 @@ class _RatingButtonState extends State<RatingButton> {
                       widget.isVoted = 1;
                     });
                   },
-                  icon: Icon(FontAwesomeIcons.thumbsUp, color: widget.isVoted == 1 ? Colors.green : Colors.black),
+                  icon: Icon(FontAwesomeIcons.thumbsUp,
+                      color: widget.isVoted == 1 ? Colors.green : Colors.black),
                   buttonColor: Colors.white,
                   buttonRadius: 10,
                 ),
@@ -63,7 +63,8 @@ class _RatingButtonState extends State<RatingButton> {
                       widget.isVoted = 0;
                     });
                   },
-                  icon: Icon(FontAwesomeIcons.thumbsDown, color: widget.isVoted == 0 ? Colors.red : Colors.black),
+                  icon: Icon(FontAwesomeIcons.thumbsDown,
+                      color: widget.isVoted == 0 ? Colors.red : Colors.black),
                   buttonColor: Colors.white,
                   buttonRadius: 10,
                 ),

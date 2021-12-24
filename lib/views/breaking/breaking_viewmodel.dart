@@ -103,7 +103,7 @@ class BreakingViewModel extends BaseViewModel {
     var languageContent =
         pref.getString(AppConstant.sharePrefKeys.languageContent);
 
-    if (!keyword.trim().isEmpty) {
+    if (keyword.trim().isNotEmpty) {
       var response = await extraApi.search(keyword, languageContent ?? 'en');
 
       searchingNews.clear();

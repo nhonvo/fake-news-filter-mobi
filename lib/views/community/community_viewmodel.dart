@@ -5,11 +5,9 @@ import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/news_comnunity_model.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:fake_news/models/language_model.dart';
-import 'package:fake_news/models/topics/topic_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
-import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -45,7 +43,8 @@ class CommunityViewModel extends BaseViewModel {
   var getLanguageContent = "".obs, tempLanguageContent = "".obs;
 ////////////////////////////////////////////////////////////
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -57,9 +56,11 @@ class CommunityViewModel extends BaseViewModel {
   handleGetNews() async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent =
+        prefs.getString(AppConstant.sharePrefKeys.languageContent);
 
-    var response = await newsCommunityApi.getNewsCommunity(languageContent ?? 'en');
+    var response =
+        await newsCommunityApi.getNewsCommunity(languageContent ?? 'en');
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();

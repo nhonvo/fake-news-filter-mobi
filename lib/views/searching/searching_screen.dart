@@ -2,7 +2,6 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:fake_news/views/view_news/viewnews_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
@@ -18,7 +17,8 @@ class _SearchingState extends State<Searching> {
 
   @override
   Widget build(BuildContext context) {
-    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Obx(() {
       return FloatingSearchBar(
@@ -73,12 +73,16 @@ class _SearchingState extends State<Searching> {
                       },
                       child: Container(
                         decoration: item != viewModel.searchingNews.last
-                            ? BoxDecoration(border: Border(bottom: BorderSide(color: MyColors.greyLight)))
+                            ? BoxDecoration(
+                                border: Border(
+                                    bottom:
+                                        BorderSide(color: MyColors.greyLight)))
                             : null,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ListTile(
-                            title: Text(item?.name ?? "", style: StylesText.content16BoldBlack),
+                            title: Text(item?.name ?? "",
+                                style: StylesText.content16BoldBlack),
                             subtitle: Text(
                                 '${item?.description.toString().substring(0, item.description!.length > 50 ? 50 : item.description.toString().length) ?? ""}...',
                                 style: StylesText.content14LightBlack),
