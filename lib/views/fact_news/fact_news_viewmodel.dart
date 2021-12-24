@@ -30,7 +30,8 @@ class FactNewsViewModel extends BaseViewModel {
   var searchingNews = <NewsModel?>[].obs;
   var isLoaded = false.obs;
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   // void onRefresh() async {
   //   // monitor network fetch
@@ -42,8 +43,8 @@ class FactNewsViewModel extends BaseViewModel {
   handleGetFactNews(String? filter) async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var userId = await authRepo.getUserId();
-    var languageContent = pref.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent =
+        pref.getString(AppConstant.sharePrefKeys.languageContent);
 
     var response = await newsApi.getNews(filter, languageContent);
 

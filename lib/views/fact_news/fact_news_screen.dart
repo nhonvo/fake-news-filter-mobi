@@ -7,7 +7,6 @@ import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/views/fact_news/fact_news_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class FactNewsScreen extends StatefulWidget {
@@ -42,7 +41,8 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
           SizedBox(
             height: 10,
           ),
-          Text('filter_news'.tr.toUpperCase(), style: StylesText.content20BoldBlack),
+          Text('filter_news'.tr.toUpperCase(),
+              style: StylesText.content20BoldBlack),
           SizedBox(
             height: 5,
           ),
@@ -140,14 +140,19 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                 for (var item in viewmodel.news)
                   CardNews(
                       newsId: item!.newsId.toString(),
-                      factCheck: filter == 'real' ? IconsApp.real : IconsApp.fake,
+                      factCheck:
+                          filter == 'real' ? IconsApp.real : IconsApp.fake,
                       rate: false,
                       offical: "$filter".tr,
                       // tag: viewmodel.topicModel.value.tag.toString(),
                       socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
-                      times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                      times: AppHelper.convertToAgo(
+                          DateTime.parse(item.timestamp.toString())),
                       title: item.description.toString().substring(
-                          0, item.description.toString().length > 50 ? 50 : item.description.toString().length),
+                          0,
+                          item.description.toString().length > 50
+                              ? 50
+                              : item.description.toString().length),
                       content: item.content.toString(),
                       image: item.thumbNews.toString(),
                       article: item.publisher ?? '',

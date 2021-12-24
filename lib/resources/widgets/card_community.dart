@@ -1,6 +1,5 @@
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'avatar.dart';
 
@@ -91,7 +90,8 @@ class _CardCommunityState extends State<CardCommunity> {
                                 "Số tin đã đóng góp:",
                                 style: StylesText.content10MediumBlack,
                               ),
-                              Text(widget.numberCrowd.toString(), style: StylesText.content10BoldBlack)
+                              Text(widget.numberCrowd.toString(),
+                                  style: StylesText.content10BoldBlack)
                             ],
                           ),
                         ],
