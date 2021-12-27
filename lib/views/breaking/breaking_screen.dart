@@ -4,6 +4,7 @@ import 'package:fake_news/data/story_data.dart';
 import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
+import 'package:fake_news/resources/widgets/shimmer.dart';
 import 'package:fake_news/resources/widgets/story_button.dart';
 import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:fake_news/views/searching/searching_screen.dart';
@@ -62,20 +63,40 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         factCheck: Images.icnone,
                                         rate: true,
                                         // tag: viewmodel.topicModel.value.tag.toString(),
-                                        socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
-                                        times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
-                                        title: item.description.toString().substring(
-                                            0,
-                                            item.description.toString().length > 50
-                                                ? 50
-                                                : item.description.toString().length),
+                                        socialBeliefs:
+                                            '${50 + new Random().nextInt(90 - 50)}%',
+                                        times: AppHelper.convertToAgo(
+                                            DateTime.parse(
+                                                item.timestamp.toString())),
+                                        title: item.description
+                                            .toString()
+                                            .substring(
+                                                0,
+                                                item.description
+                                                            .toString()
+                                                            .length >
+                                                        50
+                                                    ? 50
+                                                    : item.description
+                                                        .toString()
+                                                        .length),
                                         content: item.content.toString(),
                                         image: item.thumbNews.toString(),
                                         article: item.publisher ?? '',
                                         onpress: () {}),
                                 ],
                               )
-                            : Container();
+                            : Container(
+                                height: 700,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    padding: const EdgeInsets.all(8),
+                                    itemCount: 6,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return NewsShimmer();
+                                    }),
+                              );
                       }),
                     ),
                   )

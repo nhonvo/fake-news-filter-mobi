@@ -44,7 +44,7 @@ class BreakingViewModel extends BaseViewModel {
   }
 
   handleGetNewsByFollowedTopic() async {
-    EasyLoading.show(status: 'fetchingData'.tr);
+    // EasyLoading.show(status: 'fetchingData'.tr);
 
     var userId = await authRepo.getUserId();
 
@@ -69,7 +69,7 @@ class BreakingViewModel extends BaseViewModel {
       //clear all news before get data from API to avoid duplication
       news.clear();
       news.addAll(newsList);
-      EasyLoading.dismiss();
+      //   EasyLoading.dismiss();
     }
   }
 
