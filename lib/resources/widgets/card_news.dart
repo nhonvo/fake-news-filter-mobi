@@ -103,7 +103,8 @@ class _CardNewsState extends State<CardNews> {
                           children: [
                             widget.offical != null
                                 ? Row(children: [
-                                    Text('Official Rating: ', style: StylesText.content12MediumBlack),
+                                    Text('Official Rating: ',
+                                        style: StylesText.content12MediumBlack),
                                     Text(
                                       widget.offical!,
                                       style: StylesText.content12BoldBlack,
@@ -114,7 +115,8 @@ class _CardNewsState extends State<CardNews> {
                                 ? Row(children: [
                                     widget.offical == null
                                         ? Padding(
-                                            padding: const EdgeInsets.only(right: 4.0),
+                                            padding: const EdgeInsets.only(
+                                                right: 4.0),
                                             child: SvgPicture.asset(
                                               IconsApp.unknown,
                                               width: 24,
@@ -159,7 +161,8 @@ class _CardNewsState extends State<CardNews> {
                           child: CachedNetworkImage(
                             fit: BoxFit.fitWidth,
                             height: 180,
-                            imageUrl: "${appEnvironment.apiBaseUrl}/images/news/${widget.image}",
+                            imageUrl:
+                                "${appEnvironment.apiBaseUrl}/images/news/${widget.image}",
                             imageBuilder: (context, imageProvider) => Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
@@ -169,8 +172,10 @@ class _CardNewsState extends State<CardNews> {
                                 ),
                               ),
                             ),
-                            placeholder: (context, url) => CupertinoActivityIndicator(),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            placeholder: (context, url) =>
+                                CupertinoActivityIndicator(),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                         ),
                       )
@@ -238,7 +243,10 @@ class _CardNewsState extends State<CardNews> {
         ),
         widget.tag == null
             ? SizedBox()
-            : Positioned(top: 7, right: 0, child: TagTopic(tagName: widget.tag, buttonColor: Colors.blue))
+            : Positioned(
+                top: 7,
+                right: 0,
+                child: TagTopic(tagName: widget.tag, buttonColor: Colors.blue))
       ],
     );
   }
