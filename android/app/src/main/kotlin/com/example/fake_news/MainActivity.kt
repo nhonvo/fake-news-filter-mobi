@@ -1,4 +1,4 @@
-package com.example.fake_news
+package com.fnf_technology
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -5,6 +5,7 @@ import 'package:fake_news/models/language_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class SplashViewModel extends BaseViewModel {
   SplashViewModel({required this.authRepo, required this.languageApi, required this.followingApi});
@@ -16,6 +17,7 @@ class SplashViewModel extends BaseViewModel {
   handleTransition() async {
     var isNotFollow = await authRepo.getIsNotFollow();
     var token = await authRepo.getAuthToken();
+    var userId = await authRepo.getUserId();
 
     var response = await languageApi.getLanguages();
 

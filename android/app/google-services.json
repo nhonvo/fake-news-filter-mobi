@@ -7,14 +7,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:801182969519:android:e7cc466d8425f1a757ae5a",
+        "mobilesdk_app_id": "1:801182969519:android:770674dbe5ce91b557ae5a",
         "android_client_info": {
-          "package_name": "com.example.fake_news"
+          "package_name": "com.fnf_technology"
         }
       },
       "oauth_client": [
         {
-          "client_id": "801182969519-0l8hskdqu11malnqdvtp3663h8ro6os7.apps.googleusercontent.com",
+          "client_id": "801182969519-fb9n5dkntfukp3e9pfqfc06fje4vop2u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fnf_technology",
+            "certificate_hash": "14dc673e4544655edd544296e480171e69797b47"
+          }
+        },
+        {
+          "client_id": "801182969519-dlef2amtm9nqe6eslvo7oc6nmgku47qg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

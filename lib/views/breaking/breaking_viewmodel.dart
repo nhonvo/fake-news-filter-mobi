@@ -9,6 +9,7 @@ import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,8 +34,7 @@ class BreakingViewModel extends BaseViewModel {
   //hide progress searching
   var isSearching = false.obs;
 
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController refreshController = RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -47,7 +47,11 @@ class BreakingViewModel extends BaseViewModel {
     // EasyLoading.show(status: 'fetchingData'.tr);
 
     var userId = await authRepo.getUserId();
-
+    await OneSignal.shared.setExternalUserId(userId!).then((results) {
+      print(results.toString());
+    }).catchError((error) {
+      print(error.toString());
+    });
     var response = await newsApi.getNewsByFollowedTopic(userId.toString());
 
     if (response.isSuccessed == false) {
@@ -100,8 +104,7 @@ class BreakingViewModel extends BaseViewModel {
     //show progress searching
     isSearching.value = true;
 
-    var languageContent =
-        pref.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent = pref.getString(AppConstant.sharePrefKeys.languageContent);
 
     if (keyword.trim().isNotEmpty) {
       var response = await extraApi.search(keyword, languageContent ?? 'en');
