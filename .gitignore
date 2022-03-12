@@ -44,6 +44,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/key.properties
 ios/build/Pods.build/Release-iphonesimulator/connectivity.build/dgph
 ios/build/Pods.build/Release-iphonesimulator/Flutter.build/dgph
 ios/build/Pods.build/Release-iphonesimulator/FMDB.build/dgph

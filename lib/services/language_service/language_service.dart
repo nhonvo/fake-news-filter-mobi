@@ -11,6 +11,7 @@ class LanguageService extends GetxService {
   LanguageService({
     required this.sharedPreferences,
   });
+
   String get currentLanguage => language.value;
 
   Future<LanguageService> init() async {

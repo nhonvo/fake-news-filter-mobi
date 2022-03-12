@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.fakenewsfilter</string>
+	<string>com.fnf_technology</string>
 	<key>PROJECT_ID</key>
 	<string>fake-news-filter</string>
 	<key>STORAGE_BUCKET</key>
