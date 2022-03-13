@@ -308,6 +308,12 @@ class StylesText {
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size18,
   );
+  static TextStyle content18BoldBlue = TextStyle(
+    color: Colors.blue,
+    fontFamily: 'NUNITO-BOLD',
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size18,
+  );
   static TextStyle content20BoldBlack = TextStyle(
     color: Colors.black,
     fontFamily: 'NUNITO-BOLD',
@@ -323,6 +329,12 @@ class StylesText {
   static TextStyle title24HeavyBlack = TextStyle(
     color: Colors.black,
     fontFamily: 'NUNITO-BOLD',
+    fontSize: SizeText.size24,
+  );
+  static TextStyle content24BoldBlue = TextStyle(
+    color: Colors.blue,
+    fontFamily: 'NUNITO-BOLD',
+    fontWeight: FontWeight.bold,
     fontSize: SizeText.size24,
   );
   static TextStyle content24BoldOrange = TextStyle(

@@ -6,6 +6,7 @@ import 'package:fake_news/views/discovery/discovery_binding.dart';
 import 'package:fake_news/views/discovery/discovery_screen.dart';
 import 'package:fake_news/views/login/login_binding.dart';
 import 'package:fake_news/views/login/login_screen.dart';
+import 'package:fake_news/views/onboarding/onboarding_screen.dart';
 import 'package:fake_news/views/preview/preview_binding.dart';
 import 'package:fake_news/views/preview/preview_screen.dart';
 import 'package:fake_news/views/splash/splash_binding.dart';
@@ -53,6 +54,11 @@ class AppRoutes {
       page: () => ContributeScreen(),
       transition: Transition.rightToLeftWithFade,
     ),
+    GetPage(
+      name: Routes.ONBOARDING,
+      page: () => OnBoardingScreen(),
+      transition: Transition.rightToLeftWithFade,
+    ),
   ];
 }
 
@@ -64,4 +70,5 @@ class Routes {
   static const String LOGIN = "/login";
   static const String PREVIEW = "/preview";
   static const String CONTRIBUTE = "/contribute";
+  static const String ONBOARDING = "/onboarding";
 }
