@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       locale: Locale(language.currentLanguage),
       translations: Localization(),
       getPages: AppRoutes.appRoutes,
-      initialRoute: Routes.INIT,
+      initialRoute: Routes.ONBOARDING,
       defaultTransition: Transition.rightToLeftWithFade,
     );
   }
@@ -77,9 +77,4 @@ void initOneSignal() {
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
   OneSignal.shared.setAppId("fabd12c6-0ad1-4e5a-bdad-78fabebae2a7");
-
-// The promptForPushNotificationsWithUserResponse function will show the iOS push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
-    print("Accepted permission: $accepted");
-  });
 }
