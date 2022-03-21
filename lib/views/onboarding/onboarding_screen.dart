@@ -23,9 +23,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         globalBackgroundColor: Colors.white,
         showBackButton: false,
         showSkipButton: true,
-        skip: Text("Skip"),
-        next: Text("Next"),
-        done: Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
+        skip: Text("skip".tr),
+        next: Text("next".tr),
+        done: Text("done".tr,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+            )),
         onDone: () {
           Get.offAllNamed(Routes.DISCOVERY);
         },
@@ -34,13 +37,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             activeSize: Size(20.0, 10.0),
             color: Colors.black26,
             spacing: EdgeInsets.symmetric(horizontal: 3.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0))),
+            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0))),
         pages: [
           PageViewModel(
-            title: "XEM TIN TỨC",
-            body:
-                "Đa dạng các chủ đề, ngôn ngữ. \nĐọc các tin tức dựa trên chủ đề đã theo dõi.",
+            title: "onboardTitle1".tr,
+            body: "onboardBody1".tr,
             image: Image.asset(
               Images.onboarding_1,
               width: Get.size.width * 0.6,
@@ -51,9 +52,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
           ),
           PageViewModel(
-            title: "TIN TỨC ĐƯỢC XÁC THỰC",
-            body:
-                "Các tin tức giả sẽ được lọc và thể hiện cụ thể ở từng tin tức, tránh các tin không đáng tin cậy.",
+            title: "onboardTitle2".tr,
+            body: "onboardBody2".tr,
             image: Image.asset(
               Images.onboarding_2,
               width: Get.size.width * 0.6,
@@ -64,9 +64,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
           ),
           PageViewModel(
-            title: "TƯƠNG TÁC TRÊN TIN TỨC",
-            body:
-                "Người dùng có thể bình chọn, chia sẻ, bình luận hoặc đóng góp tính xác thực của các tin tức.",
+            title: "onboardTitle3".tr,
+            body: "onboardBody3".tr,
             image: Image.asset(
               Images.onboarding_4,
               width: Get.size.width * 0.6,
@@ -77,24 +76,21 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
           ),
           PageViewModel(
-            title: "NHẬN THÔNG BÁO MỚI",
-            body:
-                "Các tin tức mới sẽ được cập nhật để đạt trải nghiệm tốt nhất cho người dùng.",
+            title: "onboardTitle4".tr,
+            body: "onboardBody4".tr,
             image: Image.asset(
               Images.onboarding_5,
               width: Get.size.width * 0.6,
             ),
             footer: CustomButton(
                 onPressed: () {
-                  OneSignal.shared
-                      .promptUserForPushNotificationPermission()
-                      .then((accepted) {
+                  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
                     print("Accepted permission: $accepted");
                   });
                 },
                 buttonColor: MyColors.blue,
                 width: Get.size.width * 0.6,
-                buttonText: "Cho phép gửi thông báo",
+                buttonText: "allowNotification".tr,
                 textStyle: StylesText.content12BoldWhite,
                 buttonRadius: 15.0),
             decoration: PageDecoration(

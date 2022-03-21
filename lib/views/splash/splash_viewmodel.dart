@@ -18,7 +18,6 @@ class SplashViewModel extends BaseViewModel {
     var isNotFollow = await authRepo.getIsNotFollow();
     var token = await authRepo.getAuthToken();
     var userId = await authRepo.getUserId();
-
     var response = await languageApi.getLanguages();
 
     // Get.lazyPut<List<LanguageModel>?>(() => response.resultObj);
@@ -34,7 +33,7 @@ class SplashViewModel extends BaseViewModel {
       }
     } else {
       //if user do not have token
-      Get.offAllNamed(Routes.DISCOVERY);
+      Get.offAllNamed(Routes.ONBOARDING);
     }
   }
 

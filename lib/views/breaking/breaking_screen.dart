@@ -37,18 +37,20 @@ class _BreakingScreenState extends State<BreakingScreen> {
               header: MaterialClassicHeader(),
               child: Column(
                 children: [
-                  Container(
-                    color: Colors.white,
-                    width: double.infinity,
-                    height: 100,
-                    alignment: Alignment.center,
-                    child: ListView.builder(
-                        itemCount: news.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return storyButton(news[index], context);
-                        }),
-                  ),
+                  //TODO: Uncomment to enable story
+
+                  // Container(
+                  //   color: Colors.white,
+                  //   width: double.infinity,
+                  //   height: 100,
+                  //   alignment: Alignment.center,
+                  //   child: ListView.builder(
+                  //       itemCount: news.length,
+                  //       scrollDirection: Axis.horizontal,
+                  //       itemBuilder: (context, index) {
+                  //         return storyButton(news[index], context);
+                  //       }),
+                  // ),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Obx(() {
@@ -63,23 +65,13 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         factCheck: Images.icnone,
                                         rate: true,
                                         // tag: viewmodel.topicModel.value.tag.toString(),
-                                        socialBeliefs:
-                                            '${50 + new Random().nextInt(90 - 50)}%',
-                                        times: AppHelper.convertToAgo(
-                                            DateTime.parse(
-                                                item.timestamp.toString())),
-                                        title: item.description
-                                            .toString()
-                                            .substring(
-                                                0,
-                                                item.description
-                                                            .toString()
-                                                            .length >
-                                                        50
-                                                    ? 50
-                                                    : item.description
-                                                        .toString()
-                                                        .length),
+                                        socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
+                                        times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                                        title: item.description.toString().substring(
+                                            0,
+                                            item.description.toString().length > 50
+                                                ? 50
+                                                : item.description.toString().length),
                                         content: item.content.toString(),
                                         image: item.thumbNews.toString(),
                                         article: item.publisher ?? '',
@@ -92,8 +84,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                     scrollDirection: Axis.vertical,
                                     padding: const EdgeInsets.all(8),
                                     itemCount: 6,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
+                                    itemBuilder: (BuildContext context, int index) {
                                       return NewsShimmer();
                                     }),
                               );

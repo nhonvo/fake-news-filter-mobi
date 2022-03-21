@@ -2,6 +2,7 @@ import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/views/comming_soon_screen.dart';
 import 'package:fake_news/views/follow_topic/follow_topic.dart';
 import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_viewmodel.dart';
@@ -41,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: 40,
                     ),
                     Text(
-                      'Thiết lập',
+                      'config'.tr,
                       style: StylesText.content16BoldBlack,
                     ),
                     SizedBox(
@@ -52,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: 20,
                     ),
                     Text(
-                      'Về Fake News Filter',
+                      'aboutFnf'.tr,
                       style: StylesText.content16BoldBlack,
                     ),
                     SizedBox(
@@ -68,10 +69,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            margin:
-                EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+            margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
             child: Text(
-              'Phiên bản 0.0.1',
+              'version'.tr,
               style: StylesText.content12LightBlack,
             ),
           ),
@@ -171,9 +171,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Get.to(FollowTopicScreen());
                   }),
               BuildItemButon(
-                  icon: IconsApp.social,
-                  content: 'linkSocial'.tr,
-                  onTap: () {}),
+                icon: IconsApp.social,
+                content: 'linkSocial'.tr,
+                //return coming soon screen when button is clicked
+                onTap: () => Get.to(() => ComingSoonScreen()),
+              ),
             ],
           ),
         )
@@ -199,17 +201,26 @@ Widget _infoSupport(BuildContext context) {
         ),
         child: Column(
           children: <Widget>[
-            BuildItemButon(icon: IconsApp.faq, content: 'FAQ', onTap: () {}),
             BuildItemButon(
-                icon: IconsApp.rate,
-                content: 'Đánh giá ứng dụng',
-                onTap: () {}),
+              icon: IconsApp.faq,
+              content: 'FAQ',
+              onTap: () => Get.to(() => ComingSoonScreen()),
+            ),
             BuildItemButon(
-                icon: IconsApp.about,
-                content: 'Về Fake News Filter',
-                onTap: () {}),
+              icon: IconsApp.rate,
+              content: 'rateApp'.tr,
+              onTap: () => Get.to(() => ComingSoonScreen()),
+            ),
             BuildItemButon(
-                icon: IconsApp.support, content: 'Hỗ trợ', onTap: () {}),
+              icon: IconsApp.about,
+              content: 'aboutFnf'.tr,
+              onTap: () => Get.to(() => ComingSoonScreen()),
+            ),
+            BuildItemButon(
+              icon: IconsApp.support,
+              content: 'support'.tr,
+              onTap: () => Get.to(() => ComingSoonScreen()),
+            ),
           ],
         ),
       )
@@ -221,8 +232,7 @@ class BuildItemButon extends StatelessWidget {
   final String icon;
   final String content;
   final Function onTap;
-  BuildItemButon(
-      {required this.icon, required this.content, required this.onTap});
+  BuildItemButon({required this.icon, required this.content, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
