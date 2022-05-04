@@ -8,6 +8,7 @@ abstract class AuthApi {
   Future<BaseResponse<LoginModel>> login(String email, String password);
   Future<BaseResponse<LoginModel>> loginFacebook(String accessToken);
   Future<BaseResponse<LoginModel>> loginGoogle(String accessToken);
+  Future<BaseResponse<UserModel>> getUserLoggedIn(String userId);
   Future<BaseResponse<UserModel>> register(UserModel model);
   Future<BaseResponse<String>> requestResetPassword(String email);
   Future<BaseResponse<String>> resetPassword(String code, String newPass, String cfNewPass);
@@ -25,6 +26,13 @@ class AuthApiIpml implements AuthApi {
       "/api/Users/Authenticate",
       {'username': username, 'password': password},
       parseJson: (json) => LoginModel.fromJson(json),
+    );
+  }
+
+  Future<BaseResponse<UserModel>> getUserLoggedIn(String userId) async {
+    return await dioApi.doGet<UserModel>(
+      "/api/Users/$userId",
+      parseJson: (json) => UserModel.fromJson(json),
     );
   }
 

@@ -1,5 +1,6 @@
 //Simply, a Repository pattern is such pattern where the business will ask for receipt and won’t know how the price is getting calculated and printed on the receipt.
 import 'package:fake_news/core/services/local_storage/auth_local_storage.dart';
+import 'package:fake_news/models/users/user_model.dart';
 
 abstract class AuthRepo {
   Future<String?>? getApiKey();

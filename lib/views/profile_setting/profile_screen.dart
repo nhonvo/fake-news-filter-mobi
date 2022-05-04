@@ -11,6 +11,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -27,42 +28,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(top: 10, left: 15, right: 15),
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 5, bottom: 5),
-            child: Column(
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    _buildInfoHeader(),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Text(
-                      'config'.tr,
-                      style: StylesText.content16BoldBlack,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    _infoConfig(context),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'aboutFnf'.tr,
-                      style: StylesText.content16BoldBlack,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    _infoSupport(context)
-                  ],
-                ),
-              ],
+        Obx(
+          () => Container(
+            padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+              child: Column(
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      _buildInfoHeader(viewModel.user?.value.fullName ?? ''),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        'config'.tr,
+                        style: StylesText.content16BoldBlack,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _infoConfig(context),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'aboutFnf'.tr,
+                        style: StylesText.content16BoldBlack,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _infoSupport(context)
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -87,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildInfoHeader() {
+  Widget _buildInfoHeader(String fullname) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -103,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Huynh Huu Khanh',
+                    fullname,
                     style: StylesText.content18BoldBlack,
                   ),
                   SizedBox(
@@ -126,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         InkWell(
           child: SvgPicture.asset(IconsApp.exit, width: 30),
           onTap: () async {
-            viewModel.handlelogout();
+            viewModel.handleLogout();
           },
         )
       ],
