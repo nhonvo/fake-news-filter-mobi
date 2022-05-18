@@ -27,7 +27,7 @@ void main() async {
 
   GestureBinding.instance?.resamplingEnabled = true; //Custom Gesture ListView
 
-  Get.put<AppEnvironment>(AppEnvironment.live());
+  Get.put<AppEnvironment>(AppEnvironment.dev());
 
   await AppServices.initServices();
 

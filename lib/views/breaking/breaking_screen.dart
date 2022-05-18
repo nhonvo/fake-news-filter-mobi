@@ -66,13 +66,11 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         tags: item.topicInfo!.map((v) => v!.topicName).toList(),
                                         socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
                                         times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
-                                        title: item.description.toString().substring(
-                                            0,
-                                            item.description.toString().length > 50
-                                                ? 50
-                                                : item.description.toString().length),
+                                        title: item.title.toString().substring(
+                                            0, item.title.toString().length > 50 ? 50 : item.title.toString().length),
                                         content: item.content.toString(),
-                                        image: item.thumbNews.toString(),
+                                        imageUrl: item.thumbNews.toString(),
+                                        webUrl: item.url.toString(),
                                         article: item.publisher ?? '',
                                         onpress: () {}),
                                 ],

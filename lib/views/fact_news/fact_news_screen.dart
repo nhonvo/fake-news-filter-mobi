@@ -41,8 +41,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
           SizedBox(
             height: 10,
           ),
-          Text('filter_news'.tr.toUpperCase(),
-              style: StylesText.content20BoldBlack),
+          Text('filter_news'.tr.toUpperCase(), style: StylesText.content20BoldBlack),
           SizedBox(
             height: 5,
           ),
@@ -140,21 +139,17 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                 for (var item in viewmodel.news)
                   CardNews(
                       newsId: item!.newsId.toString(),
-                      factCheck:
-                          filter == 'real' ? IconsApp.real : IconsApp.fake,
+                      factCheck: filter == 'real' ? IconsApp.real : IconsApp.fake,
                       rate: false,
                       offical: "$filter".tr,
                       // tag: viewmodel.topicModel.value.tag.toString(),
                       socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
-                      times: AppHelper.convertToAgo(
-                          DateTime.parse(item.timestamp.toString())),
-                      title: item.description.toString().substring(
-                          0,
-                          item.description.toString().length > 50
-                              ? 50
-                              : item.description.toString().length),
+                      times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                      title: item.title
+                          .toString()
+                          .substring(0, item.title.toString().length > 50 ? 50 : item.title.toString().length),
                       content: item.content.toString(),
-                      image: item.thumbNews.toString(),
+                      imageUrl: item.thumbNews.toString(),
                       article: item.publisher ?? '',
                       onpress: () {}),
               ],

@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
-  final String? offical, socialBeliefs, avatar, name, link, image, video;
+  final String? offical, socialBeliefs, avatar, name, link, imageUrl, video, webUrl;
   final String newsId, times, title, article, content, factCheck;
   final List<String?>? tags;
 
@@ -30,7 +30,8 @@ class CardNews extends StatefulWidget {
       this.offical,
       this.socialBeliefs,
       required this.times,
-      this.image,
+      this.imageUrl,
+      this.webUrl,
       this.video,
       required this.title,
       required this.article,
@@ -73,6 +74,7 @@ class _CardNewsState extends State<CardNews> {
             Get.to(() => ViewNewsScreen(
                   newsId: widget.newsId,
                   content: widget.content,
+                  webUrl: widget.webUrl,
                   isLoggedIn: isLoggedIn,
                 ));
           },
@@ -155,14 +157,14 @@ class _CardNewsState extends State<CardNews> {
                       )
                     ],
                   ),
-                  widget.image != "null"
+                  widget.imageUrl != "null"
                       ? Center(
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10.0),
                             child: CachedNetworkImage(
                               fit: BoxFit.fitWidth,
                               height: 180,
-                              imageUrl: "${appEnvironment.apiBaseUrl}/images/news/${widget.image}",
+                              imageUrl: widget.imageUrl!,
                               imageBuilder: (context, imageProvider) => Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6),

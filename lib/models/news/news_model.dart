@@ -4,8 +4,8 @@
 class NewsModelTopicInfo {
 /*
 {
-  "topicId": 8,
-  "topicName": "dịch bệnh"
+  "topicId": 1,
+  "topicName": "afghanistan"
 }
 */
 
@@ -31,61 +31,65 @@ class NewsModelTopicInfo {
 class NewsModel {
 /*
 {
-  "newsId": 5,
-  "name": "Thông tin TP.HCM dùng 5 trực thăng phun khử khuẩn là sai sự thật",
-  "description": "Lãnh đạo Sở TT&TT TP.HCM cho biết, thông tin dùng 5 trực thăng phun khử trùng diệt Covid-19 là sai...",
-  "officialRating": "real",
+  "languageId": "en",
+  "newsId": 4,
+  "title": "Hospitalizations of Americans under 50 have reached new pandemic highs",
+  "content": "A lagging vaccination campaign and the spread of the highly contagious Delta variant are driving a surge in Covid-19 hospitalizations in the United States..",
+  "url": "https://www.independent.co.uk/arts-entertainment/eurovision/the-rasmus-eurovision-2022-finland-b2077365.html",
+  "alias": "a-lagging-vaccine",
+  "thumbNews": "http://localhost:5001/images/news/newsid4.jpg",
+  "officialRating": null,
   "publisher": null,
-  "content": "Theo Sở TT&TT, hiện nay, trên mạng xã hội đang lan truyền thông tin “tối nay từ 11h40 không nên ra đường. Cửa ra vào và cửa sổ nên được đóng lại khi 5 máy bay trực thăng phun chất khử trùng vào không khí để diệt trừ Coronavirus”. Trao đổi với VietNamNet, ông Lâm Đình Thắng, Giám đốc Sở TT&TT cho hay, Bộ Tư lệnh TP.HCM khẳng định, thông tin trên hoàn toàn sai sự thật. Lực lượng quân đội phun khử khuẩn trên địa bàn TP.HCM Trước đó, sáng 23/7, Bộ Tư lệnh TP.HCM phối hợp với Lữ đoàn 87 Binh Chủng hóa học, Tiểu đoàn Phòng hóa 38 Quân khu 7 cùng với lực lượng vũ trang TP và 21 quận, huyện và TP Thủ Đức đồng loạt mở đợt cao điểm phun thuốc khử khuẩn phòng, chống dịch Covid-19 quy mô lớn nhất từ trước tới nay trên địa bàn TP, trong thời gian 7 ngày. Mỗi ngày sẽ có 20 lượt xe tham gia phun thuốc khử khuẩn phòng, chống Covid-19. Theo Hồ Văn/Báo điện tử VietnamNet https://vietnamnet.vn/vn/thoi-su/thong-tin-tp-hcm-dung-5-truc-thang-phun-khu-khuan-la-sai-su-that-759937.html",
-  "thumbNews": "newid5.jpg",
+  "timestamp": "2022-05-16T12:47:00.157796",
   "status": 1,
-  "timestamp": "2021-12-15T13:37:45.14139",
-  "languageId": "vi",
   "topicInfo": [
     {
-      "topicId": 8,
-      "topicName": "dịch bệnh"
+      "topicId": 1,
+      "topicName": "afghanistan"
     }
   ]
 }
 */
 
+  String? languageId;
   int? newsId;
-  String? name;
-  String? description;
+  String? title;
+  String? content;
+  String? url;
+  String? alias;
+  String? thumbNews;
   String? officialRating;
   String? publisher;
-  String? content;
-  String? thumbNews;
-  int? status;
   String? timestamp;
-  String? languageId;
+  int? status;
   List<NewsModelTopicInfo?>? topicInfo;
 
   NewsModel({
+    this.languageId,
     this.newsId,
-    this.name,
-    this.description,
+    this.title,
+    this.content,
+    this.url,
+    this.alias,
+    this.thumbNews,
     this.officialRating,
     this.publisher,
-    this.content,
-    this.thumbNews,
-    this.status,
     this.timestamp,
-    this.languageId,
+    this.status,
     this.topicInfo,
   });
   NewsModel.fromJson(Map<String, dynamic> json) {
+    languageId = json['languageId']?.toString();
     newsId = json['newsId']?.toInt();
-    name = json['name']?.toString();
-    description = json['description']?.toString();
+    title = json['title']?.toString();
+    content = json['content']?.toString();
+    url = json['url']?.toString();
+    alias = json['alias']?.toString();
+    thumbNews = json['thumbNews']?.toString();
     officialRating = json['officialRating']?.toString();
     publisher = json['publisher']?.toString();
-    content = json['content']?.toString();
-    thumbNews = json['thumbNews']?.toString();
-    status = json['status']?.toInt();
     timestamp = json['timestamp']?.toString();
-    languageId = json['languageId']?.toString();
+    status = json['status']?.toInt();
     if (json['topicInfo'] != null) {
       final v = json['topicInfo'];
       final arr0 = <NewsModelTopicInfo>[];
@@ -97,16 +101,17 @@ class NewsModel {
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
+    data['languageId'] = languageId;
     data['newsId'] = newsId;
-    data['name'] = name;
-    data['description'] = description;
+    data['title'] = title;
+    data['content'] = content;
+    data['url'] = url;
+    data['alias'] = alias;
+    data['thumbNews'] = thumbNews;
     data['officialRating'] = officialRating;
     data['publisher'] = publisher;
-    data['content'] = content;
-    data['thumbNews'] = thumbNews;
-    data['status'] = status;
     data['timestamp'] = timestamp;
-    data['languageId'] = languageId;
+    data['status'] = status;
     if (topicInfo != null) {
       final v = topicInfo;
       final arr0 = [];
