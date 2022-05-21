@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_unnecessary_containers
-
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
@@ -30,8 +28,10 @@ class ViewNewsScreen extends StatefulWidget {
 }
 
 class _ViewNewsScreenState extends State<ViewNewsScreen> {
-  bool isLoading = true;
-  final _key = UniqueKey();
+  Future<String> get _url async {
+    await Future.delayed(Duration(seconds: 1));
+    return widget.webUrl.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,24 +97,17 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          WebView(
-            key: _key,
-            initialUrl: widget.webUrl,
-            javascriptMode: JavascriptMode.unrestricted,
-            onPageFinished: (finish) {
-              setState(() => isLoading = false);
-            },
+          FutureBuilder(
+            future: _url,
+            builder: (BuildContext context, AsyncSnapshot snapshot) => snapshot.hasData
+                ? WebView(
+                    initialUrl: snapshot.data,
+                    javascriptMode: JavascriptMode.unrestricted,
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  ),
           ),
-          isLoading
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Stack(),
-
-          // WebView(
-          //   initialUrl: widget.webUrl,
-          //   javascriptMode: JavascriptMode.unrestricted,
-          // ),
           Positioned(
             bottom: 15,
             child: Container(
