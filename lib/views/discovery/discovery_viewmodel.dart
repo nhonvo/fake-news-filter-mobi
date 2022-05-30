@@ -40,8 +40,7 @@ class DiscoveryViewModel extends BaseViewModel {
   var getLanguageContent = "".obs, tempLanguageContent = "".obs;
 ////////////////////////////////////////////////////////////
 
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController refreshController = RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -53,8 +52,7 @@ class DiscoveryViewModel extends BaseViewModel {
   handleGetTopic() async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var languageContent =
-        prefs.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
 
     var response = await topicApi.getTopic(languageContent ?? 'en');
 
@@ -106,8 +104,7 @@ class DiscoveryViewModel extends BaseViewModel {
     EasyLoading.show(status: 'fetchingData'.tr);
     var userId = await authRepo.getUserId();
 
-    var response = await followingApi.createFollow(
-        topicIdListHasFollowed, userId.toString());
+    var response = await followingApi.createFollow(topicIdListHasFollowed, userId.toString());
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
       snackBar(
@@ -146,8 +143,7 @@ class DiscoveryViewModel extends BaseViewModel {
     handleGetTopic();
 
     //used to choose the language in choose language screen
-    getLanguageContent.value =
-        prefs.getString(AppConstant.sharePrefKeys.languageContent) ?? "";
+    getLanguageContent.value = prefs.getString(AppConstant.sharePrefKeys.languageContent) ?? "";
     //saving selected language content to temporary variable for compare with new language content
     tempLanguageContent.value = getLanguageContent.value;
   }

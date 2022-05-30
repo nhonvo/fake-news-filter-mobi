@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:fake_news/core/api/extra_api.dart';
 import 'package:fake_news/core/api/news_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
@@ -81,6 +82,8 @@ class BreakingViewModel extends BaseViewModel {
   Future<void> vote(bool isReal, String newsId) async {
     var userId = await authRepo.getUserId();
     var response = await voteApi.createVote(userId.toString(), newsId, isReal);
+
+    news.removeWhere((e) => e!.newsId == int.parse(newsId));
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();

@@ -122,6 +122,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                 '${item.title.toString().substring(0, item.title!.length > 50 ? 50 : item.title.toString().length)}...',
                             content: item.content.toString(),
                             imageUrl: item.thumbNews.toString(),
+                            webUrl: item.url.toString(),
                             article: item.publisher ?? '',
                             onpress: () {}),
                     ],

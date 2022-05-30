@@ -1,4 +1,5 @@
 import 'package:fake_news/resources/utils/icon.dart';
+import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
@@ -98,7 +99,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             _buildCicleAvatar(
-                "https://scontent.fsgn8-1.fna.fbcdn.net/v/t1.6435-9/182394264_2883716055249217_2405969830174331902_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=s25Yo5XumrwAX9T_BHX&_nc_ht=scontent.fsgn8-1.fna&oh=00_AT_aIE7OYqlx7QjRyp9cpgn5-hkQsyKP7MvB_pffvdhpLQ&oe=61E268EF"),
+              viewModel.user?.value.avatar ?? '',
+            ),
             Container(
               margin: EdgeInsets.only(left: 20),
               child: Column(

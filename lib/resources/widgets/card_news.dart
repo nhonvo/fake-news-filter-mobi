@@ -218,7 +218,8 @@ class _CardNewsState extends State<CardNews> {
                         style: StylesText.content12BoldGrey,
                       ),
                       isLoggedIn && widget.rate == true
-                          ? RatingButton(newsId: widget.newsId.toString())
+                          ? SizedBox()
+                          // RatingButton(newsId: widget.newsId.toString())
                           : InkWell(
                               onTap: () {},
                               child: Row(
