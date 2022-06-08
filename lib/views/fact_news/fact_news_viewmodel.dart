@@ -29,22 +29,19 @@ class FactNewsViewModel extends BaseViewModel {
   final news = <NewsModel?>[].obs;
   var searchingNews = <NewsModel?>[].obs;
   var isLoaded = false.obs;
+  var index = 0.obs;
 
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController refreshController = RefreshController(initialRefresh: false);
 
   // void onRefresh() async {
-  //   // monitor network fetch
-  //   await handleGetFactNews();
-  //   // if failed,use refreshFailed()
+  //   await handleGetFactNews(this.index.value == 0 ? 'real' : 'fake');
   //   refreshController.refreshCompleted();
   // }
 
   handleGetFactNews(String? filter) async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var languageContent =
-        pref.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent = pref.getString(AppConstant.sharePrefKeys.languageContent);
 
     var response = await newsApi.getNews(filter, languageContent);
 
@@ -72,10 +69,10 @@ class FactNewsViewModel extends BaseViewModel {
     }
   }
 
-  // @override
-  // void onInit() async {
-  //   super.onInit();
-  //   await handleGetFactNews();
-  //   isLoaded.value = true;
-  // }
+  @override
+  void onInit() async {
+    super.onInit();
+    await handleGetFactNews('real');
+    isLoaded.value = true;
+  }
 }

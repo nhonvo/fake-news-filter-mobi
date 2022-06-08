@@ -17,7 +17,6 @@ class FactNewsScreen extends StatefulWidget {
 }
 
 class _FactNewsScreenState extends State<FactNewsScreen> {
-  int index = 0;
   FactNewsViewModel get viewmodel => Get.find<FactNewsViewModel>();
 
   @override
@@ -41,8 +40,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
           SizedBox(
             height: 10,
           ),
-          Text('filter_news'.tr.toUpperCase(),
-              style: StylesText.content20BoldBlack),
+          Text('filter_news'.tr.toUpperCase(), style: StylesText.content20BoldBlack),
           SizedBox(
             height: 5,
           ),
@@ -50,67 +48,58 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
           SizedBox(
             height: 10,
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: Colors.transparent,
-            ),
-            width: 305,
-            height: 40,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                index == 0
-                    ? CustomButton(
-                        buttonText: 'real'.tr.toUpperCase(),
-                        buttonColor: MyColors.blue,
-                        buttonRadius: 30,
-                        width: 150,
-                        textStyle: StylesText.content14BoldWhite,
-                        onPressed: () {
-                          setState(() {
-                            index = 0;
-                          });
-                        },
-                      )
-                    : CustomButton(
-                        buttonText: 'real'.tr.toUpperCase(),
-                        buttonColor: MyColors.greyLight,
-                        buttonRadius: 30,
-                        width: 150,
-                        textStyle: StylesText.content12BoldWhite,
-                        onPressed: () {
-                          setState(() {
-                            index = 0;
-                          });
-                        },
-                      ),
-                index == 1
-                    ? CustomButton(
-                        buttonText: 'fake'.tr.toUpperCase(),
-                        buttonColor: MyColors.blue,
-                        buttonRadius: 30,
-                        width: 150,
-                        textStyle: StylesText.content14BoldWhite,
-                        onPressed: () {
-                          setState(() {
-                            index = 0;
-                          });
-                        },
-                      )
-                    : CustomButton(
-                        buttonText: 'fake'.tr.toUpperCase(),
-                        buttonColor: MyColors.greyLight,
-                        buttonRadius: 30,
-                        width: 150,
-                        textStyle: StylesText.content12BoldWhite,
-                        onPressed: () {
-                          setState(() {
-                            index = 1;
-                          });
-                        },
-                      )
-              ],
+          Obx(
+            () => Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.transparent,
+              ),
+              width: 305,
+              height: 40,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  viewmodel.index.value == 0
+                      ? CustomButton(
+                          buttonText: 'real'.tr.toUpperCase(),
+                          buttonColor: MyColors.blue,
+                          buttonRadius: 30,
+                          width: 150,
+                          textStyle: StylesText.content14BoldWhite,
+                          onPressed: () => viewmodel.index.value = 0,
+                        )
+                      : CustomButton(
+                          buttonText: 'real'.tr.toUpperCase(),
+                          buttonColor: MyColors.greyLight,
+                          buttonRadius: 30,
+                          width: 150,
+                          textStyle: StylesText.content12BoldWhite,
+                          onPressed: () {
+                            viewmodel.index.value = 0;
+                            viewmodel.handleGetFactNews('real');
+                          },
+                        ),
+                  viewmodel.index.value == 1
+                      ? CustomButton(
+                          buttonText: 'fake'.tr.toUpperCase(),
+                          buttonColor: MyColors.blue,
+                          buttonRadius: 30,
+                          width: 150,
+                          textStyle: StylesText.content14BoldWhite,
+                          onPressed: () => viewmodel.index.value = 1)
+                      : CustomButton(
+                          buttonText: 'fake'.tr.toUpperCase(),
+                          buttonColor: MyColors.greyLight,
+                          buttonRadius: 30,
+                          width: 150,
+                          textStyle: StylesText.content12BoldWhite,
+                          onPressed: () {
+                            viewmodel.index.value = 1;
+                            viewmodel.handleGetFactNews('fake');
+                          },
+                        )
+                ],
+              ),
             ),
           ),
         ],
@@ -119,13 +108,9 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
   }
 
   Widget _buildBody() {
-    if (index == 0) {
-      viewmodel.news.clear();
-      viewmodel.handleGetFactNews('real');
+    if (viewmodel.index.value == 0) {
       return _buildItem('real');
     } else {
-      viewmodel.news.clear();
-      viewmodel.handleGetFactNews('fake');
       return _buildItem('fake');
     }
   }
@@ -140,21 +125,18 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                 for (var item in viewmodel.news)
                   CardNews(
                       newsId: item!.newsId.toString(),
-                      factCheck:
-                          filter == 'real' ? IconsApp.real : IconsApp.fake,
+                      factCheck: viewmodel.index.value == 0 ? IconsApp.real : IconsApp.fake,
                       rate: false,
-                      offical: "$filter".tr,
+                      offical: viewmodel.index.value == 0 ? "real".tr : "fake".tr,
                       // tag: viewmodel.topicModel.value.tag.toString(),
                       socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
-                      times: AppHelper.convertToAgo(
-                          DateTime.parse(item.timestamp.toString())),
-                      title: item.description.toString().substring(
-                          0,
-                          item.description.toString().length > 50
-                              ? 50
-                              : item.description.toString().length),
+                      times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                      title: item.title
+                          .toString()
+                          .substring(0, item.title.toString().length > 50 ? 50 : item.title.toString().length),
                       content: item.content.toString(),
-                      image: item.thumbNews.toString(),
+                      imageUrl: item.thumbNews.toString(),
+                      webUrl: item.url.toString(),
                       article: item.publisher ?? '',
                       onpress: () {}),
               ],

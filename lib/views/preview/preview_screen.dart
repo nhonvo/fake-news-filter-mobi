@@ -119,9 +119,10 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
                             times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
                             title:
-                                '${item.description.toString().substring(0, item.description!.length > 50 ? 50 : item.description.toString().length)}...',
+                                '${item.title.toString().substring(0, item.title!.length > 50 ? 50 : item.title.toString().length)}...',
                             content: item.content.toString(),
-                            image: item.thumbNews.toString(),
+                            imageUrl: item.thumbNews.toString(),
+                            webUrl: item.url.toString(),
                             article: item.publisher ?? '',
                             onpress: () {}),
                     ],

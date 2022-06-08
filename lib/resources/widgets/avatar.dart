@@ -19,38 +19,31 @@ class CircleAvatarCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: radius * 2,
+    return SizedBox(
       height: radius * 2,
-      child: Stack(
-        children: <Widget>[
-          Container(
-              width: radius * 2,
-              height: radius * 2,
-              decoration: (url == "" || url == null)
-                  ? BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: backgroundColor ?? Colors.blue[400],
-                      image: DecorationImage(
-                        fit: BoxFit.scaleDown,
-                        image: ExactAssetImage(
-                          Images.avatar,
-                        ),
-                      ),
-                    )
-                  : BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(url!),
-                      ),
-                    )),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: stackWidget,
-          )
-        ],
-      ),
+      width: radius * 2,
+      child: url == null
+          ? Image.asset(
+              Images.avatar,
+              fit: BoxFit.fill,
+            )
+          : CachedNetworkImage(
+              imageUrl: url!,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: stackWidget,
+              ),
+              errorWidget: (context, url, error) => Image.asset(
+                Images.avatar,
+                fit: BoxFit.fill,
+              ),
+            ),
     );
   }
 }

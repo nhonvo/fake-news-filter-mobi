@@ -1,7 +1,9 @@
 import 'package:fake_news/resources/utils/icon.dart';
+import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/views/comming_soon_screen.dart';
 import 'package:fake_news/views/follow_topic/follow_topic.dart';
 import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_viewmodel.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -26,52 +29,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(top: 10, left: 15, right: 15),
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 5, bottom: 5),
-            child: Column(
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    _buildInfoHeader(),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Text(
-                      'Thiết lập',
-                      style: StylesText.content16BoldBlack,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    _infoConfig(context),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Về Fake News Filter',
-                      style: StylesText.content16BoldBlack,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    _infoSupport(context)
-                  ],
-                ),
-              ],
+        Obx(
+          () => Container(
+            padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(top: 5, bottom: 5),
+              child: Column(
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      _buildInfoHeader(viewModel.user?.value.fullName ?? ''),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        'config'.tr,
+                        style: StylesText.content16BoldBlack,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _infoConfig(context),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'aboutFnf'.tr,
+                        style: StylesText.content16BoldBlack,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _infoSupport(context)
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            margin:
-                EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+            margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
             child: Text(
-              'Phiên bản 0.0.1',
+              'version'.tr,
               style: StylesText.content12LightBlack,
             ),
           ),
@@ -87,7 +91,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildInfoHeader() {
+  Widget _buildInfoHeader(String fullname) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -95,7 +99,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             _buildCicleAvatar(
-                "https://scontent.fsgn8-1.fna.fbcdn.net/v/t1.6435-9/182394264_2883716055249217_2405969830174331902_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=s25Yo5XumrwAX9T_BHX&_nc_ht=scontent.fsgn8-1.fna&oh=00_AT_aIE7OYqlx7QjRyp9cpgn5-hkQsyKP7MvB_pffvdhpLQ&oe=61E268EF"),
+              viewModel.user?.value.avatar ?? '',
+            ),
             Container(
               margin: EdgeInsets.only(left: 20),
               child: Column(
@@ -103,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Huynh Huu Khanh',
+                    fullname,
                     style: StylesText.content18BoldBlack,
                   ),
                   SizedBox(
@@ -126,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         InkWell(
           child: SvgPicture.asset(IconsApp.exit, width: 30),
           onTap: () async {
-            viewModel.handlelogout();
+            viewModel.handleLogout();
           },
         )
       ],
@@ -171,9 +176,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Get.to(FollowTopicScreen());
                   }),
               BuildItemButon(
-                  icon: IconsApp.social,
-                  content: 'linkSocial'.tr,
-                  onTap: () {}),
+                icon: IconsApp.social,
+                content: 'linkSocial'.tr,
+                //return coming soon screen when button is clicked
+                onTap: () => Get.to(() => ComingSoonScreen()),
+              ),
             ],
           ),
         )
@@ -199,17 +206,26 @@ Widget _infoSupport(BuildContext context) {
         ),
         child: Column(
           children: <Widget>[
-            BuildItemButon(icon: IconsApp.faq, content: 'FAQ', onTap: () {}),
             BuildItemButon(
-                icon: IconsApp.rate,
-                content: 'Đánh giá ứng dụng',
-                onTap: () {}),
+              icon: IconsApp.faq,
+              content: 'FAQ',
+              onTap: () => Get.to(() => ComingSoonScreen()),
+            ),
             BuildItemButon(
-                icon: IconsApp.about,
-                content: 'Về Fake News Filter',
-                onTap: () {}),
+              icon: IconsApp.rate,
+              content: 'rateApp'.tr,
+              onTap: () => Get.to(() => ComingSoonScreen()),
+            ),
             BuildItemButon(
-                icon: IconsApp.support, content: 'Hỗ trợ', onTap: () {}),
+              icon: IconsApp.about,
+              content: 'aboutFnf'.tr,
+              onTap: () => Get.to(() => ComingSoonScreen()),
+            ),
+            BuildItemButon(
+              icon: IconsApp.support,
+              content: 'support'.tr,
+              onTap: () => Get.to(() => ComingSoonScreen()),
+            ),
           ],
         ),
       )
@@ -221,8 +237,7 @@ class BuildItemButon extends StatelessWidget {
   final String icon;
   final String content;
   final Function onTap;
-  BuildItemButon(
-      {required this.icon, required this.content, required this.onTap});
+  BuildItemButon({required this.icon, required this.content, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

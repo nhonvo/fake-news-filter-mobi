@@ -35,7 +35,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Kiểm tra tính xác thực",
+                  'checkVerify'.tr,
                   style: StylesText.content18BoldBlack,
                 ),
                 IconButton(onPressed: () {}, icon: Icon(Icons.history))
@@ -57,7 +57,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 width: Get.size.width * 0.9,
                 child: Center(
                     child: Text(
-                  "Gửi thông tin chi tiết về tin tức cần xác thực ...",
+                  'sendInfo'.tr,
                   style: StylesText.content12LightBlack,
                 )),
               ),
@@ -78,7 +78,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                       width: 5,
                     ),
                     Text(
-                      "Thêm tệp đính kèm",
+                      'addFile'.tr,
                       style: StylesText.content12MediumBlack,
                     )
                   ],
@@ -93,7 +93,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                       width: 5,
                     ),
                     Text(
-                      "Xem hướng dẫn",
+                      'viewGuide'.tr,
                       style: StylesText.content12MediumBlack,
                     )
                   ],
@@ -118,7 +118,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                         width: 5,
                       ),
                       Text(
-                        "Tin đóng góp nổi bật",
+                        'highlightContributedNews'.tr,
                         style: StylesText.content16BoldBlack,
                       ),
                     ],
@@ -132,27 +132,16 @@ class _CommunityScreenState extends State<CommunityScreen> {
                             physics: BouncingScrollPhysics(),
                             itemCount: viewModel.newsCommList.length,
                             itemBuilder: (context, index) {
-                              if (viewModel.newsCommList[index].isPopular ==
-                                  true) {
+                              if (viewModel.newsCommList[index].isPopular == true) {
                                 return GestureDetector(
                                   onTap: () {},
                                   child: CardCommunity(
-                                    avatar: viewModel
-                                        .newsCommList[index].publisher?.avatar,
-                                    title: viewModel.newsCommList[index].title
-                                        .toString(),
-                                    content: viewModel
-                                        .newsCommList[index].content
-                                        .toString(),
-                                    crowdId: viewModel
-                                        .newsCommList[index].newsCommunityId
-                                        .toString(),
-                                    nameCrowd: viewModel.newsCommList[index]
-                                            .publisher?.fullName ??
-                                        "Anonymous",
-                                    numberCrowd: viewModel.newsCommList[index]
-                                            .publisher?.noNewsContributed ??
-                                        0,
+                                    avatar: viewModel.newsCommList[index].publisher?.avatar,
+                                    title: viewModel.newsCommList[index].title.toString(),
+                                    content: viewModel.newsCommList[index].content.toString(),
+                                    crowdId: viewModel.newsCommList[index].newsCommunityId.toString(),
+                                    nameCrowd: viewModel.newsCommList[index].publisher?.fullName ?? "Anonymous",
+                                    numberCrowd: viewModel.newsCommList[index].publisher?.noNewsContributed ?? 0,
                                     onpress: () {},
                                     times: "",
                                   ),
@@ -179,7 +168,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Tin đóng góp mới nhất",
+                        'newContributedNews'.tr,
                         style: StylesText.content16BoldBlack,
                       ),
                       for (var item in viewModel.newsCommList)
@@ -188,12 +177,10 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           title: item.title.toString(),
                           content: item.content.toString(),
                           crowdId: item.newsCommunityId.toString(),
-                          nameCrowd: item.publisher?.fullName.toString() ??
-                              "Anonymous",
+                          nameCrowd: item.publisher?.fullName.toString() ?? "Anonymous",
                           numberCrowd: item.publisher?.noNewsContributed ?? 0,
                           width: Get.size.width,
-                          times: AppHelper.convertToAgo(
-                              DateTime.parse(item.datePublished.toString())),
+                          times: AppHelper.convertToAgo(DateTime.parse(item.datePublished.toString())),
                           onpress: () {},
                         ),
                     ],

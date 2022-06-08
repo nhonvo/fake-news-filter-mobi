@@ -70,4 +70,26 @@ class LanguageKey {
   static const rateApp = "rateApp";
   static const voting = "voting";
   static const searchNews = "searchNews";
+  static const config = "config";
+  static const aboutFnf = "aboutFnf";
+  static const version = "version";
+  static const support = "support";
+  static const checkVerify = "checkVerify";
+  static const sendInfo = "sendInfo";
+  static const addFile = "addFile";
+  static const viewGuide = "viewGuide";
+  static const highlightContributedNews = "highlightContributedNews";
+  static const newContributedNews = "newContributedNews";
+  static const skip = "skip";
+  static const next = "next";
+  static const done = "done";
+  static const onboardTitle1 = "onboardTitle1";
+  static const onboardTitle2 = "onboardTitle2";
+  static const onboardTitle3 = "onboardTitle3";
+  static const onboardTitle4 = "onboardTitle4";
+  static const onboardBody1 = "onboardBody1";
+  static const onboardBody2 = "onboardBody2";
+  static const onboardBody3 = "onboardBody3";
+  static const onboardBody4 = "onboardBody4";
+  static const allowNotification = "allowNotification";
 }

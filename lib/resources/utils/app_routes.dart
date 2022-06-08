@@ -6,6 +6,7 @@ import 'package:fake_news/views/discovery/discovery_binding.dart';
 import 'package:fake_news/views/discovery/discovery_screen.dart';
 import 'package:fake_news/views/login/login_binding.dart';
 import 'package:fake_news/views/login/login_screen.dart';
+import 'package:fake_news/views/login/signup_screen.dart';
 import 'package:fake_news/views/onboarding/onboarding_screen.dart';
 import 'package:fake_news/views/preview/preview_binding.dart';
 import 'package:fake_news/views/preview/preview_screen.dart';
@@ -44,6 +45,12 @@ class AppRoutes {
       binding: LoginBinding(),
     ),
     GetPage(
+      name: Routes.SIGNUP,
+      page: () => SignupScreen(),
+      transition: Transition.rightToLeftWithFade,
+      binding: LoginBinding(),
+    ),
+    GetPage(
       name: Routes.HOME,
       page: () => HomeScreen(),
       binding: HomeBinding(),
@@ -68,6 +75,7 @@ class Routes {
   static const String FOLLOW_TOPIC = "/followTopic";
   static const String HOME = "/home";
   static const String LOGIN = "/login";
+  static const String SIGNUP = '/signup';
   static const String PREVIEW = "/preview";
   static const String CONTRIBUTE = "/contribute";
   static const String ONBOARDING = "/onboarding";

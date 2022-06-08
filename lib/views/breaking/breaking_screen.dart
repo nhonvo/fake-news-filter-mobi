@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:fake_news/data/story_data.dart';
 import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
@@ -26,29 +25,31 @@ class _BreakingScreenState extends State<BreakingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 50.0),
-            child: SmartRefresher(
-              controller: viewmodel.refreshController,
-              onRefresh: viewmodel.onRefresh,
-              header: MaterialClassicHeader(),
+      body: SmartRefresher(
+        controller: viewmodel.refreshController,
+        onRefresh: viewmodel.onRefresh,
+        header: MaterialClassicHeader(),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 80.0),
               child: Column(
                 children: [
-                  Container(
-                    color: Colors.white,
-                    width: double.infinity,
-                    height: 100,
-                    alignment: Alignment.center,
-                    child: ListView.builder(
-                        itemCount: news.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return storyButton(news[index], context);
-                        }),
-                  ),
+                  //TODO: Uncomment to enable story
+
+                  // Container(
+                  //   color: Colors.white,
+                  //   width: double.infinity,
+                  //   height: 100,
+                  //   alignment: Alignment.center,
+                  //   child: ListView.builder(
+                  //       itemCount: news.length,
+                  //       scrollDirection: Axis.horizontal,
+                  //       itemBuilder: (context, index) {
+                  //         return storyButton(news[index], context);
+                  //       }),
+                  // ),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Obx(() {
@@ -62,26 +63,14 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         newsId: item!.newsId.toString(),
                                         factCheck: Images.icnone,
                                         rate: true,
-                                        // tag: viewmodel.topicModel.value.tag.toString(),
-                                        socialBeliefs:
-                                            '${50 + new Random().nextInt(90 - 50)}%',
-                                        times: AppHelper.convertToAgo(
-                                            DateTime.parse(
-                                                item.timestamp.toString())),
-                                        title: item.description
-                                            .toString()
-                                            .substring(
-                                                0,
-                                                item.description
-                                                            .toString()
-                                                            .length >
-                                                        50
-                                                    ? 50
-                                                    : item.description
-                                                        .toString()
-                                                        .length),
+                                        tags: item.topicInfo!.map((v) => v!.topicName).toList(),
+                                        socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
+                                        times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                                        title: item.title.toString().substring(
+                                            0, item.title.toString().length > 50 ? 50 : item.title.toString().length),
                                         content: item.content.toString(),
-                                        image: item.thumbNews.toString(),
+                                        imageUrl: item.thumbNews.toString(),
+                                        webUrl: item.url.toString(),
                                         article: item.publisher ?? '',
                                         onpress: () {}),
                                 ],
@@ -92,8 +81,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                     scrollDirection: Axis.vertical,
                                     padding: const EdgeInsets.all(8),
                                     itemCount: 6,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
+                                    itemBuilder: (BuildContext context, int index) {
                                       return NewsShimmer();
                                     }),
                               );
@@ -103,9 +91,9 @@ class _BreakingScreenState extends State<BreakingScreen> {
                 ],
               ),
             ),
-          ),
-          Searching(),
-        ],
+            Searching(),
+          ],
+        ),
       ),
     );
   }

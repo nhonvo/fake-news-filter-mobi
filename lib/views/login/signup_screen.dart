@@ -11,16 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../../resources/utils/app_routes.dart';
-
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   LoginViewModel get viewmodel => Get.find<LoginViewModel>();
 
   bool _obscureText = true;
@@ -135,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Sign in',
                         style: TextStyle(fontSize: 20),
                       ),
-                      onPressed: () => Get.toNamed(Routes.SIGNUP),
+                      onPressed: () => Get.toNamed('/signup'),
                     )
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
