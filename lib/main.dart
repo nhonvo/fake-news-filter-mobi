@@ -26,7 +26,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  GestureBinding.instance?.resamplingEnabled = true; //Custom Gesture ListView
+  GestureBinding.instance.resamplingEnabled = true; //Custom Gesture ListView
 
   Get.put<AppEnvironment>(AppEnvironment.live());
 
@@ -72,9 +72,11 @@ void configLoading() {
     ..dismissOnTap = false;
 }
 
-void initOneSignal() {
+void initOneSignal() async {
   //Remove this method to stop OneSignal Debugging
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
-  OneSignal.shared.setAppId("fabd12c6-0ad1-4e5a-bdad-78fabebae2a7");
+  await OneSignal.shared.setAppId("fabd12c6-0ad1-4e5a-bdad-78fabebae2a7");
+
+  await OneSignal.shared.consentGranted(true);
 }

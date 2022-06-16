@@ -1,5 +1,4 @@
 import 'package:fake_news/resources/utils/icon.dart';
-import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
@@ -73,7 +72,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+            margin:
+                EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
             child: Text(
               'version'.tr,
               style: StylesText.content12LightBlack,
@@ -237,7 +237,8 @@ class BuildItemButon extends StatelessWidget {
   final String icon;
   final String content;
   final Function onTap;
-  BuildItemButon({required this.icon, required this.content, required this.onTap});
+  BuildItemButon(
+      {required this.icon, required this.content, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

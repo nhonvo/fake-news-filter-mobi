@@ -1,6 +1,5 @@
 //Simply, a Repository pattern is such pattern where the business will ask for receipt and won’t know how the price is getting calculated and printed on the receipt.
 import 'package:fake_news/core/services/local_storage/auth_local_storage.dart';
-import 'package:fake_news/models/users/user_model.dart';
 
 abstract class AuthRepo {
   Future<String?>? getApiKey();
@@ -67,13 +66,16 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<bool> saveAuthToken(String authToken) async => authLocalStorage.saveAuthToken(authToken);
+  Future<bool> saveAuthToken(String authToken) async =>
+      authLocalStorage.saveAuthToken(authToken);
 
   @override
-  Future<bool> saveEmail(String email) async => authLocalStorage.saveEmail(email);
+  Future<bool> saveEmail(String email) async =>
+      authLocalStorage.saveEmail(email);
 
   @override
-  Future<bool> saveIsNotFollow(bool isNotFollow) async => authLocalStorage.saveIsNotFollow(isNotFollow);
+  Future<bool> saveIsNotFollow(bool isNotFollow) async =>
+      authLocalStorage.saveIsNotFollow(isNotFollow);
 
   @override
   Future<bool> handleUnAuthorized() {

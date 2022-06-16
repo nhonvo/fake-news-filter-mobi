@@ -4,7 +4,6 @@ import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/resources/widgets/shimmer.dart';
-import 'package:fake_news/resources/widgets/story_button.dart';
 import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:fake_news/views/searching/searching_screen.dart';
 import 'package:flutter/material.dart';
