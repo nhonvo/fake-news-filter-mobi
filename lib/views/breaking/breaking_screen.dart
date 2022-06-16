@@ -4,7 +4,6 @@ import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/resources/widgets/shimmer.dart';
-import 'package:fake_news/resources/widgets/story_button.dart';
 import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:fake_news/views/searching/searching_screen.dart';
 import 'package:flutter/material.dart';
@@ -63,11 +62,19 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         newsId: item!.newsId.toString(),
                                         factCheck: Images.icnone,
                                         rate: true,
-                                        tags: item.topicInfo!.map((v) => v!.topicName).toList(),
-                                        socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
-                                        times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                                        tags: item.topicInfo!
+                                            .map((v) => v!.topicName)
+                                            .toList(),
+                                        socialBeliefs:
+                                            '${50 + new Random().nextInt(90 - 50)}%',
+                                        times: AppHelper.convertToAgo(
+                                            DateTime.parse(
+                                                item.timestamp.toString())),
                                         title: item.title.toString().substring(
-                                            0, item.title.toString().length > 50 ? 50 : item.title.toString().length),
+                                            0,
+                                            item.title.toString().length > 50
+                                                ? 50
+                                                : item.title.toString().length),
                                         content: item.content.toString(),
                                         imageUrl: item.thumbNews.toString(),
                                         webUrl: item.url.toString(),
@@ -81,7 +88,8 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                     scrollDirection: Axis.vertical,
                                     padding: const EdgeInsets.all(8),
                                     itemCount: 6,
-                                    itemBuilder: (BuildContext context, int index) {
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
                                       return NewsShimmer();
                                     }),
                               );

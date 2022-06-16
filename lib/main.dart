@@ -16,7 +16,8 @@ class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -25,9 +26,9 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  GestureBinding.instance?.resamplingEnabled = true; //Custom Gesture ListView
+  GestureBinding.instance.resamplingEnabled = true; //Custom Gesture ListView
 
-  Get.put<AppEnvironment>(AppEnvironment.dev());
+  Get.put<AppEnvironment>(AppEnvironment.live());
 
   await AppServices.initServices();
 
@@ -71,9 +72,11 @@ void configLoading() {
     ..dismissOnTap = false;
 }
 
-void initOneSignal() {
+void initOneSignal() async {
   //Remove this method to stop OneSignal Debugging
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
-  OneSignal.shared.setAppId("fabd12c6-0ad1-4e5a-bdad-78fabebae2a7");
+  await OneSignal.shared.setAppId("fabd12c6-0ad1-4e5a-bdad-78fabebae2a7");
+
+  await OneSignal.shared.consentGranted(true);
 }
