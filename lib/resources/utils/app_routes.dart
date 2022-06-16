@@ -1,3 +1,4 @@
+import 'package:fake_news/views/community/contribute/contribute_binding.dart';
 import 'package:fake_news/views/community/contribute/contribute_screen.dart';
 import 'package:fake_news/views/follow_topic/follow_topic.dart';
 import 'package:fake_news/views/home/home_binding.dart';
@@ -59,6 +60,7 @@ class AppRoutes {
     GetPage(
       name: Routes.CONTRIBUTE,
       page: () => ContributeScreen(),
+      binding: ContributeBinding(),
       transition: Transition.rightToLeftWithFade,
     ),
     GetPage(

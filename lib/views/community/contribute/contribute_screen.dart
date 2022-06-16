@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 
+import 'contribute_viewmodel.dart';
+
 class ContributeScreen extends StatefulWidget {
   const ContributeScreen({Key? key}) : super(key: key);
 
@@ -13,6 +15,7 @@ class ContributeScreen extends StatefulWidget {
 }
 
 class _ContributeScreenState extends State<ContributeScreen> {
+  ContributeViewModel get viewmodel => Get.find<ContributeViewModel>();
   final FocusNode inputNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
 
@@ -138,7 +141,9 @@ class _ContributeScreenState extends State<ContributeScreen> {
                         buttonColor: MyColors.blue,
                         buttonRadius: 10,
                         textStyle: StylesText.content16BoldWhite,
-                        onPressed: () {},
+                        onPressed: () {
+                          viewmodel.handleCreate();
+                        },
                       ),
                     ],
                   ),
@@ -151,7 +156,7 @@ class _ContributeScreenState extends State<ContributeScreen> {
             child: Column(
               children: [
                 TextFormField(
-                  controller: _controller,
+                  controller: viewmodel.titleController,
                   focusNode: inputNode,
                   autofocus: true,
                   keyboardType: TextInputType.multiline,
@@ -163,6 +168,7 @@ class _ContributeScreenState extends State<ContributeScreen> {
                   ),
                 ),
                 TextFormField(
+                  controller: viewmodel.contentController,
                   minLines: 7,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,

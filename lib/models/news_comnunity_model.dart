@@ -5,10 +5,10 @@ class NewsCommunityModelPublisher {
 /*
 {
   "userId": "69db714f-9576-45ba-b5b7-f00649be03de",
-  "fullName": "Huynh Huu Khanh",
+  "fullName": "Le Xuan Thành",
   "phoneNumber": null,
-  "userName": "hkhansh27",
-  "email": "khanh200111@gmail.com",
+  "userName": "LXthanh",
+  "email": "thanh26092000@gmail.com",
   "status": 1,
   "avatar": null,
   "noNewsContributed": 2,
@@ -72,10 +72,10 @@ class NewsCommunityModel {
   "isPopular": true,
   "publisher": {
     "userId": "69db714f-9576-45ba-b5b7-f00649be03de",
-    "fullName": "Huynh Huu Khanh",
+    "fullName": "Le Xuan Thanh",
     "phoneNumber": null,
-    "userName": "hkhansh27",
-    "email": "khanh200111@gmail.com",
+    "userName": "Lxthanh",
+    "email": "thanh26092000@gmail.com",
     "status": 1,
     "avatar": null,
     "noNewsContributed": 2,
@@ -111,7 +111,9 @@ class NewsCommunityModel {
     title = json['title']?.toString();
     content = json['content']?.toString();
     isPopular = json['isPopular'];
-    publisher = (json['publisher'] != null) ? NewsCommunityModelPublisher.fromJson(json['publisher']) : null;
+    publisher = (json['publisher'] != null)
+        ? NewsCommunityModelPublisher.fromJson(json['publisher'])
+        : null;
     datePublished = json['datePublished']?.toString();
     thumbNews = json['thumbNews']?.toString();
     languageId = json['languageId']?.toString();

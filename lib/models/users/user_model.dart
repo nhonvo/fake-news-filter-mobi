@@ -2,10 +2,10 @@ class UserModel {
 /*
 {
   "userId": "69db714f-9576-45ba-b5b7-f00649be03de",
-  "fullName": "Huynh Huu Khanh",
+  "fullName": "Le Xuan Thanh",
   "phoneNumber": null,
-  "userName": "hkhansh27",
-  "email": "khanh200111@gmail.com",
+  "userName": "Lxthanh",
+  "email": "thanh26092000@gmail.com",
   "role": null,
   "status": 1,
   "avatar": null,
