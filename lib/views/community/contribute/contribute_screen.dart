@@ -62,6 +62,8 @@ class _ContributeScreenState extends State<ContributeScreen> {
           selectCircleStrokeColor: "#000000",
         ),
       );
+      viewmodel.resultList = resultList;
+      print(resultList);
     } on Exception catch (e) {
       error = e.toString();
     }
@@ -80,7 +82,7 @@ class _ContributeScreenState extends State<ContributeScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       inputNode.requestFocus();
     });
   }

@@ -137,6 +137,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                   onTap: () {},
                                   child: CardCommunity(
                                     avatar: viewModel.newsCommList[index].publisher?.avatar,
+                                    thumbNews: viewModel.newsCommList[index].thumbNews,
                                     title: viewModel.newsCommList[index].title.toString(),
                                     content: viewModel.newsCommList[index].content.toString(),
                                     crowdId: viewModel.newsCommList[index].newsCommunityId.toString(),
@@ -176,6 +177,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           avatar: item.publisher?.avatar,
                           title: item.title.toString(),
                           content: item.content.toString(),
+                          thumbNews: item.thumbNews,
                           crowdId: item.newsCommunityId.toString(),
                           nameCrowd: item.publisher?.fullName.toString() ?? "Anonymous",
                           numberCrowd: item.publisher?.noNewsContributed ?? 0,

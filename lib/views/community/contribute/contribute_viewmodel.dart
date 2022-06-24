@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/news_community_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
@@ -11,6 +12,7 @@ import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:multi_image_picker2/multi_image_picker2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ContributeViewModel extends BaseViewModel {
@@ -31,6 +33,8 @@ class ContributeViewModel extends BaseViewModel {
   var titleController = TextEditingController();
   var contentController = TextEditingController();
   var languagesList = Get.find<List<LanguageModel>?>();
+  var resultList = <Asset>[];
+
   LanguageService languageService;
 
   var selectedValue = 0.obs;
@@ -63,15 +67,15 @@ class ContributeViewModel extends BaseViewModel {
     var userId = await authRepo.getUserId();
     var user = await authApi.getUserLoggedIn(userId!);
     //this.user?.value = user.resultObj!;
+    //just the first image in image picker
+    var imageFile = resultList[0];
+    var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
+    var byte = await imageFile.getByteData();
+    //convert bytedata to list int
+    List<int> imageBytes = byte.buffer.asUint8List().map((eachUint8) => eachUint8.toInt()).toList();
 
-    var languageContent =
-        prefs.getString(AppConstant.sharePrefKeys.languageContent);
-
-    var response = await newsCommunityApi.createNewsCommunity(
-        titleController.text,
-        contentController.text,
-        languageContent ?? 'en',
-        userId);
+    var response = await newsCommunityApi.createNewsCommunity(titleController.text, contentController.text,
+        languageContent ?? 'en', userId, imageBytes, imageFile.name ?? 'tmpImage.jpg');
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();

@@ -1,10 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:flutter/material.dart';
 
 import 'avatar.dart';
 
 class CardCommunity extends StatefulWidget {
-  final String? avatar;
+  final String? avatar, thumbNews;
   final String crowdId, times, title, content, nameCrowd;
   final double? width, height;
   final int numberCrowd;
@@ -14,6 +15,7 @@ class CardCommunity extends StatefulWidget {
   const CardCommunity(
       {Key? key,
       this.avatar,
+      this.thumbNews,
       required this.crowdId,
       required this.times,
       required this.title,
@@ -21,7 +23,7 @@ class CardCommunity extends StatefulWidget {
       required this.nameCrowd,
       required this.numberCrowd,
       this.width = 230,
-      this.height = 150,
+      this.height = 200,
       required this.onpress})
       : super(key: key);
 
@@ -55,6 +57,18 @@ class _CardCommunityState extends State<CardCommunity> {
               style: StylesText.content14BoldBlack,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
+            ),
+            Expanded(
+              flex: 2,
+              child: Card(
+                child: Image.network(
+                  widget.thumbNews!,
+                  fit: BoxFit.fill,
+                  errorBuilder: (context, url, error) {
+                    return Icon(Icons.error);
+                  },
+                ),
+              ),
             ),
             Expanded(
               child: Row(

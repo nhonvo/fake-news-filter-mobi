@@ -43,8 +43,7 @@ class CommunityViewModel extends BaseViewModel {
   var getLanguageContent = "".obs, tempLanguageContent = "".obs;
 ////////////////////////////////////////////////////////////
 
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController refreshController = RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -56,11 +55,9 @@ class CommunityViewModel extends BaseViewModel {
   handleGetNews() async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var languageContent =
-        prefs.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
 
-    var response =
-        await newsCommunityApi.getNewsCommunity(languageContent ?? 'en');
+    var response = await newsCommunityApi.getNewsCommunity(languageContent ?? 'en');
 
     if (response.isSuccessed == false) {
       EasyLoading.dismiss();
