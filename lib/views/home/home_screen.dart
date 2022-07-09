@@ -7,6 +7,7 @@ import 'package:fake_news/views/community/community_screen.dart';
 import 'package:fake_news/views/fact_news/fact_news_screen.dart';
 import 'package:fake_news/views/profile_setting/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
@@ -35,9 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
+            SvgPicture.asset(
               Images.logo,
-              width: 30,
+              width: Get.size.width * 0.13,
             ),
             const SizedBox(width: 10),
             Text('appname'.tr, style: StylesText.content16BoldWhite)

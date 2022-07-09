@@ -1,5 +1,5 @@
 class Images {
-  static const String logo = "assets/images/logo.png";
+  static const String logo = "assets/images/new_logo.svg";
   static const String banner = "assets/images/banner_bottom.png";
   static const String coming_soon = "assets/images/coming_soon.png";
   static const String covid = "assets/images/coronavirus.jpg";

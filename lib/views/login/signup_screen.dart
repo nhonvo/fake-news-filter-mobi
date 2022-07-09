@@ -8,6 +8,7 @@ import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/login/login_viewmodel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -74,7 +75,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   margin: const EdgeInsets.only(top: 46),
                   child: Column(
                     children: <Widget>[
-                      Image.asset(
+                      SvgPicture.asset(
                         Images.logo,
                         width: Get.size.width * 0.25,
                       ),
@@ -84,7 +85,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 Column(
                   children: <Widget>[
-                    Text('login'.tr, style: StylesText.content18BoldWhite),
+                    Text('Register', style: StylesText.content18BoldWhite),
                     SizedBox(
                       height: Get.size.height * 0.03,
                     ),
@@ -97,6 +98,67 @@ class _SignupScreenState extends State<SignupScreen> {
                           ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
+                      height: 40,
+                      prefixIcon: const Icon(Icons.supervised_user_circle),
+                      obscureText: false,
+                    ),
+                    SizedBox(
+                      height: Get.size.height * 0.02,
+                    ),
+                    CustomTextField(
+                      controller: viewmodel.nameController,
+                      // ignore: null_check_always_fails
+                      hintText: 'Name',
+                      suffixIcon: viewmodel.usernameController.text.isNotEmpty
+                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
+                          : null,
+                      width: Get.size.width * 0.7,
+                      height: 40,
+                      prefixIcon: const Icon(Icons.supervised_user_circle),
+                      obscureText: false,
+                    ),
+                    SizedBox(
+                      height: Get.size.height * 0.02,
+                    ),
+                    CustomTextField(
+                      controller: viewmodel.emailController,
+                      // ignore: null_check_always_fails
+                      hintText: 'Email',
+                      suffixIcon: viewmodel.usernameController.text.isNotEmpty
+                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
+                          : null,
+                      width: Get.size.width * 0.7,
+                      height: 40,
+                      prefixIcon: const Icon(Icons.supervised_user_circle),
+                      obscureText: false,
+                    ),
+                    SizedBox(
+                      height: Get.size.height * 0.02,
+                    ),
+                    CustomTextField(
+                      controller: viewmodel.phoneController,
+                      // ignore: null_check_always_fails
+                      hintText: 'Phone',
+                      suffixIcon: viewmodel.usernameController.text.isNotEmpty
+                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
+                          : null,
+                      width: Get.size.width * 0.7,
+                      height: 40,
+                      prefixIcon: const Icon(Icons.supervised_user_circle),
+                      obscureText: false,
+                    ),
+                    SizedBox(
+                      height: Get.size.height * 0.02,
+                    ),
+                    CustomTextField(
+                      controller: viewmodel.passwordController,
+                      // ignore: null_check_always_fails
+                      hintText: 'Password',
+                      suffixIcon: viewmodel.usernameController.text.isNotEmpty
+                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
+                          : null,
+                      width: Get.size.width * 0.7,
+                      height: 40,
                       prefixIcon: const Icon(Icons.supervised_user_circle),
                       obscureText: false,
                     ),
@@ -104,25 +166,29 @@ class _SignupScreenState extends State<SignupScreen> {
                       height: Get.size.height * 0.02,
                     ), //Password Text Field
                     CustomTextField(
-                      controller: viewmodel.passwordController,
+                      controller: viewmodel.passwordConfirmController,
                       width: Get.size.width * 0.7,
                       prefixIcon: const Icon(Icons.security_outlined),
                       obscureText: _obscureText,
                       suffixIcon:
                           InkWell(onTap: toggle, child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility)),
-                      hintText: 'inputpass'.tr,
+                      hintText: 'Password confirm',
+                      height: 40,
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: Get.size.height * 0.02,
                 ),
                 CustomButton(
                   width: Get.size.width * 0.5,
                   height: Get.size.height * 0.015,
-                  buttonText: 'login',
+                  buttonText: 'Register',
                   buttonColor: MyColors.blueDart,
                   buttonRadius: 20,
                   textStyle: StylesText.content16BoldWhite,
                   onPressed: () {
-                    viewmodel.handleLogin();
+                    viewmodel.handleRegister();
                   },
                 ),
                 Row(
@@ -137,40 +203,6 @@ class _SignupScreenState extends State<SignupScreen> {
                     )
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
-                ),
-                Text(
-                  'or'.tr,
-                  style: StylesText.content18BoldBlack,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomIconButton(
-                      width: Get.size.width * 0.35,
-                      buttonText: '',
-                      icon: const Icon(FontAwesomeIcons.facebookF, color: Colors.white),
-                      buttonColor: Colors.blue,
-                      buttonRadius: 14,
-                      textStyle: StylesText.content18BoldWhite,
-                      onPressed: () {
-                        viewmodel.handleLoginFacebook();
-                      },
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CustomIconButton(
-                      width: Get.size.width * 0.35,
-                      buttonText: '',
-                      icon: const Icon(FontAwesomeIcons.google, color: Colors.white),
-                      buttonColor: Colors.red,
-                      buttonRadius: 14,
-                      textStyle: StylesText.content18BoldWhite,
-                      onPressed: () {
-                        viewmodel.handleLoginGoogle();
-                      },
-                    ),
-                  ],
                 ),
                 Text(
                   'help'.tr,

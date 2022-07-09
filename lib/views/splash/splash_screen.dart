@@ -2,6 +2,7 @@ import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/views/splash/splash_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
               margin: const EdgeInsets.only(top: 50),
               child: Column(
                 children: <Widget>[
-                  Image.asset(
+                  SvgPicture.asset(
                     Images.logo,
                     width: Get.size.width * 0.2,
                   ),

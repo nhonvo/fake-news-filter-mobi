@@ -8,6 +8,7 @@ import 'package:fake_news/resources/widgets/card_topic.dart';
 import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
 import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -66,7 +67,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
+                      SvgPicture.asset(
                         Images.logo,
                         width: Get.size.width * 0.2,
                       ),
@@ -115,11 +116,9 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                                   tag: topic.tag.toString(),
                                   description: topic.description.toString(),
                                   image: topic.thumbImage.toString(),
-                                  time: AppHelper.convertToAgo(DateTime.parse(
-                                      topic.realTime.toString())),
+                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
                                   ontap: () {
-                                    Get.toNamed(Routes.PREVIEW,
-                                        arguments: topic.obs);
+                                    Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
                                   },
                                 ));
                           }).toList());

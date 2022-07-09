@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
   final double width;
+  final double? height;
   final TextEditingController controller;
   final VoidCallback? onPressed;
   final Widget prefixIcon;
@@ -13,6 +14,7 @@ class CustomTextField extends StatefulWidget {
   const CustomTextField(
       {Key? key,
       required this.width,
+      this.height,
       required this.controller,
       this.onPressed,
       required this.prefixIcon,
@@ -29,15 +31,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: widget.height,
       width: widget.width,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30.0),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(30.0),
           // ignore: prefer_const_literals_to_create_immutables
-          boxShadow: [
-            const BoxShadow(
-                color: Colors.lightBlue, blurRadius: 1.0, spreadRadius: 0.2)
-          ]),
+          boxShadow: [const BoxShadow(color: Colors.lightBlue, blurRadius: 1.0, spreadRadius: 0.2)]),
       child: TextFormField(
         textAlign: TextAlign.justify,
         obscureText: widget.obscureText,

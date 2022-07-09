@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
@@ -8,6 +9,7 @@ import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/login/login_viewmodel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -76,9 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin: const EdgeInsets.only(top: 46),
                   child: Column(
                     children: <Widget>[
-                      Image.asset(
+                      SvgPicture.asset(
                         Images.logo,
-                        width: Get.size.width * 0.25,
+                        width: Get.size.width * 0.34,
                       ),
                       Text('appname'.tr, style: StylesText.content18BoldWhite)
                     ],

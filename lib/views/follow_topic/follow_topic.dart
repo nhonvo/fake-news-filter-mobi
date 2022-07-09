@@ -6,6 +6,7 @@ import 'package:fake_news/resources/widgets/card.dart';
 import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/discovery/discovery_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class FollowTopicScreen extends StatefulWidget {
@@ -58,7 +59,7 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
+                    SvgPicture.asset(
                       Images.logo,
                       width: Get.size.width * 0.2,
                     ),
@@ -100,17 +101,13 @@ class _FollowTopicScreenState extends State<FollowTopicScreen> {
                               child: CustomCard(
                                 index: index.toString(),
                                 id: topic.topicId.toString(),
-                                isSelected: viewModel.topicIdListHasFollowed
-                                        .contains(topic.topicId)
-                                    ? true
-                                    : false,
+                                isSelected: viewModel.topicIdListHasFollowed.contains(topic.topicId) ? true : false,
                                 noNews: topic.noNews.toString(),
                                 label: topic.label.toString(),
                                 tag: topic.tag.toString(),
                                 description: topic.description.toString(),
                                 image: topic.thumbImage.toString(),
-                                time: AppHelper.convertToAgo(
-                                    DateTime.parse(topic.realTime.toString())),
+                                time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
                               ));
                         }).toList());
                   }),

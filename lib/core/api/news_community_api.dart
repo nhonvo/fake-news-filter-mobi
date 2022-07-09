@@ -30,7 +30,6 @@ class NewsCommunityApiImpl implements NewsCommunityApi {
       'content': content,
       'languageId': languageId,
       'userId': userId,
-      // 'thumbNews':
       'thumbNews': await MultipartFile.fromBytes(imageBytes, filename: filename)
     });
     return await dioApi.doPost<NewsCommunityModel>("/api/NewsCommunity", formData);

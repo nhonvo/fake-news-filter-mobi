@@ -19,7 +19,11 @@ class LoginViewModel extends BaseViewModel {
   SharedPreferences pref;
 
   var usernameController = TextEditingController();
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var phoneController = TextEditingController();
   var passwordController = TextEditingController();
+  var passwordConfirmController = TextEditingController();
   FollowingApi followingApi = Get.find();
 
   void clearText() {
@@ -57,6 +61,15 @@ class LoginViewModel extends BaseViewModel {
     } else {
       _checkIsFollowed(response);
     }
+  }
+
+  handleRegister() {
+    // print(usernameController.text);
+    // print(nameController.text);
+    // print(emailController.text);
+    // print(phoneController.text);
+    // print(passwordController.text);
+    // print(passwordConfirmController.text);
   }
 
   handleLoginFacebook() async {

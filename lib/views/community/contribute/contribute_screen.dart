@@ -63,7 +63,6 @@ class _ContributeScreenState extends State<ContributeScreen> {
         ),
       );
       viewmodel.resultList = resultList;
-      print(resultList);
     } on Exception catch (e) {
       error = e.toString();
     }
