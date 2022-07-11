@@ -2,7 +2,6 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 
 import 'contribute_viewmodel.dart';
@@ -20,7 +19,6 @@ class _ContributeScreenState extends State<ContributeScreen> {
   final TextEditingController _controller = TextEditingController();
 
   List<Asset> images = <Asset>[];
-  String _error = 'No Error Dectected';
 
   Widget buildGridView() {
     return Container(
@@ -43,7 +41,6 @@ class _ContributeScreenState extends State<ContributeScreen> {
 
   Future<void> loadAssets() async {
     List<Asset> resultList = <Asset>[];
-    String error = 'No Error Detected';
 
     try {
       resultList = await MultiImagePicker.pickImages(
@@ -63,9 +60,7 @@ class _ContributeScreenState extends State<ContributeScreen> {
         ),
       );
       viewmodel.resultList = resultList;
-    } on Exception catch (e) {
-      error = e.toString();
-    }
+    } on Exception {}
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -74,14 +69,13 @@ class _ContributeScreenState extends State<ContributeScreen> {
 
     setState(() {
       images = resultList;
-      _error = error;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       inputNode.requestFocus();
     });
   }
