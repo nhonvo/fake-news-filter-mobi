@@ -17,7 +17,6 @@ class _ContributeScreenState extends State<ContributeScreen> {
   final TextEditingController _controller = TextEditingController();
 
   List<Asset> images = <Asset>[];
-  String _error = 'No Error Dectected';
 
   Widget buildGridView() {
     return Container(
@@ -40,7 +39,6 @@ class _ContributeScreenState extends State<ContributeScreen> {
 
   Future<void> loadAssets() async {
     List<Asset> resultList = <Asset>[];
-    String error = 'No Error Detected';
 
     try {
       resultList = await MultiImagePicker.pickImages(
@@ -59,9 +57,7 @@ class _ContributeScreenState extends State<ContributeScreen> {
           selectCircleStrokeColor: "#000000",
         ),
       );
-    } on Exception catch (e) {
-      error = e.toString();
-    }
+    } on Exception {}
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
@@ -70,14 +66,13 @@ class _ContributeScreenState extends State<ContributeScreen> {
 
     setState(() {
       images = resultList;
-      _error = error;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       inputNode.requestFocus();
     });
   }

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fnf_technology">
+    package="com.owl_trust">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:requestLegacyExternalStorage="true"

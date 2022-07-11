@@ -23,7 +23,7 @@ class AppEnvironment {
 
   factory AppEnvironment.live() {
     return AppEnvironment._(
-      apiBaseUrl: "http://103.75.186.229",
+      apiBaseUrl: "http://104.194.232.100:2000",
       imageUrl: "",
       defaultBranchApiKey: "",
       oneSignalAppId: "",
