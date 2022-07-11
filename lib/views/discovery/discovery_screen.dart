@@ -64,14 +64,14 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
               ),
               Column(
                 children: [
-                  Row(
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SvgPicture.asset(
                         Images.logo,
-                        width: Get.size.width * 0.2,
+                        width: Get.size.width * 0.25,
                       ),
-                      Text('appname'.tr, style: StylesText.content18BoldWhite)
+                      Text('appname'.tr, style: StylesText.content16BoldWhite)
                     ],
                   ),
                   Padding(
@@ -116,9 +116,11 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                                   tag: topic.tag.toString(),
                                   description: topic.description.toString(),
                                   image: topic.thumbImage.toString(),
-                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
+                                  time: AppHelper.convertToAgo(DateTime.parse(
+                                      topic.realTime.toString())),
                                   ontap: () {
-                                    Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
+                                    Get.toNamed(Routes.PREVIEW,
+                                        arguments: topic.obs);
                                   },
                                 ));
                           }).toList());

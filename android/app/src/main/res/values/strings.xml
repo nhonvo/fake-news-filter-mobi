@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fake News Filter</string>
-    <string name="facebook_app_id">263493625606585</string>
-    <string name="fb_login_protocol_scheme">fb263493625606585</string>
-    <string name="facebook_client_token">3a516a44c4a8715809bd0a358d91e922</string>
+    <string name="app_name">Owl Trust - Fake News Filter</string>
+    <string name="facebook_app_id">1001624143838277</string>
+    <string name="fb_login_protocol_scheme">fb1001624143838277</string>
+    <string name="facebook_client_token">a78ba77845f78f80b32337227240def5</string>
 </resources>

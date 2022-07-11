@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>801182969519-hpdvcifae1co4kuu6h7i2kp7nohbs6sr.apps.googleusercontent.com</string>
+	<string>801182969519-quv414g419dqar64i1o0ph5ksfhdg1ti.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.801182969519-hpdvcifae1co4kuu6h7i2kp7nohbs6sr</string>
+	<string>com.googleusercontent.apps.801182969519-quv414g419dqar64i1o0ph5ksfhdg1ti</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>801182969519-b04fj93fs7m60ea3koe77genv7p4o32u.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDBj95iLmRUaNBWICv8-_yJGFEcJvy0V_c</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.owl_trust</string>
+	<string>com.owl-trust</string>
 	<key>PROJECT_ID</key>
 	<string>fake-news-filter</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:801182969519:ios:66518102841357b257ae5a</string>
+	<string>1:801182969519:ios:8e03967cf4234d1f57ae5a</string>
 </dict>
 </plist>

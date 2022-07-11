@@ -7,12 +7,13 @@ class Localization extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         LocaleKey.EN: {
-          LanguageKey.appname: 'Fake News Filter',
+          LanguageKey.appname: 'Owl Trust - Fake News Filter',
           LanguageKey.language: 'English',
           LanguageKey.klanguage: 'Language',
           LanguageKey.managelanguage: 'LANGUAGE MANAGERMENT',
           LanguageKey.displaylanguage: 'Select your display language',
-          LanguageKey.contentlanguage: 'What language do you want to read news?',
+          LanguageKey.contentlanguage:
+              'What language do you want to read news?',
           LanguageKey.login: 'Login',
           LanguageKey.hello: 'Hello',
           LanguageKey.logout: 'Logout',
@@ -22,7 +23,8 @@ class Localization extends Translations {
           LanguageKey.inputpass: 'Input password',
           LanguageKey.inputUserEmptyErr: 'Username or email cannot be empty',
           LanguageKey.inputPassEmptyErr: 'Password cannot be empty',
-          LanguageKey.inputPassAtLeast6Err: 'Password must be at least 6 characters',
+          LanguageKey.inputPassAtLeast6Err:
+              'Password must be at least 6 characters',
           LanguageKey.or: 'or',
           LanguageKey.help: 'Help you?',
           LanguageKey.okay: 'Okay',
@@ -68,7 +70,8 @@ class Localization extends Translations {
           LanguageKey.fetchingDataErr: "Error when fetching data",
           LanguageKey.dataConvertErr: "Error when converting data",
           LanguageKey.requestTimeOutErr: "Your request time out",
-          LanguageKey.noInternetErr: "The internet connection appears to be offline, please try again",
+          LanguageKey.noInternetErr:
+              "The internet connection appears to be offline, please try again",
           LanguageKey.serverErr: "Server error, please try again, code:",
           LanguageKey.serverDieErr: "Server is die, please try again",
           LanguageKey.interruptErr: "Cancelled, please try again",
@@ -95,20 +98,24 @@ class Localization extends Translations {
           LanguageKey.onboardTitle2: "NEWS CONFIRMED",
           LanguageKey.onboardTitle3: "INTERACT WITH NEWS",
           LanguageKey.onboardTitle4: "GET NEW NOTIFICATIONS",
-          LanguageKey.onboardBody1: "Diverse topics and languages. \nRead news based on the topics you follow.",
+          LanguageKey.onboardBody1:
+              "Diverse topics and languages. \nRead news based on the topics you follow.",
           LanguageKey.onboardBody2:
               "The fake news will be filtered and shown specifically in each news, avoiding unreliable news.",
-          LanguageKey.onboardBody3: "Users can vote, share, comment or contribute to the authenticity of the news.",
-          LanguageKey.onboardBody4: "The new news will be updated to achieve the best experience for users.",
+          LanguageKey.onboardBody3:
+              "Users can vote, share, comment or contribute to the authenticity of the news.",
+          LanguageKey.onboardBody4:
+              "The new news will be updated to achieve the best experience for users.",
           LanguageKey.allowNotification: "Allow notification",
         },
         LocaleKey.VI: {
-          LanguageKey.appname: 'Fake News Filter',
+          LanguageKey.appname: 'Owl Trust - Fake News Filter',
           LanguageKey.language: 'Tiếng Việt',
           LanguageKey.klanguage: 'Ngôn ngữ',
           LanguageKey.managelanguage: 'QUẢN LÝ NGÔN NGỮ',
           LanguageKey.displaylanguage: 'Chọn ngôn ngữ hiển thị',
-          LanguageKey.contentlanguage: 'Bạn muốn đọc tin tức bằng ngôn ngữ nào?',
+          LanguageKey.contentlanguage:
+              'Bạn muốn đọc tin tức bằng ngôn ngữ nào?',
           LanguageKey.login: 'Đăng nhập',
           LanguageKey.logout: 'Đăng xuất',
           LanguageKey.hello: 'Xin chào',
@@ -116,7 +123,8 @@ class Localization extends Translations {
           LanguageKey.started: 'Khám phá',
           LanguageKey.inputuser: 'Nhập tên đăng nhập hoặc email',
           LanguageKey.inputpass: 'Nhập mật khẩu',
-          LanguageKey.inputUserEmptyErr: 'Tên đăng nhập hoặc email không được để trống',
+          LanguageKey.inputUserEmptyErr:
+              'Tên đăng nhập hoặc email không được để trống',
           LanguageKey.inputPassEmptyErr: 'Mật khẩu không được để trống',
           LanguageKey.inputPassAtLeast6Err: 'Mật khẩu phải có ít nhất 6 ký tự',
           LanguageKey.or: 'hoặc',
@@ -127,7 +135,8 @@ class Localization extends Translations {
           LanguageKey.agree: 'Tôi đồng ý với ',
           LanguageKey.terms: 'Điều khoản sử dụng ',
           LanguageKey.about: 'của Fake News Filter',
-          LanguageKey.introduction: 'Theo dõi những tin tức nằm ở những chủ đề khác nhau.',
+          LanguageKey.introduction:
+              'Theo dõi những tin tức nằm ở những chủ đề khác nhau.',
           LanguageKey.covering: 'Tổng hợp chủ đề được quan tâm',
           LanguageKey.content_started:
               'Theo dõi các chủ đề để thông báo. Ứng dụng sẽ cho bạn biết khi hệ thống có những cập nhật mới',
@@ -163,7 +172,8 @@ class Localization extends Translations {
           LanguageKey.fetchingDataErr: "Lỗi khi tải dữ liệu",
           LanguageKey.dataConvertErr: "Lỗi khi chuyển dữ liệu",
           LanguageKey.requestTimeOutErr: "Yêu cầu của bạn đã hết thời gian",
-          LanguageKey.noInternetErr: "Kết nối internet của bạn bị lỗi, vui lòng thử lại",
+          LanguageKey.noInternetErr:
+              "Kết nối internet của bạn bị lỗi, vui lòng thử lại",
           LanguageKey.serverErr: "Lỗi máy chủ, vui lòng thử lại, mã lỗi:",
           LanguageKey.serverDieErr: "Máy chủ đã bị lỗi, vui lòng thử lại",
           LanguageKey.interruptErr: "Đã hủy, vui lòng thử lại",
@@ -178,7 +188,8 @@ class Localization extends Translations {
           LanguageKey.version: "",
           LanguageKey.support: "Hỗ trợ",
           LanguageKey.checkVerify: "Kiểm tra tính xác thực",
-          LanguageKey.sendInfo: "Gửi thông tin chi tiết về tin tức cần xác thực...",
+          LanguageKey.sendInfo:
+              "Gửi thông tin chi tiết về tin tức cần xác thực...",
           LanguageKey.addFile: "Thêm tệp đính kèm",
           LanguageKey.viewGuide: "Xem hướng dẫn",
           LanguageKey.highlightContributedNews: "Tin đóng góp nổi bật",
@@ -190,12 +201,14 @@ class Localization extends Translations {
           LanguageKey.onboardTitle2: "TIN TỨC ĐƯỢC XÁC THỰC",
           LanguageKey.onboardTitle3: "TƯƠNG TÁC TRÊN TIN TỨC",
           LanguageKey.onboardTitle4: "NHẬN THÔNG BÁO MỚI",
-          LanguageKey.onboardBody1: "Đa dạng các chủ đề, ngôn ngữ. \nĐọc các tin tức dựa trên chủ đề đã theo dõi.",
+          LanguageKey.onboardBody1:
+              "Đa dạng các chủ đề, ngôn ngữ. \nĐọc các tin tức dựa trên chủ đề đã theo dõi.",
           LanguageKey.onboardBody2:
               "Các tin tức giả sẽ được lọc và thể hiện cụ thể ở từng tin tức, tránh các tin không đáng tin cậy.",
           LanguageKey.onboardBody3:
               "Người dùng có thể bình chọn, chia sẻ, bình luận hoặc đóng góp tính xác thực của các tin tức.",
-          LanguageKey.onboardBody4: "Các tin tức mới sẽ được cập nhật để đạt trải nghiệm tốt nhất cho người dùng.",
+          LanguageKey.onboardBody4:
+              "Các tin tức mới sẽ được cập nhật để đạt trải nghiệm tốt nhất cho người dùng.",
           LanguageKey.allowNotification: "Cho phép gửi thông báo",
         },
       };

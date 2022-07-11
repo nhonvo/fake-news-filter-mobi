@@ -80,9 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
                       SvgPicture.asset(
                         Images.logo,
-                        width: Get.size.width * 0.34,
+                        width: Get.size.width * 0.2,
                       ),
-                      Text('appname'.tr, style: StylesText.content18BoldWhite)
+                      Text('appname'.tr, style: StylesText.content16BoldWhite)
                     ],
                   ),
                 ),
@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     Text('login'.tr, style: StylesText.content18BoldWhite),
                     SizedBox(
-                      height: Get.size.height * 0.03,
+                      height: Get.size.height * 0.025,
                     ),
                     //Account Text Field
                     CustomTextField(
@@ -98,25 +98,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       // ignore: null_check_always_fails
                       hintText: 'inputuser'.tr,
                       suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
+                          ? IconButton(
+                              onPressed: viewmodel.clearText,
+                              icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       prefixIcon: const Icon(Icons.supervised_user_circle),
                       obscureText: false,
                     ),
                     SizedBox(
-                      height: Get.size.height * 0.02,
+                      height: Get.size.height * 0.03,
                     ), //Password Text Field
                     CustomTextField(
                       controller: viewmodel.passwordController,
                       width: Get.size.width * 0.7,
                       prefixIcon: const Icon(Icons.security_outlined),
                       obscureText: _obscureText,
-                      suffixIcon:
-                          InkWell(onTap: toggle, child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility)),
+                      suffixIcon: InkWell(
+                          onTap: toggle,
+                          child: Icon(_obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility)),
                       hintText: 'inputpass'.tr,
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: Get.size.height * 0.02,
                 ),
                 CustomButton(
                   width: Get.size.width * 0.5,
@@ -131,11 +139,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Row(
                   children: <Widget>[
-                    const Text('Does not have account?'),
+                    Text('Does not have account?',
+                        style: StylesText.content16BoldBlack),
                     TextButton(
-                      child: const Text(
+                      child: Text(
                         'Sign in',
-                        style: TextStyle(fontSize: 20),
+                        style: StylesText.content16BoldBlue,
                       ),
                       onPressed: () => Get.toNamed(Routes.SIGNUP),
                     )
@@ -152,7 +161,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomIconButton(
                       width: Get.size.width * 0.35,
                       buttonText: '',
-                      icon: const Icon(FontAwesomeIcons.facebookF, color: Colors.white),
+                      icon: const Icon(FontAwesomeIcons.facebookF,
+                          color: Colors.white),
                       buttonColor: Colors.blue,
                       buttonRadius: 14,
                       textStyle: StylesText.content18BoldWhite,
@@ -166,7 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomIconButton(
                       width: Get.size.width * 0.35,
                       buttonText: '',
-                      icon: const Icon(FontAwesomeIcons.google, color: Colors.white),
+                      icon: const Icon(FontAwesomeIcons.google,
+                          color: Colors.white),
                       buttonColor: Colors.red,
                       buttonRadius: 14,
                       textStyle: StylesText.content18BoldWhite,
@@ -290,7 +301,8 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _buildTextBold('Chúng tôi thu thập những thông tin gì?'),
-              _buildTextMedium('- Chúng tôi thu thập thông tin từ bạn khi bạn điền vào một biểu mẫu.'),
+              _buildTextMedium(
+                  '- Chúng tôi thu thập thông tin từ bạn khi bạn điền vào một biểu mẫu.'),
               _buildTextMedium(
                   '- Chúng tôi có thể thu thập các thông tin như tên thiết bị, hệ điều hành, kích cỡ màn hình ngôn ngữ và vị trí.'),
               const SizedBox(
@@ -311,7 +323,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 5,
               ),
               _buildTextBold('Sự đồng ý của bạn'),
-              _buildTextMedium('Bằng cách sử dụng ứng dụng, bạn bằng lòng với chính sách riêng tư của chúng tôi.'),
+              _buildTextMedium(
+                  'Bằng cách sử dụng ứng dụng, bạn bằng lòng với chính sách riêng tư của chúng tôi.'),
               _buildTextBold('Thay đổi chính sách bảo mật của chúng tôi'),
               _buildTextMedium(
                   'Nếu có bất kỳ câu hỏi liên quan đến chính sách bảo mật này, bạn có thể liên hệ với chúng tôi')
@@ -357,7 +370,8 @@ class _LoginScreenState extends State<LoginScreen> {
       padding: const EdgeInsets.only(left: 10),
       child: Text(
         content,
-        style: StylesText.content14MediumBlack.merge(const TextStyle(height: 1.4)),
+        style:
+            StylesText.content14MediumBlack.merge(const TextStyle(height: 1.4)),
       ),
     );
   }
