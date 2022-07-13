@@ -26,6 +26,8 @@ class ViewNewsScreen extends StatefulWidget {
 }
 
 class _ViewNewsScreenState extends State<ViewNewsScreen> {
+  int _stackToView = 1;
+
   Future<String> get _url async {
     await Future.delayed(Duration(seconds: 1));
     return widget.webUrl.toString();
@@ -50,18 +52,22 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
         actions: [
           PopupMenuButton(
               offset: Offset(0, 50),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
               itemBuilder: (context) => [
                     PopupMenuItem(
                       onTap: () {
-                        Clipboard.setData(ClipboardData(text: widget.content)).then((_) {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text('clipboard'.tr), backgroundColor: Colors.green));
+                        Clipboard.setData(ClipboardData(text: widget.content))
+                            .then((_) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('clipboard'.tr),
+                              backgroundColor: Colors.green));
                         });
                       },
                       child: Row(
                         children: [
-                          Icon(FontAwesomeIcons.link, color: Colors.black, size: 17),
+                          Icon(FontAwesomeIcons.link,
+                              color: Colors.black, size: 17),
                           SizedBox(width: 10),
                           Text(
                             'copy'.tr,
@@ -79,7 +85,8 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                       },
                       child: Row(
                         children: [
-                          Icon(FontAwesomeIcons.globeAsia, color: Colors.black, size: 17),
+                          Icon(FontAwesomeIcons.globeAsia,
+                              color: Colors.black, size: 17),
                           SizedBox(width: 10),
                           Text(
                             'browser'.tr,
@@ -97,14 +104,25 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
         children: [
           FutureBuilder(
             future: _url,
-            builder: (BuildContext context, AsyncSnapshot snapshot) => snapshot.hasData
-                ? WebView(
-                    initialUrl: snapshot.data,
-                    javascriptMode: JavascriptMode.unrestricted,
-                  )
-                : Center(
-                    child: CircularProgressIndicator(),
-                  ),
+            builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                snapshot.hasData
+                    ? WebView(
+                        initialUrl: snapshot.data,
+                        javascriptMode: JavascriptMode.unrestricted,
+                        navigationDelegate: (NavigationRequest request) {
+                          if (request.url.compareTo(snapshot.data) != 0) {
+                            //Chặn khi rời website khác
+                            return NavigationDecision.prevent;
+                          }
+                          return NavigationDecision.navigate;
+                        },
+                        onPageFinished: (String url) {
+                          setState(() {
+                            _stackToView = 0;
+                          });
+                        },
+                      )
+                    : Container(child: LinearProgressIndicator()),
           ),
           Positioned(
             bottom: 15,
