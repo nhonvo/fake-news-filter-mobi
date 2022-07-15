@@ -61,7 +61,7 @@ class _CardCommunityState extends State<CardCommunity> {
               flex: 2,
               child: Card(
                 child: Image.network(
-                  widget.thumbNews!,
+                  widget.thumbNews ?? '',
                   fit: BoxFit.fill,
                   errorBuilder: (context, url, error) {
                     return Icon(Icons.error);
@@ -103,8 +103,7 @@ class _CardCommunityState extends State<CardCommunity> {
                                 "Số tin đã đóng góp:",
                                 style: StylesText.content10MediumBlack,
                               ),
-                              Text(widget.numberCrowd.toString(),
-                                  style: StylesText.content10BoldBlack)
+                              Text(widget.numberCrowd.toString(), style: StylesText.content10BoldBlack)
                             ],
                           ),
                         ],

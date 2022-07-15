@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:fake_news/core/models/api/base_response_api_model.dart';
 import 'package:fake_news/models/users/login_model.dart';
 import 'package:fake_news/models/users/user_model.dart';
@@ -9,7 +10,7 @@ abstract class AuthApi {
   Future<BaseResponse<LoginModel>> loginFacebook(String accessToken);
   Future<BaseResponse<LoginModel>> loginGoogle(String accessToken);
   Future<BaseResponse<UserModel>> getUserLoggedIn(String userId);
-  Future<BaseResponse<UserModel>> register(UserModel model);
+  Future<BaseResponse<dynamic>> register(dynamic data);
   Future<BaseResponse<String>> requestResetPassword(String email);
   Future<BaseResponse<String>> resetPassword(String code, String newPass, String cfNewPass);
   Future<BaseResponse<UserModel>> changePassword(String currentPass, String newPass, String confirmPass);
@@ -37,8 +38,8 @@ class AuthApiIpml implements AuthApi {
   }
 
   @override
-  Future<BaseResponse<UserModel>> register(UserModel model) async {
-    return await dioApi.doPost("/partner/signUp", model.toJson(), parseJson: (json) => UserModel.fromJson(json));
+  Future<BaseResponse<dynamic>> register(dynamic data) async {
+    return await dioApi.doPost("/api/Users/Register", data);
   }
 
   @override

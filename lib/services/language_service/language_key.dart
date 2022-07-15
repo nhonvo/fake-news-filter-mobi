@@ -14,6 +14,10 @@ class LanguageKey {
   static const started = "started";
   static const inputuser = "inputuser";
   static const inputpass = "inputpass";
+  static const inputEmail = "inputEmail";
+  static const inputName = "inputName";
+  static const inputPhone = "inputPhone";
+  static const inputPassConfirm = "inputPassConfirm";
   static const inputUserEmptyErr = "inputUserEmptyErr";
   static const inputPassEmptyErr = "inputPassEmptyErr";
   static const inputPassAtLeast6Err = "inputPassAtLeast6Err";

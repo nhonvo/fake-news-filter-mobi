@@ -20,22 +20,18 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   LoginViewModel get viewmodel => Get.find<LoginViewModel>();
 
-  bool _obscureText = true;
+  bool _passwordObscureText = true;
+  bool _confirmPasswordObscureText = true;
   bool checkbox = true;
 
   final language = Get.find<LanguageService>();
-
-  void toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
+        width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [
             Colors.blue,
@@ -43,6 +39,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
         ),
         child: Stack(
+          alignment: Alignment.center,
           children: [
             Positioned(
               top: Get.size.height * 0.04,
@@ -67,7 +64,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.only(top: 46),
@@ -87,15 +84,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     SizedBox(
                       height: Get.size.height * 0.03,
                     ),
-                    //Account Text Field
                     CustomTextField(
                       controller: viewmodel.usernameController,
                       // ignore: null_check_always_fails
                       hintText: 'inputuser'.tr,
                       suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(
-                              onPressed: viewmodel.clearText,
-                              icon: const Icon(Icons.clear))
+                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       height: 40,
@@ -108,11 +102,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     CustomTextField(
                       controller: viewmodel.nameController,
                       // ignore: null_check_always_fails
-                      hintText: 'Name',
+                      hintText: 'inputName'.tr,
                       suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(
-                              onPressed: viewmodel.clearText,
-                              icon: const Icon(Icons.clear))
+                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       height: 40,
@@ -125,11 +117,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     CustomTextField(
                       controller: viewmodel.emailController,
                       // ignore: null_check_always_fails
-                      hintText: 'Email',
+                      hintText: 'inputEmail'.tr,
                       suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(
-                              onPressed: viewmodel.clearText,
-                              icon: const Icon(Icons.clear))
+                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       height: 40,
@@ -139,20 +129,33 @@ class _SignupScreenState extends State<SignupScreen> {
                     SizedBox(
                       height: Get.size.height * 0.02,
                     ),
-
                     CustomTextField(
-                      controller: viewmodel.passwordController,
+                      controller: viewmodel.phoneController,
                       // ignore: null_check_always_fails
-                      hintText: 'Password',
-                      suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(
-                              onPressed: viewmodel.clearText,
-                              icon: const Icon(Icons.clear))
+                      hintText: 'inputPhone'.tr,
+                      suffixIcon: viewmodel.phoneController.text.isNotEmpty
+                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       height: 40,
                       prefixIcon: const Icon(Icons.supervised_user_circle),
                       obscureText: false,
+                    ),
+                    SizedBox(
+                      height: Get.size.height * 0.02,
+                    ),
+                    CustomTextField(
+                      controller: viewmodel.passwordController,
+                      hintText: 'inputpass'.tr,
+                      suffixIcon: InkWell(
+                          onTap: () => setState(() {
+                                _passwordObscureText = !_passwordObscureText;
+                              }),
+                          child: Icon(_passwordObscureText ? Icons.visibility_off : Icons.visibility)),
+                      width: Get.size.width * 0.7,
+                      height: 40,
+                      prefixIcon: const Icon(Icons.supervised_user_circle),
+                      obscureText: _passwordObscureText,
                     ),
                     SizedBox(
                       height: Get.size.height * 0.02,
@@ -161,13 +164,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       controller: viewmodel.passwordConfirmController,
                       width: Get.size.width * 0.7,
                       prefixIcon: const Icon(Icons.security_outlined),
-                      obscureText: _obscureText,
+                      obscureText: _confirmPasswordObscureText,
                       suffixIcon: InkWell(
-                          onTap: toggle,
-                          child: Icon(_obscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility)),
-                      hintText: 'Password confirm',
+                          onTap: () => setState(() {
+                                _confirmPasswordObscureText = !_confirmPasswordObscureText;
+                              }),
+                          child: Icon(_confirmPasswordObscureText ? Icons.visibility_off : Icons.visibility)),
+                      hintText: 'inputPassConfirm'.tr,
                       height: 40,
                     ),
                   ],
@@ -185,20 +188,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   onPressed: () {
                     viewmodel.handleRegister();
                   },
-                ),
-                Row(
-                  children: <Widget>[
-                    Text('Does not have account?',
-                        style: StylesText.content14BoldBlack),
-                    TextButton(
-                      child: Text(
-                        'Sign up',
-                        style: StylesText.content16BoldBlue,
-                      ),
-                      onPressed: () => Get.toNamed('/signup'),
-                    )
-                  ],
-                  mainAxisAlignment: MainAxisAlignment.center,
                 ),
               ],
             ),
