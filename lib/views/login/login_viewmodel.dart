@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart' as dio;
 import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
@@ -63,13 +64,21 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
-  handleRegister() {
-    // print(usernameController.text);
-    // print(nameController.text);
-    // print(emailController.text);
-    // print(phoneController.text);
-    // print(passwordController.text);
-    // print(passwordConfirmController.text);
+  handleRegister() async {
+    var response = await authApi.register({
+      "username": usernameController.text,
+      "name": nameController.text,
+      "email": emailController.text,
+      "phoneNumber": phoneController.text,
+      "password": passwordController.text,
+      "confirmPassword": passwordConfirmController.text,
+    });
+
+    if (response.isSuccessed == false) {
+      _showSnackbar(response.messages ?? "An error occurred");
+    } else {
+      _showSnackbar(response.messages!);
+    }
   }
 
   handleLoginFacebook() async {
