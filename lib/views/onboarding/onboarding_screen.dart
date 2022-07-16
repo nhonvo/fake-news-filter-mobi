@@ -29,15 +29,21 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             style: TextStyle(
               fontWeight: FontWeight.w600,
             )),
-        onDone: () {
-          Get.offAllNamed(Routes.DISCOVERY);
+        onDone: () async {
+          await OneSignal.shared
+              .promptUserForPushNotificationPermission()
+              .then((accepted) {
+            print("Accepted permission: $accepted");
+          });
+          await Get.offAllNamed(Routes.DISCOVERY);
         },
         dotsDecorator: DotsDecorator(
             size: Size.square(10.0),
             activeSize: Size(20.0, 10.0),
             color: Colors.black26,
             spacing: EdgeInsets.symmetric(horizontal: 3.0),
-            activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0))),
+            activeShape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25.0))),
         pages: [
           PageViewModel(
             title: "onboardTitle1".tr,
@@ -84,7 +90,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
             footer: CustomButton(
                 onPressed: () {
-                  OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+                  OneSignal.shared
+                      .promptUserForPushNotificationPermission()
+                      .then((accepted) {
                     print("Accepted permission: $accepted");
                   });
                 },

@@ -50,9 +50,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       locale: Locale(language.currentLanguage),
       translations: Localization(),
+      defaultTransition: Transition.fade,
       getPages: AppRoutes.appRoutes,
       initialRoute: Routes.INIT,
-      defaultTransition: Transition.rightToLeftWithFade,
     );
   }
 }

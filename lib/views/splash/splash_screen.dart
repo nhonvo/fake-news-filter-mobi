@@ -19,36 +19,29 @@ class _SplashScreenState extends State<SplashScreen> {
     SizeText.queryData = MediaQuery.of(context).textScaleFactor;
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Colors.blue,
-            Colors.white,
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(Images.background),
+            fit: BoxFit.cover,
+          ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(top: 50),
-              child: Column(
-                children: <Widget>[
-                  SvgPicture.asset(
-                    Images.logo,
-                    width: Get.size.width * 0.2,
-                  ),
-                  Text('appname'.tr, style: StylesText.content18BoldWhite)
-                ],
-              ),
+            SvgPicture.asset(
+              Images.logo,
+              width: Get.size.width * 0.25,
             ),
-            Column(
-              children: <Widget>[
-                Text("hello".tr, style: StylesText.content18BoldBlack),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
+            Text('appname'.tr, style: StylesText.content18BoldWhite),
+            SizedBox(
+              height: 10,
             ),
-            Image.asset(Images.banner),
+            Text('slogan'.tr, style: StylesText.content18BoldWhite),
+            SizedBox(
+              height: 10,
+            ),
+            RefreshProgressIndicator()
           ],
         ),
       ),

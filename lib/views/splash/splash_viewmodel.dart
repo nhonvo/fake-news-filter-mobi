@@ -21,7 +21,6 @@ class SplashViewModel extends BaseViewModel {
     var token = await authRepo.getAuthToken();
     var response = await languageApi.getLanguages();
 
-    // Get.lazyPut<List<LanguageModel>?>(() => response.resultObj);
     Get.create<List<LanguageModel>?>(() => response.resultObj);
 
     if (token != null) {

@@ -22,51 +22,42 @@ class AppRoutes {
     GetPage(
         name: Routes.INIT,
         page: () => SplashScreen(),
-        transition: Transition.rightToLeftWithFade,
         binding: SplashBinding()),
     GetPage(
         name: Routes.FOLLOW_TOPIC,
         page: () => FollowTopicScreen(),
-        transition: Transition.rightToLeftWithFade,
         binding: DiscoveryBinding()),
     GetPage(
         name: Routes.DISCOVERY,
         page: () => DiscoveryScreen(),
-        transition: Transition.rightToLeftWithFade,
         binding: DiscoveryBinding()),
     GetPage(
         name: Routes.PREVIEW,
         page: () => PreviewScreen(),
-        transition: Transition.rightToLeftWithFade,
         binding: PreviewBinding()),
     GetPage(
       name: Routes.LOGIN,
       page: () => LoginScreen(),
-      transition: Transition.rightToLeftWithFade,
       binding: LoginBinding(),
     ),
     GetPage(
       name: Routes.SIGNUP,
       page: () => SignupScreen(),
-      transition: Transition.rightToLeftWithFade,
       binding: LoginBinding(),
     ),
     GetPage(
       name: Routes.HOME,
       page: () => HomeScreen(),
       binding: HomeBinding(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: Routes.CONTRIBUTE,
       page: () => ContributeScreen(),
       binding: ContributeBinding(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: Routes.ONBOARDING,
       page: () => OnBoardingScreen(),
-      transition: Transition.rightToLeftWithFade,
     ),
   ];
 }

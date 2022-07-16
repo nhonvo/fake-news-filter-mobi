@@ -7,7 +7,8 @@ class Localization extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         LocaleKey.EN: {
-          LanguageKey.appname: 'Owl Trust - Fake News Filter',
+          LanguageKey.appname: 'Owl Trust',
+          LanguageKey.slogan: 'Fake News Filter',
           LanguageKey.language: 'English',
           LanguageKey.klanguage: 'Language',
           LanguageKey.managelanguage: 'LANGUAGE MANAGERMENT',
@@ -109,7 +110,8 @@ class Localization extends Translations {
           LanguageKey.allowNotification: "Allow notification",
         },
         LocaleKey.VI: {
-          LanguageKey.appname: 'Owl Trust - Fake News Filter',
+          LanguageKey.appname: 'Owl Trust',
+          LanguageKey.slogan: 'Fake News Filter',
           LanguageKey.language: 'Tiếng Việt',
           LanguageKey.klanguage: 'Ngôn ngữ',
           LanguageKey.managelanguage: 'QUẢN LÝ NGÔN NGỮ',

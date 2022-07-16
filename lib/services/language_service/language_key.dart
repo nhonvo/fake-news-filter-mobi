@@ -1,6 +1,7 @@
 class LanguageKey {
   //App
   static const appname = "appname";
+  static const slogan = "slogan";
   static const klanguage = "klanguage";
   static const language = "language";
   static const managelanguage = "managelanguage";
