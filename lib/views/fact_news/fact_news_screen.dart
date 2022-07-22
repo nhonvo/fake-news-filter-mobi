@@ -138,7 +138,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                       imageUrl: item.thumbNews.toString(),
                       webUrl: item.url.toString(),
                       article: item.publisher ?? '',
-                      onpress: () {}),
+                      onPress: () {}),
               ],
             )
           : Container();

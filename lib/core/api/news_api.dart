@@ -7,6 +7,7 @@ abstract class NewsApi {
   Future<BaseResponse<List<NewsModel>>> getNews(String? filter, String? languageId);
   Future<BaseResponse<List<NewsModel>>> getNewsByTopicId(int? topicId);
   Future<BaseResponse<List<NewsModel>>> getNewsByFollowedTopic(String userId);
+  Future<BaseResponse<dynamic>> getViewCount(int newsId);
 }
 
 class NewsApiIpml implements NewsApi {
@@ -32,5 +33,10 @@ class NewsApiIpml implements NewsApi {
       "/api/News/FollowedTopic?userId=$userId",
       parseJson: (json) => List<NewsModel>.from(json.map((x) => NewsModel.fromJson(x))),
     );
+  }
+
+  @override
+  Future<BaseResponse<dynamic>> getViewCount(int newsId) async {
+    return await dioApi.doGet("/api/News/Views/$newsId");
   }
 }

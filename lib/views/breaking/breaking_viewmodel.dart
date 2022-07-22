@@ -78,6 +78,14 @@ class BreakingViewModel extends BaseViewModel {
     }
   }
 
+  handleGetCountView(int newsId) async {
+    try {
+      await newsApi.getViewCount(newsId);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥Rating button💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
   Future<void> vote(bool isReal, String newsId) async {
     var userId = await authRepo.getUserId();
