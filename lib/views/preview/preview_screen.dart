@@ -124,6 +124,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             imageUrl: item.thumbNews.toString(),
                             webUrl: item.url.toString(),
                             article: item.publisher ?? '',
+                            viewCount: item.viewCount.toString(),
                             onPress: () {}),
                     ],
                   ),

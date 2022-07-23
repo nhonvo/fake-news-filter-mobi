@@ -39,6 +39,7 @@ class NewsModel {
   "alias": "a-lagging-vaccine",
   "thumbNews": "http://localhost:5001/images/news/newsid4.jpg",
   "officialRating": null,
+  "viewCount": 6,
   "publisher": null,
   "timestamp": "2022-05-16T12:47:00.157796",
   "status": 1,
@@ -59,6 +60,7 @@ class NewsModel {
   String? alias;
   String? thumbNews;
   String? officialRating;
+  String? viewCount;
   String? publisher;
   String? timestamp;
   int? status;
@@ -73,6 +75,7 @@ class NewsModel {
     this.alias,
     this.thumbNews,
     this.officialRating,
+    this.viewCount,
     this.publisher,
     this.timestamp,
     this.status,
@@ -87,6 +90,7 @@ class NewsModel {
     alias = json['alias']?.toString();
     thumbNews = json['thumbNews']?.toString();
     officialRating = json['officialRating']?.toString();
+    viewCount = json['viewCount']?.toString();
     publisher = json['publisher']?.toString();
     timestamp = json['timestamp']?.toString();
     status = json['status']?.toInt();
@@ -109,6 +113,7 @@ class NewsModel {
     data['alias'] = alias;
     data['thumbNews'] = thumbNews;
     data['officialRating'] = officialRating;
+    data['viewCount'] = viewCount;
     data['publisher'] = publisher;
     data['timestamp'] = timestamp;
     data['status'] = status;

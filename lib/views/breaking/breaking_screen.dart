@@ -72,6 +72,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         imageUrl: item.thumbNews.toString(),
                                         webUrl: item.url.toString(),
                                         article: item.publisher ?? '',
+                                        viewCount: item.viewCount.toString(),
                                         onPress: () {
                                           viewmodel.handleGetCountView(item.newsId!);
                                         }),

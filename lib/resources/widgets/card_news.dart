@@ -16,7 +16,7 @@ import 'button.dart';
 
 class CardNews extends StatefulWidget {
   final String? offical, socialBeliefs, avatar, name, link, imageUrl, video, webUrl;
-  final String newsId, times, title, article, content, factCheck;
+  final String newsId, times, title, article, content, factCheck, viewCount;
   final List<String?>? tags;
 
   final VoidCallback onPress;
@@ -34,6 +34,7 @@ class CardNews extends StatefulWidget {
       this.video,
       required this.title,
       required this.article,
+      required this.viewCount,
       this.avatar,
       this.name,
       required this.onPress,
@@ -235,7 +236,20 @@ class _CardNewsState extends State<CardNews> {
                                   )
                                 ],
                               ),
-                            )
+                            ),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            IconsApp.eye,
+                            width: 15,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            widget.viewCount,
+                            style: StylesText.content12BoldGrey,
+                          ),
+                        ],
+                      )
                     ],
                   )
                 ],
