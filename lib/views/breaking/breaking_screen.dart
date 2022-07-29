@@ -64,7 +64,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         factCheck: Images.icnone,
                                         rate: true,
                                         tags: item.topicInfo!.map((v) => v!.topicName).toList(),
-                                        socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
+                                        socialBeliefs: '${item.socialBeliefs}%',
                                         times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
                                         title: item.title.toString().substring(
                                             0, item.title.toString().length > 50 ? 50 : item.title.toString().length),

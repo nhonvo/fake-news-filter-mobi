@@ -38,6 +38,7 @@ class NewsModel {
   "url": "https://www.independent.co.uk/arts-entertainment/eurovision/the-rasmus-eurovision-2022-finland-b2077365.html",
   "alias": "a-lagging-vaccine",
   "thumbNews": "http://localhost:5001/images/news/newsid4.jpg",
+  "socialBeliefs": 0.67,
   "officialRating": null,
   "viewCount": 6,
   "publisher": null,
@@ -60,6 +61,7 @@ class NewsModel {
   String? alias;
   String? thumbNews;
   String? officialRating;
+  double? socialBeliefs;
   String? viewCount;
   String? publisher;
   String? timestamp;
@@ -90,6 +92,7 @@ class NewsModel {
     alias = json['alias']?.toString();
     thumbNews = json['thumbNews']?.toString();
     officialRating = json['officialRating']?.toString();
+    socialBeliefs = json['socialBeliefs']?.toDouble();
     viewCount = json['viewCount']?.toString();
     publisher = json['publisher']?.toString();
     timestamp = json['timestamp']?.toString();
@@ -113,6 +116,7 @@ class NewsModel {
     data['alias'] = alias;
     data['thumbNews'] = thumbNews;
     data['officialRating'] = officialRating;
+    data['socialBeliefs'] = socialBeliefs;
     data['viewCount'] = viewCount;
     data['publisher'] = publisher;
     data['timestamp'] = timestamp;

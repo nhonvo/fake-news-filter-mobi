@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import '../breaking/breaking_viewmodel.dart';
+
 class PreviewScreen extends StatefulWidget {
   const PreviewScreen({Key? key}) : super(key: key);
 
@@ -22,7 +24,8 @@ class PreviewScreen extends StatefulWidget {
 }
 
 class _PreviewScreenState extends State<PreviewScreen> {
-  PreviewViewModel get viewModel => Get.find<PreviewViewModel>();
+  PreviewViewModel get previewViewModel => Get.find<PreviewViewModel>();
+  BreakingViewModel get breakingViewModel => Get.find<BreakingViewModel>();
 
   bool follow = false;
 
@@ -42,12 +45,12 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        viewModel.topicModel.value.thumbImage != null
+                        previewViewModel.topicModel.value.thumbImage != null
                             ? CachedNetworkImage(
                                 fit: BoxFit.fitWidth,
                                 height: 120,
                                 imageUrl:
-                                    "${viewModel.appEnvironment.apiBaseUrl}/images/topics/${viewModel.topicModel.value.thumbImage}",
+                                    "${previewViewModel.appEnvironment.apiBaseUrl}/images/topics/${previewViewModel.topicModel.value.thumbImage}",
                                 imageBuilder: (context, imageProvider) => Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(6),
@@ -67,12 +70,12 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TagTopic(
-                                tagName: viewModel.topicModel.value.tag.toString(),
+                                tagName: previewViewModel.topicModel.value.tag.toString(),
                                 buttonColor: MyColors.red.withOpacity(0.1),
                               ),
                               InkWell(
                                 onTap: () {
-                                  viewModel.handleFollowing();
+                                  previewViewModel.handleFollowing();
                                   // setState(() {
                                   //   follow = !follow;
                                   // });
@@ -88,7 +91,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
                           child: Text(
-                            viewModel.topicModel.value.description.toString(),
+                            previewViewModel.topicModel.value.description.toString(),
                             style: StylesText.content12BlackWhite,
                           ),
                         ),
@@ -111,12 +114,12 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     spacing: 10,
                     runSpacing: 10,
                     children: [
-                      for (var item in viewModel.news)
+                      for (var item in previewViewModel.news)
                         CardNews(
                             newsId: item.newsId.toString(),
                             factCheck: Images.icnone,
                             rate: true,
-                            socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
+                            socialBeliefs: '${item.socialBeliefs}%',
                             times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
                             title:
                                 '${item.title.toString().substring(0, item.title!.length > 50 ? 50 : item.title.toString().length)}...',
@@ -125,7 +128,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             webUrl: item.url.toString(),
                             article: item.publisher ?? '',
                             viewCount: item.viewCount.toString(),
-                            onPress: () {}),
+                            onPress: () {
+                              breakingViewModel.handleGetCountView(item.newsId!);
+                            }),
                     ],
                   ),
                 ],
