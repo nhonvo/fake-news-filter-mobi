@@ -15,18 +15,11 @@ import 'package:get/get.dart';
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
-  final String? offical,
-      socialBeliefs,
-      avatar,
-      name,
-      link,
-      imageUrl,
-      video,
-      webUrl;
-  final String newsId, times, title, article, content, factCheck;
+  final String? offical, socialBeliefs, avatar, name, link, imageUrl, video, webUrl;
+  final String newsId, times, title, article, content, factCheck, viewCount;
   final List<String?>? tags;
 
-  final VoidCallback onpress;
+  final VoidCallback onPress;
 
   final bool? rate;
   const CardNews(
@@ -41,9 +34,10 @@ class CardNews extends StatefulWidget {
       this.video,
       required this.title,
       required this.article,
+      required this.viewCount,
       this.avatar,
       this.name,
-      required this.onpress,
+      required this.onPress,
       this.link,
       this.tags,
       required this.content,
@@ -77,6 +71,7 @@ class _CardNewsState extends State<CardNews> {
       children: [
         GestureDetector(
           onTap: () {
+            widget.onPress();
             Get.to(() => ViewNewsScreen(
                   newsId: widget.newsId,
                   content: widget.content,
@@ -114,9 +109,7 @@ class _CardNewsState extends State<CardNews> {
                             children: [
                               widget.offical != null
                                   ? Row(children: [
-                                      Text('Official Rating: ',
-                                          style:
-                                              StylesText.content12MediumBlack),
+                                      Text('Official Rating: ', style: StylesText.content12MediumBlack),
                                       Text(
                                         widget.offical!,
                                         style: StylesText.content12BoldBlack,
@@ -127,8 +120,7 @@ class _CardNewsState extends State<CardNews> {
                                   ? Row(children: [
                                       widget.offical == null
                                           ? Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 4.0),
+                                              padding: const EdgeInsets.only(right: 4.0),
                                               child: SvgPicture.asset(
                                                 IconsApp.unknown,
                                                 width: 24,
@@ -174,8 +166,7 @@ class _CardNewsState extends State<CardNews> {
                               fit: BoxFit.fitWidth,
                               height: 180,
                               imageUrl: widget.imageUrl!,
-                              imageBuilder: (context, imageProvider) =>
-                                  Container(
+                              imageBuilder: (context, imageProvider) => Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6),
                                   image: DecorationImage(
@@ -184,10 +175,8 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                 ),
                               ),
-                              placeholder: (context, url) =>
-                                  CupertinoActivityIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                              placeholder: (context, url) => CupertinoActivityIndicator(),
+                              errorWidget: (context, url, error) => Icon(Icons.error),
                             ),
                           ),
                         )
@@ -247,7 +236,20 @@ class _CardNewsState extends State<CardNews> {
                                   )
                                 ],
                               ),
-                            )
+                            ),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            IconsApp.eye,
+                            width: 15,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            widget.viewCount,
+                            style: StylesText.content12BoldGrey,
+                          ),
+                        ],
+                      )
                     ],
                   )
                 ],

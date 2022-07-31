@@ -5,6 +5,7 @@ import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
+import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:fake_news/views/fact_news/fact_news_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,8 +18,8 @@ class FactNewsScreen extends StatefulWidget {
 }
 
 class _FactNewsScreenState extends State<FactNewsScreen> {
-  FactNewsViewModel get viewmodel => Get.find<FactNewsViewModel>();
-
+  FactNewsViewModel get factNewsViewModel => Get.find<FactNewsViewModel>();
+  BreakingViewModel get breakingViewModel => Get.find<BreakingViewModel>();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,14 +60,14 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  viewmodel.index.value == 0
+                  factNewsViewModel.index.value == 0
                       ? CustomButton(
                           buttonText: 'real'.tr.toUpperCase(),
                           buttonColor: MyColors.blue,
                           buttonRadius: 30,
                           width: 150,
                           textStyle: StylesText.content14BoldWhite,
-                          onPressed: () => viewmodel.index.value = 0,
+                          onPressed: () => factNewsViewModel.index.value = 0,
                         )
                       : CustomButton(
                           buttonText: 'real'.tr.toUpperCase(),
@@ -75,18 +76,18 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                           width: 150,
                           textStyle: StylesText.content12BoldWhite,
                           onPressed: () {
-                            viewmodel.index.value = 0;
-                            viewmodel.handleGetFactNews('real');
+                            factNewsViewModel.index.value = 0;
+                            factNewsViewModel.handleGetFactNews('real');
                           },
                         ),
-                  viewmodel.index.value == 1
+                  factNewsViewModel.index.value == 1
                       ? CustomButton(
                           buttonText: 'fake'.tr.toUpperCase(),
                           buttonColor: MyColors.blue,
                           buttonRadius: 30,
                           width: 150,
                           textStyle: StylesText.content14BoldWhite,
-                          onPressed: () => viewmodel.index.value = 1)
+                          onPressed: () => factNewsViewModel.index.value = 1)
                       : CustomButton(
                           buttonText: 'fake'.tr.toUpperCase(),
                           buttonColor: MyColors.greyLight,
@@ -94,8 +95,8 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                           width: 150,
                           textStyle: StylesText.content12BoldWhite,
                           onPressed: () {
-                            viewmodel.index.value = 1;
-                            viewmodel.handleGetFactNews('fake');
+                            factNewsViewModel.index.value = 1;
+                            factNewsViewModel.handleGetFactNews('fake');
                           },
                         )
                 ],
@@ -108,7 +109,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
   }
 
   Widget _buildBody() {
-    if (viewmodel.index.value == 0) {
+    if (factNewsViewModel.index.value == 0) {
       return _buildItem('real');
     } else {
       return _buildItem('fake');
@@ -117,19 +118,19 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
 
   Widget _buildItem(String filter) {
     return Obx(() {
-      return viewmodel.isLoaded.value
+      return factNewsViewModel.isLoaded.value
           ? Wrap(
               spacing: 10,
               runSpacing: 10,
               children: [
-                for (var item in viewmodel.news)
+                for (var item in factNewsViewModel.news)
                   CardNews(
                       newsId: item!.newsId.toString(),
-                      factCheck: viewmodel.index.value == 0 ? IconsApp.real : IconsApp.fake,
+                      factCheck: factNewsViewModel.index.value == 0 ? IconsApp.real : IconsApp.fake,
                       rate: false,
-                      offical: viewmodel.index.value == 0 ? "real".tr : "fake".tr,
+                      offical: factNewsViewModel.index.value == 0 ? "real".tr : "fake".tr,
                       // tag: viewmodel.topicModel.value.tag.toString(),
-                      socialBeliefs: '${50 + new Random().nextInt(90 - 50)}%',
+                      socialBeliefs: '${item.socialBeliefs}%',
                       times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
                       title: item.title
                           .toString()
@@ -138,7 +139,10 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                       imageUrl: item.thumbNews.toString(),
                       webUrl: item.url.toString(),
                       article: item.publisher ?? '',
-                      onpress: () {}),
+                      viewCount: item.viewCount.toString(),
+                      onPress: () {
+                        breakingViewModel.handleGetCountView(item.newsId!);
+                      }),
               ],
             )
           : Container();
