@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewNewsScreen extends StatefulWidget {
   ViewNewsScreen({
@@ -57,7 +58,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
               itemBuilder: (context) => [
                     PopupMenuItem(
                       onTap: () {
-                        Clipboard.setData(ClipboardData(text: widget.content))
+                        Clipboard.setData(ClipboardData(text: widget.webUrl))
                             .then((_) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('clipboard'.tr),
@@ -79,9 +80,10 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                     ),
                     PopupMenuItem(
                       onTap: () async {
-                        // await canLaunch(widget.content)
-                        //     ? await launch(widget.content)
-                        //     : ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('error_browser'.tr)));
+                        await canLaunchUrl(Uri.parse(widget.webUrl!))
+                            ? await launchUrl(Uri.parse(widget.webUrl!))
+                            : ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('error_browser'.tr)));
                       },
                       child: Row(
                         children: [
@@ -108,7 +110,6 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                 snapshot.hasData
                     ? WebView(
                         initialUrl: snapshot.data,
-                        javascriptMode: JavascriptMode.unrestricted,
                         navigationDelegate: (NavigationRequest request) {
                           if (request.url.compareTo(snapshot.data) != 0) {
                             //Chặn khi rời website khác
