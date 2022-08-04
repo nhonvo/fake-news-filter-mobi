@@ -12,7 +12,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
-class ChooseLanguageScreen extends StatelessWidget {
+class ChooseLanguageScreen extends StatefulWidget {
+  bool? showChangeContentLanguageButton;
+
+  ChooseLanguageScreen({Key? key, this.showChangeContentLanguageButton = true}) : super(key: key);
+
+  @override
+  State<ChooseLanguageScreen> createState() => _ChooseLanguageScreenState();
+}
+
+class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
   DiscoveryViewModel get viewmodel => Get.find<DiscoveryViewModel>();
 
   Widget iconBuilder(int i, Size size, bool active) {
@@ -86,84 +95,86 @@ class ChooseLanguageScreen extends StatelessWidget {
                   height: 55,
                   dif: 10,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'contentlanguage'.tr,
-                  style: StylesText.content14BoldBlack,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    height: 150,
-                    child: ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
-                        itemCount: viewmodel.languagesList?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              viewmodel.selectedValue.value = index;
-                              viewmodel.getLanguageContent.value = viewmodel.languagesList?[index].id ?? 'en';
-                            },
-                            child: Card(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                              child: Container(
-                                width: 175,
-                                padding: EdgeInsets.all(25),
-                                child: Obx(
-                                  () => Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      viewmodel.languagesList?[index].flag != null
-                                          ? CachedNetworkImage(
-                                              width: 50,
-                                              height: 50,
-                                              imageUrl:
-                                                  "${viewmodel.appEnvironment.apiBaseUrl}/images/languages/${viewmodel.languagesList?[index].flag}",
-                                              imageBuilder: (context, imageProvider) => Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(6),
-                                                  image: DecorationImage(
-                                                      image: imageProvider,
-                                                      fit: BoxFit.fitWidth,
-                                                      colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                if (widget.showChangeContentLanguageButton == true) ...[
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'contentlanguage'.tr,
+                    style: StylesText.content14BoldBlack,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                      height: 150,
+                      child: ListView.builder(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          scrollDirection: Axis.horizontal,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: viewmodel.languagesList?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                viewmodel.selectedValue.value = index;
+                                viewmodel.getLanguageContent.value = viewmodel.languagesList?[index].id ?? 'en';
+                              },
+                              child: Card(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                child: Container(
+                                  width: 175,
+                                  padding: EdgeInsets.all(25),
+                                  child: Obx(
+                                    () => Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        viewmodel.languagesList?[index].flag != null
+                                            ? CachedNetworkImage(
+                                                width: 50,
+                                                height: 50,
+                                                imageUrl:
+                                                    "${viewmodel.appEnvironment.apiBaseUrl}/images/languages/${viewmodel.languagesList?[index].flag}",
+                                                imageBuilder: (context, imageProvider) => Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(6),
+                                                    image: DecorationImage(
+                                                        image: imageProvider,
+                                                        fit: BoxFit.fitWidth,
+                                                        colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                                                  ),
                                                 ),
-                                              ),
-                                              placeholder: (context, url) => CupertinoActivityIndicator(),
-                                              errorWidget: (context, url, error) => Icon(Icons.error),
+                                                placeholder: (context, url) => CupertinoActivityIndicator(),
+                                                errorWidget: (context, url, error) => Icon(Icons.error),
+                                              )
+                                            : Container(),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(viewmodel.languagesList![index].name.toString(),
+                                                style: viewmodel.selectedValue.value == index
+                                                    ? StylesText.content14BoldBlue
+                                                    : StylesText.content14MediumBlack),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(100),
+                                                  border: Border.all(color: Colors.black12)),
+                                              child: Icon(Icons.check,
+                                                  size: 18,
+                                                  color: viewmodel.selectedValue.value == index
+                                                      ? MyColors.blue
+                                                      : Colors.black12),
                                             )
-                                          : Container(),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(viewmodel.languagesList![index].name.toString(),
-                                              style: viewmodel.selectedValue.value == index
-                                                  ? StylesText.content14BoldBlue
-                                                  : StylesText.content14MediumBlack),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(100),
-                                                border: Border.all(color: Colors.black12)),
-                                            child: Icon(Icons.check,
-                                                size: 18,
-                                                color: viewmodel.selectedValue.value == index
-                                                    ? MyColors.blue
-                                                    : Colors.black12),
-                                          )
-                                        ],
-                                      )
-                                    ],
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        }))
+                            );
+                          }))
+                ]
               ],
             ),
           ),

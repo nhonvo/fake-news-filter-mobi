@@ -55,11 +55,11 @@ class BreakingViewModel extends BaseViewModel {
     });
     var response = await newsApi.getNewsByFollowedTopic(userId.toString());
 
-    if (response.isSuccessed == false) {
+    if (response.statusCode != 200) {
       EasyLoading.dismiss();
       snackBar(
         'error'.tr,
-        response.messages!,
+        response.message!,
         'altMessage'.tr,
         Icon(
           Icons.error,
@@ -93,11 +93,11 @@ class BreakingViewModel extends BaseViewModel {
 
     news.removeWhere((e) => e!.newsId == int.parse(newsId));
 
-    if (response.isSuccessed == false) {
+    if (response.statusCode != 200) {
       EasyLoading.dismiss();
       snackBar(
         'error'.tr,
-        response.messages!,
+        response.message!,
         'altMessage'.tr,
         Icon(
           Icons.error,

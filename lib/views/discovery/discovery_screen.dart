@@ -116,11 +116,9 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                                   tag: topic.tag.toString(),
                                   description: topic.description.toString(),
                                   image: topic.thumbImage.toString(),
-                                  time: AppHelper.convertToAgo(DateTime.parse(
-                                      topic.realTime.toString())),
+                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
                                   ontap: () {
-                                    Get.toNamed(Routes.PREVIEW,
-                                        arguments: topic.obs);
+                                    Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
                                   },
                                 ));
                           }).toList());

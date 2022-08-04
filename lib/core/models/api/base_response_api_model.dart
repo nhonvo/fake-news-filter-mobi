@@ -1,18 +1,18 @@
 import 'dart:core';
 
 class BaseResponse<T> {
-  bool? isSuccessed;
+  int? statusCode;
   T? resultObj;
-  String? messages;
+  String? message;
 
   BaseResponse.fromJson(Map<String, dynamic> json, {T Function(dynamic json)? parseJson}) {
-    isSuccessed = json["isSuccessed"] ?? false;
+    statusCode = json["statusCode"] ?? 400;
     resultObj = json['resultObj'] != null ? parseJson?.call(json['resultObj']) : null;
-    messages = json['message'];
+    message = json['message'] ?? "An error has occurred!";
   }
 
   BaseResponse.initError(int code, String message) {
-    messages = message;
-    this.isSuccessed = false;
+    message = message;
+    this.statusCode = 400;
   }
 }

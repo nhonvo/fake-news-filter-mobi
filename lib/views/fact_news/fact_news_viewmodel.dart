@@ -45,11 +45,11 @@ class FactNewsViewModel extends BaseViewModel {
 
     var response = await newsApi.getNews(filter, languageContent);
 
-    if (response.isSuccessed == false) {
+    if (response.statusCode != 200) {
       EasyLoading.dismiss();
       snackBar(
         'error'.tr,
-        response.messages!,
+        response.message!,
         'altMessage'.tr,
         Icon(
           Icons.error,

@@ -77,9 +77,9 @@ class ContributeViewModel extends BaseViewModel {
     var response = await newsCommunityApi.createNewsCommunity(titleController.text, contentController.text,
         languageContent ?? 'en', userId, imageBytes, imageFile.name ?? 'tmpImage.jpg');
 
-    if (response.isSuccessed == false) {
+    if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      _showSnackbar(response.messages!);
+      _showSnackbar(response.message!);
     } else {
       //clear all data before get data from API to avoid duplication
       titleController.clear();

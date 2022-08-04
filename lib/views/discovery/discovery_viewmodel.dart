@@ -64,11 +64,11 @@ class DiscoveryViewModel extends BaseViewModel {
       topicIdListHasFollowed.addAll(result.resultObj?.map((e) => e) ?? []);
     }
 
-    if (response.isSuccessed == false) {
+    if (response.statusCode != 200) {
       EasyLoading.dismiss();
       snackBar(
         'error'.tr,
-        response.messages!,
+        response.message!,
         'altMessage'.tr,
         Icon(
           Icons.error,
@@ -105,11 +105,11 @@ class DiscoveryViewModel extends BaseViewModel {
     var userId = await authRepo.getUserId();
 
     var response = await followingApi.createFollow(topicIdListHasFollowed, userId.toString());
-    if (response.isSuccessed == false) {
+    if (response.statusCode != 200) {
       EasyLoading.dismiss();
       snackBar(
         'error'.tr,
-        response.messages!,
+        response.message!,
         'altMessage'.tr,
         Icon(
           Icons.error,

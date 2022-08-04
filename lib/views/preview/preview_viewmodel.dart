@@ -39,11 +39,11 @@ class PreviewViewModel extends BaseViewModel {
 
     var response = await newsApi.getNewsByTopicId(topicModel.value.topicId);
 
-    if (response.isSuccessed == false) {
+    if (response.statusCode != 200) {
       EasyLoading.dismiss();
       snackBar(
         'Error',
-        response.messages!,
+        response.message!,
         'altMessage'.tr,
         Icon(
           Icons.error,
