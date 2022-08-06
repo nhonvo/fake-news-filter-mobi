@@ -43,7 +43,8 @@ class CommunityViewModel extends BaseViewModel {
   var getLanguageContent = "".obs, tempLanguageContent = "".obs;
 ////////////////////////////////////////////////////////////
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -55,23 +56,17 @@ class CommunityViewModel extends BaseViewModel {
   handleGetNews() async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent =
+        prefs.getString(AppConstant.sharePrefKeys.languageContent);
 
-    var response = await newsCommunityApi.getNewsCommunity(languageContent ?? 'en');
+    var response =
+        await newsCommunityApi.getNewsCommunity(languageContent ?? 'en');
 
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      snackBar(
-        'error'.tr,
-        response.message!,
-        'altMessage'.tr,
-        Icon(
-          Icons.error,
-          color: Colors.white,
-        ),
-        Colors.red,
-        Colors.white,
-        SnackPosition.BOTTOM,
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
       );
     } else {
       List<NewsCommunityModel> newsCommunityList = response.resultObj!.obs;

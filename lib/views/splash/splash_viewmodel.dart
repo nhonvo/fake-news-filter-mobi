@@ -1,20 +1,58 @@
 import 'package:fake_news/core/api/following_api.dart';
-import 'package:fake_news/core/api/language_api.dart';
+import 'package:fake_news/core/api/update_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
-import 'package:fake_news/models/language_model.dart';
+import 'package:fake_news/models/update_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
+import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:get/get.dart';
+import 'dart:io' show Platform;
+import 'package:package_info_plus/package_info_plus.dart';
+import '../../core/api/language_api.dart';
+import '../../models/language_model.dart';
 
 class SplashViewModel extends BaseViewModel {
   SplashViewModel(
       {required this.authRepo,
+      required this.followingApi,
       required this.languageApi,
-      required this.followingApi});
+      required this.updateApi});
 
-  AuthRepo authRepo;
   LanguageApi languageApi;
+  AuthRepo authRepo;
   FollowingApi followingApi;
+  UpdateApi updateApi;
+
+  var version = VersionModel().obs;
+
+  var isHaveUpdate = false.obs;
+
+  var packageName = ''.obs;
+
+  handleCheckUpdate() async {
+    //Lấy thông tin nền tảng (Android, iOS)
+    String platform = Platform.operatingSystem;
+
+    //Lấy thông tin phiên bản hiện tại
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    packageName = packageInfo.packageName.obs;
+    String currentVersionCode = packageInfo.version;
+
+    var checkUpdate = await updateApi.checkUpdate(currentVersionCode, platform);
+    List<int> statuscode = [200, 201, 202];
+
+    if (!statuscode.contains(checkUpdate.statusCode)) {
+      SnackbarCustom.showError(
+        message: checkUpdate.message!,
+        altMessage: 'altMessage'.tr,
+      );
+    } else {
+      if (checkUpdate.statusCode == 201) {
+        isHaveUpdate.value = true;
+        version = checkUpdate.resultObj!.obs;
+      }
+    }
+  }
 
   handleTransition() async {
     var isNotFollow = await authRepo.getIsNotFollow();
@@ -23,7 +61,7 @@ class SplashViewModel extends BaseViewModel {
 
     Get.create<List<LanguageModel>?>(() => response.resultObj);
 
-    if (token != null) {
+    if (token != "") {
       if (isNotFollow == 'false') {
         //if user is following any topics and have token
         Get.offAllNamed(Routes.HOME);
@@ -38,8 +76,11 @@ class SplashViewModel extends BaseViewModel {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    handleTransition();
+    await handleCheckUpdate();
+    if (isHaveUpdate.isFalse) {
+      await handleTransition();
+    }
   }
 }

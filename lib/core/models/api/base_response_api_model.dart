@@ -5,9 +5,11 @@ class BaseResponse<T> {
   T? resultObj;
   String? message;
 
-  BaseResponse.fromJson(Map<String, dynamic> json, {T Function(dynamic json)? parseJson}) {
-    statusCode = json["statusCode"] ?? 400;
-    resultObj = json['resultObj'] != null ? parseJson?.call(json['resultObj']) : null;
+  BaseResponse.fromJson(Map<String, dynamic> json,
+      {T Function(dynamic json)? parseJson}) {
+    statusCode = json["statusCode"]!;
+    resultObj =
+        json['resultObj'] != null ? parseJson?.call(json['resultObj']) : null;
     message = json['message'] ?? "An error has occurred!";
   }
 

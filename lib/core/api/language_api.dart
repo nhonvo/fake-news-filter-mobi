@@ -14,7 +14,8 @@ class LanguageApiImpl implements LanguageApi {
   Future<BaseResponse<List<LanguageModel>>> getLanguages() async {
     return await dioApi.doGet<List<LanguageModel>>(
       "/api/Language/List",
-      parseJson: (json) => List<LanguageModel>.from(json.map((x) => LanguageModel.fromJson(x))),
+      parseJson: (json) =>
+          List<LanguageModel>.from(json.map((x) => LanguageModel.fromJson(x))),
     );
   }
 }

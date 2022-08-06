@@ -47,11 +47,17 @@ class ContributeViewModel extends BaseViewModel {
 
   bool _validateTextField() {
     if (titleController.text.isEmpty) {
-      _showSnackbar("inputTitleEmptyErr".tr);
+      SnackbarCustom.showError(
+        message: "inputTitleEmptyErr".tr,
+        altMessage: 'altMessage'.tr,
+      );
       return false;
     }
     if (contentController.text.isEmpty) {
-      _showSnackbar("inputContentEmptyErr".tr);
+      SnackbarCustom.showError(
+        message: "inputContentEmptyErr".tr,
+        altMessage: 'altMessage'.tr,
+      );
       return false;
     }
     return true;
@@ -69,38 +75,35 @@ class ContributeViewModel extends BaseViewModel {
     //this.user?.value = user.resultObj!;
     //just the first image in image picker
     var imageFile = resultList[0];
-    var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent =
+        prefs.getString(AppConstant.sharePrefKeys.languageContent);
     var byte = await imageFile.getByteData();
     //convert bytedata to list int
-    List<int> imageBytes = byte.buffer.asUint8List().map((eachUint8) => eachUint8.toInt()).toList();
+    List<int> imageBytes = byte.buffer
+        .asUint8List()
+        .map((eachUint8) => eachUint8.toInt())
+        .toList();
 
-    var response = await newsCommunityApi.createNewsCommunity(titleController.text, contentController.text,
-        languageContent ?? 'en', userId, imageBytes, imageFile.name ?? 'tmpImage.jpg');
+    var response = await newsCommunityApi.createNewsCommunity(
+        titleController.text,
+        contentController.text,
+        languageContent ?? 'en',
+        userId,
+        imageBytes,
+        imageFile.name ?? 'tmpImage.jpg');
 
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      _showSnackbar(response.message!);
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
+      );
     } else {
       //clear all data before get data from API to avoid duplication
       titleController.clear();
       contentController.clear();
       EasyLoading.dismiss();
     }
-  }
-
-  _showSnackbar(String message) {
-    snackBar(
-      'error'.tr,
-      message,
-      'altMessage'.tr,
-      Icon(
-        Icons.error,
-        color: Colors.white,
-      ),
-      Colors.red,
-      Colors.white,
-      SnackPosition.BOTTOM,
-    );
   }
 
   @override

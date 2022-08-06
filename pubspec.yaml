@@ -53,7 +53,8 @@ dependencies:
   multi_image_picker2: ^5.0.2
   introduction_screen: ^3.0.2
   webview_flutter: ^3.0.4
-
+  package_info_plus: ^1.4.3
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

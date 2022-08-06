@@ -17,7 +17,8 @@ class ErrorMessage {
   final String anErrorOccured = 'An error occured';
   final String invalidAccess = 'Your access is invalid';
   final String expiredAccess = 'Your access is expired, please login again';
-  String badInternetConnection = 'The internet connection appears to be offline, please try again';
+  String badInternetConnection =
+      'The internet connection appears to be offline, please try again';
 }
 
 class AppKey {
@@ -50,6 +51,10 @@ class SharePrefKeys {
   final String taxes = 'taxes';
   final String isNotFollow = 'isNotFollow';
   final String languageContent = 'languageContent';
+  final String appName = 'appName';
+  final String packageName = 'packageName';
+  final String version = 'version';
+  final String buildNumber = 'buildNumber';
 }
 
 class LocaleKey {

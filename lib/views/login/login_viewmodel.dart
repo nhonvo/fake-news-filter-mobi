@@ -14,7 +14,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends BaseViewModel {
-  LoginViewModel({required this.authApi, required this.authRepo, required this.pref});
+  LoginViewModel(
+      {required this.authApi, required this.authRepo, required this.pref});
   AuthApi authApi;
   AuthRepo authRepo;
   SharedPreferences pref;
@@ -33,15 +34,24 @@ class LoginViewModel extends BaseViewModel {
 
   bool _validateTextField() {
     if (usernameController.text.isEmpty) {
-      _showSnackbar("inputUserEmptyErr".tr);
+      SnackbarCustom.showError(
+        message: "inputUserEmptyErr".tr,
+        altMessage: 'altMessage'.tr,
+      );
       return false;
     }
     if (passwordController.text.isEmpty) {
-      _showSnackbar("inputPassEmptyErr".tr);
+      SnackbarCustom.showError(
+        message: "inputPassEmptyErr".tr,
+        altMessage: 'altMessage'.tr,
+      );
       return false;
     }
     if (passwordController.text.length < 6) {
-      _showSnackbar("inputPassAtLeast6Err".tr);
+      SnackbarCustom.showError(
+        message: "inputPassAtLeast6Err".tr,
+        altMessage: 'altMessage'.tr,
+      );
       return false;
     }
     return true;
@@ -54,11 +64,15 @@ class LoginViewModel extends BaseViewModel {
 
     EasyLoading.show(status: 'loadingLogin'.tr);
 
-    var response = await authApi.login(usernameController.text, passwordController.text);
+    var response =
+        await authApi.login(usernameController.text, passwordController.text);
 
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      _showSnackbar(response.message!);
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
+      );
     } else {
       _checkIsFollowed(response);
     }
@@ -75,17 +89,25 @@ class LoginViewModel extends BaseViewModel {
     });
 
     if (response.statusCode != 200) {
-      _showSnackbar(response.message ?? "An error occurred");
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
+      );
     } else {
-      _showSnackbar(response.message!);
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
+      );
     }
   }
 
   handleLoginFacebook() async {
     EasyLoading.show(status: 'loadingLogin'.tr);
 
-    final LoginResult result = await FacebookAuth.instance
-        .login(permissions: ['public_profile', 'email']); // by default we request the email and the public profile
+    final LoginResult result = await FacebookAuth.instance.login(permissions: [
+      'public_profile',
+      'email'
+    ]); // by default we request the email and the public profile
 
     if (result.status == LoginStatus.success) {
       final AccessToken accessToken = result.accessToken!;
@@ -93,12 +115,19 @@ class LoginViewModel extends BaseViewModel {
       var response = await authApi.loginFacebook(accessToken.token);
       if (response.statusCode != 200) {
         EasyLoading.dismiss();
-        _showSnackbar(response.message!);
+        SnackbarCustom.showError(
+          message: response.message!,
+          altMessage: 'altMessage'.tr,
+          snackPosition: SnackPosition.BOTTOM,
+        );
       } else {
         _checkIsFollowed(response);
       }
     } else {
-      _showSnackbar(result.message!);
+      SnackbarCustom.showError(
+        message: result.message!,
+        altMessage: 'altMessage'.tr,
+      );
       EasyLoading.dismiss();
     }
   }
@@ -112,18 +141,27 @@ class LoginViewModel extends BaseViewModel {
 
     try {
       var result = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleSignInAuthentication = await result!.authentication;
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await result!.authentication;
 
-      var response = await authApi.loginGoogle(googleSignInAuthentication.idToken.toString());
+      var response = await authApi
+          .loginGoogle(googleSignInAuthentication.idToken.toString());
       if (response.statusCode != 200) {
         EasyLoading.dismiss();
-        _showSnackbar(response.message!);
+        SnackbarCustom.showError(
+          message: response.message!,
+          altMessage: 'altMessage'.tr,
+          snackPosition: SnackPosition.BOTTOM,
+        );
       } else {
         _checkIsFollowed(response);
       }
     } catch (error) {
       EasyLoading.dismiss();
-      _showSnackbar(error.toString());
+      SnackbarCustom.showError(
+        message: error.toString(),
+        altMessage: 'altMessage'.tr,
+      );
     }
   }
 
@@ -134,8 +172,10 @@ class LoginViewModel extends BaseViewModel {
     await authRepo.saveUserId(user.userId!);
 
     //check if user has followed any topic
-    var topicIdList = await followingApi.getFollowedTopic(user.userId.toString());
-    bool isNotFollow = topicIdList.resultObj == null || topicIdList.resultObj?.length == 0;
+    var topicIdList =
+        await followingApi.getFollowedTopic(user.userId.toString());
+    bool isNotFollow =
+        topicIdList.resultObj == null || topicIdList.resultObj?.length == 0;
 
     if (isNotFollow) {
       EasyLoading.dismiss();
@@ -146,20 +186,5 @@ class LoginViewModel extends BaseViewModel {
       await authRepo.saveIsNotFollow(false);
       Get.offAllNamed(Routes.HOME);
     }
-  }
-
-  _showSnackbar(String message) {
-    snackBar(
-      'error'.tr,
-      message,
-      'altMessage'.tr,
-      Icon(
-        Icons.error,
-        color: Colors.white,
-      ),
-      Colors.red,
-      Colors.white,
-      SnackPosition.BOTTOM,
-    );
   }
 }

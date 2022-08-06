@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'services/language_service/language_service.dart';
 import 'services/language_service/localization.dart';
 import 'resources/utils/app_routes.dart';
@@ -26,17 +27,23 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+  String appName = packageInfo.appName;
+  String packageName = packageInfo.packageName;
+  String version = packageInfo.version;
+  String buildNumber = packageInfo.buildNumber;
   GestureBinding.instance.resamplingEnabled = true; //Custom Gesture ListView
 
-  Get.put<AppEnvironment>(AppEnvironment.live());
+  Get.put<AppEnvironment>(AppEnvironment.dev());
 
   await AppServices.initServices();
 
   initOneSignal();
 
-  runApp(const MyApp());
+  configSystem();
 
-  configLoading();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -57,7 +64,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-void configLoading() {
+void configSystem() async {
+  //Easy Loading
   EasyLoading.instance
     ..displayDuration = const Duration(milliseconds: 2000)
     ..indicatorType = EasyLoadingIndicatorType.fadingCircle

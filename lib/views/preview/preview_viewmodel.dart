@@ -12,7 +12,10 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PreviewViewModel extends BaseViewModel {
-  PreviewViewModel({required this.newsApi, required this.followingApi, required this.authRepo});
+  PreviewViewModel(
+      {required this.newsApi,
+      required this.followingApi,
+      required this.authRepo});
 
   // PreviewViewModel({required this.newsApi, required this.authRepo, required this.pref});
   NewsApi newsApi;
@@ -25,7 +28,8 @@ class PreviewViewModel extends BaseViewModel {
 
   // SharedPreferences pref;
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -41,17 +45,9 @@ class PreviewViewModel extends BaseViewModel {
 
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      snackBar(
-        'Error',
-        response.message!,
-        'altMessage'.tr,
-        Icon(
-          Icons.error,
-          color: Colors.white,
-        ),
-        Colors.red,
-        Colors.white,
-        SnackPosition.BOTTOM,
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
       );
     } else {
       List<NewsModel> newsList = response.resultObj!.obs;

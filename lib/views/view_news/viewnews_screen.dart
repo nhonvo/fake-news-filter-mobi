@@ -81,7 +81,10 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                     PopupMenuItem(
                       onTap: () async {
                         await canLaunchUrl(Uri.parse(widget.webUrl!))
-                            ? await launchUrl(Uri.parse(widget.webUrl!))
+                            ? await launchUrl(
+                                Uri.parse(widget.webUrl!),
+                                mode: LaunchMode.externalApplication,
+                              )
                             : ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('error_browser'.tr)));
                       },

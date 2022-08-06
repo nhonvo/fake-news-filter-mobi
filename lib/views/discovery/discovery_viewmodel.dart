@@ -8,12 +8,13 @@ import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
-import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../resources/widgets/snackbar_custom.dart';
 
 class DiscoveryViewModel extends BaseViewModel {
   DiscoveryViewModel(
@@ -40,7 +41,8 @@ class DiscoveryViewModel extends BaseViewModel {
   var getLanguageContent = "".obs, tempLanguageContent = "".obs;
 ////////////////////////////////////////////////////////////
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -52,7 +54,8 @@ class DiscoveryViewModel extends BaseViewModel {
   handleGetTopic() async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var languageContent = prefs.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent =
+        prefs.getString(AppConstant.sharePrefKeys.languageContent);
 
     var response = await topicApi.getTopic(languageContent ?? 'en');
 
@@ -66,17 +69,9 @@ class DiscoveryViewModel extends BaseViewModel {
 
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      snackBar(
-        'error'.tr,
-        response.message!,
-        'altMessage'.tr,
-        Icon(
-          Icons.error,
-          color: Colors.white,
-        ),
-        Colors.red,
-        Colors.white,
-        SnackPosition.BOTTOM,
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
       );
     } else {
       List<TopicModel> topicList = response.resultObj!.obs;
@@ -104,20 +99,13 @@ class DiscoveryViewModel extends BaseViewModel {
     EasyLoading.show(status: 'fetchingData'.tr);
     var userId = await authRepo.getUserId();
 
-    var response = await followingApi.createFollow(topicIdListHasFollowed, userId.toString());
+    var response = await followingApi.createFollow(
+        topicIdListHasFollowed, userId.toString());
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      snackBar(
-        'error'.tr,
-        response.message!,
-        'altMessage'.tr,
-        Icon(
-          Icons.error,
-          color: Colors.white,
-        ),
-        Colors.red,
-        Colors.white,
-        SnackPosition.BOTTOM,
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
       );
     } else {
       EasyLoading.dismiss();
@@ -143,7 +131,8 @@ class DiscoveryViewModel extends BaseViewModel {
     handleGetTopic();
 
     //used to choose the language in choose language screen
-    getLanguageContent.value = prefs.getString(AppConstant.sharePrefKeys.languageContent) ?? "";
+    getLanguageContent.value =
+        prefs.getString(AppConstant.sharePrefKeys.languageContent) ?? "";
     //saving selected language content to temporary variable for compare with new language content
     tempLanguageContent.value = getLanguageContent.value;
   }

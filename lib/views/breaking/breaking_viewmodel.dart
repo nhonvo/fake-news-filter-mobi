@@ -7,7 +7,6 @@ import 'package:fake_news/models/news/news_model.dart';
 import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -35,7 +34,8 @@ class BreakingViewModel extends BaseViewModel {
   //hide progress searching
   var isSearching = false.obs;
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -57,17 +57,9 @@ class BreakingViewModel extends BaseViewModel {
 
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      snackBar(
-        'error'.tr,
-        response.message!,
-        'altMessage'.tr,
-        Icon(
-          Icons.error,
-          color: Colors.white,
-        ),
-        Colors.red,
-        Colors.white,
-        SnackPosition.BOTTOM,
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
       );
     } else {
       List<NewsModel> newsList = response.resultObj!.obs;
@@ -95,17 +87,9 @@ class BreakingViewModel extends BaseViewModel {
 
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      snackBar(
-        'error'.tr,
-        response.message!,
-        'altMessage'.tr,
-        Icon(
-          Icons.error,
-          color: Colors.white,
-        ),
-        Colors.red,
-        Colors.white,
-        SnackPosition.BOTTOM,
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
       );
     }
   }
@@ -115,7 +99,8 @@ class BreakingViewModel extends BaseViewModel {
     //show progress searching
     isSearching.value = true;
 
-    var languageContent = pref.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent =
+        pref.getString(AppConstant.sharePrefKeys.languageContent);
 
     if (keyword.trim().isNotEmpty) {
       var response = await extraApi.search(keyword, languageContent ?? 'en');

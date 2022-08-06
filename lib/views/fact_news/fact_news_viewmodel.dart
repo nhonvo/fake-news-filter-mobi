@@ -31,7 +31,8 @@ class FactNewsViewModel extends BaseViewModel {
   var isLoaded = false.obs;
   var index = 0.obs;
 
-  RefreshController refreshController = RefreshController(initialRefresh: false);
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
   // void onRefresh() async {
   //   await handleGetFactNews(this.index.value == 0 ? 'real' : 'fake');
@@ -41,23 +42,16 @@ class FactNewsViewModel extends BaseViewModel {
   handleGetFactNews(String? filter) async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var languageContent = pref.getString(AppConstant.sharePrefKeys.languageContent);
+    var languageContent =
+        pref.getString(AppConstant.sharePrefKeys.languageContent);
 
     var response = await newsApi.getNews(filter, languageContent);
 
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
-      snackBar(
-        'error'.tr,
-        response.message!,
-        'altMessage'.tr,
-        Icon(
-          Icons.error,
-          color: Colors.white,
-        ),
-        Colors.red,
-        Colors.white,
-        SnackPosition.BOTTOM,
+      SnackbarCustom.showError(
+        message: response.message!,
+        altMessage: 'altMessage'.tr,
       );
     } else {
       List<NewsModel> newsList = response.resultObj!.obs;

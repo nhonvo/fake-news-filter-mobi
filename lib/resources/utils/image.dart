@@ -13,4 +13,6 @@ class Images {
   static const String onboarding_5 = "assets/images/onboarding_5.png";
   static const String icprotect = "assets/icons/protect.png";
   static const String icnone = "assets/icons/none.png";
+  static const String update_bg_app_top = "assets/images/update_bg_app_top.png";
+  static const String update_ic_close = "assets/images/update_ic_close.png.png";
 }
