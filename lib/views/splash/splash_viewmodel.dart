@@ -8,8 +8,10 @@ import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:get/get.dart';
 import 'dart:io' show Platform;
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/api/language_api.dart';
 import '../../models/language_model.dart';
+import '../../resources/widgets/dialog_update.dart';
 
 class SplashViewModel extends BaseViewModel {
   SplashViewModel(
@@ -49,7 +51,24 @@ class SplashViewModel extends BaseViewModel {
     } else {
       if (checkUpdate.statusCode == 201) {
         isHaveUpdate.value = true;
-        version = checkUpdate.resultObj!.obs;
+        UpdateDialog.showUpdate(Get.context!,
+            isForce: true,
+            title: "haveUpdateVersion".tr,
+            updateContent: checkUpdate.resultObj!.content!, onUpdate: () {
+          if (GetPlatform.isAndroid || GetPlatform.isIOS) {
+            final appId = packageName.value;
+            final url = Uri.parse(
+              GetPlatform.isAndroid
+                  ? "market://details?id=$appId"
+                  : "https://apps.apple.com/app/id$appId",
+            );
+            print("URL NÈ:" + url.toString());
+            launchUrl(
+              url,
+              mode: LaunchMode.externalApplication,
+            );
+          }
+        });
       }
     }
   }
@@ -61,7 +80,7 @@ class SplashViewModel extends BaseViewModel {
 
     Get.create<List<LanguageModel>?>(() => response.resultObj);
 
-    if (token != "") {
+    if (token != null) {
       if (isNotFollow == 'false') {
         //if user is following any topics and have token
         Get.offAllNamed(Routes.HOME);
@@ -76,11 +95,15 @@ class SplashViewModel extends BaseViewModel {
   }
 
   @override
-  void onInit() async {
+  void onInit() {
+    // TODO: implement onInit
     super.onInit();
-    await handleCheckUpdate();
-    if (isHaveUpdate.isFalse) {
-      await handleTransition();
-    }
+    handleTransition();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    handleCheckUpdate();
   }
 }

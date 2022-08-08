@@ -97,4 +97,5 @@ class LanguageKey {
   static const onboardBody3 = "onboardBody3";
   static const onboardBody4 = "onboardBody4";
   static const allowNotification = "allowNotification";
+  static const haveUpdateVersion = "haveUpdateVersion";
 }

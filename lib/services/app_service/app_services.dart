@@ -23,12 +23,10 @@ class AppServices {
     await Get.putAsync(() async {
       return await LanguageService(sharedPreferences: Get.find()).init();
     });
-    // await Get.putAsync(() async {
-    //   return LocationService();
-    // });
     Get.put<AuthLocalStorage>(AuthLocalStorageIpml(sharedPref: Get.find()));
     Get.put<AuthRepo>(AuthRepoImpl(authLocalStorage: Get.find()));
     Get.put<DioApi>(DioApi(authRepo: Get.find()));
+    Get.put<UpdateApi>(UpdateApiImpl(dioApi: Get.find()));
     Get.put<AuthApi>(AuthApiIpml(dioApi: Get.find()));
     Get.put<TopicApi>(TopicApiIpml(dioApi: Get.find()));
     Get.put<NewsApi>(NewsApiIpml(dioApi: Get.find()));
@@ -37,7 +35,7 @@ class AppServices {
     Get.put<VoteApi>(VoteApiImpl(dioApi: Get.find()));
     Get.put<NewsCommunityApi>(NewsCommunityApiImpl(dioApi: Get.find()));
     Get.put<ExtraApi>(ExtraApiImpl(dioApi: Get.find()));
-    Get.put<UpdateApi>(UpdateApiImpl(dioApi: Get.find()));
+
     print('All services started! ✅');
   }
 }
