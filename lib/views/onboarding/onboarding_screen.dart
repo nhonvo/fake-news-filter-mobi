@@ -1,12 +1,12 @@
+import 'package:fake_news/resources/utils/app_routes.dart';
+import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/views/onboarding/onboarding_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-
-import '../../resources/utils/app_routes.dart';
-import '../../resources/utils/image.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -16,6 +16,7 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  OnboardingViewModel get viewmodel => Get.find<OnboardingViewModel>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,6 +36,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               .then((accepted) {
             print("Accepted permission: $accepted");
           });
+          await viewmodel.localRepo.saveFinishedOnboarding(true);
           await Get.offAllNamed(Routes.DISCOVERY);
         },
         dotsDecorator: DotsDecorator(

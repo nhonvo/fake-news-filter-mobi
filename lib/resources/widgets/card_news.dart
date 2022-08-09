@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
@@ -15,7 +15,14 @@ import 'package:get/get.dart';
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
-  final String? offical, socialBeliefs, avatar, name, link, imageUrl, video, webUrl;
+  final String? offical,
+      socialBeliefs,
+      avatar,
+      name,
+      link,
+      imageUrl,
+      video,
+      webUrl;
   final String newsId, times, title, article, content, factCheck, viewCount;
   final List<String?>? tags;
 
@@ -49,14 +56,14 @@ class CardNews extends StatefulWidget {
 }
 
 class _CardNewsState extends State<CardNews> {
-  AuthRepo authRepo = Get.find();
+  LocalStorageRepo localRepo = Get.find();
   late bool isLoggedIn = false;
   var appEnvironment = Get.find<AppEnvironment>();
 
   @override
   void initState() {
     super.initState();
-    authRepo.getAuthToken().then((token) {
+    localRepo.getAuthToken().then((token) {
       if (token != null) {
         setState(() {
           isLoggedIn = true;
@@ -109,7 +116,9 @@ class _CardNewsState extends State<CardNews> {
                             children: [
                               widget.offical != null
                                   ? Row(children: [
-                                      Text('Official Rating: ', style: StylesText.content12MediumBlack),
+                                      Text('Official Rating: ',
+                                          style:
+                                              StylesText.content12MediumBlack),
                                       Text(
                                         widget.offical!,
                                         style: StylesText.content12BoldBlack,
@@ -120,7 +129,8 @@ class _CardNewsState extends State<CardNews> {
                                   ? Row(children: [
                                       widget.offical == null
                                           ? Padding(
-                                              padding: const EdgeInsets.only(right: 4.0),
+                                              padding: const EdgeInsets.only(
+                                                  right: 4.0),
                                               child: SvgPicture.asset(
                                                 IconsApp.unknown,
                                                 width: 24,
@@ -166,7 +176,8 @@ class _CardNewsState extends State<CardNews> {
                               fit: BoxFit.fitWidth,
                               height: 180,
                               imageUrl: widget.imageUrl!,
-                              imageBuilder: (context, imageProvider) => Container(
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6),
                                   image: DecorationImage(
@@ -175,8 +186,10 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                 ),
                               ),
-                              placeholder: (context, url) => CupertinoActivityIndicator(),
-                              errorWidget: (context, url, error) => Icon(Icons.error),
+                              placeholder: (context, url) =>
+                                  CupertinoActivityIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             ),
                           ),
                         )

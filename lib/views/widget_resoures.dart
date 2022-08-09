@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:fake_news/services/language_service/language_service.dart';
-import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
-import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

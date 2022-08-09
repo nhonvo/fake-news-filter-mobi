@@ -8,6 +8,7 @@ import 'package:fake_news/views/discovery/discovery_screen.dart';
 import 'package:fake_news/views/login/login_binding.dart';
 import 'package:fake_news/views/login/login_screen.dart';
 import 'package:fake_news/views/login/signup_screen.dart';
+import 'package:fake_news/views/onboarding/onboarding_binding.dart';
 import 'package:fake_news/views/onboarding/onboarding_screen.dart';
 import 'package:fake_news/views/preview/preview_binding.dart';
 import 'package:fake_news/views/preview/preview_screen.dart';
@@ -58,6 +59,7 @@ class AppRoutes {
     GetPage(
       name: Routes.ONBOARDING,
       page: () => OnBoardingScreen(),
+      binding: OnboardingBinding(),
     ),
   ];
 }

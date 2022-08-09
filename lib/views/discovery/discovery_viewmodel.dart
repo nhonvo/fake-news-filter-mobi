@@ -4,7 +4,7 @@ import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:fake_news/models/language_model.dart';
 import 'package:fake_news/models/topics/topic_model.dart';
-import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
@@ -21,13 +21,13 @@ class DiscoveryViewModel extends BaseViewModel {
       {required this.topicApi,
       required this.followingApi,
       required this.languageService,
-      required this.authRepo,
+      required this.localRepo,
       required this.prefs,
       required this.appEnvironment});
 
   TopicApi topicApi;
   FollowingApi followingApi;
-  AuthRepo authRepo;
+  LocalStorageRepo localRepo;
   SharedPreferences prefs;
   AppEnvironment appEnvironment;
 
@@ -59,7 +59,7 @@ class DiscoveryViewModel extends BaseViewModel {
 
     var response = await topicApi.getTopic(languageContent ?? 'en');
 
-    var userId = await authRepo.getUserId();
+    var userId = await localRepo.getUserId();
 
     //get the topic ids of the user has followed topics
     if (userId?.isNotEmpty ?? false) {
@@ -97,7 +97,7 @@ class DiscoveryViewModel extends BaseViewModel {
 
   handleCreateFollow() async {
     EasyLoading.show(status: 'fetchingData'.tr);
-    var userId = await authRepo.getUserId();
+    var userId = await localRepo.getUserId();
 
     var response = await followingApi.createFollow(
         topicIdListHasFollowed, userId.toString());
@@ -111,7 +111,7 @@ class DiscoveryViewModel extends BaseViewModel {
       EasyLoading.dismiss();
 
       //set this user has followed any topics
-      await authRepo.saveIsNotFollow(false);
+      await localRepo.saveIsNotFollow(false);
       Get.offAllNamed(Routes.HOME);
     }
   }

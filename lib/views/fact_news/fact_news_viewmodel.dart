@@ -3,7 +3,7 @@ import 'package:fake_news/core/api/news_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/news/news_model.dart';
-import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +18,11 @@ class FactNewsViewModel extends BaseViewModel {
       required this.voteApi,
       required this.extraApi,
       required this.pref,
-      required this.authRepo});
+      required this.localRepo});
 
   NewsApi newsApi;
   VoteApi voteApi;
-  AuthRepo authRepo;
+  LocalStorageRepo localRepo;
   ExtraApi extraApi;
   SharedPreferences pref;
 

@@ -9,8 +9,8 @@ import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/api/update_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
-import 'package:fake_news/core/services/local_storage/auth_local_storage.dart';
-import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/core/services/local_storage/local_storage.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,9 +23,9 @@ class AppServices {
     await Get.putAsync(() async {
       return await LanguageService(sharedPreferences: Get.find()).init();
     });
-    Get.put<AuthLocalStorage>(AuthLocalStorageIpml(sharedPref: Get.find()));
-    Get.put<AuthRepo>(AuthRepoImpl(authLocalStorage: Get.find()));
-    Get.put<DioApi>(DioApi(authRepo: Get.find()));
+    Get.put<LocalStorage>(LocalStorageIpml(sharedPref: Get.find()));
+    Get.put<LocalStorageRepo>(LocalStorageRepoImpl(localStorage: Get.find()));
+    Get.put<DioApi>(DioApi(localRepo: Get.find()));
     Get.put<UpdateApi>(UpdateApiImpl(dioApi: Get.find()));
     Get.put<AuthApi>(AuthApiIpml(dioApi: Get.find()));
     Get.put<TopicApi>(TopicApiIpml(dioApi: Get.find()));

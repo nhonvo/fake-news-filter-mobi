@@ -1,25 +1,27 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 
-abstract class AuthLocalStorage {
+abstract class LocalStorage {
   Future<String?> getApiKey();
   Future<String?> getUserId();
   Future<String?> getAuthToken();
   Future<String?> getEmail();
   Future<String?> getIsNotFollow();
+  Future<String?> getIsFinishOnboarding();
   Future<bool> saveApiKey(String apiKey);
   Future<bool> saveUserId(String userId);
   Future<bool> saveAuthToken(String authToken);
   Future<bool> saveEmail(String email);
   Future<bool> saveIsNotFollow(bool isNotFollow);
+  Future<bool> saveFinishedOnboarding(bool isNotFinish);
   Future<bool> handleUnAuthorized();
 }
 
 // with shared pref
-class AuthLocalStorageIpml implements AuthLocalStorage {
+class LocalStorageIpml implements LocalStorage {
   SharedPreferences sharedPref;
 
-  AuthLocalStorageIpml({required this.sharedPref});
+  LocalStorageIpml({required this.sharedPref});
 
   @override
   Future<String?> getApiKey() async {
@@ -47,6 +49,11 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
   }
 
   @override
+  Future<String?> getIsFinishOnboarding() async {
+    return sharedPref.getString(AppConstant.sharePrefKeys.isFinishOnboarding);
+  }
+
+  @override
   Future<bool> saveApiKey(String apiKey) async {
     return await sharedPref.setString(AppConstant.sharePrefKeys.apiKey, apiKey);
   }
@@ -71,6 +78,12 @@ class AuthLocalStorageIpml implements AuthLocalStorage {
   Future<bool> saveIsNotFollow(bool isNotFollow) async {
     return await sharedPref.setString(
         AppConstant.sharePrefKeys.isNotFollow, isNotFollow.toString());
+  }
+
+  @override
+  Future<bool> saveFinishedOnboarding(bool isNotFinish) async {
+    return await sharedPref.setString(
+        AppConstant.sharePrefKeys.isFinishOnboarding, isNotFinish.toString());
   }
 
   @override

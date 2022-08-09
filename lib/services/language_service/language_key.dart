@@ -70,7 +70,9 @@ class LanguageKey {
   static const serverDieErr = "serverDieErr";
   static const interruptErr = "interruptErr";
   static const updateProfile = "updateProfile";
+  static const follow = "follow";
   static const followTopic = "followTopic";
+  static const updateLive = "updateLive";
   static const linkSocial = "linkSocial";
   static const rateApp = "rateApp";
   static const voting = "voting";
@@ -83,6 +85,8 @@ class LanguageKey {
   static const sendInfo = "sendInfo";
   static const addFile = "addFile";
   static const viewGuide = "viewGuide";
+  static const signUp = "signUp";
+  static const noAccount = "noAccount";
   static const highlightContributedNews = "highlightContributedNews";
   static const newContributedNews = "newContributedNews";
   static const skip = "skip";
@@ -98,4 +102,6 @@ class LanguageKey {
   static const onboardBody4 = "onboardBody4";
   static const allowNotification = "allowNotification";
   static const haveUpdateVersion = "haveUpdateVersion";
+  static const btnUpdate = "btnUpdate";
+  static const btnIgnore = "btnIgnore";
 }

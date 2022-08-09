@@ -327,15 +327,17 @@ class _UpdateWidgetState extends State<UpdateWidget> {
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(top: widget.extraHeight),
-                        child: Text(widget.title,
-                            style: TextStyle(
-                                fontSize: widget.titleTextSize,
-                                color: Colors.black)),
+                      Center(
+                        child: Container(
+                          padding: EdgeInsets.only(top: widget.extraHeight),
+                          child: Text(widget.title,
+                              style: TextStyle(
+                                  fontSize: widget.titleTextSize,
+                                  color: Colors.black)),
+                        ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 15),
                         child: Text(widget.updateContent,
                             style: TextStyle(
                                 fontSize: widget.contentTextSize,

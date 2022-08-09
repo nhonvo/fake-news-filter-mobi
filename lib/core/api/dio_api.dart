@@ -4,8 +4,8 @@ import 'dart:async';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:fake_news/core/models/api/base_response_api_model.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
-import 'package:fake_news/providers/auth_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
@@ -15,12 +15,15 @@ import 'package:get/get.dart' as getX;
 
 abstract class Api {
   String baseApiUrl = getX.Get.find<AppEnvironment>().apiBaseUrl;
-  AuthRepo authRepo;
+  LocalStorageRepo authRepo;
   Api(this.authRepo);
   String _checkHost = 'google.com';
 
   Future<Map<String, String>> getHeader() async {
-    Map<String, String> header = {"accept": "application/json", "content-type": "application/json"};
+    Map<String, String> header = {
+      "accept": "application/json",
+      "content-type": "application/json"
+    };
 
     var apikey = await authRepo.getApiKey();
     if (apikey != null) {
@@ -76,7 +79,8 @@ abstract class Api {
       pref.remove(AppConstant.sharePrefKeys.avatar),
       authRepo.saveAuthToken(''),
     ]);
-    if (getX.Get.currentRoute != Routes.LOGIN) getX.Get.offAllNamed(Routes.LOGIN);
+    if (getX.Get.currentRoute != Routes.LOGIN)
+      getX.Get.offAllNamed(Routes.LOGIN);
   }
 
   Future<bool> checkBadInternet() async {
@@ -96,15 +100,18 @@ abstract class Api {
 }
 
 class DioApi extends Api {
-  Dio dio = Dio(BaseOptions(connectTimeout: 30000, receiveTimeout: 30000, sendTimeout: 30000));
+  Dio dio = Dio(BaseOptions(
+      connectTimeout: 30000, receiveTimeout: 30000, sendTimeout: 30000));
 
-  DioApi({required AuthRepo authRepo}) : super(authRepo) {
+  DioApi({required LocalStorageRepo localRepo}) : super(localRepo) {
     if (!kReleaseMode) {
-      dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
+      dio.interceptors
+          .add(LogInterceptor(responseBody: true, requestBody: true));
     }
   }
 
-  Future<BaseResponse<T>> handleDioResponse<T>(Response response, {T Function(dynamic json)? parseJson}) async {
+  Future<BaseResponse<T>> handleDioResponse<T>(Response response,
+      {T Function(dynamic json)? parseJson}) async {
     try {
       if (response.statusCode! >= 200 && response.statusCode! <= 499) {
         if (response.statusCode == 401) {
@@ -114,10 +121,12 @@ class DioApi extends Api {
           var error = BaseResponse<T>.fromJson({'A': 'B'});
           return error;
         }
-        var result = BaseResponse<T>.fromJson(response.data, parseJson: parseJson);
+        var result =
+            BaseResponse<T>.fromJson(response.data, parseJson: parseJson);
         return result;
       } else {
-        var error = BaseResponse<T>.initError(response.statusCode!, AppConstant.errorMessage.anErrorOccured);
+        var error = BaseResponse<T>.initError(
+            response.statusCode!, AppConstant.errorMessage.anErrorOccured);
         return error;
       }
     } catch (error) {
@@ -135,12 +144,15 @@ class DioApi extends Api {
     }
     if (error is SocketException) if (error.osError != null) {
       if (error.osError?.errorCode == 8) {
-        return BaseResponse<T>.initError(error.osError?.errorCode ?? -999, 'noInternetErr'.tr);
+        return BaseResponse<T>.initError(
+            error.osError?.errorCode ?? -999, 'noInternetErr'.tr);
       } else {
-        return BaseResponse<T>.initError(error.osError?.errorCode ?? -999, error.osError!.message);
+        return BaseResponse<T>.initError(
+            error.osError?.errorCode ?? -999, error.osError!.message);
       }
     } else {
-      return BaseResponse<T>.initError(error.osError?.errorCode ?? -999, 'noInternetErr'.tr);
+      return BaseResponse<T>.initError(
+          error.osError?.errorCode ?? -999, 'noInternetErr'.tr);
     }
     if (error is NoSuchMethodError) {
       return BaseResponse<T>.initError(-1, 'fetchingDataErr'.tr);
@@ -153,7 +165,8 @@ class DioApi extends Api {
   }
 
   @override
-  Future<BaseResponse<T>> handleResponse<T>(response, {T Function(dynamic json)? parseJson}) async {
+  Future<BaseResponse<T>> handleResponse<T>(response,
+      {T Function(dynamic json)? parseJson}) async {
     if (response is Response) {
       return await handleDioResponse<T>(response, parseJson: parseJson);
     } else {
@@ -184,7 +197,8 @@ class DioApi extends Api {
         var errorCode;
         errorCode = dioError.response?.statusCode ?? -9999;
 
-        var errorMessage = error != null ? error : 'serverErr'.tr + '$errorCode';
+        var errorMessage =
+            error != null ? error : 'serverErr'.tr + '$errorCode';
         print("ERRRRrrrrrrrrr $error");
         return BaseResponse<T>.initError(errorCode, errorMessage);
 
@@ -207,10 +221,12 @@ class DioApi extends Api {
   }) async {
     try {
       if (await checkBadInternet()) {
-        return BaseResponse<T>.initError(-999, AppConstant.errorMessage.badInternetConnection);
+        return BaseResponse<T>.initError(
+            -999, AppConstant.errorMessage.badInternetConnection);
       }
       var header = await getHeader();
-      var response = await dio.get(baseApiUrl + url, options: Options(headers: header), queryParameters: queryParams);
+      var response = await dio.get(baseApiUrl + url,
+          options: Options(headers: header), queryParameters: queryParams);
       return await handleResponse<T>(response, parseJson: parseJson);
     } catch (e) {
       if (needThrowError) {
@@ -223,13 +239,16 @@ class DioApi extends Api {
 
   @override
   Future<BaseResponse<T>> doPost<T>(String url, dynamic body,
-      {bool needThrowError = false, T Function(dynamic json)? parseJson}) async {
+      {bool needThrowError = false,
+      T Function(dynamic json)? parseJson}) async {
     try {
       if (await checkBadInternet()) {
-        return BaseResponse<T>.initError(-999, AppConstant.errorMessage.badInternetConnection);
+        return BaseResponse<T>.initError(
+            -999, AppConstant.errorMessage.badInternetConnection);
       }
       var header = await getHeader();
-      var response = await dio.post(baseApiUrl + url, data: body, options: Options(headers: header));
+      var response = await dio.post(baseApiUrl + url,
+          data: body, options: Options(headers: header));
       print('api response $response');
       return handleResponse<T>(response, parseJson: parseJson);
     } catch (e) {
@@ -243,14 +262,17 @@ class DioApi extends Api {
 
   @override
   Future<BaseResponse<T>> doPut<T>(String url, dynamic body,
-      {bool needThrowError = false, T Function(dynamic json)? parseJson}) async {
+      {bool needThrowError = false,
+      T Function(dynamic json)? parseJson}) async {
     try {
       if (await checkBadInternet()) {
-        return BaseResponse<T>.initError(-999, AppConstant.errorMessage.badInternetConnection);
+        return BaseResponse<T>.initError(
+            -999, AppConstant.errorMessage.badInternetConnection);
       }
       var header = await getHeader();
 
-      var response = await dio.put(baseApiUrl + url, options: Options(headers: header), data: body);
+      var response = await dio.put(baseApiUrl + url,
+          options: Options(headers: header), data: body);
       return handleResponse<T>(response, parseJson: parseJson);
     } catch (e) {
       if (needThrowError) {
@@ -263,13 +285,16 @@ class DioApi extends Api {
 
   @override
   Future<BaseResponse<T>> doDelete<T>(String url,
-      {bool needThrowError = false, T Function(dynamic json)? parseJson}) async {
+      {bool needThrowError = false,
+      T Function(dynamic json)? parseJson}) async {
     try {
       if (await checkBadInternet()) {
-        return BaseResponse<T>.initError(-999, AppConstant.errorMessage.badInternetConnection);
+        return BaseResponse<T>.initError(
+            -999, AppConstant.errorMessage.badInternetConnection);
       }
       var header = await getHeader();
-      var response = await dio.delete(baseApiUrl + url, options: Options(headers: header));
+      var response =
+          await dio.delete(baseApiUrl + url, options: Options(headers: header));
       return handleResponse<T>(response, parseJson: parseJson);
     } catch (e) {
       if (needThrowError) {

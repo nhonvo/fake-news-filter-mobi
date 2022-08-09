@@ -4,7 +4,7 @@ import 'package:fake_news/core/api/news_community_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/language_model.dart';
 import 'package:fake_news/models/news_comnunity_model.dart';
-import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
@@ -20,14 +20,14 @@ class ContributeViewModel extends BaseViewModel {
       {required this.newsCommunityApi,
       required this.prefs,
       required this.authApi,
-      required this.authRepo,
+      required this.localRepo,
       required this.languageService,
       required this.appEnvironment});
 
   NewsCommunityApi newsCommunityApi;
   SharedPreferences prefs;
   AuthApi authApi;
-  AuthRepo authRepo;
+  LocalStorageRepo localRepo;
   AppEnvironment appEnvironment;
 
   var titleController = TextEditingController();
@@ -70,7 +70,7 @@ class ContributeViewModel extends BaseViewModel {
 
     EasyLoading.show(status: 'Loading...'.tr);
 
-    var userId = await authRepo.getUserId();
+    var userId = await localRepo.getUserId();
     var user = await authApi.getUserLoggedIn(userId!);
     //this.user?.value = user.resultObj!;
     //just the first image in image picker

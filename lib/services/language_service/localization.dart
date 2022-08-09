@@ -94,6 +94,10 @@ class Localization extends Translations {
           LanguageKey.sendInfo: "Send info",
           LanguageKey.addFile: "Add an attachment",
           LanguageKey.viewGuide: "Guide",
+          LanguageKey.follow: "FOLLOW",
+          LanguageKey.updateLive: "UPDATING LIVE",
+          LanguageKey.signUp: "Sign up",
+          LanguageKey.noAccount: "Does not have account?",
           LanguageKey.highlightContributedNews: "Highlight contributed news",
           LanguageKey.newContributedNews: "New contributed news",
           LanguageKey.skip: "Skip",
@@ -112,7 +116,9 @@ class Localization extends Translations {
           LanguageKey.onboardBody4:
               "The new news will be updated to achieve the best experience for users.",
           LanguageKey.allowNotification: "Allow notification",
-          LanguageKey.haveUpdateVersion: "A new version is avaiable"
+          LanguageKey.haveUpdateVersion: "A new version is avaiable",
+          LanguageKey.btnUpdate: "Update",
+          LanguageKey.btnIgnore: "Ignore"
         },
         LocaleKey.VI: {
           LanguageKey.appname: 'Owl Trust',
@@ -189,6 +195,10 @@ class Localization extends Translations {
           LanguageKey.serverDieErr: "Máy chủ đã bị lỗi, vui lòng thử lại",
           LanguageKey.interruptErr: "Đã hủy, vui lòng thử lại",
           LanguageKey.updateProfile: "Cập nhật thông tin cá nhân",
+          LanguageKey.follow: "THEO DÕI",
+          LanguageKey.signUp: "Đăng ký",
+          LanguageKey.noAccount: "Chưa có tài khoản?",
+          LanguageKey.updateLive: "CẬP NHẬT TRỰC TIẾP",
           LanguageKey.followTopic: "Thay đổi Chủ đề tin tức",
           LanguageKey.linkSocial: "Liên kết mạng xã hội",
           LanguageKey.rateApp: "Đánh giá ứng dụng",
@@ -221,7 +231,9 @@ class Localization extends Translations {
           LanguageKey.onboardBody4:
               "Các tin tức mới sẽ được cập nhật để đạt trải nghiệm tốt nhất cho người dùng.",
           LanguageKey.allowNotification: "Cho phép gửi thông báo",
-          LanguageKey.haveUpdateVersion: "Đã có bản cập nhật mới"
+          LanguageKey.haveUpdateVersion: "Đã có bản cập nhật mới",
+          LanguageKey.btnUpdate: "Cập nhật",
+          LanguageKey.btnIgnore: "Bỏ qua"
         },
       };
 }

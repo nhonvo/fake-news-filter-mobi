@@ -3,7 +3,7 @@ import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/users/login_model.dart';
-import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +15,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginViewModel extends BaseViewModel {
   LoginViewModel(
-      {required this.authApi, required this.authRepo, required this.pref});
+      {required this.authApi, required this.localRepo, required this.pref});
   AuthApi authApi;
-  AuthRepo authRepo;
+  LocalStorageRepo localRepo;
   SharedPreferences pref;
 
   var usernameController = TextEditingController();
@@ -168,8 +168,8 @@ class LoginViewModel extends BaseViewModel {
   _checkIsFollowed(dynamic response) async {
     LoginModel user = response.resultObj!;
 
-    await authRepo.saveAuthToken(user.token ?? '');
-    await authRepo.saveUserId(user.userId!);
+    await localRepo.saveAuthToken(user.token ?? '');
+    await localRepo.saveUserId(user.userId!);
 
     //check if user has followed any topic
     var topicIdList =
@@ -183,7 +183,7 @@ class LoginViewModel extends BaseViewModel {
     } else {
       EasyLoading.dismiss();
       //set this user has followed any topics
-      await authRepo.saveIsNotFollow(false);
+      await localRepo.saveIsNotFollow(false);
       Get.offAllNamed(Routes.HOME);
     }
   }

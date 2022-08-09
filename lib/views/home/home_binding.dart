@@ -5,7 +5,7 @@ import 'package:fake_news/core/api/news_api.dart';
 import 'package:fake_news/core/api/news_community_api.dart';
 import 'package:fake_news/core/api/topic_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
-import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
@@ -20,7 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeBinding extends Bindings {
   AuthApi authApi = Get.find();
-  AuthRepo authRepo = Get.find();
+  LocalStorageRepo localRepo = Get.find();
   NewsApi newsApi = Get.find();
   VoteApi voteApi = Get.find();
   ExtraApi extraApi = Get.find();
@@ -37,23 +37,33 @@ class HomeBinding extends Bindings {
         topicApi: topicApi,
         followingApi: followingApi,
         languageService: languageService,
-        authRepo: authRepo,
+        localRepo: localRepo,
         prefs: pref,
         appEnvironment: appEnvironment));
 
-    Get.put<BreakingViewModel>(
-        BreakingViewModel(newsApi: newsApi, voteApi: voteApi, extraApi: extraApi, pref: pref, authRepo: authRepo));
-    Get.put<FactNewsViewModel>(
-        FactNewsViewModel(newsApi: newsApi, voteApi: voteApi, extraApi: extraApi, pref: pref, authRepo: authRepo));
+    Get.put<BreakingViewModel>(BreakingViewModel(
+        newsApi: newsApi,
+        voteApi: voteApi,
+        extraApi: extraApi,
+        pref: pref,
+        localRepo: localRepo));
+
+    Get.put<FactNewsViewModel>(FactNewsViewModel(
+        newsApi: newsApi,
+        voteApi: voteApi,
+        extraApi: extraApi,
+        pref: pref,
+        localRepo: localRepo));
 
     Get.lazyPut<CommunityViewModel>(() => CommunityViewModel(
         topicApi: topicApi,
         followingApi: followingApi,
         newsCommunityApi: newsCommunityApi,
         languageService: languageService,
-        authRepo: authRepo,
+        localRepo: localRepo,
         prefs: pref,
         appEnvironment: appEnvironment));
-    Get.put<ProfileViewModel>(ProfileViewModel(authApi: authApi, authRepo: authRepo, pref: pref));
+    Get.put<ProfileViewModel>(
+        ProfileViewModel(authApi: authApi, localRepo: localRepo, pref: pref));
   }
 }

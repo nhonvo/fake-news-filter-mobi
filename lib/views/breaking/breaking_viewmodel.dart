@@ -4,7 +4,7 @@ import 'package:fake_news/core/api/news_api.dart';
 import 'package:fake_news/core/api/vote_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/news/news_model.dart';
-import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -19,11 +19,11 @@ class BreakingViewModel extends BaseViewModel {
       required this.voteApi,
       required this.extraApi,
       required this.pref,
-      required this.authRepo});
+      required this.localRepo});
 
   NewsApi newsApi;
   VoteApi voteApi;
-  AuthRepo authRepo;
+  LocalStorageRepo localRepo;
   ExtraApi extraApi;
   SharedPreferences pref;
 
@@ -47,7 +47,7 @@ class BreakingViewModel extends BaseViewModel {
   handleGetNewsByFollowedTopic() async {
     // EasyLoading.show(status: 'fetchingData'.tr);
 
-    var userId = await authRepo.getUserId();
+    var userId = await localRepo.getUserId();
     await OneSignal.shared.setExternalUserId(userId!).then((results) {
       print(results.toString());
     }).catchError((error) {
@@ -80,7 +80,7 @@ class BreakingViewModel extends BaseViewModel {
 
   //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥Rating button💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
   Future<void> vote(bool isReal, String newsId) async {
-    var userId = await authRepo.getUserId();
+    var userId = await localRepo.getUserId();
     var response = await voteApi.createVote(userId.toString(), newsId, isReal);
 
     news.removeWhere((e) => e!.newsId == int.parse(newsId));

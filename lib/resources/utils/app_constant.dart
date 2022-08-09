@@ -50,6 +50,7 @@ class SharePrefKeys {
   final String formatTime = 'startDayOfWeek';
   final String taxes = 'taxes';
   final String isNotFollow = 'isNotFollow';
+  final String isFinishOnboarding = 'isFinishOnboarding';
   final String languageContent = 'languageContent';
   final String appName = 'appName';
   final String packageName = 'packageName';

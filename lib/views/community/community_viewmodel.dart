@@ -5,7 +5,7 @@ import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/news_comnunity_model.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:fake_news/models/language_model.dart';
-import 'package:fake_news/providers/auth_repo.dart';
+import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
@@ -21,14 +21,14 @@ class CommunityViewModel extends BaseViewModel {
       required this.followingApi,
       required this.newsCommunityApi,
       required this.languageService,
-      required this.authRepo,
+      required this.localRepo,
       required this.prefs,
       required this.appEnvironment});
 
   TopicApi topicApi;
   FollowingApi followingApi;
   NewsCommunityApi newsCommunityApi;
-  AuthRepo authRepo;
+  LocalStorageRepo localRepo;
   SharedPreferences prefs;
   AppEnvironment appEnvironment;
 
