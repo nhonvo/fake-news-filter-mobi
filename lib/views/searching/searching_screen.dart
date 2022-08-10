@@ -67,7 +67,7 @@ class _SearchingState extends State<Searching> {
                         // FloatingSearchBar.of(context)!.close();
                         Get.to(() => ViewNewsScreen(
                               newsId: item!.newsId.toString(),
-                              content: item.content.toString(),
+                              webUrl: item.urlNews,
                             ));
                       },
                       child: Container(

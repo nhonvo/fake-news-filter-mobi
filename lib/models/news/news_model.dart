@@ -32,71 +32,58 @@ class NewsModel {
 /*
 {
   "languageId": "en",
-  "newsId": 4,
-  "title": "Hospitalizations of Americans under 50 have reached new pandemic highs",
-  "content": "A lagging vaccination campaign and the spread of the highly contagious Delta variant are driving a surge in Covid-19 hospitalizations in the United States..",
-  "url": "https://www.independent.co.uk/arts-entertainment/eurovision/the-rasmus-eurovision-2022-finland-b2077365.html",
-  "alias": "a-lagging-vaccine",
-  "thumbNews": "http://localhost:5001/images/news/newsid4.jpg",
-  "socialBeliefs": 0.67,
-  "officialRating": null,
-  "viewCount": 6,
-  "publisher": null,
-  "timestamp": "2022-05-16T12:47:00.157796",
-  "status": 1,
+  "newsId": 1,
   "topicInfo": [
     {
       "topicId": 1,
       "topicName": "afghanistan"
     }
-  ]
+  ],
+  "title": "Kabul’s Sudden Fall to Taliban Ends U.S. Era in Afghanistan",
+  "urlNews": "https://www.independent.co.uk/arts-entertainment/eurovision/the-rasmus-eurovision-2022-finland-b2077365.html",
+  "thumbNews": "https://travelweekly.co.uk/images/cmstw/original/4/e/6/4/4/easid-453165-media-id-34528.jpg",
+  "socialBeliefs": 0,
+  "officialRating": "real",
+  "viewCount": 0,
+  "publisher": "New York Times",
+  "timestamp": "2022-08-08T15:03:50.165156",
+  "status": 1,
+  "sourceCreate": "GoogleApi"
 }
 */
 
   String? languageId;
   int? newsId;
+  List<NewsModelTopicInfo?>? topicInfo;
   String? title;
-  String? content;
-  String? url;
-  String? alias;
+  String? urlNews;
   String? thumbNews;
+  int? socialBeliefs;
   String? officialRating;
-  double? socialBeliefs;
-  String? viewCount;
+  int? viewCount;
   String? publisher;
   String? timestamp;
   int? status;
-  List<NewsModelTopicInfo?>? topicInfo;
+  String? sourceCreate;
 
   NewsModel({
     this.languageId,
     this.newsId,
+    this.topicInfo,
     this.title,
-    this.content,
-    this.url,
-    this.alias,
+    this.urlNews,
     this.thumbNews,
+    this.socialBeliefs,
     this.officialRating,
     this.viewCount,
     this.publisher,
     this.timestamp,
     this.status,
-    this.topicInfo,
+    this.sourceCreate,
   });
   NewsModel.fromJson(Map<String, dynamic> json) {
     languageId = json['languageId']?.toString();
     newsId = json['newsId']?.toInt();
-    title = json['title']?.toString();
-    content = json['content']?.toString();
-    url = json['url']?.toString();
-    alias = json['alias']?.toString();
-    thumbNews = json['thumbNews']?.toString();
-    officialRating = json['officialRating']?.toString();
-    socialBeliefs = json['socialBeliefs']?.toDouble();
-    viewCount = json['viewCount']?.toString();
-    publisher = json['publisher']?.toString();
-    timestamp = json['timestamp']?.toString();
-    status = json['status']?.toInt();
     if (json['topicInfo'] != null) {
       final v = json['topicInfo'];
       final arr0 = <NewsModelTopicInfo>[];
@@ -105,22 +92,21 @@ class NewsModel {
       });
       topicInfo = arr0;
     }
+    title = json['title']?.toString();
+    urlNews = json['urlNews']?.toString();
+    thumbNews = json['thumbNews']?.toString();
+    socialBeliefs = json['socialBeliefs']?.toInt();
+    officialRating = json['officialRating']?.toString();
+    viewCount = json['viewCount']?.toInt();
+    publisher = json['publisher']?.toString();
+    timestamp = json['timestamp']?.toString();
+    status = json['status']?.toInt();
+    sourceCreate = json['sourceCreate']?.toString();
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['languageId'] = languageId;
     data['newsId'] = newsId;
-    data['title'] = title;
-    data['content'] = content;
-    data['url'] = url;
-    data['alias'] = alias;
-    data['thumbNews'] = thumbNews;
-    data['officialRating'] = officialRating;
-    data['socialBeliefs'] = socialBeliefs;
-    data['viewCount'] = viewCount;
-    data['publisher'] = publisher;
-    data['timestamp'] = timestamp;
-    data['status'] = status;
     if (topicInfo != null) {
       final v = topicInfo;
       final arr0 = [];
@@ -129,6 +115,16 @@ class NewsModel {
       });
       data['topicInfo'] = arr0;
     }
+    data['title'] = title;
+    data['urlNews'] = urlNews;
+    data['thumbNews'] = thumbNews;
+    data['socialBeliefs'] = socialBeliefs;
+    data['officialRating'] = officialRating;
+    data['viewCount'] = viewCount;
+    data['publisher'] = publisher;
+    data['timestamp'] = timestamp;
+    data['status'] = status;
+    data['sourceCreate'] = sourceCreate;
     return data;
   }
 }

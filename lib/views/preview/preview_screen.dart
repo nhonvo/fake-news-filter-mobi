@@ -39,8 +39,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     ? CachedNetworkImage(
                         fit: BoxFit.fitWidth,
                         height: 120,
-                        imageUrl:
-                            "${previewViewModel.topicModel.value.thumbImage}",
+                        imageUrl: "${previewViewModel.topicModel.value.thumbImage}",
                         imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
@@ -50,8 +49,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             ),
                           ),
                         ),
-                        placeholder: (context, url) =>
-                            CupertinoActivityIndicator(),
+                        placeholder: (context, url) => CupertinoActivityIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       )
                     : Container(),
@@ -61,8 +59,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TagTopic(
-                        tagName:
-                            previewViewModel.topicModel.value.tag.toString(),
+                        tagName: previewViewModel.topicModel.value.tag.toString(),
                         buttonColor: MyColors.red.withOpacity(0.1),
                       ),
                       InkWell(
@@ -88,11 +85,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   padding: const EdgeInsets.only(left: 15, bottom: 15),
                   child: Row(
                     children: [
-                      Icon(FontAwesomeIcons.syncAlt,
-                          size: 15, color: Colors.white),
+                      Icon(FontAwesomeIcons.syncAlt, size: 15, color: Colors.white),
                       SizedBox(width: 10),
-                      Text('updateLive'.tr,
-                          style: StylesText.content12BoldWhite)
+                      Text('updateLive'.tr, style: StylesText.content12BoldWhite)
                     ],
                   ),
                 )
@@ -117,18 +112,15 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                   factCheck: Images.icnone,
                                   rate: true,
                                   socialBeliefs: '${item.socialBeliefs}%',
-                                  times: AppHelper.convertToAgo(DateTime.parse(
-                                      item.timestamp.toString())),
+                                  times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
                                   title:
                                       '${item.title.toString().substring(0, item.title!.length > 50 ? 50 : item.title.toString().length)}...',
-                                  content: item.content.toString(),
                                   imageUrl: item.thumbNews.toString(),
-                                  webUrl: item.url.toString(),
+                                  webUrl: item.urlNews.toString(),
                                   article: item.publisher ?? '',
                                   viewCount: item.viewCount.toString(),
                                   onPress: () {
-                                    breakingViewModel
-                                        .handleGetCountView(item.newsId!);
+                                    breakingViewModel.handleGetCountView(item.newsId!);
                                   }),
                           ],
                         ),

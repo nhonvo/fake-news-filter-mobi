@@ -15,15 +15,8 @@ import 'package:get/get.dart';
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
-  final String? offical,
-      socialBeliefs,
-      avatar,
-      name,
-      link,
-      imageUrl,
-      video,
-      webUrl;
-  final String newsId, times, title, article, content, factCheck, viewCount;
+  final String? offical, socialBeliefs, avatar, name, link, imageUrl, video, webUrl;
+  final String newsId, times, title, article, factCheck, viewCount;
   final List<String?>? tags;
 
   final VoidCallback onPress;
@@ -47,7 +40,6 @@ class CardNews extends StatefulWidget {
       required this.onPress,
       this.link,
       this.tags,
-      required this.content,
       this.rate = false})
       : super(key: key);
 
@@ -81,7 +73,6 @@ class _CardNewsState extends State<CardNews> {
             widget.onPress();
             Get.to(() => ViewNewsScreen(
                   newsId: widget.newsId,
-                  content: widget.content,
                   webUrl: widget.webUrl,
                   isLoggedIn: isLoggedIn,
                 ));
@@ -116,9 +107,7 @@ class _CardNewsState extends State<CardNews> {
                             children: [
                               widget.offical != null
                                   ? Row(children: [
-                                      Text('Official Rating: ',
-                                          style:
-                                              StylesText.content12MediumBlack),
+                                      Text('Official Rating: ', style: StylesText.content12MediumBlack),
                                       Text(
                                         widget.offical!,
                                         style: StylesText.content12BoldBlack,
@@ -129,8 +118,7 @@ class _CardNewsState extends State<CardNews> {
                                   ? Row(children: [
                                       widget.offical == null
                                           ? Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 4.0),
+                                              padding: const EdgeInsets.only(right: 4.0),
                                               child: SvgPicture.asset(
                                                 IconsApp.unknown,
                                                 width: 24,
@@ -176,8 +164,7 @@ class _CardNewsState extends State<CardNews> {
                               fit: BoxFit.fitWidth,
                               height: 180,
                               imageUrl: widget.imageUrl!,
-                              imageBuilder: (context, imageProvider) =>
-                                  Container(
+                              imageBuilder: (context, imageProvider) => Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6),
                                   image: DecorationImage(
@@ -186,10 +173,8 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                 ),
                               ),
-                              placeholder: (context, url) =>
-                                  CupertinoActivityIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                              placeholder: (context, url) => CupertinoActivityIndicator(),
+                              errorWidget: (context, url, error) => Icon(Icons.error),
                             ),
                           ),
                         )
@@ -232,7 +217,21 @@ class _CardNewsState extends State<CardNews> {
                         style: StylesText.content12BoldGrey,
                       ),
                       isLoggedIn && widget.rate == true
-                          ? SizedBox()
+                          ? SizedBox(
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    IconsApp.eye,
+                                    width: 15,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    widget.viewCount,
+                                    style: StylesText.content12BoldGrey,
+                                  ),
+                                ],
+                              ),
+                            )
                           // RatingButton(newsId: widget.newsId.toString())
                           : InkWell(
                               onTap: () {},
@@ -246,23 +245,22 @@ class _CardNewsState extends State<CardNews> {
                                     Icons.launch_rounded,
                                     color: MyColors.greyDark,
                                     size: 18,
-                                  )
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  SvgPicture.asset(
+                                    IconsApp.eye,
+                                    width: 15,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    widget.viewCount,
+                                    style: StylesText.content12BoldGrey,
+                                  ),
                                 ],
                               ),
                             ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            IconsApp.eye,
-                            width: 15,
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            widget.viewCount,
-                            style: StylesText.content12BoldGrey,
-                          ),
-                        ],
-                      )
                     ],
                   )
                 ],

@@ -68,9 +68,8 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
                                         title: item.title.toString().substring(
                                             0, item.title.toString().length > 50 ? 50 : item.title.toString().length),
-                                        content: item.content.toString(),
                                         imageUrl: item.thumbNews.toString(),
-                                        webUrl: item.url.toString(),
+                                        webUrl: item.urlNews.toString(),
                                         article: item.publisher ?? '',
                                         viewCount: item.viewCount.toString(),
                                         onPress: () {

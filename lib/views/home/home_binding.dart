@@ -41,19 +41,11 @@ class HomeBinding extends Bindings {
         prefs: pref,
         appEnvironment: appEnvironment));
 
-    Get.put<BreakingViewModel>(BreakingViewModel(
-        newsApi: newsApi,
-        voteApi: voteApi,
-        extraApi: extraApi,
-        pref: pref,
-        localRepo: localRepo));
+    Get.put<BreakingViewModel>(
+        BreakingViewModel(newsApi: newsApi, voteApi: voteApi, extraApi: extraApi, pref: pref, localRepo: localRepo));
 
-    Get.put<FactNewsViewModel>(FactNewsViewModel(
-        newsApi: newsApi,
-        voteApi: voteApi,
-        extraApi: extraApi,
-        pref: pref,
-        localRepo: localRepo));
+    Get.put<FactNewsViewModel>(
+        FactNewsViewModel(newsApi: newsApi, voteApi: voteApi, extraApi: extraApi, pref: pref, localRepo: localRepo));
 
     Get.lazyPut<CommunityViewModel>(() => CommunityViewModel(
         topicApi: topicApi,
@@ -63,7 +55,6 @@ class HomeBinding extends Bindings {
         localRepo: localRepo,
         prefs: pref,
         appEnvironment: appEnvironment));
-    Get.put<ProfileViewModel>(
-        ProfileViewModel(authApi: authApi, localRepo: localRepo, pref: pref));
+    Get.put<ProfileViewModel>(ProfileViewModel(authApi: authApi, localRepo: localRepo, pref: pref));
   }
 }
