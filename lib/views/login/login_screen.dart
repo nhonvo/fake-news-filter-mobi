@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
@@ -157,8 +156,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    GetPlatform.isIOS
+                        ? CustomIconButton(
+                            width: Get.size.width * 0.25,
+                            buttonText: '',
+                            icon: const Icon(FontAwesomeIcons.apple,
+                                color: Colors.white),
+                            buttonColor: Colors.black,
+                            buttonRadius: 14,
+                            textStyle: StylesText.content18BoldWhite,
+                            onPressed: () {
+                              viewmodel.handleLoginApple();
+                            },
+                          )
+                        : Container(),
+                    SizedBox(
+                      width: 10,
+                    ),
                     CustomIconButton(
-                      width: Get.size.width * 0.35,
+                      width: Get.size.width * (GetPlatform.isIOS ? 0.25 : 0.35),
                       buttonText: '',
                       icon: const Icon(FontAwesomeIcons.facebookF,
                           color: Colors.white),
@@ -173,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 10,
                     ),
                     CustomIconButton(
-                      width: Get.size.width * 0.35,
+                      width: Get.size.width * (GetPlatform.isIOS ? 0.25 : 0.35),
                       buttonText: '',
                       icon: const Icon(FontAwesomeIcons.google,
                           color: Colors.white),

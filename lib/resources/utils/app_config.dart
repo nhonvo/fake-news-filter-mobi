@@ -12,6 +12,15 @@ class AppEnvironment {
   final String oneSignalAppId;
   final bool isDev;
 
+  factory AppEnvironment.local() {
+    return AppEnvironment._(
+      apiBaseUrl: "http://localhost:2000",
+      imageUrl: "",
+      defaultBranchApiKey: "",
+      oneSignalAppId: "",
+    );
+  }
+
   factory AppEnvironment.dev() {
     return AppEnvironment._(
       apiBaseUrl: "http://104.194.232.100:2020",

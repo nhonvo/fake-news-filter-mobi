@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/views/splash/splash_viewmodel.dart';

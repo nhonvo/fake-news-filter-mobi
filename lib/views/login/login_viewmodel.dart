@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart' as dio;
 import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginViewModel extends BaseViewModel {
   LoginViewModel(
@@ -101,6 +101,7 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
+  //Đăng nhập bằng Facebook
   handleLoginFacebook() async {
     EasyLoading.show(status: 'loadingLogin'.tr);
 
@@ -132,6 +133,40 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
+  //Đăng nhập bằng Apple
+  handleLoginApple() async {
+    try {
+      final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName
+        ],
+      );
+      String fullName = '${credential.familyName}' + '${credential.givenName}';
+
+      print(credential.identityToken);
+      var response = await authApi.loginApple(
+          fullName, credential.identityToken.toString());
+
+      if (response.statusCode != 200) {
+        EasyLoading.dismiss();
+        SnackbarCustom.showError(
+          message: response.message!,
+          altMessage: 'altMessage'.tr,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        _checkIsFollowed(response);
+      }
+    } catch (error) {
+      SnackbarCustom.showError(
+        message: error.toString(),
+        altMessage: 'altMessage'.tr,
+      );
+    }
+  }
+
+  //Đăng nhập bằng Google
   GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email', "https://www.googleapis.com/auth/userinfo.profile"],
   );

@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:fake_news/data/story_data.dart';
 import 'package:fake_news/resources/utils/app_helper.dart';
 import 'package:fake_news/resources/utils/image.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
@@ -63,17 +60,25 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         newsId: item!.newsId.toString(),
                                         factCheck: Images.icnone,
                                         rate: true,
-                                        tags: item.topicInfo!.map((v) => v!.topicName).toList(),
+                                        tags: item.topicInfo!
+                                            .map((v) => v!.topicName)
+                                            .toList(),
                                         socialBeliefs: '${item.socialBeliefs}%',
-                                        times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+                                        times: AppHelper.convertToAgo(
+                                            DateTime.parse(
+                                                item.timestamp.toString())),
                                         title: item.title.toString().substring(
-                                            0, item.title.toString().length > 50 ? 50 : item.title.toString().length),
+                                            0,
+                                            item.title.toString().length > 50
+                                                ? 50
+                                                : item.title.toString().length),
                                         imageUrl: item.thumbNews.toString(),
                                         webUrl: item.urlNews.toString(),
                                         article: item.publisher ?? '',
                                         viewCount: item.viewCount.toString(),
                                         onPress: () {
-                                          viewmodel.handleGetCountView(item.newsId!);
+                                          viewmodel
+                                              .handleGetCountView(item.newsId!);
                                         }),
                                 ],
                               )
@@ -83,7 +88,8 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                     scrollDirection: Axis.vertical,
                                     padding: const EdgeInsets.all(8),
                                     itemCount: 6,
-                                    itemBuilder: (BuildContext context, int index) {
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
                                       return NewsShimmer();
                                     }),
                               );

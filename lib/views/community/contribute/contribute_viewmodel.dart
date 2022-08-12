@@ -1,9 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/news_community_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/language_model.dart';
-import 'package:fake_news/models/news_comnunity_model.dart';
 import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';

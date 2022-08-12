@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/services/app_service/app_services.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'services/language_service/language_service.dart';
 import 'services/language_service/localization.dart';
 import 'resources/utils/app_routes.dart';
@@ -29,7 +27,7 @@ void main() async {
 
   GestureBinding.instance.resamplingEnabled = true; //Custom Gesture ListView
 
-  Get.put<AppEnvironment>(AppEnvironment.dev());
+  Get.put<AppEnvironment>(AppEnvironment.live());
 
   await AppServices.initServices();
 
