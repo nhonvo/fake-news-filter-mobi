@@ -103,7 +103,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                     child: Obx(() {
                       int index = 0;
                       return GridView.count(
-                          //shrinkWrap: true,
+                          shrinkWrap: true,
                           crossAxisCount: 2,
                           children: viewmodel.topics.map((topic) {
                             index++;

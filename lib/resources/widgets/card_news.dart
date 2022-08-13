@@ -15,7 +15,14 @@ import 'package:get/get.dart';
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
-  final String? offical, socialBeliefs, avatar, name, link, imageUrl, video, webUrl;
+  final String? offical,
+      socialBeliefs,
+      avatar,
+      name,
+      link,
+      imageUrl,
+      video,
+      webUrl;
   final String newsId, times, title, article, factCheck, viewCount;
   final List<String?>? tags;
 
@@ -72,6 +79,7 @@ class _CardNewsState extends State<CardNews> {
           onTap: () {
             widget.onPress();
             Get.to(() => ViewNewsScreen(
+                  publisher: widget.article,
                   newsId: widget.newsId,
                   webUrl: widget.webUrl,
                   isLoggedIn: isLoggedIn,
@@ -107,7 +115,9 @@ class _CardNewsState extends State<CardNews> {
                             children: [
                               widget.offical != null
                                   ? Row(children: [
-                                      Text('Official Rating: ', style: StylesText.content12MediumBlack),
+                                      Text('Official Rating: ',
+                                          style:
+                                              StylesText.content12MediumBlack),
                                       Text(
                                         widget.offical!,
                                         style: StylesText.content12BoldBlack,
@@ -118,7 +128,8 @@ class _CardNewsState extends State<CardNews> {
                                   ? Row(children: [
                                       widget.offical == null
                                           ? Padding(
-                                              padding: const EdgeInsets.only(right: 4.0),
+                                              padding: const EdgeInsets.only(
+                                                  right: 4.0),
                                               child: SvgPicture.asset(
                                                 IconsApp.unknown,
                                                 width: 24,
@@ -164,7 +175,8 @@ class _CardNewsState extends State<CardNews> {
                               fit: BoxFit.fitWidth,
                               height: 180,
                               imageUrl: widget.imageUrl!,
-                              imageBuilder: (context, imageProvider) => Container(
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6),
                                   image: DecorationImage(
@@ -173,8 +185,10 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                 ),
                               ),
-                              placeholder: (context, url) => CupertinoActivityIndicator(),
-                              errorWidget: (context, url, error) => Icon(Icons.error),
+                              placeholder: (context, url) =>
+                                  CupertinoActivityIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             ),
                           ),
                         )

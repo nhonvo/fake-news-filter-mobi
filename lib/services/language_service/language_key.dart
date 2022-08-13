@@ -107,4 +107,5 @@ class LanguageKey {
   static const commingsoon = "commingsoon";
   static const info = "info";
   static const warning = "warning";
+  static const reportLink = "reportLink";
 }

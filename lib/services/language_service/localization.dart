@@ -122,6 +122,7 @@ class Localization extends Translations {
           LanguageKey.commingsoon: "Comming Soon",
           LanguageKey.info: "Information",
           LanguageKey.warning: "Warning",
+          LanguageKey.reportLink: "Report news not showing",
         },
         LocaleKey.VI: {
           LanguageKey.appname: 'Owl Trust',
@@ -240,6 +241,7 @@ class Localization extends Translations {
           LanguageKey.commingsoon: "Tính năng sẽ được cập nhật sau",
           LanguageKey.info: "Thông tin",
           LanguageKey.warning: "Cảnh báo",
+          LanguageKey.reportLink: "Báo lỗi không xem được tin",
         },
       };
 }
