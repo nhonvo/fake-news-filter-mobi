@@ -1,5 +1,4 @@
-import 'package:fake_news/views/community/contribute/contribute_binding.dart';
-import 'package:fake_news/views/community/contribute/contribute_screen.dart';
+import 'package:fake_news/views/comming_soon_screen.dart';
 import 'package:fake_news/views/follow_topic/follow_topic.dart';
 import 'package:fake_news/views/home/home_binding.dart';
 import 'package:fake_news/views/home/home_screen.dart';
@@ -53,8 +52,7 @@ class AppRoutes {
     ),
     GetPage(
       name: Routes.CONTRIBUTE,
-      page: () => ContributeScreen(),
-      binding: ContributeBinding(),
+      page: () => ComingSoonScreen(),
     ),
     GetPage(
       name: Routes.ONBOARDING,

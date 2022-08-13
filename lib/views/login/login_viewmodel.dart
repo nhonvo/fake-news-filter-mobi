@@ -26,6 +26,7 @@ class LoginViewModel extends BaseViewModel {
   var phoneController = TextEditingController();
   var passwordController = TextEditingController();
   var passwordConfirmController = TextEditingController();
+  
   FollowingApi followingApi = Get.find();
 
   void clearText() {

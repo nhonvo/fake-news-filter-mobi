@@ -6,7 +6,7 @@ import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:fake_news/views/searching/searching_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class BreakingScreen extends StatefulWidget {
   const BreakingScreen({Key? key}) : super(key: key);
@@ -22,36 +22,37 @@ class _BreakingScreenState extends State<BreakingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SmartRefresher(
-        controller: viewmodel.refreshController,
-        onRefresh: viewmodel.onRefresh,
-        header: MaterialClassicHeader(),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 80.0),
-              child: Column(
-                children: [
-                  //TODO: Uncomment to enable story
-
-                  // Container(
-                  //   color: Colors.white,
-                  //   width: double.infinity,
-                  //   height: 100,
-                  //   alignment: Alignment.center,
-                  //   child: ListView.builder(
-                  //       itemCount: news.length,
-                  //       scrollDirection: Axis.horizontal,
-                  //       itemBuilder: (context, index) {
-                  //         return storyButton(news[index], context);
-                  //       }),
-                  // ),
-                  Expanded(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 80.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //TODO: Uncomment to enable story
+                // Container(
+                //   color: Colors.white,
+                //   width: double.infinity,
+                //   height: 100,
+                //   alignment: Alignment.center,
+                //   child: ListView.builder(
+                //       itemCount: news.length,
+                //       scrollDirection: Axis.horizontal,
+                //       itemBuilder: (context, index) {
+                //         return storyButton(news[index], context);
+                //       }),
+                // ),
+                Expanded(
+                  child: SmartRefresher(
+                    controller: viewmodel.refreshController,
+                    onRefresh: viewmodel.onRefresh,
+                    header: MaterialClassicHeader(),
                     child: SingleChildScrollView(
                       child: Obx(() {
                         return viewmodel.isLoaded.value
                             ? Wrap(
+                                alignment: WrapAlignment.center,
                                 spacing: 10,
                                 runSpacing: 10,
                                 children: [
@@ -95,13 +96,13 @@ class _BreakingScreenState extends State<BreakingScreen> {
                               );
                       }),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
-            Searching(),
-          ],
-        ),
+          ),
+          Searching(),
+        ],
       ),
     );
   }

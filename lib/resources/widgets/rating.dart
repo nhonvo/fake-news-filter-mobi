@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
+// ignore_for_file: prefer_const_constructors, avoid_print, must_be_immutable
 
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/views/breaking/breaking_viewmodel.dart';

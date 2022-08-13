@@ -1,3 +1,4 @@
+/*
 import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/news_community_api.dart';
 import 'package:fake_news/providers/local_storage_repo.dart';
@@ -30,3 +31,4 @@ class ContributeBinding extends Bindings {
     );
   }
 }
+*/

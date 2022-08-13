@@ -88,7 +88,7 @@ class Localization extends Translations {
           LanguageKey.searchNews: "Search news...",
           LanguageKey.config: "Settings",
           LanguageKey.aboutFnf: "About Fake News Filter",
-          LanguageKey.version: "",
+          LanguageKey.version: "Version",
           LanguageKey.support: "Support",
           LanguageKey.checkVerify: "Check verify",
           LanguageKey.sendInfo: "Send info",
@@ -118,7 +118,10 @@ class Localization extends Translations {
           LanguageKey.allowNotification: "Allow notification",
           LanguageKey.haveUpdateVersion: "A new version is avaiable",
           LanguageKey.btnUpdate: "Update",
-          LanguageKey.btnIgnore: "Ignore"
+          LanguageKey.btnIgnore: "Ignore",
+          LanguageKey.commingsoon: "Comming Soon",
+          LanguageKey.info: "Information",
+          LanguageKey.warning: "Warning",
         },
         LocaleKey.VI: {
           LanguageKey.appname: 'Owl Trust',
@@ -206,7 +209,7 @@ class Localization extends Translations {
           LanguageKey.searchNews: "Tìm kiếm tin tức...",
           LanguageKey.config: "Cấu hình",
           LanguageKey.aboutFnf: "Về Fake News Filter",
-          LanguageKey.version: "",
+          LanguageKey.version: "Phiên bản",
           LanguageKey.support: "Hỗ trợ",
           LanguageKey.checkVerify: "Kiểm tra tính xác thực",
           LanguageKey.sendInfo:
@@ -233,7 +236,10 @@ class Localization extends Translations {
           LanguageKey.allowNotification: "Cho phép gửi thông báo",
           LanguageKey.haveUpdateVersion: "Đã có bản cập nhật mới",
           LanguageKey.btnUpdate: "Cập nhật",
-          LanguageKey.btnIgnore: "Bỏ qua"
+          LanguageKey.btnIgnore: "Bỏ qua",
+          LanguageKey.commingsoon: "Tính năng sẽ được cập nhật sau",
+          LanguageKey.info: "Thông tin",
+          LanguageKey.warning: "Cảnh báo",
         },
       };
 }

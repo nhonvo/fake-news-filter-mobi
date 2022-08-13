@@ -10,7 +10,7 @@ import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class DiscoveryScreen extends StatefulWidget {
   const DiscoveryScreen({Key? key}) : super(key: key);
@@ -116,9 +116,11 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                                   tag: topic.tag.toString(),
                                   description: topic.description.toString(),
                                   image: topic.thumbImage.toString(),
-                                  time: AppHelper.convertToAgo(DateTime.parse(topic.realTime.toString())),
+                                  time: AppHelper.convertToAgo(DateTime.parse(
+                                      topic.realTime.toString())),
                                   ontap: () {
-                                    Get.toNamed(Routes.PREVIEW, arguments: topic.obs);
+                                    Get.toNamed(Routes.PREVIEW,
+                                        arguments: topic.obs);
                                   },
                                 ));
                           }).toList());

@@ -7,7 +7,7 @@ import 'package:fake_news/views/community/community_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({Key? key}) : super(key: key);
@@ -132,17 +132,29 @@ class _CommunityScreenState extends State<CommunityScreen> {
                             physics: BouncingScrollPhysics(),
                             itemCount: viewModel.newsCommList.length,
                             itemBuilder: (context, index) {
-                              if (viewModel.newsCommList[index].isPopular == true) {
+                              if (viewModel.newsCommList[index].isPopular ==
+                                  true) {
                                 return GestureDetector(
                                   onTap: () {},
                                   child: CardCommunity(
-                                    avatar: viewModel.newsCommList[index].publisher?.avatar,
-                                    thumbNews: viewModel.newsCommList[index].thumbNews,
-                                    title: viewModel.newsCommList[index].title.toString(),
-                                    content: viewModel.newsCommList[index].content.toString(),
-                                    crowdId: viewModel.newsCommList[index].newsCommunityId.toString(),
-                                    nameCrowd: viewModel.newsCommList[index].publisher?.fullName ?? "Anonymous",
-                                    numberCrowd: viewModel.newsCommList[index].publisher?.noNewsContributed ?? 0,
+                                    avatar: viewModel
+                                        .newsCommList[index].publisher?.avatar,
+                                    thumbNews:
+                                        viewModel.newsCommList[index].thumbNews,
+                                    title: viewModel.newsCommList[index].title
+                                        .toString(),
+                                    content: viewModel
+                                        .newsCommList[index].content
+                                        .toString(),
+                                    crowdId: viewModel
+                                        .newsCommList[index].newsCommunityId
+                                        .toString(),
+                                    nameCrowd: viewModel.newsCommList[index]
+                                            .publisher?.fullName ??
+                                        "Anonymous",
+                                    numberCrowd: viewModel.newsCommList[index]
+                                            .publisher?.noNewsContributed ??
+                                        0,
                                     onpress: () {},
                                     times: "",
                                   ),
@@ -179,10 +191,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           content: item.content.toString(),
                           thumbNews: item.thumbNews,
                           crowdId: item.newsCommunityId.toString(),
-                          nameCrowd: item.publisher?.fullName.toString() ?? "Anonymous",
+                          nameCrowd: item.publisher?.fullName.toString() ??
+                              "Anonymous",
                           numberCrowd: item.publisher?.noNewsContributed ?? 0,
                           width: Get.size.width,
-                          times: AppHelper.convertToAgo(DateTime.parse(item.datePublished.toString())),
+                          times: AppHelper.convertToAgo(
+                              DateTime.parse(item.datePublished.toString())),
                           onpress: () {},
                         ),
                     ],

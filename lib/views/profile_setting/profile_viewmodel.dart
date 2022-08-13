@@ -9,6 +9,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileViewModel extends BaseViewModel {
@@ -19,6 +20,7 @@ class ProfileViewModel extends BaseViewModel {
   SharedPreferences pref;
 
   Rx<UserModel>? user = Rx<UserModel>(new UserModel());
+  var version = "".obs;
 
   getLoggedInUser() async {
     var userId = await localRepo.getUserId();
@@ -37,6 +39,11 @@ class ProfileViewModel extends BaseViewModel {
       confirm: confirmBtn(),
       cancel: cancelBtn(),
     );
+  }
+
+  @override
+  void onReady() async {
+    super.onReady();
   }
 
   @override

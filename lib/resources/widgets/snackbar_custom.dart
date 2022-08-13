@@ -23,7 +23,7 @@ class SnackbarCustom {
   static void showError(
       {required String message,
       String? altMessage,
-      SnackPosition? snackPosition}) {
+      SnackPosition? snackPosition = SnackPosition.BOTTOM}) {
     Get.snackbar(
       'error'.tr,
       message == "null" ? altMessage.toString() : message,
@@ -34,6 +34,42 @@ class SnackbarCustom {
       backgroundColor: Colors.red,
       colorText: Colors.white,
       snackPosition: snackPosition,
+    );
+  }
+
+  static void showInfo(
+      {required String message,
+      String? altMessage,
+      SnackPosition? snackPosition = SnackPosition.BOTTOM}) {
+    Get.snackbar(
+      'info'.tr,
+      message == "null" ? altMessage.toString() : message,
+      icon: Icon(
+        Icons.error,
+        color: Colors.white,
+      ),
+      backgroundColor: Colors.blue,
+      colorText: Colors.white,
+      snackPosition: snackPosition,
+      duration: const Duration(seconds: 1),
+    );
+  }
+
+  static void showWarning(
+      {required String message,
+      String? altMessage,
+      SnackPosition? snackPosition = SnackPosition.BOTTOM}) {
+    Get.snackbar(
+      'warning'.tr,
+      message == "null" ? altMessage.toString() : message,
+      icon: Icon(
+        Icons.error,
+        color: Colors.white,
+      ),
+      backgroundColor: Colors.amber,
+      colorText: Colors.white,
+      snackPosition: snackPosition,
+      duration: const Duration(seconds: 1),
     );
   }
 }

@@ -1,10 +1,10 @@
+/*
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multi_image_picker2/multi_image_picker2.dart';
+import 'package:image_picker/image_picker.dart';
 
-import 'contribute_viewmodel.dart';
 
 class ContributeScreen extends StatefulWidget {
   const ContributeScreen({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _ContributeScreenState extends State<ContributeScreen> {
   final FocusNode inputNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
 
-  List<Asset> images = <Asset>[];
+  List<XFile>? images;
 
   Widget buildGridView() {
     return Container(
@@ -27,7 +27,7 @@ class _ContributeScreenState extends State<ContributeScreen> {
         crossAxisSpacing: 10,
         scrollDirection: Axis.vertical,
         crossAxisCount: 5,
-        children: List.generate(images.length, (index) {
+        children: List.generate(images!.length, (index) {
           Asset asset = images[index];
           return AssetThumb(
             asset: asset,
@@ -181,3 +181,4 @@ class _ContributeScreenState extends State<ContributeScreen> {
     );
   }
 }
+*/

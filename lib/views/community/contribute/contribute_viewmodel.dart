@@ -1,3 +1,4 @@
+/*
 import 'package:fake_news/core/api/auth_api.dart';
 import 'package:fake_news/core/api/news_community_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
@@ -10,7 +11,6 @@ import 'package:fake_news/services/language_service/language_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:multi_image_picker2/multi_image_picker2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ContributeViewModel extends BaseViewModel {
@@ -110,3 +110,4 @@ class ContributeViewModel extends BaseViewModel {
     await handleCreate();
   }
 }
+*/

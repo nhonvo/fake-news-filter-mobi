@@ -8,6 +8,7 @@ import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:get/get.dart';
 import 'dart:io' show Platform;
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/api/language_api.dart';
 import '../../models/language_model.dart';
@@ -37,6 +38,8 @@ class SplashViewModel extends BaseViewModel {
 
     //Lấy thông tin phiên bản hiện tại
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('version', packageInfo.version);
     packageName = packageInfo.packageName.obs;
     String currentVersionCode = packageInfo.version;
 
@@ -101,7 +104,6 @@ class SplashViewModel extends BaseViewModel {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     handleTransition();
   }

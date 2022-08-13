@@ -104,4 +104,7 @@ class LanguageKey {
   static const haveUpdateVersion = "haveUpdateVersion";
   static const btnUpdate = "btnUpdate";
   static const btnIgnore = "btnIgnore";
+  static const commingsoon = "commingsoon";
+  static const info = "info";
+  static const warning = "warning";
 }

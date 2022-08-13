@@ -5,7 +5,6 @@ PODS:
   - AppAuth/Core (1.5.0)
   - AppAuth/ExternalUserAgent (1.5.0):
     - AppAuth/Core
-  - BSImagePicker (3.3.1)
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
@@ -35,8 +34,7 @@ PODS:
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.7.2)
-  - multi_image_picker2 (5.0.00):
-    - BSImagePicker (~> 3.3.1)
+  - image_picker_ios (0.0.1):
     - Flutter
   - onesignal_flutter (3.3.2):
     - Flutter
@@ -75,7 +73,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_facebook_auth (from `.symlinks/plugins/flutter_facebook_auth/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
-  - multi_image_picker2 (from `.symlinks/plugins/multi_image_picker2/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
   - OneSignalXCFramework (< 4.0, >= 3.4.3)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
@@ -90,7 +88,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppAuth
-    - BSImagePicker
     - FBAEMKit
     - FBSDKCoreKit
     - FBSDKCoreKit_Basics
@@ -111,8 +108,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_facebook_auth/ios"
   google_sign_in_ios:
     :path: ".symlinks/plugins/google_sign_in_ios/ios"
-  multi_image_picker2:
-    :path: ".symlinks/plugins/multi_image_picker2/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   onesignal_flutter:
     :path: ".symlinks/plugins/onesignal_flutter/ios"
   package_info_plus:
@@ -134,7 +131,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
-  BSImagePicker: 0fe04b574d4d6b81093785d2af6c26227efc8428
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   FBAEMKit: d00064597439e75885c70d9adbcb5f3e9ad84f5d
   FBSDKCoreKit: e5d3acfffe5063a9d0b967ba2ad1f5afc460cf43
@@ -147,7 +143,7 @@ SPEC CHECKSUMS:
   GoogleSignIn: 3c68388ac221f379676e8f1cb115df3aaf73b93f
   GTMAppAuth: 4d8f864896f3646f0c33baf38a28362f4c601e15
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
-  multi_image_picker2: f81a13124e7a2bc48e7d15ee539a5f8b9ff4d407
+  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
   onesignal_flutter: f3ff66c97498f9131481441a362ef5f0e6cb6d16
   OneSignalXCFramework: 81ceac017a290f23793443323090cfbe888f74ea
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e

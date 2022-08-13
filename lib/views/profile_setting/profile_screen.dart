@@ -2,6 +2,7 @@ import 'package:fake_news/resources/utils/icon.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/avatar.dart';
 import 'package:fake_news/resources/widgets/button.dart';
+import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:fake_news/views/comming_soon_screen.dart';
 import 'package:fake_news/views/follow_topic/follow_topic.dart';
 import 'package:fake_news/views/language/choose_language_screen.dart';
@@ -13,6 +14,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -72,10 +74,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            margin: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+            margin:
+                EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
             child: Text(
-              'version'.tr,
-              style: StylesText.content12LightBlack,
+              'version'.tr +
+                  ": " +
+                  viewModel.pref.getString('version').toString(),
+              style: StylesText.content12BoldBlack,
             ),
           ),
         ),
@@ -174,13 +179,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   icon: IconsApp.follow,
                   content: 'followTopic'.tr,
                   onTap: () {
-                    Get.to(FollowTopicScreen());
+                    Get.to(() => FollowTopicScreen());
                   }),
               BuildItemButon(
                 icon: IconsApp.social,
                 content: 'linkSocial'.tr,
                 //return coming soon screen when button is clicked
-                onTap: () => Get.to(() => ComingSoonScreen()),
+                onTap: () => SnackbarCustom.showInfo(message: "commingsoon".tr),
               ),
             ],
           ),
@@ -210,22 +215,22 @@ Widget _infoSupport(BuildContext context) {
             BuildItemButon(
               icon: IconsApp.faq,
               content: 'FAQ',
-              onTap: () => Get.to(() => ComingSoonScreen()),
+              onTap: () => SnackbarCustom.showInfo(message: "commingsoon".tr),
             ),
             BuildItemButon(
               icon: IconsApp.rate,
               content: 'rateApp'.tr,
-              onTap: () => Get.to(() => ComingSoonScreen()),
+              onTap: () => SnackbarCustom.showInfo(message: "commingsoon".tr),
             ),
             BuildItemButon(
               icon: IconsApp.about,
               content: 'aboutFnf'.tr,
-              onTap: () => Get.to(() => ComingSoonScreen()),
+              onTap: () => SnackbarCustom.showInfo(message: "commingsoon".tr),
             ),
             BuildItemButon(
               icon: IconsApp.support,
               content: 'support'.tr,
-              onTap: () => Get.to(() => ComingSoonScreen()),
+              onTap: () => SnackbarCustom.showInfo(message: "commingsoon".tr),
             ),
           ],
         ),
@@ -238,7 +243,8 @@ class BuildItemButon extends StatelessWidget {
   final String icon;
   final String content;
   final Function onTap;
-  BuildItemButon({required this.icon, required this.content, required this.onTap});
+  BuildItemButon(
+      {required this.icon, required this.content, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
