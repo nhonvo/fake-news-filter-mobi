@@ -59,6 +59,12 @@ class StylesText {
     fontWeight: FontWeight.bold,
     fontSize: SizeText.size10,
   );
+  static TextStyle content18BoldRed = TextStyle(
+    color: MyColors.red,
+    fontFamily: 'NUNITO-BOLD',
+    fontWeight: FontWeight.bold,
+    fontSize: SizeText.size18,
+  );
   static TextStyle content10BoldBlack = TextStyle(
     color: Colors.black,
     fontFamily: 'NUNITO-BOLD',

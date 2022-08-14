@@ -22,7 +22,7 @@ class _SearchingState extends State<Searching> {
 
     return Obx(() {
       return FloatingSearchBar(
-        automaticallyImplyBackButton: true,
+        //automaticallyImplyBackButton: true,
         leadingActions: [
           FloatingSearchBarAction.back(),
         ],

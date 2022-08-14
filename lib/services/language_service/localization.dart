@@ -123,6 +123,10 @@ class Localization extends Translations {
           LanguageKey.info: "Information",
           LanguageKey.warning: "Warning",
           LanguageKey.reportLink: "Report news not showing",
+          LanguageKey.errorServer:
+              "A Server Error Occurred Please Contact the Administrator!",
+          LanguageKey.exit: "Exit",
+          LanguageKey.tryAgain: "Try Again",
         },
         LocaleKey.VI: {
           LanguageKey.appname: 'Owl Trust',
@@ -242,6 +246,9 @@ class Localization extends Translations {
           LanguageKey.info: "Thông tin",
           LanguageKey.warning: "Cảnh báo",
           LanguageKey.reportLink: "Báo lỗi không xem được tin",
+          LanguageKey.errorServer: "Lỗi hệ thống! Vui lòng quay lại sau",
+          LanguageKey.exit: "Thoát",
+          LanguageKey.tryAgain: "Thử lại",
         },
       };
 }

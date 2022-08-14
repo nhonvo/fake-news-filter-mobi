@@ -1,12 +1,14 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:fake_news/core/api/following_api.dart';
 import 'package:fake_news/core/api/update_api.dart';
 import 'package:fake_news/core/base/base_view_model.dart';
 import 'package:fake_news/models/update_model.dart';
 import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
+import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
 import 'package:get/get.dart';
-import 'dart:io' show Platform;
+import 'dart:io' show Platform, exit;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,6 +46,28 @@ class SplashViewModel extends BaseViewModel {
     String currentVersionCode = packageInfo.version;
 
     var checkUpdate = await updateApi.checkUpdate(currentVersionCode, platform);
+
+    if (checkUpdate.statusCode == 500) {
+      return AwesomeDialog(
+        context: Get.context!,
+        dialogType: DialogType.ERROR,
+        animType: AnimType.BOTTOMSLIDE,
+        title: 'error'.tr,
+        desc: 'errorServer'.tr,
+        btnOkText: 'tryAgain'.tr,
+        btnCancelText: 'exit'.tr,
+        titleTextStyle: StylesText.content18BoldRed,
+        descTextStyle: StylesText.content16BoldBlack,
+        buttonsTextStyle: StylesText.content16BoldWhite,
+        btnCancelOnPress: () {
+          exit(0);
+        },
+        btnOkOnPress: () {
+          handleCheckUpdate();
+        },
+      )..show();
+    }
+
     List<int> statuscode = [200, 201, 202];
 
     if (!statuscode.contains(checkUpdate.statusCode)) {
@@ -105,12 +129,12 @@ class SplashViewModel extends BaseViewModel {
   @override
   void onInit() {
     super.onInit();
-    handleTransition();
+    handleCheckUpdate();
   }
 
   @override
-  void onReady() {
+  onReady() {
     super.onReady();
-    handleCheckUpdate();
+    handleTransition();
   }
 }

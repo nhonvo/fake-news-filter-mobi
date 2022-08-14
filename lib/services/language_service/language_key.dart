@@ -108,4 +108,7 @@ class LanguageKey {
   static const info = "info";
   static const warning = "warning";
   static const reportLink = "reportLink";
+  static const errorServer = "errorServer";
+  static const exit = "exit";
+  static const tryAgain = "tryAgain";
 }
