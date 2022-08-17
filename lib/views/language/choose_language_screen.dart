@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
@@ -15,7 +17,8 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 class ChooseLanguageScreen extends StatefulWidget {
   bool? showChangeContentLanguageButton;
 
-  ChooseLanguageScreen({Key? key, this.showChangeContentLanguageButton = true}) : super(key: key);
+  ChooseLanguageScreen({Key? key, this.showChangeContentLanguageButton = true})
+      : super(key: key);
 
   @override
   State<ChooseLanguageScreen> createState() => _ChooseLanguageScreenState();
@@ -36,12 +39,14 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int defaultLanguage = viewmodel.languageService.currentLanguage == "en" ? 1 : 0;
+    int defaultLanguage =
+        viewmodel.languageService.currentLanguage == "en" ? 1 : 0;
 
     //get the current language from the language service
     if (viewmodel.getLanguageContent.value != "") {
-      viewmodel.selectedValue.value =
-          viewmodel.languagesList?.indexWhere((element) => element.id == viewmodel.getLanguageContent.value) ?? 0;
+      viewmodel.selectedValue.value = viewmodel.languagesList?.indexWhere(
+              (element) => element.id == viewmodel.getLanguageContent.value) ??
+          0;
     }
 
     return SingleChildScrollView(
@@ -117,51 +122,80 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                             return GestureDetector(
                               onTap: () {
                                 viewmodel.selectedValue.value = index;
-                                viewmodel.getLanguageContent.value = viewmodel.languagesList?[index].id ?? 'en';
+                                viewmodel.getLanguageContent.value =
+                                    viewmodel.languagesList?[index].id ?? 'en';
                               },
                               child: Card(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
                                 child: Container(
                                   width: 175,
                                   padding: EdgeInsets.all(25),
                                   child: Obx(
                                     () => Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        viewmodel.languagesList?[index].flag != null
+                                        viewmodel.languagesList?[index].flag !=
+                                                null
                                             ? CachedNetworkImage(
                                                 width: 50,
                                                 height: 50,
                                                 imageUrl:
                                                     "${viewmodel.appEnvironment.apiBaseUrl}/images/languages/${viewmodel.languagesList?[index].flag}",
-                                                imageBuilder: (context, imageProvider) => Container(
+                                                imageBuilder:
+                                                    (context, imageProvider) =>
+                                                        Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(6),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
                                                     image: DecorationImage(
                                                         image: imageProvider,
                                                         fit: BoxFit.fitWidth,
-                                                        colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+                                                        colorFilter:
+                                                            ColorFilter.mode(
+                                                                Colors.red,
+                                                                BlendMode
+                                                                    .colorBurn)),
                                                   ),
                                                 ),
-                                                placeholder: (context, url) => CupertinoActivityIndicator(),
-                                                errorWidget: (context, url, error) => Icon(Icons.error),
+                                                placeholder: (context, url) =>
+                                                    CupertinoActivityIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(Icons.error),
                                               )
                                             : Container(),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(viewmodel.languagesList![index].name.toString(),
-                                                style: viewmodel.selectedValue.value == index
-                                                    ? StylesText.content14BoldBlue
-                                                    : StylesText.content14MediumBlack),
+                                            Text(
+                                                viewmodel
+                                                    .languagesList![index].name
+                                                    .toString(),
+                                                style: viewmodel.selectedValue
+                                                            .value ==
+                                                        index
+                                                    ? StylesText
+                                                        .content14BoldBlue
+                                                    : StylesText
+                                                        .content14MediumBlack),
                                             Container(
                                               decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  border: Border.all(color: Colors.black12)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  border: Border.all(
+                                                      color: Colors.black12)),
                                               child: Icon(Icons.check,
                                                   size: 18,
-                                                  color: viewmodel.selectedValue.value == index
+                                                  color: viewmodel.selectedValue
+                                                              .value ==
+                                                          index
                                                       ? MyColors.blue
                                                       : Colors.black12),
                                             )
@@ -191,17 +225,22 @@ class _ChooseLanguageScreenState extends State<ChooseLanguageScreen> {
                 width: Get.size.width * 0.8,
                 onPressed: () async {
                   //save language content to shared pref
-                  viewmodel.prefs
-                      .setString(AppConstant.sharePrefKeys.languageContent, viewmodel.getLanguageContent.value);
+                  viewmodel.prefs.setString(
+                      AppConstant.sharePrefKeys.languageContent,
+                      viewmodel.getLanguageContent.value);
 
-                  OneSignal.shared.sendTag("language_content", viewmodel.getLanguageContent.value);
+                  OneSignal.shared.sendTag(
+                      "language_content", viewmodel.getLanguageContent.value);
 
                   //only fetching topic data when user choose language in discovery screen and follow topic screen
-                  if (viewmodel.getLanguageContent.value != viewmodel.tempLanguageContent.value &&
-                      (Get.currentRoute == Routes.DISCOVERY || Get.currentRoute == Routes.FOLLOW_TOPIC)) {
+                  if (viewmodel.getLanguageContent.value !=
+                          viewmodel.tempLanguageContent.value &&
+                      (Get.currentRoute == Routes.DISCOVERY ||
+                          Get.currentRoute == Routes.FOLLOW_TOPIC)) {
                     viewmodel.handleGetTopic();
                     //saving selected language content to temporary variable for compare with new language content
-                    viewmodel.tempLanguageContent.value = viewmodel.getLanguageContent.value;
+                    viewmodel.tempLanguageContent.value =
+                        viewmodel.getLanguageContent.value;
                   }
                   Get.back();
                 },

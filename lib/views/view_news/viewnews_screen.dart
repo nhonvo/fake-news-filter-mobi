@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
@@ -7,8 +8,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-final webViewKey = GlobalKey<_ViewNewsScreenState>();
 
 // ignore: must_be_immutable
 class ViewNewsScreen extends StatefulWidget {
@@ -30,13 +29,9 @@ class ViewNewsScreen extends StatefulWidget {
 }
 
 class _ViewNewsScreenState extends State<ViewNewsScreen> {
-  bool isRoute = false;
-
-  Future<String> get _url async {
-    await Future.delayed(Duration(seconds: 1));
-    return widget.webUrl.toString();
-  }
-
+  int loadingPercentage = 0;
+  final Completer<WebViewController> controller =
+      Completer<WebViewController>();
   @override
   void initState() {
     super.initState();
@@ -45,7 +40,6 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
     }
   }
 
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -64,10 +58,28 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
             onPressed: () => Get.back(),
           ),
           title: Center(
-            child: Text(widget.publisher?.toUpperCase() ?? 'appname'.tr,
-                style: StylesText.content16BoldBlack),
+            child: Text(
+              widget.publisher?.toUpperCase() ?? 'appname'.tr,
+              style: StylesText.content16BoldBlack,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           actions: [
+            FutureBuilder<WebViewController>(
+                future: controller.future,
+                builder: (context, AsyncSnapshot<WebViewController> snapshot) {
+                  final bool webViewReady =
+                      snapshot.connectionState == ConnectionState.done;
+                  final WebViewController? controller = snapshot.data;
+                  return IconButton(
+                    icon: const Icon(Icons.replay),
+                    onPressed: !webViewReady
+                        ? null
+                        : () {
+                            controller!.reload();
+                          },
+                  );
+                }),
             PopupMenuButton(
                 offset: Offset(0, 50),
                 shape: RoundedRectangleBorder(
@@ -139,29 +151,46 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            FutureBuilder(
-              future: _url,
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                return snapshot.hasData
-                    ? WebView(
-                        initialUrl: snapshot.data,
-                        javascriptMode: JavascriptMode.unrestricted,
-                        onPageStarted: (_) {
-                          isRoute = false;
-                        },
-                        onPageFinished: (_) {
-                          isRoute = true;
-                        },
-                        navigationDelegate: (NavigationRequest request) {
-                          if (isRoute) {
-                            return NavigationDecision.prevent;
-                          }
-                          return NavigationDecision.navigate;
-                        },
-                      )
-                    : LinearProgressIndicator();
+            WebView(
+              initialUrl: widget.webUrl,
+              onWebViewCreated: (webViewController) {
+                controller.complete(webViewController);
+              },
+              javascriptMode: JavascriptMode.unrestricted,
+              onPageStarted: (url) {
+                if (!mounted) return;
+                setState(() {
+                  loadingPercentage = 0;
+                });
+              },
+              onProgress: (progress) {
+                if (!mounted) return;
+                setState(() {
+                  loadingPercentage = progress;
+                });
+              },
+              onPageFinished: (url) {
+                if (!mounted) return;
+                setState(() {
+                  loadingPercentage = 100;
+                });
+              },
+              navigationDelegate: (NavigationRequest request) {
+                if (loadingPercentage > 90) {
+                  return NavigationDecision.prevent;
+                }
+                return NavigationDecision.navigate;
               },
             ),
+            if (loadingPercentage < 90)
+              Align(
+                alignment: AlignmentDirectional.topStart,
+                child: LinearProgressIndicator(
+                  color: Colors.black,
+                  backgroundColor: Colors.white,
+                  value: loadingPercentage / 100.0,
+                ),
+              ),
             Positioned(
               bottom: 15,
               child: Container(

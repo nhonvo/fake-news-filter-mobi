@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
@@ -61,7 +63,7 @@ class _CustomCardState extends State<CustomCard> {
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(15.0),
                               topRight: Radius.circular(15.0)),
-                          child: widget.image != "null"
+                          child: widget.image != null
                               ? CachedNetworkImage(
                                   fit: BoxFit.fitWidth,
                                   height: 55,

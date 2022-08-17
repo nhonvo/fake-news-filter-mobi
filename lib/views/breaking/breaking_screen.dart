@@ -64,7 +64,8 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         tags: item.topicInfo!
                                             .map((v) => v!.topicName)
                                             .toList(),
-                                        socialBeliefs: '${item.socialBeliefs}%',
+                                        socialBeliefs:
+                                            '${item.socialBeliefs!.round() * 100}%',
                                         times: AppHelper.convertToAgo(
                                             DateTime.parse(
                                                 item.timestamp.toString())),

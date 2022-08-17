@@ -133,7 +133,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                           ? "real".tr
                           : "fake".tr,
                       // tag: viewmodel.topicModel.value.tag.toString(),
-                      socialBeliefs: '${item.socialBeliefs}%',
+                      socialBeliefs: '${item.socialBeliefs!.round() * 100}%',
                       times: AppHelper.convertToAgo(
                           DateTime.parse(item.timestamp.toString())),
                       title: item.title.toString().substring(

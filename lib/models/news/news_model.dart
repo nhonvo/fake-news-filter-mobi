@@ -58,7 +58,7 @@ class NewsModel {
   String? title;
   String? urlNews;
   String? thumbNews;
-  int? socialBeliefs;
+  double? socialBeliefs;
   String? officialRating;
   int? viewCount;
   String? publisher;
@@ -95,7 +95,7 @@ class NewsModel {
     title = json['title']?.toString();
     urlNews = json['urlNews']?.toString();
     thumbNews = json['thumbNews']?.toString();
-    socialBeliefs = json['socialBeliefs']?.toInt();
+    socialBeliefs = json['socialBeliefs']?.toDouble();
     officialRating = json['officialRating']?.toString();
     viewCount = json['viewCount']?.toInt();
     publisher = json['publisher']?.toString();

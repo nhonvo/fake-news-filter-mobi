@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import 'button.dart';
 
@@ -58,7 +61,7 @@ class _CardNewsState extends State<CardNews> {
   LocalStorageRepo localRepo = Get.find();
   late bool isLoggedIn = false;
   var appEnvironment = Get.find<AppEnvironment>();
-
+  final controller = Completer<WebViewController>();
   @override
   void initState() {
     super.initState();
@@ -167,7 +170,7 @@ class _CardNewsState extends State<CardNews> {
                       )
                     ],
                   ),
-                  widget.imageUrl != "null"
+                  widget.imageUrl != null
                       ? Center(
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10.0),
