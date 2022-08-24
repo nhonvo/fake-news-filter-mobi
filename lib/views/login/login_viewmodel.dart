@@ -26,7 +26,7 @@ class LoginViewModel extends BaseViewModel {
   var phoneController = TextEditingController();
   var passwordController = TextEditingController();
   var passwordConfirmController = TextEditingController();
-  
+
   FollowingApi followingApi = Get.find();
 
   void clearText() {
@@ -118,7 +118,7 @@ class LoginViewModel extends BaseViewModel {
       if (response.statusCode != 200) {
         EasyLoading.dismiss();
         SnackbarCustom.showError(
-          message: response.message!,
+          message: 'errLogFace'.tr,
           altMessage: 'altMessage'.tr,
           snackPosition: SnackPosition.BOTTOM,
         );
@@ -127,7 +127,7 @@ class LoginViewModel extends BaseViewModel {
       }
     } else {
       SnackbarCustom.showError(
-        message: result.message!,
+        message: 'errLogFace'.tr,
         altMessage: 'altMessage'.tr,
       );
       EasyLoading.dismiss();
@@ -145,14 +145,13 @@ class LoginViewModel extends BaseViewModel {
       );
       String fullName = '${credential.familyName}' + '${credential.givenName}';
 
-      print(credential.identityToken);
       var response = await authApi.loginApple(
           fullName, credential.identityToken.toString());
 
       if (response.statusCode != 200) {
         EasyLoading.dismiss();
         SnackbarCustom.showError(
-          message: response.message!,
+          message: 'errLogApple'.tr,
           altMessage: 'altMessage'.tr,
           snackPosition: SnackPosition.BOTTOM,
         );
@@ -161,7 +160,7 @@ class LoginViewModel extends BaseViewModel {
       }
     } catch (error) {
       SnackbarCustom.showError(
-        message: error.toString(),
+        message: 'errLogApple'.tr,
         altMessage: 'altMessage'.tr,
       );
     }
@@ -185,7 +184,7 @@ class LoginViewModel extends BaseViewModel {
       if (response.statusCode != 200) {
         EasyLoading.dismiss();
         SnackbarCustom.showError(
-          message: response.message!,
+          message: 'errLogGoogle'.tr,
           altMessage: 'altMessage'.tr,
           snackPosition: SnackPosition.BOTTOM,
         );
@@ -195,7 +194,7 @@ class LoginViewModel extends BaseViewModel {
     } catch (error) {
       EasyLoading.dismiss();
       SnackbarCustom.showError(
-        message: error.toString(),
+        message: 'errLogGoogle'.tr,
         altMessage: 'altMessage'.tr,
       );
     }

@@ -4,9 +4,9 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
@@ -29,15 +29,48 @@ class ViewNewsScreen extends StatefulWidget {
 }
 
 class _ViewNewsScreenState extends State<ViewNewsScreen> {
-  int loadingPercentage = 0;
-  final Completer<WebViewController> controller =
-      Completer<WebViewController>();
+  final GlobalKey webViewKey = GlobalKey();
+
+  InAppWebViewController? webViewController;
+
+  InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
+      crossPlatform: InAppWebViewOptions(
+        useShouldOverrideUrlLoading: true,
+        mediaPlaybackRequiresUserGesture: false,
+      ),
+      android: AndroidInAppWebViewOptions(
+        useHybridComposition: true,
+      ),
+      ios: IOSInAppWebViewOptions(
+        allowsInlineMediaPlayback: true,
+      ));
+
+  late PullToRefreshController pullToRefreshController;
+  String url = "";
+  double progress = 0;
+  final urlController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) {
-      WebView.platform = SurfaceAndroidWebView();
-    }
+    pullToRefreshController = PullToRefreshController(
+      options: PullToRefreshOptions(
+        color: Colors.blue,
+      ),
+      onRefresh: () async {
+        if (Platform.isAndroid) {
+          webViewController?.reload();
+        } else if (Platform.isIOS) {
+          webViewController?.loadUrl(
+              urlRequest: URLRequest(url: await webViewController?.getUrl()));
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
@@ -65,21 +98,12 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
             ),
           ),
           actions: [
-            FutureBuilder<WebViewController>(
-                future: controller.future,
-                builder: (context, AsyncSnapshot<WebViewController> snapshot) {
-                  final bool webViewReady =
-                      snapshot.connectionState == ConnectionState.done;
-                  final WebViewController? controller = snapshot.data;
-                  return IconButton(
-                    icon: const Icon(Icons.replay),
-                    onPressed: !webViewReady
-                        ? null
-                        : () {
-                            controller!.reload();
-                          },
-                  );
-                }),
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                webViewController?.reload();
+              },
+            ),
             PopupMenuButton(
                 offset: Offset(0, 50),
                 shape: RoundedRectangleBorder(
@@ -151,44 +175,57 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
         body: Stack(
           alignment: Alignment.center,
           children: [
-            WebView(
-              initialUrl: widget.webUrl,
-              onWebViewCreated: (webViewController) {
-                controller.complete(webViewController);
+            InAppWebView(
+              key: webViewKey,
+              initialUrlRequest: URLRequest(url: Uri.parse(widget.webUrl!)),
+              initialOptions: options,
+              pullToRefreshController: pullToRefreshController,
+              onWebViewCreated: (controller) {
+                webViewController = controller;
               },
-              javascriptMode: JavascriptMode.unrestricted,
-              onPageStarted: (url) {
-                if (!mounted) return;
-                setState(() {
-                  loadingPercentage = 0;
-                });
+              androidOnPermissionRequest:
+                  (controller, origin, resources) async {
+                return PermissionRequestResponse(
+                    resources: resources,
+                    action: PermissionRequestResponseAction.GRANT);
               },
-              onProgress: (progress) {
-                if (!mounted) return;
-                setState(() {
-                  loadingPercentage = progress;
-                });
+              onLoadStop: (controller, url) async {
+                pullToRefreshController.endRefreshing();
               },
-              onPageFinished: (url) {
-                if (!mounted) return;
-                setState(() {
-                  loadingPercentage = 100;
-                });
+              onLoadError: (controller, url, code, message) {
+                pullToRefreshController.endRefreshing();
               },
-              navigationDelegate: (NavigationRequest request) {
-                if (loadingPercentage > 90) {
-                  return NavigationDecision.prevent;
+              onProgressChanged: (controller, progress) {
+                if (progress == 100) {
+                  pullToRefreshController.endRefreshing();
                 }
-                return NavigationDecision.navigate;
+                setState(() {
+                  this.progress = progress / 100;
+                  urlController.text = this.url;
+                });
+              },
+              onPageCommitVisible: (con, uri) {
+                con.goBack();
+              },
+              onUpdateVisitedHistory: (controller, url, androidIsReload) {
+                setState(() {
+                  this.url = url.toString();
+                  urlController.text = this.url;
+                });
+              },
+              onConsoleMessage: (controller, consoleMessage) {
+                print(consoleMessage);
               },
             ),
-            if (loadingPercentage < 90)
+            if (progress < 0.8)
               Align(
                 alignment: AlignmentDirectional.topStart,
-                child: LinearProgressIndicator(
-                  color: Colors.black,
-                  backgroundColor: Colors.white,
-                  value: loadingPercentage / 100.0,
+                child: SizedBox(
+                  height: 1.5,
+                  child: LinearProgressIndicator(
+                      color: Colors.black,
+                      backgroundColor: Colors.white,
+                      value: progress),
                 ),
               ),
             Positioned(

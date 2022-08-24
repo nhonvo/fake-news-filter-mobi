@@ -89,7 +89,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       // ignore: null_check_always_fails
                       hintText: 'inputuser'.tr,
                       suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
+                          ? IconButton(
+                              onPressed: viewmodel.clearText,
+                              icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       height: 40,
@@ -104,7 +106,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       // ignore: null_check_always_fails
                       hintText: 'inputName'.tr,
                       suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
+                          ? IconButton(
+                              onPressed: viewmodel.clearText,
+                              icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       height: 40,
@@ -119,28 +123,16 @@ class _SignupScreenState extends State<SignupScreen> {
                       // ignore: null_check_always_fails
                       hintText: 'inputEmail'.tr,
                       suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
+                          ? IconButton(
+                              onPressed: viewmodel.clearText,
+                              icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       height: 40,
                       prefixIcon: const Icon(Icons.supervised_user_circle),
                       obscureText: false,
                     ),
-                    SizedBox(
-                      height: Get.size.height * 0.02,
-                    ),
-                    CustomTextField(
-                      controller: viewmodel.phoneController,
-                      // ignore: null_check_always_fails
-                      hintText: 'inputPhone'.tr,
-                      suffixIcon: viewmodel.phoneController.text.isNotEmpty
-                          ? IconButton(onPressed: viewmodel.clearText, icon: const Icon(Icons.clear))
-                          : null,
-                      width: Get.size.width * 0.7,
-                      height: 40,
-                      prefixIcon: const Icon(Icons.supervised_user_circle),
-                      obscureText: false,
-                    ),
+
                     SizedBox(
                       height: Get.size.height * 0.02,
                     ),
@@ -151,7 +143,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           onTap: () => setState(() {
                                 _passwordObscureText = !_passwordObscureText;
                               }),
-                          child: Icon(_passwordObscureText ? Icons.visibility_off : Icons.visibility)),
+                          child: Icon(_passwordObscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility)),
                       width: Get.size.width * 0.7,
                       height: 40,
                       prefixIcon: const Icon(Icons.supervised_user_circle),
@@ -167,9 +161,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       obscureText: _confirmPasswordObscureText,
                       suffixIcon: InkWell(
                           onTap: () => setState(() {
-                                _confirmPasswordObscureText = !_confirmPasswordObscureText;
+                                _confirmPasswordObscureText =
+                                    !_confirmPasswordObscureText;
                               }),
-                          child: Icon(_confirmPasswordObscureText ? Icons.visibility_off : Icons.visibility)),
+                          child: Icon(_confirmPasswordObscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility)),
                       hintText: 'inputPassConfirm'.tr,
                       height: 40,
                     ),

@@ -127,6 +127,9 @@ class Localization extends Translations {
               "A Server Error Occurred Please Contact the Administrator!",
           LanguageKey.exit: "Exit",
           LanguageKey.tryAgain: "Try Again",
+          LanguageKey.errLogFace: "Login Facebook failed!",
+          LanguageKey.errLogGoogle: "Login Google failed!",
+          LanguageKey.errLogApple: "Login Apple failed!",
         },
         LocaleKey.VI: {
           LanguageKey.appname: 'Owl Trust',
@@ -249,6 +252,9 @@ class Localization extends Translations {
           LanguageKey.errorServer: "Lỗi hệ thống! Vui lòng quay lại sau",
           LanguageKey.exit: "Thoát",
           LanguageKey.tryAgain: "Thử lại",
+          LanguageKey.errLogFace: "Đăng nhập Facebook thất bại!",
+          LanguageKey.errLogGoogle: "Đăng nhập Google thất bại!",
+          LanguageKey.errLogApple: "Đăng nhập Apple thất bại!",
         },
       };
 }

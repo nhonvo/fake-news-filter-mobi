@@ -6,7 +6,6 @@ import 'package:fake_news/views/view_news/viewnews_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class Searching extends StatefulWidget {
   const Searching({Key? key}) : super(key: key);

@@ -111,7 +111,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                                 padding: const EdgeInsets.all(15.0),
                                 child: CardTopic(
                                   index: index.toString(),
-                                  noNews: topic.noNews.toString(),
+                                  noNews: topic.noNews!,
                                   label: topic.label.toString(),
                                   tag: topic.tag.toString(),
                                   description: topic.description.toString(),

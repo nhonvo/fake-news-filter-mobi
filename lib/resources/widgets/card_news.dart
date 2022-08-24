@@ -13,7 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:intl/intl.dart';
 
 import 'button.dart';
 
@@ -26,7 +26,9 @@ class CardNews extends StatefulWidget {
       imageUrl,
       video,
       webUrl;
-  final String newsId, times, title, article, factCheck, viewCount;
+  final String newsId, times, title, article, factCheck;
+  final int viewCount;
+
   final List<String?>? tags;
 
   final VoidCallback onPress;
@@ -61,7 +63,6 @@ class _CardNewsState extends State<CardNews> {
   LocalStorageRepo localRepo = Get.find();
   late bool isLoggedIn = false;
   var appEnvironment = Get.find<AppEnvironment>();
-  final controller = Completer<WebViewController>();
   @override
   void initState() {
     super.initState();
@@ -243,7 +244,8 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                   SizedBox(width: 5),
                                   Text(
-                                    widget.viewCount,
+                                    NumberFormat.compact()
+                                        .format(widget.viewCount),
                                     style: StylesText.content12BoldGrey,
                                   ),
                                 ],
@@ -272,7 +274,8 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                   SizedBox(width: 5),
                                   Text(
-                                    widget.viewCount,
+                                    NumberFormat.compact()
+                                        .format(widget.viewCount),
                                     style: StylesText.content12BoldGrey,
                                   ),
                                 ],

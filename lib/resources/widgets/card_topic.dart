@@ -7,6 +7,7 @@ import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class CardTopic extends StatefulWidget {
   CardTopic(
@@ -22,7 +23,8 @@ class CardTopic extends StatefulWidget {
       : super(key: key);
 
   final VoidCallback ontap;
-  final String index, tag, description, label, noNews, image, time;
+  final int noNews;
+  final String index, tag, description, label, image, time;
   @override
   _CardTopicState createState() => _CardTopicState();
 }
@@ -45,6 +47,7 @@ class _CardTopicState extends State<CardTopic> {
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
               child: Column(
                 children: [
+                  // ignore: unnecessary_null_comparison
                   widget.image != null
                       ? ClipRRect(
                           borderRadius: BorderRadius.only(
@@ -98,7 +101,9 @@ class _CardTopicState extends State<CardTopic> {
                                   SizedBox(
                                     width: 3,
                                   ),
-                                  Text(widget.noNews,
+                                  Text(
+                                      NumberFormat.compact()
+                                          .format(widget.noNews),
                                       style: StylesText.content10MediumWhite)
                                 ],
                               ),

@@ -111,4 +111,7 @@ class LanguageKey {
   static const errorServer = "errorServer";
   static const exit = "exit";
   static const tryAgain = "tryAgain";
+  static const errLogFace = "errLogFace";
+  static const errLogGoogle = "errLogGoogle";
+  static const errLogApple = "errLogApple";
 }

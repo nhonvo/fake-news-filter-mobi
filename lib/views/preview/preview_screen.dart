@@ -125,7 +125,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                                   imageUrl: item.thumbNews.toString(),
                                   webUrl: item.urlNews.toString(),
                                   article: item.publisher ?? '',
-                                  viewCount: item.viewCount.toString(),
+                                  viewCount: item.viewCount!,
                                   onPress: () {
                                     breakingViewModel
                                         .handleGetCountView(item.newsId!);

@@ -65,7 +65,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                             .map((v) => v!.topicName)
                                             .toList(),
                                         socialBeliefs:
-                                            '${item.socialBeliefs!.round() * 100}%',
+                                            '${item.socialBeliefs!.toInt() * 100}%',
                                         times: AppHelper.convertToAgo(
                                             DateTime.parse(
                                                 item.timestamp.toString())),
@@ -77,7 +77,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                                         imageUrl: item.thumbNews.toString(),
                                         webUrl: item.urlNews.toString(),
                                         article: item.publisher ?? '',
-                                        viewCount: item.viewCount.toString(),
+                                        viewCount: item.viewCount!,
                                         onPress: () {
                                           viewmodel
                                               .handleGetCountView(item.newsId!);
