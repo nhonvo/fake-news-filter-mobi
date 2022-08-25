@@ -38,18 +38,15 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
         useShouldOverrideUrlLoading: true,
         mediaPlaybackRequiresUserGesture: false,
       ),
-      android: AndroidInAppWebViewOptions(
-        useHybridComposition: true,
-      ),
+      android: AndroidInAppWebViewOptions(useHybridComposition: true),
       ios: IOSInAppWebViewOptions(
         allowsInlineMediaPlayback: true,
       ));
 
   late PullToRefreshController pullToRefreshController;
-  String url = "";
   double progress = 0;
   final urlController = TextEditingController();
-
+  bool isRoute = false;
   @override
   void initState() {
     super.initState();
@@ -183,35 +180,31 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
               onWebViewCreated: (controller) {
                 webViewController = controller;
               },
-              androidOnPermissionRequest:
-                  (controller, origin, resources) async {
-                return PermissionRequestResponse(
-                    resources: resources,
-                    action: PermissionRequestResponseAction.GRANT);
-              },
               onLoadStop: (controller, url) async {
                 pullToRefreshController.endRefreshing();
               },
               onLoadError: (controller, url, code, message) {
                 pullToRefreshController.endRefreshing();
               },
+              onPageCommitVisible: (con, uri) {
+                if (GetPlatform.isIOS) con.goBack();
+              },
               onProgressChanged: (controller, progress) {
                 if (progress == 100) {
                   pullToRefreshController.endRefreshing();
+                  isRoute = true;
                 }
                 setState(() {
                   this.progress = progress / 100;
-                  urlController.text = this.url;
                 });
               },
-              onPageCommitVisible: (con, uri) {
-                con.goBack();
-              },
-              onUpdateVisitedHistory: (controller, url, androidIsReload) {
-                setState(() {
-                  this.url = url.toString();
-                  urlController.text = this.url;
-                });
+              shouldOverrideUrlLoading: (controller, navigationAction) async {
+                if (GetPlatform.isAndroid) {
+                  if (isRoute == true) {
+                    return NavigationActionPolicy.CANCEL;
+                  }
+                  return NavigationActionPolicy.ALLOW;
+                }
               },
               onConsoleMessage: (controller, consoleMessage) {
                 print(consoleMessage);
