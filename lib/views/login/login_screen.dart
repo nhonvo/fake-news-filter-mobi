@@ -48,6 +48,20 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         child: Stack(
           children: [
+            if (Get.arguments == 'havebtnBack')
+              Positioned(
+                top: Get.size.height * 0.05,
+                right: Get.size.width * 0.9,
+                child: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Icon(
+                    FontAwesomeIcons.angleLeft,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             Positioned(
               top: Get.size.height * 0.04,
               left: Get.size.width * 0.75,
@@ -144,7 +158,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         'signUp'.tr,
                         style: StylesText.content16BoldBlue,
                       ),
-                      onPressed: () => Get.toNamed(Routes.SIGNUP),
+                      onPressed: () =>
+                          Get.toNamed(Routes.SIGNUP, arguments: 'havebtnBack'),
                     )
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,

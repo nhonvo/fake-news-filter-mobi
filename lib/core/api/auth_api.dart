@@ -11,7 +11,7 @@ abstract class AuthApi {
   Future<BaseResponse<LoginModel>> loginApple(
       String fullName, String accessToken);
   Future<BaseResponse<UserModel>> getUserLoggedIn(String userId);
-  Future<BaseResponse<dynamic>> register(dynamic data);
+  Future<BaseResponse<String>> register(dynamic data);
   Future<BaseResponse<String>> requestResetPassword(String email);
   Future<BaseResponse<String>> resetPassword(
       String code, String newPass, String cfNewPass);
@@ -42,8 +42,12 @@ class AuthApiIpml implements AuthApi {
   }
 
   @override
-  Future<BaseResponse<dynamic>> register(dynamic data) async {
-    return await dioApi.doPost("/api/Users/Register", data);
+  Future<BaseResponse<String>> register(dynamic data) async {
+    return await dioApi.doPost(
+      "/api/Users/Register",
+      data,
+      parseJson: (json) => json,
+    );
   }
 
   @override

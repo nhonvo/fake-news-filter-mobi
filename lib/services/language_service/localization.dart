@@ -130,6 +130,10 @@ class Localization extends Translations {
           LanguageKey.errLogFace: "Login Facebook failed!",
           LanguageKey.errLogGoogle: "Login Google failed!",
           LanguageKey.errLogApple: "Login Apple failed!",
+          LanguageKey.register: "Register",
+          LanguageKey.succRegister: "Register successfully!",
+          LanguageKey.errRegister: "Register failed!",
+          LanguageKey.success: "Successful",
         },
         LocaleKey.VI: {
           LanguageKey.appname: 'Owl Trust',
@@ -255,6 +259,10 @@ class Localization extends Translations {
           LanguageKey.errLogFace: "Đăng nhập Facebook thất bại!",
           LanguageKey.errLogGoogle: "Đăng nhập Google thất bại!",
           LanguageKey.errLogApple: "Đăng nhập Apple thất bại!",
+          LanguageKey.register: "Đăng ký",
+          LanguageKey.succRegister: "Đăng ký thành công",
+          LanguageKey.errRegister: "Đăng ký thất bại",
+          LanguageKey.success: "Thành công",
         },
       };
 }

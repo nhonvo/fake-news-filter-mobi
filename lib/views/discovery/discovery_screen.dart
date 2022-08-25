@@ -89,7 +89,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen> {
                     buttonRadius: 18.5,
                     textStyle: StylesText.content14BoldWhite,
                     onPressed: () {
-                      Get.toNamed(Routes.LOGIN);
+                      Get.toNamed(Routes.LOGIN, arguments: 'havebtnBack');
                     },
                   ),
                   const SizedBox(

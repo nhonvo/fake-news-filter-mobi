@@ -21,11 +21,12 @@ class LoginViewModel extends BaseViewModel {
   SharedPreferences pref;
 
   var usernameController = TextEditingController();
+  var usernameRegController = TextEditingController();
   var nameController = TextEditingController();
   var emailController = TextEditingController();
-  var phoneController = TextEditingController();
   var passwordController = TextEditingController();
-  var passwordConfirmController = TextEditingController();
+  var passwordRegController = TextEditingController();
+  var passwordConfirmRegController = TextEditingController();
 
   FollowingApi followingApi = Get.find();
 
@@ -79,24 +80,32 @@ class LoginViewModel extends BaseViewModel {
     }
   }
 
+  //Đăng ký thành viên mới
   handleRegister() async {
-    var response = await authApi.register({
-      "username": usernameController.text,
-      "name": nameController.text,
-      "email": emailController.text,
-      "phoneNumber": phoneController.text,
-      "password": passwordController.text,
-      "confirmPassword": passwordConfirmController.text,
-    });
+    try {
+      var response = await authApi.register({
+        "username": usernameRegController.text,
+        "name": nameController.text,
+        "email": emailController.text,
+        "password": passwordRegController.text,
+        "confirmPassword": passwordConfirmRegController.text,
+      });
 
-    if (response.statusCode != 200) {
+      if (response.statusCode != 200) {
+        SnackbarCustom.showError(
+          message: response.message!,
+          altMessage: 'altMessage'.tr,
+        );
+      } else {
+        SnackbarCustom.showError(
+          message: 'succRegister'.tr,
+          altMessage: 'success'.tr,
+        );
+        Get.toNamed(Routes.LOGIN, arguments: 'havebtnBack');
+      }
+    } catch (error) {
       SnackbarCustom.showError(
-        message: response.message!,
-        altMessage: 'altMessage'.tr,
-      );
-    } else {
-      SnackbarCustom.showError(
-        message: response.message!,
+        message: 'errRegister'.tr,
         altMessage: 'altMessage'.tr,
       );
     }

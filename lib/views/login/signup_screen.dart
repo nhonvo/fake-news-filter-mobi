@@ -8,6 +8,7 @@ import 'package:fake_news/views/language/choose_language_screen.dart';
 import 'package:fake_news/views/login/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -41,6 +42,20 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            if (Get.arguments == 'havebtnBack')
+              Positioned(
+                top: Get.size.height * 0.05,
+                right: Get.size.width * 0.9,
+                child: InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Icon(
+                    FontAwesomeIcons.angleLeft,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             Positioned(
               top: Get.size.height * 0.04,
               left: Get.size.width * 0.75,
@@ -80,19 +95,20 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 Column(
                   children: <Widget>[
-                    Text('Register', style: StylesText.content18BoldWhite),
+                    Text('register'.tr, style: StylesText.content18BoldWhite),
                     SizedBox(
                       height: Get.size.height * 0.03,
                     ),
                     CustomTextField(
-                      controller: viewmodel.usernameController,
+                      controller: viewmodel.usernameRegController,
                       // ignore: null_check_always_fails
                       hintText: 'inputuser'.tr,
-                      suffixIcon: viewmodel.usernameController.text.isNotEmpty
-                          ? IconButton(
-                              onPressed: viewmodel.clearText,
-                              icon: const Icon(Icons.clear))
-                          : null,
+                      suffixIcon:
+                          viewmodel.usernameRegController.text.isNotEmpty
+                              ? IconButton(
+                                  onPressed: viewmodel.clearText,
+                                  icon: const Icon(Icons.clear))
+                              : null,
                       width: Get.size.width * 0.7,
                       height: 40,
                       prefixIcon: const Icon(Icons.supervised_user_circle),
@@ -122,7 +138,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       controller: viewmodel.emailController,
                       // ignore: null_check_always_fails
                       hintText: 'inputEmail'.tr,
-                      suffixIcon: viewmodel.usernameController.text.isNotEmpty
+                      suffixIcon: viewmodel.emailController.text.isNotEmpty
                           ? IconButton(
                               onPressed: viewmodel.clearText,
                               icon: const Icon(Icons.clear))
@@ -137,7 +153,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       height: Get.size.height * 0.02,
                     ),
                     CustomTextField(
-                      controller: viewmodel.passwordController,
+                      controller: viewmodel.passwordRegController,
                       hintText: 'inputpass'.tr,
                       suffixIcon: InkWell(
                           onTap: () => setState(() {
@@ -155,7 +171,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       height: Get.size.height * 0.02,
                     ), //Password Text Field
                     CustomTextField(
-                      controller: viewmodel.passwordConfirmController,
+                      controller: viewmodel.passwordConfirmRegController,
                       width: Get.size.width * 0.7,
                       prefixIcon: const Icon(Icons.security_outlined),
                       obscureText: _confirmPasswordObscureText,
@@ -178,7 +194,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 CustomButton(
                   width: Get.size.width * 0.5,
                   height: Get.size.height * 0.015,
-                  buttonText: 'Register',
+                  buttonText: 'register'.tr,
                   buttonColor: MyColors.blueDart,
                   buttonRadius: 20,
                   textStyle: StylesText.content16BoldWhite,

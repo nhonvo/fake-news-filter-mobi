@@ -57,6 +57,7 @@ class LanguageKey {
   static const browser = "browser";
   static const error_browser = "error_browser";
   static const clipboard = "clipboard";
+  static const success = "success";
   static const altMessage = "altMessage";
   static const error = "error";
   static const loadingLogin = "loadingLogin";
@@ -114,4 +115,7 @@ class LanguageKey {
   static const errLogFace = "errLogFace";
   static const errLogGoogle = "errLogGoogle";
   static const errLogApple = "errLogApple";
+  static const register = "register";
+  static const succRegister = "succRegister";
+  static const errRegister = "errRegister";
 }
