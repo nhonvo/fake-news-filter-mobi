@@ -195,7 +195,7 @@ class DioApi extends Api {
         }
         var error = dioError.response!.data['message'].toString();
         var errorCode;
-        errorCode = dioError.response?.statusCode ?? -9999;
+        errorCode = dioError.response?.data['statusCode'] ?? -9999;
 
         var errorMessage =
             error != null ? error : 'serverErr'.tr + '$errorCode';

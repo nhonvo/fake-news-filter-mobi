@@ -55,6 +55,24 @@ class SnackbarCustom {
     );
   }
 
+  static void showSuccess(
+      {required String message,
+      String? altMessage,
+      SnackPosition? snackPosition = SnackPosition.BOTTOM}) {
+    Get.snackbar(
+      'info'.tr,
+      message == "null" ? altMessage.toString() : message,
+      icon: Icon(
+        Icons.check,
+        color: Colors.white,
+      ),
+      backgroundColor: Colors.green,
+      colorText: Colors.white,
+      snackPosition: snackPosition,
+      duration: const Duration(seconds: 1),
+    );
+  }
+
   static void showWarning(
       {required String message,
       String? altMessage,

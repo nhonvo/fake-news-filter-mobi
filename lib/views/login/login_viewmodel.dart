@@ -30,8 +30,34 @@ class LoginViewModel extends BaseViewModel {
 
   FollowingApi followingApi = Get.find();
 
-  void clearText() {
-    usernameController.clear();
+  void clearUserName() => usernameController.clear();
+  void clearUserNameReg() => usernameRegController.clear();
+  void clearEmailReg() => emailController.clear();
+  void clearNameReg() => nameController.clear();
+
+  _validateRegTextField() {
+    if (usernameRegController.text.isEmpty) {
+      SnackbarCustom.showError(
+        message: "inputUserEmptyErr".tr,
+        altMessage: 'altMessage'.tr,
+      );
+      return false;
+    }
+    if (passwordRegController.text.isEmpty) {
+      SnackbarCustom.showError(
+        message: "inputPassEmptyErr".tr,
+        altMessage: 'altMessage'.tr,
+      );
+      return false;
+    }
+    if (passwordRegController.text.length < 6) {
+      SnackbarCustom.showError(
+        message: "inputPassAtLeast6Err".tr,
+        altMessage: 'altMessage'.tr,
+      );
+      return false;
+    }
+    return true;
   }
 
   bool _validateTextField() {
@@ -82,14 +108,20 @@ class LoginViewModel extends BaseViewModel {
 
   //Đăng ký thành viên mới
   handleRegister() async {
+    if (!_validateRegTextField()) {
+      return;
+    }
+
     try {
-      var response = await authApi.register({
+      Map<String, String> params = {
         "username": usernameRegController.text,
         "name": nameController.text,
         "email": emailController.text,
         "password": passwordRegController.text,
         "confirmPassword": passwordConfirmRegController.text,
-      });
+      };
+
+      var response = await authApi.register(params);
 
       if (response.statusCode != 200) {
         SnackbarCustom.showError(
@@ -97,11 +129,11 @@ class LoginViewModel extends BaseViewModel {
           altMessage: 'altMessage'.tr,
         );
       } else {
-        SnackbarCustom.showError(
+        SnackbarCustom.showSuccess(
           message: 'succRegister'.tr,
           altMessage: 'success'.tr,
         );
-        Get.toNamed(Routes.LOGIN, arguments: 'havebtnBack');
+        Get.offAllNamed(Routes.LOGIN);
       }
     } catch (error) {
       SnackbarCustom.showError(

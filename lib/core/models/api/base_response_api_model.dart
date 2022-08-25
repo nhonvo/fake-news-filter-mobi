@@ -13,8 +13,9 @@ class BaseResponse<T> {
     message = json['message'] ?? "An error has occurred!";
   }
 
-  BaseResponse.initError(int code, String message) {
-    message = message;
-    this.statusCode = 400;
+  BaseResponse.initError(int code, String mess) {
+    statusCode = code;
+    message = mess;
+    resultObj = null;
   }
 }

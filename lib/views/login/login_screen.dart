@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: 'inputuser'.tr,
                       suffixIcon: viewmodel.usernameController.text.isNotEmpty
                           ? IconButton(
-                              onPressed: viewmodel.clearText,
+                              onPressed: viewmodel.clearUserName,
                               icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,

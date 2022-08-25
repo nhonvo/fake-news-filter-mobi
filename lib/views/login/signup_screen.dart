@@ -101,12 +101,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     CustomTextField(
                       controller: viewmodel.usernameRegController,
-                      // ignore: null_check_always_fails
                       hintText: 'inputuser'.tr,
                       suffixIcon:
                           viewmodel.usernameRegController.text.isNotEmpty
                               ? IconButton(
-                                  onPressed: viewmodel.clearText,
+                                  onPressed: viewmodel.clearUserNameReg,
                                   icon: const Icon(Icons.clear))
                               : null,
                       width: Get.size.width * 0.7,
@@ -119,16 +118,15 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     CustomTextField(
                       controller: viewmodel.nameController,
-                      // ignore: null_check_always_fails
                       hintText: 'inputName'.tr,
-                      suffixIcon: viewmodel.usernameController.text.isNotEmpty
+                      suffixIcon: viewmodel.nameController.text.isNotEmpty
                           ? IconButton(
-                              onPressed: viewmodel.clearText,
+                              onPressed: viewmodel.clearNameReg,
                               icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       height: 40,
-                      prefixIcon: const Icon(Icons.supervised_user_circle),
+                      prefixIcon: const Icon(Icons.text_fields_rounded),
                       obscureText: false,
                     ),
                     SizedBox(
@@ -136,16 +134,15 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     CustomTextField(
                       controller: viewmodel.emailController,
-                      // ignore: null_check_always_fails
                       hintText: 'inputEmail'.tr,
                       suffixIcon: viewmodel.emailController.text.isNotEmpty
                           ? IconButton(
-                              onPressed: viewmodel.clearText,
+                              onPressed: viewmodel.clearEmailReg,
                               icon: const Icon(Icons.clear))
                           : null,
                       width: Get.size.width * 0.7,
                       height: 40,
-                      prefixIcon: const Icon(Icons.supervised_user_circle),
+                      prefixIcon: const Icon(Icons.email),
                       obscureText: false,
                     ),
 
@@ -164,7 +161,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               : Icons.visibility)),
                       width: Get.size.width * 0.7,
                       height: 40,
-                      prefixIcon: const Icon(Icons.supervised_user_circle),
+                      prefixIcon: const Icon(Icons.security_outlined),
                       obscureText: _passwordObscureText,
                     ),
                     SizedBox(

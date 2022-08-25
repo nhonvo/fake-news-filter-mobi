@@ -43,11 +43,7 @@ class AuthApiIpml implements AuthApi {
 
   @override
   Future<BaseResponse<String>> register(dynamic data) async {
-    return await dioApi.doPost(
-      "/api/Users/Register",
-      data,
-      parseJson: (json) => json,
-    );
+    return await dioApi.doPost("/api/Users/Register", data);
   }
 
   @override
