@@ -23,11 +23,11 @@ class _SearchingState extends State<Searching> {
 
     return Obx(() {
       return FloatingSearchBar(
-        //automaticallyImplyBackButton: true,
+        automaticallyImplyBackButton: false,
         controller: viewModel.floatingSearchBarController,
         clearQueryOnClose: true,
         leadingActions: [
-          FloatingSearchBarAction.back(),
+          // FloatingSearchBarAction.searchToClear(),
         ],
         hint: 'searchNews'.tr,
         scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
