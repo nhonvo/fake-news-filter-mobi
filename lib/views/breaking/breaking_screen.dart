@@ -95,16 +95,6 @@ class _BreakingScreenState extends State<BreakingScreen> {
                               child: CircularProgressIndicator(),
                             ),
                           ),
-
-                        // When nothing else to load
-                        if (viewmodel.hasNextPage.value == false)
-                          Container(
-                            padding: const EdgeInsets.only(top: 20, bottom: 20),
-                            color: Colors.amber,
-                            child: const Center(
-                              child: Text('You have fetched all of the content'),
-                            ),
-                          ),
                       ],
                     ),
             ),

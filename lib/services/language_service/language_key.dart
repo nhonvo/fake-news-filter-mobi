@@ -64,6 +64,7 @@ class LanguageKey {
   static const loadingLogin = "loadingLogin";
   static const fetchingData = "fetchingData";
   static const fetchingDataErr = "fetchingDataErr";
+  static const fetchingLoadMore = "fetchingLoadMore";
   static const dataConvertErr = "dataConvertErr";
   static const requestTimeOutErr = "requestTimeOutErr";
   static const noInternetErr = "noInternetErr";
