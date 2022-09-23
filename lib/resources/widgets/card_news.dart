@@ -18,14 +18,7 @@ import 'package:intl/intl.dart';
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
-  final String? offical,
-      socialBeliefs,
-      avatar,
-      name,
-      link,
-      imageUrl,
-      video,
-      webUrl;
+  final String? offical, socialBeliefs, avatar, name, link, imageUrl, video, webUrl;
   final String newsId, times, title, article, factCheck;
   final int viewCount;
 
@@ -91,7 +84,7 @@ class _CardNewsState extends State<CardNews> {
           },
           child: Container(
             padding: EdgeInsets.all(5),
-            margin: EdgeInsets.only(top: 10),
+            margin: EdgeInsets.only(top: 10, left: 10),
             width: Get.size.width * 0.9,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -119,9 +112,7 @@ class _CardNewsState extends State<CardNews> {
                             children: [
                               widget.offical != null
                                   ? Row(children: [
-                                      Text('Official Rating: ',
-                                          style:
-                                              StylesText.content12MediumBlack),
+                                      Text('Official Rating: ', style: StylesText.content12MediumBlack),
                                       Text(
                                         widget.offical!,
                                         style: StylesText.content12BoldBlack,
@@ -132,8 +123,7 @@ class _CardNewsState extends State<CardNews> {
                                   ? Row(children: [
                                       widget.offical == null
                                           ? Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 4.0),
+                                              padding: const EdgeInsets.only(right: 4.0),
                                               child: SvgPicture.asset(
                                                 IconsApp.unknown,
                                                 width: 24,
@@ -179,8 +169,7 @@ class _CardNewsState extends State<CardNews> {
                               fit: BoxFit.fitWidth,
                               height: 180,
                               imageUrl: widget.imageUrl!,
-                              imageBuilder: (context, imageProvider) =>
-                                  Container(
+                              imageBuilder: (context, imageProvider) => Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6),
                                   image: DecorationImage(
@@ -189,10 +178,8 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                 ),
                               ),
-                              placeholder: (context, url) =>
-                                  CupertinoActivityIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                              placeholder: (context, url) => CupertinoActivityIndicator(),
+                              errorWidget: (context, url, error) => Icon(Icons.error),
                             ),
                           ),
                         )
@@ -244,8 +231,7 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                   SizedBox(width: 5),
                                   Text(
-                                    NumberFormat.compact()
-                                        .format(widget.viewCount),
+                                    NumberFormat.compact().format(widget.viewCount),
                                     style: StylesText.content12BoldGrey,
                                   ),
                                 ],
@@ -274,8 +260,7 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                   SizedBox(width: 5),
                                   Text(
-                                    NumberFormat.compact()
-                                        .format(widget.viewCount),
+                                    NumberFormat.compact().format(widget.viewCount),
                                     style: StylesText.content12BoldGrey,
                                   ),
                                 ],

@@ -8,6 +8,9 @@ import 'package:fake_news/views/fact_news/fact_news_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../resources/utils/image.dart';
+import '../../resources/widgets/shimmer.dart';
+
 class FactNewsScreen extends StatefulWidget {
   const FactNewsScreen({Key? key}) : super(key: key);
 
@@ -24,9 +27,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
       children: [
         _buildHeader(),
         Expanded(
-          child: SingleChildScrollView(
-            child: _buildBody(),
-          ),
+          child: _buildBody(),
         )
       ],
     );
@@ -39,8 +40,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
           SizedBox(
             height: 10,
           ),
-          Text('filter_news'.tr.toUpperCase(),
-              style: StylesText.content20BoldBlack),
+          Text('filter_news'.tr.toUpperCase(), style: StylesText.content20BoldBlack),
           SizedBox(
             height: 5,
           ),
@@ -75,8 +75,11 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                           width: 150,
                           textStyle: StylesText.content12BoldWhite,
                           onPressed: () {
-                            factNewsViewModel.index.value = 0;
-                            factNewsViewModel.handleGetFactNews('real');
+                            factNewsViewModel
+                              ..index.value = 0
+                              ..filter.value = 'real'
+                              ..resetPaging()
+                              ..firstLoad();
                           },
                         ),
                   factNewsViewModel.index.value == 1
@@ -94,8 +97,11 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                           width: 150,
                           textStyle: StylesText.content12BoldWhite,
                           onPressed: () {
-                            factNewsViewModel.index.value = 1;
-                            factNewsViewModel.handleGetFactNews('fake');
+                            factNewsViewModel
+                              ..index.value = 1
+                              ..filter.value = 'fake'
+                              ..resetPaging()
+                              ..firstLoad();
                           },
                         )
                 ],
@@ -116,41 +122,94 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
   }
 
   Widget _buildItem(String filter) {
-    return Obx(() {
-      return factNewsViewModel.isLoaded.value
-          ? Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                for (var item in factNewsViewModel.news)
-                  CardNews(
-                      newsId: item!.newsId.toString(),
-                      factCheck: factNewsViewModel.index.value == 0
-                          ? IconsApp.real
-                          : IconsApp.fake,
-                      rate: false,
-                      offical: factNewsViewModel.index.value == 0
-                          ? "real".tr
-                          : "fake".tr,
-                      // tag: viewmodel.topicModel.value.tag.toString(),
-                      socialBeliefs: '${item.socialBeliefs!.round() * 100}%',
-                      times: AppHelper.convertToAgo(
-                          DateTime.parse(item.timestamp.toString())),
-                      title: item.title.toString().substring(
-                          0,
-                          item.title.toString().length > 50
-                              ? 50
-                              : item.title.toString().length),
-                      imageUrl: item.thumbNews.toString(),
-                      webUrl: item.urlNews.toString(),
-                      article: item.publisher ?? '',
-                      viewCount: item.viewCount!,
-                      onPress: () {
-                        breakingViewModel.handleGetCountView(item.newsId!);
-                      }),
-              ],
+    return Obx(
+      () => factNewsViewModel.isFirstLoadRunning.value
+          ? Container(
+              height: 700,
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  padding: const EdgeInsets.all(8),
+                  itemCount: 6,
+                  itemBuilder: (BuildContext context, int index) {
+                    return NewsShimmer();
+                  }),
             )
-          : Container();
-    });
+          : Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    controller: factNewsViewModel.scrollController,
+                    itemCount: factNewsViewModel.news.length,
+                    itemBuilder: (_, index) => CardNews(
+                        newsId: factNewsViewModel.news[index]!.newsId.toString(),
+                        factCheck: factNewsViewModel.index.value == 0 ? IconsApp.real : IconsApp.fake,
+                        rate: false,
+                        offical: factNewsViewModel.index.value == 0 ? "real".tr : "fake".tr,
+                        tags: factNewsViewModel.news[index]!.topicInfo!.map((v) => v!.topicName).toList(),
+                        socialBeliefs: '${factNewsViewModel.news[index]!.socialBeliefs!.toInt() * 100}%',
+                        times:
+                            AppHelper.convertToAgo(DateTime.parse(factNewsViewModel.news[index]!.timestamp.toString())),
+                        title: factNewsViewModel.news[index]!.title.toString().substring(
+                            0,
+                            factNewsViewModel.news[index]!.title.toString().length > 50
+                                ? 50
+                                : factNewsViewModel.news[index]?.title.toString().length),
+                        imageUrl: factNewsViewModel.news[index]?.thumbNews.toString(),
+                        webUrl: factNewsViewModel.news[index]?.urlNews.toString(),
+                        article: factNewsViewModel.news[index]?.publisher ?? 'Anonymous',
+                        viewCount: factNewsViewModel.news[index]!.viewCount!,
+                        onPress: () {
+                          breakingViewModel.handleGetCountView(factNewsViewModel.news[index]!.newsId!);
+                          // factNewsViewModel.handleGetCountView(factNewsViewModel.news[index]!.newsId!);
+                        }),
+                  ),
+                ),
+                if (factNewsViewModel.isLoadMoreRunning.value == true)
+                  Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+
+                // When nothing else to load
+                if (factNewsViewModel.hasNextPage.value == false)
+                  Container(
+                    padding: const EdgeInsets.only(top: 20, bottom: 20),
+                    color: Colors.amber,
+                    child: const Center(
+                      child: Text('You have fetched all of the content'),
+                    ),
+                  ),
+              ],
+            ),
+
+      // return factNewsViewModel.isLoaded.value
+      //     ? Wrap(
+      //         spacing: 10,
+      //         runSpacing: 10,
+      //         children: [
+      //           for (var item in factNewsViewModel.news)
+      // CardNews(
+      //     newsId: item!.newsId.toString(),
+      //     factCheck: factNewsViewModel.index.value == 0 ? IconsApp.real : IconsApp.fake,
+      //     rate: false,
+      //     offical: factNewsViewModel.index.value == 0 ? "real".tr : "fake".tr,
+      //     // tag: viewmodel.topicModel.value.tag.toString(),
+      //     socialBeliefs: '${item.socialBeliefs!.round() * 100}%',
+      //     times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
+      //     title:
+      //         item.title.toString().substring(0, item.title.toString().length > 50 ? 50 : item.title.toString().length),
+      //     imageUrl: item.thumbNews.toString(),
+      //     webUrl: item.urlNews.toString(),
+      //     article: item.publisher ?? '',
+      //     viewCount: item.viewCount!,
+      //     onPress: () {
+      //       breakingViewModel.handleGetCountView(item.newsId!);
+      //     }),
+      //         ],
+      //       )
+      //     : Container();
+    );
   }
 }

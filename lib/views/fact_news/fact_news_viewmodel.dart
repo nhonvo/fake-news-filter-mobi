@@ -6,6 +6,7 @@ import 'package:fake_news/models/news/news_model.dart';
 import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_constant.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
@@ -26,46 +27,98 @@ class FactNewsViewModel extends BaseViewModel {
   SharedPreferences pref;
 
   final news = <NewsModel?>[].obs;
-  var searchingNews = <NewsModel?>[].obs;
-  var isLoaded = false.obs;
   var index = 0.obs;
 
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  var filter = 'real'.obs;
+
+  get languageContent => _getLanguageContent;
+
+  int page = 1;
+  final int pageSize = 2;
+
+  // There is next page or not
+  var hasNextPage = true.obs;
+
+  // Used to display loading indicators when _firstLoad function is running
+  var isFirstLoadRunning = false.obs;
+
+  // Used to display loading indicators when _loadMore function is running
+  var isLoadMoreRunning = false.obs;
+
+  RefreshController refreshController = RefreshController(initialRefresh: false);
+  ScrollController scrollController = ScrollController();
 
   // void onRefresh() async {
   //   await handleGetFactNews(this.index.value == 0 ? 'real' : 'fake');
   //   refreshController.refreshCompleted();
   // }
+  firstLoad() async {
+    isFirstLoadRunning.value = true;
 
-  handleGetFactNews(String? filter) async {
-    EasyLoading.show(status: 'fetchingData'.tr);
+    var res = await newsApi.getNews(filter.value, languageContent, page, pageSize);
 
-    var languageContent =
-        pref.getString(AppConstant.sharePrefKeys.languageContent);
-
-    var response = await newsApi.getNews(filter, languageContent);
-
-    if (response.statusCode != 200) {
+    if (res.statusCode == 200) {
+      news.clear();
+      news.addAll(res.resultObj!);
+    } else {
       EasyLoading.dismiss();
       SnackbarCustom.showError(
-        message: response.message!,
+        message: res.message!,
         altMessage: 'altMessage'.tr,
       );
-    } else {
-      List<NewsModel> newsList = response.resultObj!.obs;
-      //clear all news before get data from API to avoid duplication
-      news.clear();
-      news.addAll(newsList);
-      isLoaded.value = true;
-      EasyLoading.dismiss();
     }
+
+    isFirstLoadRunning.value = false;
+  }
+
+  resetPaging() {
+    page = 1;
+    hasNextPage.value = true;
+  }
+
+  _loadMore() async {
+    if (hasNextPage.value == true &&
+        isFirstLoadRunning.value == false &&
+        isLoadMoreRunning.value == false &&
+        scrollController.position.extentAfter < 300) {
+      // Display a progress indicator at the bottom
+      isLoadMoreRunning.value = true;
+
+      page += 1; // Increase page by 1
+      try {
+        var res = await newsApi.getNews(filter.value, languageContent, page, pageSize);
+        if (res.statusCode == 200 && res.resultObj!.length > 0) {
+          news.addAll(res.resultObj!);
+        } else {
+          // This means there is no more data
+          // and therefore, we will not send another GET request
+          hasNextPage.value = false;
+        }
+      } catch (err) {
+        print('Something went wrong!');
+      }
+      isLoadMoreRunning.value = false;
+    }
+  }
+
+  String get _getLanguageContent {
+    var languageContent = pref.getString(AppConstant.sharePrefKeys.languageContent);
+    if (languageContent == null) {
+      languageContent = 'en';
+    }
+    return languageContent;
   }
 
   @override
   void onInit() async {
     super.onInit();
-    await handleGetFactNews('real');
-    isLoaded.value = true;
+    await firstLoad();
+    scrollController = ScrollController()..addListener(_loadMore);
+  }
+
+  @override
+  void onClosed() {
+    super.onClose();
+    scrollController.removeListener(_loadMore);
   }
 }

@@ -11,10 +11,7 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class PreviewViewModel extends BaseViewModel {
-  PreviewViewModel(
-      {required this.newsApi,
-      required this.followingApi,
-      required this.localRepo});
+  PreviewViewModel({required this.newsApi, required this.followingApi, required this.localRepo});
 
   // PreviewViewModel({required this.newsApi, required this.authRepo, required this.pref});
   NewsApi newsApi;
@@ -27,8 +24,7 @@ class PreviewViewModel extends BaseViewModel {
 
   // SharedPreferences pref;
 
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController refreshController = RefreshController(initialRefresh: false);
 
   void onRefresh() async {
     // monitor network fetch
@@ -40,7 +36,7 @@ class PreviewViewModel extends BaseViewModel {
   handleGetNewsByTopic() async {
     EasyLoading.show(status: 'fetchingData'.tr);
 
-    var response = await newsApi.getNewsByTopicId(topicModel.value.topicId);
+    var response = await newsApi.getNewsByTopicId(topicModel.value.topicId, 1, 1);
 
     if (response.statusCode != 200) {
       EasyLoading.dismiss();
