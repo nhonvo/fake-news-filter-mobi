@@ -45,6 +45,7 @@ class LanguageKey {
   static const community = "community";
   static const profile = "profile";
   static const reliable = "reliable";
+  static const months = "months";
   static const days = "days";
   static const hours = "hours";
   static const minutes = "minutes";
