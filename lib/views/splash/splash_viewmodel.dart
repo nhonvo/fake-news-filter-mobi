@@ -18,10 +18,7 @@ import '../../resources/widgets/dialog_update.dart';
 
 class SplashViewModel extends BaseViewModel {
   SplashViewModel(
-      {required this.localRepo,
-      required this.followingApi,
-      required this.languageApi,
-      required this.updateApi});
+      {required this.localRepo, required this.followingApi, required this.languageApi, required this.updateApi});
 
   LanguageApi languageApi;
   LocalStorageRepo localRepo;
@@ -86,9 +83,7 @@ class SplashViewModel extends BaseViewModel {
           if (GetPlatform.isAndroid || GetPlatform.isIOS) {
             final appId = packageName.value;
             final url = Uri.parse(
-              GetPlatform.isAndroid
-                  ? "market://details?id=$appId"
-                  : "https://apps.apple.com/app/id$appId",
+              GetPlatform.isAndroid ? "market://details?id=$appId" : "https://apps.apple.com/app/id$appId",
             );
             print("URL NÈ:" + url.toString());
             launchUrl(

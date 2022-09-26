@@ -174,33 +174,6 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                   ),
               ],
             ),
-
-      // return factNewsViewModel.isLoaded.value
-      //     ? Wrap(
-      //         spacing: 10,
-      //         runSpacing: 10,
-      //         children: [
-      //           for (var item in factNewsViewModel.news)
-      // CardNews(
-      //     newsId: item!.newsId.toString(),
-      //     factCheck: factNewsViewModel.index.value == 0 ? IconsApp.real : IconsApp.fake,
-      //     rate: false,
-      //     offical: factNewsViewModel.index.value == 0 ? "real".tr : "fake".tr,
-      //     // tag: viewmodel.topicModel.value.tag.toString(),
-      //     socialBeliefs: '${item.socialBeliefs!.round() * 100}%',
-      //     times: AppHelper.convertToAgo(DateTime.parse(item.timestamp.toString())),
-      //     title:
-      //         item.title.toString().substring(0, item.title.toString().length > 50 ? 50 : item.title.toString().length),
-      //     imageUrl: item.thumbNews.toString(),
-      //     webUrl: item.urlNews.toString(),
-      //     article: item.publisher ?? '',
-      //     viewCount: item.viewCount!,
-      //     onPress: () {
-      //       breakingViewModel.handleGetCountView(item.newsId!);
-      //     }),
-      //         ],
-      //       )
-      //     : Container();
     );
   }
 }
