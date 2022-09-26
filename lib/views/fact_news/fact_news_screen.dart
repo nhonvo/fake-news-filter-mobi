@@ -5,6 +5,7 @@ import 'package:fake_news/resources/widgets/button.dart';
 import 'package:fake_news/resources/widgets/card_news.dart';
 import 'package:fake_news/views/breaking/breaking_viewmodel.dart';
 import 'package:fake_news/views/fact_news/fact_news_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -168,7 +169,7 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                   Padding(
                     padding: EdgeInsets.only(top: 10, bottom: 10),
                     child: Center(
-                      child: CircularProgressIndicator(),
+                      child: CupertinoActivityIndicator(),
                     ),
                   ),
 

@@ -1,24 +1,24 @@
 PODS:
-  - AppAuth (1.5.0):
-    - AppAuth/Core (= 1.5.0)
-    - AppAuth/ExternalUserAgent (= 1.5.0)
-  - AppAuth/Core (1.5.0)
-  - AppAuth/ExternalUserAgent (1.5.0):
+  - AppAuth (1.6.0):
+    - AppAuth/Core (= 1.6.0)
+    - AppAuth/ExternalUserAgent (= 1.6.0)
+  - AppAuth/Core (1.6.0)
+  - AppAuth/ExternalUserAgent (1.6.0):
     - AppAuth/Core
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
-  - FBAEMKit (14.0.0):
-    - FBSDKCoreKit_Basics (= 14.0.0)
-  - FBSDKCoreKit (14.0.0):
-    - FBAEMKit (= 14.0.0)
-    - FBSDKCoreKit_Basics (= 14.0.0)
-  - FBSDKCoreKit_Basics (14.0.0)
-  - FBSDKLoginKit (14.0.0):
-    - FBSDKCoreKit (= 14.0.0)
+  - FBAEMKit (14.1.0):
+    - FBSDKCoreKit_Basics (= 14.1.0)
+  - FBSDKCoreKit (14.1.0):
+    - FBAEMKit (= 14.1.0)
+    - FBSDKCoreKit_Basics (= 14.1.0)
+  - FBSDKCoreKit_Basics (14.1.0)
+  - FBSDKLoginKit (14.1.0):
+    - FBSDKCoreKit (= 14.1.0)
   - Flutter (1.0.0)
-  - flutter_facebook_auth (4.4.0):
-    - FBSDKLoginKit (~> 14.0.0)
+  - flutter_facebook_auth (4.4.1):
+    - FBSDKLoginKit (= 14.1.0)
     - Flutter
   - flutter_inappwebview (0.0.1):
     - Flutter
@@ -33,17 +33,17 @@ PODS:
   - google_sign_in_ios (0.0.1):
     - Flutter
     - GoogleSignIn (~> 6.2)
-  - GoogleSignIn (6.2.2):
+  - GoogleSignIn (6.2.4):
     - AppAuth (~> 1.5)
     - GTMAppAuth (~> 1.3)
-    - GTMSessionFetcher/Core (~> 1.1)
-  - GTMAppAuth (1.3.0):
-    - AppAuth/Core (~> 1.4)
-    - GTMSessionFetcher/Core (~> 1.5)
-  - GTMSessionFetcher/Core (1.7.2)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.1)
+  - GTMAppAuth (1.3.1):
+    - AppAuth/Core (~> 1.6)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
+  - GTMSessionFetcher/Core (2.1.0)
   - image_picker_ios (0.0.1):
     - Flutter
-  - onesignal_flutter (3.3.2):
+  - onesignal_flutter (3.4.1):
     - Flutter
     - OneSignalXCFramework (= 3.11.2)
   - OneSignalXCFramework (3.11.2):
@@ -137,22 +137,22 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/video_player_avfoundation/ios"
 
 SPEC CHECKSUMS:
-  AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
+  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
-  FBAEMKit: d00064597439e75885c70d9adbcb5f3e9ad84f5d
-  FBSDKCoreKit: e5d3acfffe5063a9d0b967ba2ad1f5afc460cf43
-  FBSDKCoreKit_Basics: 1ff46a12e80f0b66e6c00e1ef32d6a5b5b9008a5
-  FBSDKLoginKit: dbe86ef42ab142f3bd0f1c904a21bb33f31c5569
-  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  flutter_facebook_auth: 8992ef870d441b8403a3b6b9859e7932605407cf
+  FBAEMKit: a899515e45476027f73aef377b5cffadcd56ca3a
+  FBSDKCoreKit: 24f8bc8d3b5b2a8c5c656a1329492a12e8efa792
+  FBSDKCoreKit_Basics: 6e578c9bdc7aa1365dbbbde633c9ebb536bcaa98
+  FBSDKLoginKit: 787de205d524c3a4b17d527916f1d066e4361660
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_facebook_auth: 361ac7a57263ebf327f26089507ead0d66558ee8
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   google_sign_in_ios: 4f85eb9f937450765c8573bb85fd8cd6a5af675c
-  GoogleSignIn: 3c68388ac221f379676e8f1cb115df3aaf73b93f
-  GTMAppAuth: 4d8f864896f3646f0c33baf38a28362f4c601e15
-  GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
+  GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
+  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
+  GTMSessionFetcher: ffbb25ec00ebcb5201adab0a56d808f6f1902d9f
   image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
-  onesignal_flutter: f3ff66c97498f9131481441a362ef5f0e6cb6d16
+  onesignal_flutter: 02a850e079073e8bd03948f50a2fb9a7918b5db6
   OneSignalXCFramework: 81ceac017a290f23793443323090cfbe888f74ea
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
