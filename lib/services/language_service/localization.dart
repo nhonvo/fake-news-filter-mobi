@@ -13,8 +13,7 @@ class Localization extends Translations {
           LanguageKey.klanguage: 'Language',
           LanguageKey.managelanguage: 'LANGUAGE MANAGERMENT',
           LanguageKey.displaylanguage: 'Select your display language',
-          LanguageKey.contentlanguage:
-              'What language do you want to read news?',
+          LanguageKey.contentlanguage: 'What language do you want to read news?',
           LanguageKey.login: 'Login',
           LanguageKey.hello: 'Hello',
           LanguageKey.logout: 'Logout',
@@ -28,8 +27,7 @@ class Localization extends Translations {
           LanguageKey.inputPassConfirm: 'Input password confirm',
           LanguageKey.inputUserEmptyErr: 'Username or email cannot be empty',
           LanguageKey.inputPassEmptyErr: 'Password cannot be empty',
-          LanguageKey.inputPassAtLeast6Err:
-              'Password must be at least 6 characters',
+          LanguageKey.inputPassAtLeast6Err: 'Password must be at least 6 characters',
           LanguageKey.or: 'or',
           LanguageKey.help: 'Help you?',
           LanguageKey.okay: 'Okay',
@@ -58,6 +56,7 @@ class Localization extends Translations {
           LanguageKey.reliable: 'Is the reliable news?',
           LanguageKey.days: 'day(s)',
           LanguageKey.hours: 'hour(s)',
+          LanguageKey.months: 'month(s)',
           LanguageKey.minutes: 'minutes',
           LanguageKey.seconds: 'seconds',
           LanguageKey.ago: 'ago',
@@ -72,11 +71,11 @@ class Localization extends Translations {
           LanguageKey.error: 'Error',
           LanguageKey.loadingLogin: "Logging in...",
           LanguageKey.fetchingData: "Fetching data...",
+          LanguageKey.fetchingLoadMore: "You have fetched all of the content",
           LanguageKey.fetchingDataErr: "Error when fetching data",
           LanguageKey.dataConvertErr: "Error when converting data",
           LanguageKey.requestTimeOutErr: "Your request time out",
-          LanguageKey.noInternetErr:
-              "The internet connection appears to be offline, please try again",
+          LanguageKey.noInternetErr: "The internet connection appears to be offline, please try again",
           LanguageKey.serverErr: "Server error, please try again, code:",
           LanguageKey.serverDieErr: "Server is die, please try again",
           LanguageKey.interruptErr: "Cancelled, please try again",
@@ -107,14 +106,11 @@ class Localization extends Translations {
           LanguageKey.onboardTitle2: "NEWS CONFIRMED",
           LanguageKey.onboardTitle3: "INTERACT WITH NEWS",
           LanguageKey.onboardTitle4: "GET NEW NOTIFICATIONS",
-          LanguageKey.onboardBody1:
-              "Diverse topics and languages. \nRead news based on the topics you follow.",
+          LanguageKey.onboardBody1: "Diverse topics and languages. \nRead news based on the topics you follow.",
           LanguageKey.onboardBody2:
               "The fake news will be filtered and shown specifically in each news, avoiding unreliable news.",
-          LanguageKey.onboardBody3:
-              "Users can vote, share, comment or contribute to the authenticity of the news.",
-          LanguageKey.onboardBody4:
-              "The new news will be updated to achieve the best experience for users.",
+          LanguageKey.onboardBody3: "Users can vote, share, comment or contribute to the authenticity of the news.",
+          LanguageKey.onboardBody4: "The new news will be updated to achieve the best experience for users.",
           LanguageKey.allowNotification: "Allow notification",
           LanguageKey.haveUpdateVersion: "A new version is avaiable",
           LanguageKey.btnUpdate: "Update",
@@ -123,8 +119,7 @@ class Localization extends Translations {
           LanguageKey.info: "Information",
           LanguageKey.warning: "Warning",
           LanguageKey.reportLink: "Report news not showing",
-          LanguageKey.errorServer:
-              "A Server Error Occurred Please Contact the Administrator!",
+          LanguageKey.errorServer: "A Server Error Occurred Please Contact the Administrator!",
           LanguageKey.exit: "Exit",
           LanguageKey.tryAgain: "Try Again",
           LanguageKey.errLogFace: "Login Facebook failed!",
@@ -142,8 +137,7 @@ class Localization extends Translations {
           LanguageKey.klanguage: 'Ngôn ngữ',
           LanguageKey.managelanguage: 'QUẢN LÝ NGÔN NGỮ',
           LanguageKey.displaylanguage: 'Chọn ngôn ngữ hiển thị',
-          LanguageKey.contentlanguage:
-              'Bạn muốn đọc tin tức bằng ngôn ngữ nào?',
+          LanguageKey.contentlanguage: 'Bạn muốn đọc tin tức bằng ngôn ngữ nào?',
           LanguageKey.login: 'Đăng nhập',
           LanguageKey.logout: 'Đăng xuất',
           LanguageKey.hello: 'Xin chào',
@@ -155,8 +149,7 @@ class Localization extends Translations {
           LanguageKey.inputEmail: 'Nhập email',
           LanguageKey.inputPhone: 'Nhập số điện thoại',
           LanguageKey.inputPassConfirm: 'Nhập lại mật khẩu',
-          LanguageKey.inputUserEmptyErr:
-              'Tên đăng nhập hoặc email không được để trống',
+          LanguageKey.inputUserEmptyErr: 'Tên đăng nhập hoặc email không được để trống',
           LanguageKey.inputPassEmptyErr: 'Mật khẩu không được để trống',
           LanguageKey.inputPassAtLeast6Err: 'Mật khẩu phải có ít nhất 6 ký tự',
           LanguageKey.or: 'hoặc',
@@ -167,8 +160,7 @@ class Localization extends Translations {
           LanguageKey.agree: 'Tôi đồng ý với ',
           LanguageKey.terms: 'Điều khoản sử dụng ',
           LanguageKey.about: 'của Fake News Filter',
-          LanguageKey.introduction:
-              'Theo dõi những tin tức nằm ở những chủ đề khác nhau.',
+          LanguageKey.introduction: 'Theo dõi những tin tức nằm ở những chủ đề khác nhau.',
           LanguageKey.covering: 'Tổng hợp chủ đề được quan tâm',
           LanguageKey.content_started:
               'Theo dõi các chủ đề để thông báo. Ứng dụng sẽ cho bạn biết khi hệ thống có những cập nhật mới',
@@ -184,6 +176,7 @@ class Localization extends Translations {
           LanguageKey.news: 'Tin tức',
           LanguageKey.community: 'Cộng đồng',
           LanguageKey.profile: 'Cá nhân',
+          LanguageKey.months: 'tháng',
           LanguageKey.days: 'ngày',
           LanguageKey.hours: 'giờ',
           LanguageKey.minutes: 'phút',
@@ -201,11 +194,11 @@ class Localization extends Translations {
           LanguageKey.error: 'Lỗi',
           LanguageKey.loadingLogin: "Đang đăng nhập...",
           LanguageKey.fetchingData: "Đang tải dữ liệu...",
+          LanguageKey.fetchingLoadMore: "Bạn đã tải hết nội dung",
           LanguageKey.fetchingDataErr: "Lỗi khi tải dữ liệu",
           LanguageKey.dataConvertErr: "Lỗi khi chuyển dữ liệu",
           LanguageKey.requestTimeOutErr: "Yêu cầu của bạn đã hết thời gian",
-          LanguageKey.noInternetErr:
-              "Kết nối internet của bạn bị lỗi, vui lòng thử lại",
+          LanguageKey.noInternetErr: "Kết nối internet của bạn bị lỗi, vui lòng thử lại",
           LanguageKey.serverErr: "Lỗi máy chủ, vui lòng thử lại, mã lỗi:",
           LanguageKey.serverDieErr: "Máy chủ đã bị lỗi, vui lòng thử lại",
           LanguageKey.interruptErr: "Đã hủy, vui lòng thử lại",
@@ -224,8 +217,7 @@ class Localization extends Translations {
           LanguageKey.version: "Phiên bản",
           LanguageKey.support: "Hỗ trợ",
           LanguageKey.checkVerify: "Kiểm tra tính xác thực",
-          LanguageKey.sendInfo:
-              "Gửi thông tin chi tiết về tin tức cần xác thực...",
+          LanguageKey.sendInfo: "Gửi thông tin chi tiết về tin tức cần xác thực...",
           LanguageKey.addFile: "Thêm tệp đính kèm",
           LanguageKey.viewGuide: "Xem hướng dẫn",
           LanguageKey.highlightContributedNews: "Tin đóng góp nổi bật",
@@ -237,14 +229,12 @@ class Localization extends Translations {
           LanguageKey.onboardTitle2: "TIN TỨC ĐƯỢC XÁC THỰC",
           LanguageKey.onboardTitle3: "TƯƠNG TÁC TRÊN TIN TỨC",
           LanguageKey.onboardTitle4: "NHẬN THÔNG BÁO MỚI",
-          LanguageKey.onboardBody1:
-              "Đa dạng các chủ đề, ngôn ngữ. \nĐọc các tin tức dựa trên chủ đề đã theo dõi.",
+          LanguageKey.onboardBody1: "Đa dạng các chủ đề, ngôn ngữ. \nĐọc các tin tức dựa trên chủ đề đã theo dõi.",
           LanguageKey.onboardBody2:
               "Các tin tức giả sẽ được lọc và thể hiện cụ thể ở từng tin tức, tránh các tin không đáng tin cậy.",
           LanguageKey.onboardBody3:
               "Người dùng có thể bình chọn, chia sẻ, bình luận hoặc đóng góp tính xác thực của các tin tức.",
-          LanguageKey.onboardBody4:
-              "Các tin tức mới sẽ được cập nhật để đạt trải nghiệm tốt nhất cho người dùng.",
+          LanguageKey.onboardBody4: "Các tin tức mới sẽ được cập nhật để đạt trải nghiệm tốt nhất cho người dùng.",
           LanguageKey.allowNotification: "Cho phép gửi thông báo",
           LanguageKey.haveUpdateVersion: "Đã có bản cập nhật mới",
           LanguageKey.btnUpdate: "Cập nhật",

@@ -133,6 +133,7 @@ class BreakingViewModel extends BaseViewModel {
           // This means there is no more data
           // and therefore, we will not send another GET request
           hasNextPage.value = false;
+          SnackbarCustom.showInfo(message: 'fetchingLoadMore'.tr);
         }
       } catch (err) {
         print('Something went wrong!');

@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../resources/utils/image.dart';
 import '../../resources/widgets/shimmer.dart';
+import '../../resources/widgets/snackbar_custom.dart';
 
 class FactNewsScreen extends StatefulWidget {
   const FactNewsScreen({Key? key}) : super(key: key);
@@ -170,16 +171,6 @@ class _FactNewsScreenState extends State<FactNewsScreen> {
                     padding: EdgeInsets.only(top: 10, bottom: 10),
                     child: Center(
                       child: CupertinoActivityIndicator(),
-                    ),
-                  ),
-
-                // When nothing else to load
-                if (factNewsViewModel.hasNextPage.value == false)
-                  Container(
-                    padding: const EdgeInsets.only(top: 20, bottom: 20),
-                    color: Colors.amber,
-                    child: const Center(
-                      child: Text('You have fetched all of the content'),
                     ),
                   ),
               ],

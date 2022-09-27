@@ -1,7 +1,4 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
-
-import 'dart:async';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
@@ -18,7 +15,14 @@ import 'package:intl/intl.dart';
 import 'button.dart';
 
 class CardNews extends StatefulWidget {
-  final String? offical, socialBeliefs, avatar, name, link, imageUrl, video, webUrl;
+  final String? offical,
+      socialBeliefs,
+      avatar,
+      name,
+      link,
+      imageUrl,
+      video,
+      webUrl;
   final String newsId, times, title, article, factCheck;
   final int viewCount;
 
@@ -71,6 +75,7 @@ class _CardNewsState extends State<CardNews> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: AlignmentDirectional.topCenter,
       children: [
         GestureDetector(
           onTap: () {
@@ -83,15 +88,17 @@ class _CardNewsState extends State<CardNews> {
                 ));
           },
           child: Container(
-            padding: EdgeInsets.all(5),
-            margin: EdgeInsets.only(top: 10, left: 10),
-            width: Get.size.width * 0.9,
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.only(bottom: 15),
+            width: Get.size.width * 0.95,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(top: 18.0),
+              padding: const EdgeInsets.only(
+                top: 18.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -112,7 +119,9 @@ class _CardNewsState extends State<CardNews> {
                             children: [
                               widget.offical != null
                                   ? Row(children: [
-                                      Text('Official Rating: ', style: StylesText.content12MediumBlack),
+                                      Text('Official Rating: ',
+                                          style:
+                                              StylesText.content12MediumBlack),
                                       Text(
                                         widget.offical!,
                                         style: StylesText.content12BoldBlack,
@@ -123,7 +132,8 @@ class _CardNewsState extends State<CardNews> {
                                   ? Row(children: [
                                       widget.offical == null
                                           ? Padding(
-                                              padding: const EdgeInsets.only(right: 4.0),
+                                              padding: const EdgeInsets.only(
+                                                  right: 4.0),
                                               child: SvgPicture.asset(
                                                 IconsApp.unknown,
                                                 width: 24,
@@ -169,7 +179,8 @@ class _CardNewsState extends State<CardNews> {
                               fit: BoxFit.fitWidth,
                               height: 180,
                               imageUrl: widget.imageUrl!,
-                              imageBuilder: (context, imageProvider) => Container(
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(6),
                                   image: DecorationImage(
@@ -178,8 +189,10 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                 ),
                               ),
-                              placeholder: (context, url) => CupertinoActivityIndicator(),
-                              errorWidget: (context, url, error) => Icon(Icons.error),
+                              placeholder: (context, url) =>
+                                  CupertinoActivityIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             ),
                           ),
                         )
@@ -231,7 +244,8 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                   SizedBox(width: 5),
                                   Text(
-                                    NumberFormat.compact().format(widget.viewCount),
+                                    NumberFormat.compact()
+                                        .format(widget.viewCount),
                                     style: StylesText.content12BoldGrey,
                                   ),
                                 ],
@@ -260,7 +274,8 @@ class _CardNewsState extends State<CardNews> {
                                   ),
                                   SizedBox(width: 5),
                                   Text(
-                                    NumberFormat.compact().format(widget.viewCount),
+                                    NumberFormat.compact()
+                                        .format(widget.viewCount),
                                     style: StylesText.content12BoldGrey,
                                   ),
                                 ],
@@ -276,8 +291,8 @@ class _CardNewsState extends State<CardNews> {
         widget.tags == null
             ? SizedBox()
             : Positioned(
-                top: 3,
-                right: 0,
+                top: 0,
+                right: 10,
                 child: Row(
                   children: [
                     for (var tag in widget.tags!)

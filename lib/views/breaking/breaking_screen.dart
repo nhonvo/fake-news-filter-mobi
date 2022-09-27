@@ -43,19 +43,6 @@ class _BreakingScreenState extends State<BreakingScreen> {
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        //TODO: Uncomment to enable story
-                        // Container(
-                        //   color: Colors.white,
-                        //   width: double.infinity,
-                        //   height: 100,
-                        //   alignment: Alignment.center,
-                        //   child: ListView.builder(
-                        //       itemCount: news.length,
-                        //       scrollDirection: Axis.horizontal,
-                        //       itemBuilder: (context, index) {
-                        //         return storyButton(news[index], context);
-                        //       }),
-                        // ),
                         Expanded(
                           child: SmartRefresher(
                             controller: viewmodel.refreshController,
@@ -107,18 +94,7 @@ class _BreakingScreenState extends State<BreakingScreen> {
                           Padding(
                             padding: EdgeInsets.only(top: 10, bottom: 10),
                             child: Center(
-                              child: CupertinoActivityIndicator(),
-                            ),
-                          ),
-
-                        // When nothing else to load
-                        if (viewmodel.hasNextPage.value == false)
-                          Container(
-                            padding: const EdgeInsets.only(top: 20, bottom: 20),
-                            color: Colors.amber,
-                            child: const Center(
-                              child:
-                                  Text('You have fetched all of the content'),
+                              child: CircularProgressIndicator(),
                             ),
                           ),
                       ],
