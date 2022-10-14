@@ -127,6 +127,7 @@ class DiscoveryViewModel extends BaseViewModel {
   @override
   void onInit() {
     super.onInit();
+
     handleGetTopic();
 
     //used to choose the language in choose language screen

@@ -6,6 +6,7 @@ import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/tag.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -110,8 +111,9 @@ class _CardTopicState extends State<CardTopic> {
                               Row(
                                 children: [
                                   Icon(
-                                    Icons.sync_rounded,
+                                    FontAwesomeIcons.arrowsRotate,
                                     color: Colors.white,
+                                    size: 16,
                                   ),
                                   SizedBox(width: 3),
                                   Text(widget.time,
