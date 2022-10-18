@@ -20,6 +20,7 @@ class PreviewBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<PreviewViewModel>(PreviewViewModel(newsApi: newsApi, followingApi: followingApi, localRepo: localRepo));
+
     Get.put<BreakingViewModel>(
         BreakingViewModel(newsApi: newsApi, voteApi: voteApi, extraApi: extraApi, pref: pref, localRepo: localRepo));
   }

@@ -1,4 +1,5 @@
 import 'package:fake_news/core/api/auth_api.dart';
+import 'package:fake_news/core/api/comment_api.dart';
 import 'package:fake_news/core/api/dio_api.dart';
 import 'package:fake_news/core/api/extra_api.dart';
 import 'package:fake_news/core/api/following_api.dart';
@@ -34,6 +35,7 @@ class AppServices {
     Get.put<FollowingApi>(FollowingApiImpl(dioApi: Get.find()));
     Get.put<VoteApi>(VoteApiImpl(dioApi: Get.find()));
     Get.put<NewsCommunityApi>(NewsCommunityApiImpl(dioApi: Get.find()));
+    Get.put<CommentApi>(CommentApiImpl(dioApi: Get.find()));
     Get.put<ExtraApi>(ExtraApiImpl(dioApi: Get.find()));
 
     print('All services started! ✅');
