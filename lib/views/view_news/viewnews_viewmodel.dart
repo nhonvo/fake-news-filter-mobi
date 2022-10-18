@@ -48,10 +48,10 @@ class ViewNewsViewModel extends BaseViewModel {
       var parentId = int.parse(response.resultObj!.parentId!);
       if (parentId != 0) {
         comList.firstWhere((e) => e.commentId == response.resultObj?.parentId).child?.add(response.resultObj!);
-        comList.refresh();
       } else {
         comList.add(response.resultObj!);
       }
+      comList.refresh();
     }
   }
 

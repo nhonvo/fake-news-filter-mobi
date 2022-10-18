@@ -21,6 +21,6 @@ class SplashBinding extends Bindings {
     Get.put<SplashViewModel>(SplashViewModel(
         localRepo: localRepo, followingApi: followingApi, updateApi: updateApi, languageApi: languageApi));
 
-    Get.lazyPut<ViewNewsViewModel>(() => ViewNewsViewModel(localRepo: localRepo, prefs: pref, commentApi: commentApi));
+    Get.create<ViewNewsViewModel>(() => ViewNewsViewModel(localRepo: localRepo, prefs: pref, commentApi: commentApi));
   }
 }

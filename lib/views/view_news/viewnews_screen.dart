@@ -274,7 +274,11 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
     return InkWell(
       onTap: () {
         viewModel.getCommentInNews(newsId);
-        // viewModel.showTextField.value = false;
+
+//reset value every time bottom show
+        if (Get.isBottomSheetOpen == false) {
+          viewModel.commentId.value = "";
+        }
 
         Get.bottomSheet(
           Container(
@@ -328,7 +332,12 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                                                 content: item.content,
                                               ),
                                         ],
-                                        treeThemeData: TreeThemeData(lineColor: Colors.green[500]!, lineWidth: 3),
+                                        treeThemeData: TreeThemeData(
+                                          lineColor: viewModel.comList[index].child!.length > 0
+                                              ? Colors.green[600]!
+                                              : Colors.transparent,
+                                          lineWidth: 1.4,
+                                        ),
                                         avatarRoot: (context, data) => PreferredSize(
                                           child: CircleAvatar(
                                             radius: 18,
@@ -387,13 +396,29 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                                                       //   width: 24,
                                                       // ),
                                                       //show reply text field
-                                                      InkWell(
-                                                        onTap: () {
-                                                          // viewModel.showTextField.value = true;
-                                                          viewModel.commentId.value = data.commentId;
-                                                        },
-                                                        child: Text('Reply'),
-                                                      ),
+                                                      if (widget.isLoggedIn == true)
+                                                        InkWell(
+                                                          onTap: () {
+                                                            viewModel.commentId.value = data.commentId;
+                                                          },
+                                                          //change color when click
+                                                          child: Obx(
+                                                            () => viewModel.commentId.value == data.commentId
+                                                                ? Text(
+                                                                    'Reply',
+                                                                    style: TextStyle(
+                                                                      fontWeight: FontWeight.bold,
+                                                                      color: Colors.green[600],
+                                                                    ),
+                                                                  )
+                                                                : Text(
+                                                                    'Reply',
+                                                                    style: TextStyle(
+                                                                      color: Colors.grey[700],
+                                                                    ),
+                                                                  ),
+                                                          ),
+                                                        ),
                                                     ],
                                                   ),
                                                 ),
@@ -469,7 +494,18 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                                     );
                                   },
                                 )
-                              : Container(),
+                              : Container(
+                                  //get height bottom sheet,
+                                  height: MediaQuery.of(context).size.height * 0.5,
+                                  child: Center(
+                                    child: Text(
+                                      'No comments yet',
+                                      style: TextStyle(
+                                        color: Colors.grey[700],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                         ),
                       ],
                     ),
@@ -477,48 +513,56 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                 ),
                 //text field to input comment
 
-                Obx(
-                  () => viewModel.showTextField == true
-                      ? Expanded(
-                          flex: 1,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 18,
-                                  backgroundColor: Colors.grey,
-                                  backgroundImage: AssetImage('assets/images/avatar.png'),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Expanded(
-                                  child: TextField(
-                                    controller: viewModel.textCommentController,
-                                    decoration: InputDecoration(
-                                      hintText: 'Add a comment...',
-                                      hintStyle: Theme.of(context).textTheme.caption,
-                                      border: InputBorder.none,
+                if (widget.isLoggedIn == true)
+                  Obx(
+                    () => viewModel.showTextField == true
+                        ? Expanded(
+                            flex: 1,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 18,
+                                    backgroundColor: Colors.grey,
+                                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+
+                                  Expanded(
+                                    child: TextField(
+                                      controller: viewModel.textCommentController,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                          gapPadding: 1,
+                                          borderSide: BorderSide(color: Colors.black, width: 1),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          gapPadding: 1,
+                                          borderSide: BorderSide(color: Colors.grey, width: .5),
+                                        ),
+                                        hintText: 'Add a comment...',
+                                      ),
                                     ),
                                   ),
-                                ),
-                                //send button
-                                InkWell(
-                                  onTap: () {
-                                    viewModel.addComment(newsId);
-                                  },
-                                  child: Text(
-                                    'Post',
-                                    style: Theme.of(context).textTheme.caption,
+                                  //send button
+                                  InkWell(
+                                    onTap: () {
+                                      viewModel.addComment(newsId);
+                                    },
+                                    child: Text(
+                                      'Post',
+                                      style: Theme.of(context).textTheme.caption,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        )
-                      : Container(),
-                )
+                          )
+                        : Container(),
+                  )
               ],
             ),
           ),
