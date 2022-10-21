@@ -273,6 +273,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
   Widget _commentButton(String newsId) {
     return InkWell(
       onTap: () {
+        viewModel.isLoading.value = true;
         viewModel.getCommentInNews(newsId);
 
 //reset value every time bottom show
@@ -290,233 +291,222 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                 topRight: Radius.circular(20),
               ),
             ),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  width: 50,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: SingleChildScrollView(
-                    child: Column(
+            child: Obx(
+              () => viewModel.isLoading.value == false
+                  ? Column(
                       children: [
-                        Obx(
-                          () => viewModel.comList.isNotEmpty
-                              ? ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: viewModel.comList.length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      child: CommentTreeWidget<Comment, Comment>(
-                                        Comment(
-                                          commentId: viewModel.comList[index].commentId.toString(),
-                                          avatar: 'null',
-                                          userName: viewModel.comList[index].user?.userName ?? "Anonymous",
-                                          content: viewModel.comList[index].content,
-                                        ),
-                                        [
-                                          //render recursive reply comment
-                                          if (viewModel.comList[index].child != null)
-                                            for (var item in viewModel.comList[index].child!)
-                                              Comment(
-                                                commentId: item.commentId.toString(),
-                                                avatar: 'null',
-                                                userName: item.user?.userName ?? "Anonymous",
-                                                content: item.content,
-                                              ),
-                                        ],
-                                        treeThemeData: TreeThemeData(
-                                          lineColor: viewModel.comList[index].child!.length > 0
-                                              ? Colors.green[600]!
-                                              : Colors.transparent,
-                                          lineWidth: 1.4,
-                                        ),
-                                        avatarRoot: (context, data) => PreferredSize(
-                                          child: CircleAvatar(
-                                            radius: 18,
-                                            backgroundColor: Colors.grey,
-                                            backgroundImage: AssetImage('assets/images/avatar.png'),
-                                          ),
-                                          preferredSize: Size.fromRadius(18),
-                                        ),
-                                        contentRoot: (context, data) {
-                                          return Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey[100],
-                                                  borderRadius: BorderRadius.circular(12),
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          width: 50,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Obx(
+                                  () => viewModel.comList.isNotEmpty
+                                      ? ListView.builder(
+                                          shrinkWrap: true,
+                                          physics: NeverScrollableScrollPhysics(),
+                                          itemCount: viewModel.comList.length,
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              child: CommentTreeWidget<Comment, Comment>(
+                                                Comment(
+                                                  commentId: viewModel.comList[index].commentId.toString(),
+                                                  avatar: 'null',
+                                                  userName: viewModel.comList[index].user?.userName ?? "Anonymous",
+                                                  content: viewModel.comList[index].content,
                                                 ),
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      data.userName ?? "Anonymous",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .caption!
-                                                          .copyWith(fontWeight: FontWeight.w600, color: Colors.black),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 4,
-                                                    ),
-                                                    Text(
-                                                      '${data.content}',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .caption!
-                                                          .copyWith(fontWeight: FontWeight.w300, color: Colors.black),
-                                                    ),
-                                                  ],
+                                                [
+                                                  //render recursive reply comment
+                                                  if (viewModel.comList[index].child != null)
+                                                    for (var item in viewModel.comList[index].child!)
+                                                      Comment(
+                                                        commentId: item.commentId.toString(),
+                                                        avatar: 'null',
+                                                        userName: item.user?.userName ?? "Anonymous",
+                                                        content: item.content,
+                                                      ),
+                                                ],
+                                                treeThemeData: TreeThemeData(
+                                                  lineColor: viewModel.comList[index].child!.length > 0
+                                                      ? Colors.green[600]!
+                                                      : Colors.transparent,
+                                                  lineWidth: 1.4,
                                                 ),
-                                              ),
-                                              DefaultTextStyle(
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .caption!
-                                                    .copyWith(color: Colors.grey[700], fontWeight: FontWeight.bold),
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(top: 4),
-                                                  child: Row(
+                                                avatarRoot: (context, data) => PreferredSize(
+                                                  child: CircleAvatar(
+                                                    radius: 18,
+                                                    backgroundColor: Colors.grey,
+                                                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                                                  ),
+                                                  preferredSize: Size.fromRadius(18),
+                                                ),
+                                                contentRoot: (context, data) {
+                                                  return Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
-                                                      // SizedBox(
-                                                      //   width: 8,
-                                                      // ),
-                                                      // Text('Like'),
-                                                      // SizedBox(
-                                                      //   width: 24,
-                                                      // ),
-                                                      //show reply text field
-                                                      if (widget.isLoggedIn == true)
-                                                        InkWell(
-                                                          onTap: () {
-                                                            viewModel.commentId.value = data.commentId;
-                                                          },
-                                                          //change color when click
-                                                          child: Obx(
-                                                            () => viewModel.commentId.value == data.commentId
-                                                                ? Text(
-                                                                    'Reply',
-                                                                    style: TextStyle(
-                                                                      fontWeight: FontWeight.bold,
-                                                                      color: Colors.green[600],
-                                                                    ),
-                                                                  )
-                                                                : Text(
-                                                                    'Reply',
-                                                                    style: TextStyle(
-                                                                      color: Colors.grey[700],
-                                                                    ),
+                                                      Container(
+                                                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.grey[100],
+                                                          borderRadius: BorderRadius.circular(12),
+                                                        ),
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text(
+                                                              data.userName ?? "Anonymous",
+                                                              style: Theme.of(context).textTheme.caption!.copyWith(
+                                                                  fontWeight: FontWeight.w600, color: Colors.black),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 4,
+                                                            ),
+                                                            Text(
+                                                              '${data.content}',
+                                                              style: Theme.of(context).textTheme.caption!.copyWith(
+                                                                  fontWeight: FontWeight.w300, color: Colors.black),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      DefaultTextStyle(
+                                                        style: Theme.of(context).textTheme.caption!.copyWith(
+                                                            color: Colors.grey[700], fontWeight: FontWeight.bold),
+                                                        child: Padding(
+                                                          padding: EdgeInsets.only(top: 4),
+                                                          child: Row(
+                                                            children: [
+                                                              // SizedBox(
+                                                              //   width: 8,
+                                                              // ),
+                                                              // Text('Like'),
+                                                              // SizedBox(
+                                                              //   width: 24,
+                                                              // ),
+                                                              //show reply text field
+                                                              if (widget.isLoggedIn == true)
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    viewModel.commentId.value = data.commentId;
+                                                                  },
+                                                                  //change color when click
+                                                                  child: Obx(
+                                                                    () => viewModel.commentId.value == data.commentId
+                                                                        ? Text(
+                                                                            'Reply',
+                                                                            style: TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              color: Colors.green[600],
+                                                                            ),
+                                                                          )
+                                                                        : Text(
+                                                                            'Reply',
+                                                                            style: TextStyle(
+                                                                              color: Colors.grey[700],
+                                                                            ),
+                                                                          ),
                                                                   ),
+                                                                ),
+                                                            ],
                                                           ),
                                                         ),
+                                                      )
                                                     ],
+                                                  );
+                                                },
+                                                avatarChild: (context, data) => PreferredSize(
+                                                  child: CircleAvatar(
+                                                    radius: 12,
+                                                    backgroundColor: Colors.grey,
+                                                    backgroundImage: AssetImage('assets/images/avatar.png'),
                                                   ),
+                                                  preferredSize: Size.fromRadius(12),
                                                 ),
-                                              )
-                                            ],
-                                          );
-                                        },
-                                        avatarChild: (context, data) => PreferredSize(
-                                          child: CircleAvatar(
-                                            radius: 12,
-                                            backgroundColor: Colors.grey,
-                                            backgroundImage: AssetImage('assets/images/avatar.png'),
-                                          ),
-                                          preferredSize: Size.fromRadius(12),
-                                        ),
-                                        contentChild: (context, data) {
-                                          return Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                                                decoration: BoxDecoration(
-                                                    color: Colors.grey[100], borderRadius: BorderRadius.circular(12)),
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      data.userName ?? "Anonymous",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .caption
-                                                          ?.copyWith(fontWeight: FontWeight.w600, color: Colors.black),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 4,
-                                                    ),
-                                                    Text(
-                                                      '${data.content}',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .caption
-                                                          ?.copyWith(fontWeight: FontWeight.w300, color: Colors.black),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              DefaultTextStyle(
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .caption!
-                                                    .copyWith(color: Colors.grey[700], fontWeight: FontWeight.bold),
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(top: 4),
-                                                  child: Row(
+                                                contentChild: (context, data) {
+                                                  return Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
-                                                      // SizedBox(
-                                                      //   width: 8,
-                                                      // ),
-                                                      // Text('Like'),
-                                                      // SizedBox(
-                                                      //   width: 24,
-                                                      // ),
-                                                      // Text('Reply'),
+                                                      Container(
+                                                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.grey[100],
+                                                            borderRadius: BorderRadius.circular(12)),
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text(
+                                                              data.userName ?? "Anonymous",
+                                                              style: Theme.of(context).textTheme.caption?.copyWith(
+                                                                  fontWeight: FontWeight.w600, color: Colors.black),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 4,
+                                                            ),
+                                                            Text(
+                                                              '${data.content}',
+                                                              style: Theme.of(context).textTheme.caption?.copyWith(
+                                                                  fontWeight: FontWeight.w300, color: Colors.black),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      DefaultTextStyle(
+                                                        style: Theme.of(context).textTheme.caption!.copyWith(
+                                                            color: Colors.grey[700], fontWeight: FontWeight.bold),
+                                                        child: Padding(
+                                                          padding: EdgeInsets.only(top: 4),
+                                                          child: Row(
+                                                            children: [
+                                                              // SizedBox(
+                                                              //   width: 8,
+                                                              // ),
+                                                              // Text('Like'),
+                                                              // SizedBox(
+                                                              //   width: 24,
+                                                              // ),
+                                                              // Text('Reply'),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
                                                     ],
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          );
-                                        },
-                                      ),
-                                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                                    );
-                                  },
-                                )
-                              : Container(
-                                  //get height bottom sheet,
-                                  height: MediaQuery.of(context).size.height * 0.5,
-                                  child: Center(
-                                    child: Text(
-                                      'No comments yet',
-                                      style: TextStyle(
-                                        color: Colors.grey[700],
-                                      ),
-                                    ),
-                                  ),
+                                                  );
+                                                },
+                                              ),
+                                              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                                            );
+                                          },
+                                        )
+                                      : Container(
+                                          //get height bottom sheet,
+                                          height: MediaQuery.of(context).size.height * 0.5,
+                                          child: Center(
+                                            child: Text(
+                                              'No comments yet',
+                                              style: TextStyle(
+                                                color: Colors.grey[700],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                 ),
+                              ],
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                //text field to input comment
+                        //text field to input comment
 
-                if (widget.isLoggedIn == true)
-                  Obx(
-                    () => viewModel.showTextField == true
-                        ? Expanded(
+                        if (widget.isLoggedIn == true)
+                          Expanded(
                             flex: 1,
                             child: Container(
                               padding: EdgeInsets.symmetric(horizontal: 16),
@@ -561,9 +551,11 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                               ),
                             ),
                           )
-                        : Container(),
-                  )
-              ],
+                      ],
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    ),
             ),
           ),
         );

@@ -20,7 +20,7 @@ class SplashBinding extends Bindings {
   void dependencies() {
     Get.put<SplashViewModel>(SplashViewModel(
         localRepo: localRepo, followingApi: followingApi, updateApi: updateApi, languageApi: languageApi));
-
-    Get.create<ViewNewsViewModel>(() => ViewNewsViewModel(localRepo: localRepo, prefs: pref, commentApi: commentApi));
+    Get.put<ViewNewsViewModel>(ViewNewsViewModel(localRepo: localRepo, prefs: pref, commentApi: commentApi),
+        permanent: true);
   }
 }

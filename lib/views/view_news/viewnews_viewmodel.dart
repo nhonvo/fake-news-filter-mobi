@@ -20,7 +20,7 @@ class ViewNewsViewModel extends BaseViewModel {
   CommentApi commentApi;
 
   final comList = <CommentModel>[].obs;
-  var showTextField = true.obs;
+  var isLoading = true.obs;
   var commentId = "".obs;
 
   TextEditingController textCommentController = TextEditingController();
@@ -28,9 +28,10 @@ class ViewNewsViewModel extends BaseViewModel {
   getCommentInNews(String newsId) async {
     var response = await commentApi.getCommentsInNews(newsId);
     if (response != null) {
-      List<CommentModel> result = response.resultObj!.obs;
+      List<CommentModel> result = response.resultObj?.obs ?? [];
       comList.clear();
       comList.addAll(result);
+      isLoading.value = false;
     }
   }
 
@@ -58,5 +59,10 @@ class ViewNewsViewModel extends BaseViewModel {
   @override
   void onInit() {
     super.onInit();
+  }
+
+  @override
+  void onClosed() {
+    super.onClose();
   }
 }
