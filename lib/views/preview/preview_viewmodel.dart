@@ -6,6 +6,7 @@ import 'package:fake_news/providers/local_storage_repo.dart';
 import 'package:fake_news/resources/utils/app_config.dart';
 import 'package:fake_news/resources/utils/app_routes.dart';
 import 'package:fake_news/resources/widgets/snackbar_custom.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
@@ -13,7 +14,6 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 class PreviewViewModel extends BaseViewModel {
   PreviewViewModel({required this.newsApi, required this.followingApi, required this.localRepo});
 
-  // PreviewViewModel({required this.newsApi, required this.authRepo, required this.pref});
   NewsApi newsApi;
   FollowingApi followingApi;
   LocalStorageRepo localRepo;
@@ -22,35 +22,77 @@ class PreviewViewModel extends BaseViewModel {
   var topicModel = Get.arguments;
   var appEnvironment = Get.find<AppEnvironment>();
 
-  // SharedPreferences pref;
+  int page = 1;
+  final int pageSize = 2;
+
+  // There is next page or not
+  var hasNextPage = true.obs;
+
+  // Used to display loading indicators when _firstLoad function is running
+  var isFirstLoadRunning = false.obs;
+
+  // Used to display loading indicators when _loadMore function is running
+  var isLoadMoreRunning = false.obs;
 
   RefreshController refreshController = RefreshController(initialRefresh: false);
+  ScrollController scrollController = ScrollController();
+
+  firstLoad() async {
+    isFirstLoadRunning.value = true;
+
+    var res = await newsApi.getNewsByTopicId(topicModel.value.topicId, page, pageSize);
+
+    if (res.statusCode == 200) {
+      news.clear();
+      news.addAll(res.resultObj!);
+    } else {
+      EasyLoading.dismiss();
+      SnackbarCustom.showError(
+        message: res.message!,
+        altMessage: 'altMessage'.tr,
+      );
+    }
+
+    isFirstLoadRunning.value = false;
+  }
+
+  resetPaging() {
+    page = 1;
+    hasNextPage.value = true;
+  }
+
+  _loadMore() async {
+    if (hasNextPage.value == true &&
+        isFirstLoadRunning.value == false &&
+        isLoadMoreRunning.value == false &&
+        scrollController.position.extentAfter < 300) {
+      // Display a progress indicator at the bottom
+      isLoadMoreRunning.value = true;
+
+      page += 1; // Increase page by 1
+      try {
+        var res = await newsApi.getNewsByTopicId(topicModel.value.topicId, page, pageSize);
+
+        if (res.statusCode == 200 && res.resultObj!.length > 0) {
+          news.addAll(res.resultObj!);
+        } else {
+          // This means there is no more data
+          // and therefore, we will not send another GET request
+          hasNextPage.value = false;
+          SnackbarCustom.showInfo(message: 'fetchingLoadMore'.tr);
+        }
+      } catch (err) {
+        print('Something went wrong!');
+      }
+      isLoadMoreRunning.value = false;
+    }
+  }
 
   void onRefresh() async {
     // monitor network fetch
-    await handleGetNewsByTopic();
+    await firstLoad();
     // if failed,use refreshFailed()
     refreshController.refreshCompleted();
-  }
-
-  handleGetNewsByTopic() async {
-    EasyLoading.show(status: 'fetchingData'.tr);
-
-    var response = await newsApi.getNewsByTopicId(topicModel.value.topicId, 1, 1);
-
-    if (response.statusCode != 200) {
-      EasyLoading.dismiss();
-      SnackbarCustom.showError(
-        message: response.message!,
-        altMessage: 'altMessage'.tr,
-      );
-    } else {
-      List<NewsModel> newsList = response.resultObj!.obs;
-      //clear all news before get data from API to avoid duplication
-      news.clear();
-      news.addAll(newsList);
-      EasyLoading.dismiss();
-    }
   }
 
   handleFollowing() async {
@@ -61,8 +103,15 @@ class PreviewViewModel extends BaseViewModel {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    handleGetNewsByTopic();
+    await firstLoad();
+    scrollController = ScrollController()..addListener(_loadMore);
+  }
+
+  @override
+  void onClosed() {
+    super.onClose();
+    scrollController.removeListener(_loadMore);
   }
 }

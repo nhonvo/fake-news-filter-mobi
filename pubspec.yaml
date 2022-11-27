@@ -57,6 +57,7 @@ dependencies:
   package_info_plus: ^1.4.3
   awesome_dialog: ^2.2.1
   intl: ^0.17.0
+  comment_tree: ^0.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

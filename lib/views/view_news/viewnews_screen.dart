@@ -1,7 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:comment_tree/data/comment.dart';
+import 'package:comment_tree/widgets/comment_tree_widget.dart';
+import 'package:comment_tree/widgets/tree_theme_data.dart';
+import 'package:fake_news/data/story_data.dart';
 import 'package:fake_news/resources/utils/style.dart';
 import 'package:fake_news/resources/widgets/rating.dart';
+import 'package:fake_news/views/view_news/viewnews_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -29,6 +34,8 @@ class ViewNewsScreen extends StatefulWidget {
 }
 
 class _ViewNewsScreenState extends State<ViewNewsScreen> {
+  ViewNewsViewModel get viewModel => Get.find<ViewNewsViewModel>();
+
   final GlobalKey webViewKey = GlobalKey();
 
   InAppWebViewController? webViewController;
@@ -58,8 +65,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
         if (Platform.isAndroid) {
           webViewController?.reload();
         } else if (Platform.isIOS) {
-          webViewController?.loadUrl(
-              urlRequest: URLRequest(url: await webViewController?.getUrl()));
+          webViewController?.loadUrl(urlRequest: URLRequest(url: await webViewController?.getUrl()));
         }
       },
     );
@@ -78,8 +84,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
             color: Colors.black,
           ),
           appBarTheme: AppBarTheme(
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black //here you can give the text color
+              backgroundColor: Colors.white, foregroundColor: Colors.black //here you can give the text color
               )),
       home: Scaffold(
         appBar: AppBar(
@@ -103,22 +108,18 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
             ),
             PopupMenuButton(
                 offset: Offset(0, 50),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
                 itemBuilder: (context) => [
                       PopupMenuItem(
                         onTap: () {
-                          Clipboard.setData(ClipboardData(text: widget.webUrl))
-                              .then((_) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text('clipboard'.tr),
-                                backgroundColor: Colors.green));
+                          Clipboard.setData(ClipboardData(text: widget.webUrl)).then((_) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(content: Text('clipboard'.tr), backgroundColor: Colors.green));
                           });
                         },
                         child: Row(
                           children: [
-                            Icon(FontAwesomeIcons.link,
-                                color: Colors.black, size: 17),
+                            Icon(FontAwesomeIcons.link, color: Colors.black, size: 17),
                             SizedBox(width: 10),
                             Text(
                               'copy'.tr,
@@ -135,13 +136,11 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                                   Uri.parse(widget.webUrl!),
                                   mode: LaunchMode.externalApplication,
                                 )
-                              : ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('error_browser'.tr)));
+                              : ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('error_browser'.tr)));
                         },
                         child: Row(
                           children: [
-                            Icon(FontAwesomeIcons.globeAsia,
-                                color: Colors.black, size: 17),
+                            Icon(FontAwesomeIcons.globeAsia, color: Colors.black, size: 17),
                             SizedBox(width: 10),
                             Text(
                               'browser'.tr,
@@ -155,8 +154,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                         onTap: () async {},
                         child: Row(
                           children: [
-                            Icon(FontAwesomeIcons.flagCheckered,
-                                color: Colors.black, size: 17),
+                            Icon(FontAwesomeIcons.flagCheckered, color: Colors.black, size: 17),
                             SizedBox(width: 10),
                             Text(
                               'reportLink'.tr,
@@ -215,10 +213,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                 alignment: AlignmentDirectional.topStart,
                 child: SizedBox(
                   height: 1.5,
-                  child: LinearProgressIndicator(
-                      color: Colors.black,
-                      backgroundColor: Colors.white,
-                      value: progress),
+                  child: LinearProgressIndicator(color: Colors.black, backgroundColor: Colors.white, value: progress),
                 ),
               ),
             Positioned(
@@ -251,7 +246,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                             newsId: widget.newsId,
                           ),
                           VerticalDivider(),
-                          Icon(FontAwesomeIcons.comments),
+                          _commentButton(widget.newsId),
                           VerticalDivider(),
                           Icon(FontAwesomeIcons.shareAlt),
                           VerticalDivider(),
@@ -259,7 +254,7 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
                         ]
                       : [
                           Container(),
-                          Icon(FontAwesomeIcons.comments),
+                          _commentButton(widget.newsId),
                           VerticalDivider(),
                           Icon(FontAwesomeIcons.shareAlt),
                           VerticalDivider(),
@@ -271,6 +266,308 @@ class _ViewNewsScreenState extends State<ViewNewsScreen> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _commentButton(String newsId) {
+    return InkWell(
+      onTap: () {
+        viewModel.isLoading.value = true;
+        viewModel.getCommentInNews(newsId);
+
+//reset value every time bottom show
+        if (Get.isBottomSheetOpen == false) {
+          viewModel.commentId.value = "";
+        }
+
+        Get.bottomSheet(
+          Container(
+            height: Get.height * 1,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            child: Obx(
+              () => viewModel.isLoading.value == false
+                  ? Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          width: 50,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Obx(
+                                  () => viewModel.comList.isNotEmpty
+                                      ? ListView.builder(
+                                          shrinkWrap: true,
+                                          physics: NeverScrollableScrollPhysics(),
+                                          itemCount: viewModel.comList.length,
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              child: CommentTreeWidget<Comment, Comment>(
+                                                Comment(
+                                                  commentId: viewModel.comList[index].commentId.toString(),
+                                                  avatar: 'null',
+                                                  userName: viewModel.comList[index].user?.userName ?? "Anonymous",
+                                                  content: viewModel.comList[index].content,
+                                                ),
+                                                [
+                                                  //render recursive reply comment
+                                                  if (viewModel.comList[index].child != null)
+                                                    for (var item in viewModel.comList[index].child!)
+                                                      Comment(
+                                                        commentId: item.commentId.toString(),
+                                                        avatar: 'null',
+                                                        userName: item.user?.userName ?? "Anonymous",
+                                                        content: item.content,
+                                                      ),
+                                                ],
+                                                treeThemeData: TreeThemeData(
+                                                  lineColor: viewModel.comList[index].child!.length > 0
+                                                      ? Colors.green[600]!
+                                                      : Colors.transparent,
+                                                  lineWidth: 1.4,
+                                                ),
+                                                avatarRoot: (context, data) => PreferredSize(
+                                                  child: CircleAvatar(
+                                                    radius: 18,
+                                                    backgroundColor: Colors.grey,
+                                                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                                                  ),
+                                                  preferredSize: Size.fromRadius(18),
+                                                ),
+                                                contentRoot: (context, data) {
+                                                  return Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                                                        decoration: BoxDecoration(
+                                                          color: Colors.grey[100],
+                                                          borderRadius: BorderRadius.circular(12),
+                                                        ),
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text(
+                                                              data.userName ?? "Anonymous",
+                                                              style: Theme.of(context).textTheme.caption!.copyWith(
+                                                                  fontWeight: FontWeight.w600, color: Colors.black),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 4,
+                                                            ),
+                                                            Text(
+                                                              '${data.content}',
+                                                              style: Theme.of(context).textTheme.caption!.copyWith(
+                                                                  fontWeight: FontWeight.w300, color: Colors.black),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      DefaultTextStyle(
+                                                        style: Theme.of(context).textTheme.caption!.copyWith(
+                                                            color: Colors.grey[700], fontWeight: FontWeight.bold),
+                                                        child: Padding(
+                                                          padding: EdgeInsets.only(top: 4),
+                                                          child: Row(
+                                                            children: [
+                                                              // SizedBox(
+                                                              //   width: 8,
+                                                              // ),
+                                                              // Text('Like'),
+                                                              // SizedBox(
+                                                              //   width: 24,
+                                                              // ),
+                                                              //show reply text field
+                                                              if (widget.isLoggedIn == true)
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    viewModel.commentId.value = data.commentId;
+                                                                  },
+                                                                  //change color when click
+                                                                  child: Obx(
+                                                                    () => viewModel.commentId.value == data.commentId
+                                                                        ? Text(
+                                                                            'Reply',
+                                                                            style: TextStyle(
+                                                                              fontWeight: FontWeight.bold,
+                                                                              color: Colors.green[600],
+                                                                            ),
+                                                                          )
+                                                                        : Text(
+                                                                            'Reply',
+                                                                            style: TextStyle(
+                                                                              color: Colors.grey[700],
+                                                                            ),
+                                                                          ),
+                                                                  ),
+                                                                ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  );
+                                                },
+                                                avatarChild: (context, data) => PreferredSize(
+                                                  child: CircleAvatar(
+                                                    radius: 12,
+                                                    backgroundColor: Colors.grey,
+                                                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                                                  ),
+                                                  preferredSize: Size.fromRadius(12),
+                                                ),
+                                                contentChild: (context, data) {
+                                                  return Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.grey[100],
+                                                            borderRadius: BorderRadius.circular(12)),
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text(
+                                                              data.userName ?? "Anonymous",
+                                                              style: Theme.of(context).textTheme.caption?.copyWith(
+                                                                  fontWeight: FontWeight.w600, color: Colors.black),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 4,
+                                                            ),
+                                                            Text(
+                                                              '${data.content}',
+                                                              style: Theme.of(context).textTheme.caption?.copyWith(
+                                                                  fontWeight: FontWeight.w300, color: Colors.black),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      DefaultTextStyle(
+                                                        style: Theme.of(context).textTheme.caption!.copyWith(
+                                                            color: Colors.grey[700], fontWeight: FontWeight.bold),
+                                                        child: Padding(
+                                                          padding: EdgeInsets.only(top: 4),
+                                                          child: Row(
+                                                            children: [
+                                                              // SizedBox(
+                                                              //   width: 8,
+                                                              // ),
+                                                              // Text('Like'),
+                                                              // SizedBox(
+                                                              //   width: 24,
+                                                              // ),
+                                                              // Text('Reply'),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                                            );
+                                          },
+                                        )
+                                      : Container(
+                                          //get height bottom sheet,
+                                          height: MediaQuery.of(context).size.height * 0.5,
+                                          child: Center(
+                                            child: Text(
+                                              'No comments yet',
+                                              style: TextStyle(
+                                                color: Colors.grey[700],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        //text field to input comment
+
+                        if (widget.isLoggedIn == true)
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 18,
+                                    backgroundColor: Colors.grey,
+                                    backgroundImage: AssetImage('assets/images/avatar.png'),
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+
+                                  Expanded(
+                                    child: TextField(
+                                      controller: viewModel.textCommentController,
+                                      decoration: InputDecoration(
+                                        focusedBorder: OutlineInputBorder(
+                                          gapPadding: 1,
+                                          borderSide: BorderSide(color: Colors.black, width: 1),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          gapPadding: 1,
+                                          borderSide: BorderSide(color: Colors.grey, width: .5),
+                                        ),
+                                        hintText: 'Add a comment...',
+                                      ),
+                                    ),
+                                  ),
+                                  //send button
+                                  InkWell(
+                                    onTap: () {
+                                      viewModel.addComment(newsId);
+                                    },
+                                    child: Text(
+                                      'Post',
+                                      style: Theme.of(context).textTheme.caption,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                      ],
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    ),
+            ),
+          ),
+        );
+      },
+      child: Row(
+        children: [
+          Icon(
+            FontAwesomeIcons.comment,
+            color: Colors.black,
+          ),
+          SizedBox(width: 5),
+        ],
       ),
     );
   }

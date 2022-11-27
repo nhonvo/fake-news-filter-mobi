@@ -34,7 +34,7 @@ class BreakingViewModel extends BaseViewModel {
   // var isLoaded = false.obs;
 
   get languageContent => _getLanguageContent;
-  get userId => _getUserId;
+
   //hide progress searching
   var isSearching = false.obs;
 
@@ -61,27 +61,6 @@ class BreakingViewModel extends BaseViewModel {
     refreshController.refreshCompleted();
   }
 
-  // handleGetNewsByFollowedTopic() async {
-  //   // EasyLoading.show(status: 'fetchingData'.tr);
-
-  //   // var userId = await localRepo.getUserId();
-  //   await OneSignal.shared.setExternalUserId(userId!).then((results) {
-  //     print(results.toString());
-  //   }).catchError((error) {
-  //     print(error.toString());
-  //   });
-
-  //   var response = await newsApi.getNewsByFollowedTopic(userId.toString(), page, pageSize);
-
-  //   if (response.statusCode != 200) {
-  //     EasyLoading.dismiss();
-  //     SnackbarCustom.showError(
-  //       message: response.message!,
-  //       altMessage: 'altMessage'.tr,
-  //     );
-  //   }
-  // }
-
   handleGetCountView(int newsId) async {
     try {
       await newsApi.getViewCount(newsId);
@@ -92,9 +71,7 @@ class BreakingViewModel extends BaseViewModel {
 
   _firstLoad() async {
     isFirstLoadRunning.value = true;
-
-    // var userId = await localRepo.getUserId();
-
+    var userId = await localRepo.getUserId();
     await OneSignal.shared.setExternalUserId(userId!).then((results) {
       print(results.toString());
     }).catchError((error) {
@@ -126,7 +103,8 @@ class BreakingViewModel extends BaseViewModel {
 
       page += 1; // Increase page by 1
       try {
-        var res = await newsApi.getNewsByFollowedTopic(userId, page, pageSize);
+        var userId = await localRepo.getUserId();
+        var res = await newsApi.getNewsByFollowedTopic(userId!, page, pageSize);
         if (res.statusCode == 200 && res.resultObj!.length > 0) {
           newsLoadMore.addAll(res.resultObj!);
         } else {
@@ -144,8 +122,8 @@ class BreakingViewModel extends BaseViewModel {
 
   //💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥Rating button💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
   Future<void> vote(bool isReal, String newsId) async {
-    // var userId = await localRepo.getUserId();
-    var response = await voteApi.createVote(userId, newsId, isReal);
+    var userId = await localRepo.getUserId();
+    var response = await voteApi.createVote(userId!, newsId, isReal);
 
     newsLoadMore.removeWhere((e) => e!.newsId == int.parse(newsId));
 
@@ -180,14 +158,6 @@ class BreakingViewModel extends BaseViewModel {
       languageContent = 'en';
     }
     return languageContent;
-  }
-
-  String get _getUserId {
-    var userId = pref.getString(AppConstant.sharePrefKeys.userId);
-    if (userId == null) {
-      throw Exception('User id is null');
-    }
-    return userId;
   }
 
   @override
